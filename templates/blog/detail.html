@@ -30,5 +30,20 @@
       {% endfor %}
     </div>
   {% endif %}
+
+  {% with author_profile=post.author.author_profile %}
+    {% if author_profile.bio %}
+      <div class="mt-6 flex flex-col gap-2 rounded-lg border border-gray-100 p-4 dark:border-gray-800 sm:flex-row sm:items-start sm:gap-4">
+        {% if author_profile.avatar %}
+          <img src="{{ author_profile.avatar.url }}" alt="{{ post.author.get_full_name }}"
+               class="h-14 w-14 shrink-0 rounded-full object-cover">
+        {% endif %}
+        <div>
+          <p class="font-semibold">{{ post.author.get_full_name|default:post.author.username }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">{{ author_profile.bio }}</p>
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
 </article>
 {% endblock %}
