@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 16:52+0330\n"
+"POT-Creation-Date: 2026-07-15 17:16+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
@@ -43,7 +43,7 @@ msgid "Name"
 msgstr "نام"
 
 #: apps/blog/models.py:13 apps/blog/models.py:36 apps/leads/models.py:29
-#: apps/offerings/models.py:18
+#: apps/offerings/models.py:18 apps/pages/models.py:11
 msgid "Slug"
 msgstr "نامک"
 
@@ -66,7 +66,7 @@ msgid "Published"
 msgstr "منتشرشده"
 
 #: apps/blog/models.py:35 apps/leads/models.py:28 apps/navigation/models.py:7
-#: apps/offerings/models.py:17
+#: apps/offerings/models.py:17 apps/pages/models.py:9
 msgid "Title"
 msgstr "عنوان"
 
@@ -87,6 +87,7 @@ msgid "Excerpt"
 msgstr "خلاصه"
 
 #: apps/blog/models.py:53 apps/blog/models.py:95 apps/offerings/models.py:20
+#: apps/pages/models.py:16
 msgid "Body"
 msgstr "متن"
 
@@ -389,6 +390,18 @@ msgstr "ثبت‌نام‌ها"
 #: apps/offerings/views.py:46
 msgid "Thanks — we received your enrollment."
 msgstr "متشکریم — ثبت‌نام شما دریافت شد."
+
+#: apps/pages/models.py:14
+msgid "Must match a routed page name, e.g. 'about' or 'contact'."
+msgstr "باید با نام یک صفحه مسیریابی‌شده مطابقت داشته باشد، مثلاً 'about' یا 'contact'."
+
+#: apps/pages/models.py:19
+msgid "page"
+msgstr "صفحه"
+
+#: apps/pages/models.py:20
+msgid "pages"
+msgstr "صفحات"
 
 #: apps/testimonials/models.py:9
 msgid "Author name"

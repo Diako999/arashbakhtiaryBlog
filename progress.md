@@ -92,7 +92,19 @@ Deviations from those two docs, agreed with the user during this build:
    forms (enrollment, lead-magnet gate) both verified working end to end via
    curl, including django-ratelimit decorators. All new UI strings
    translated (fa/ckb) and compiled.
-8. [ ] pages app (flat pages).
+8. [x] pages app (flat pages): `FlatPage` model, fixed routes `/about/` and
+   `/contact/` (matches the doc's literal URL map exactly, rather than a
+   generic `<slug>/` catch-all). The architecture doc's own app table lists
+   `pages` as "Built, hidden" alongside offerings/testimonials/leads — so
+   it's gated the same way, via one shared NavItem (`pages:about`) added in
+   a new migration (`navigation/migrations/0004_seed_pages_navitem.py`;
+   the original seed migration only covered the first three). No dedicated
+   dashboard CRUD screen — deliberately left to the Django admin fallback,
+   since "Pages" as a dashboard nav label is already taken by the
+   visibility-switch screen and doc's own dashboard module table doesn't
+   list flat-page content editing as a screen. Verified end to end: 404
+   while hidden, 200 + correct content immediately after toggling visible,
+   nav link appears live.
 9. [ ] SEO: sitemap.xml (`PostSitemap` and `OfferingSitemap` both wired to
    real published querysets now), meta fields, OG/Twitter tags (basic
    version already in `base/layout.html`), robots.txt (basic version already
@@ -104,10 +116,10 @@ Deviations from those two docs, agreed with the user during this build:
     blog comments if a submission view is ever added, upload validators —
     `apps/leads/models.py` has a size validator already, apply the same
     pattern to any other upload fields).
-11. [ ] i18n: only remaining work here is translating strings from the
-    pages app once built (see "translate as you go" practice above) —
-    Persian/Kurdish is otherwise fully wired and verified working for
-    everything built so far, including offerings/testimonials/leads.
+11. [x] i18n: fully wired and verified for everything built (blog, dashboard,
+    offerings, testimonials, leads, pages) — nothing left to translate as of
+    this writing. Keep following the "translate as you go" practice for
+    anything still to come (SEO templates, security-related UI if any).
 12. [ ] End-to-end verification against the "Definition of done" in the
     kickoff prompt, then a stop-and-review summary for the user.
 
@@ -144,5 +156,5 @@ source .venv/bin/activate
 python manage.py check      # should say "no issues"
 ```
 
-Then continue at step 8 above (pages app) unless this file has been updated
-since.
+Then continue at step 9 above (SEO basics) unless this file has been
+updated since.

@@ -1,3 +1,9 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
-# Register your models here.
+from .models import FlatPage
+
+
+@admin.register(FlatPage)
+class FlatPageAdmin(TranslationAdmin):
+    list_display = ("title", "slug")

@@ -33,7 +33,7 @@ DASHBOARD_LOGIN_URL = "dashboard:login"
 # The display label always comes from the NavItem's own (translated) title,
 # not from this list — this is just a security whitelist of which url_names
 # are toggleable from this screen.
-TOGGLEABLE_SECTION_URL_NAMES = ["offerings:list", "testimonials:list", "leads:list"]
+TOGGLEABLE_SECTION_URL_NAMES = ["offerings:list", "testimonials:list", "leads:list", "pages:about"]
 
 
 class DashboardLoginView(LoginView):

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 16:52+0330\n"
+"POT-Creation-Date: 2026-07-15 17:16+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
@@ -43,7 +43,7 @@ msgid "Name"
 msgstr "ناو"
 
 #: apps/blog/models.py:13 apps/blog/models.py:36 apps/leads/models.py:29
-#: apps/offerings/models.py:18
+#: apps/offerings/models.py:18 apps/pages/models.py:11
 msgid "Slug"
 msgstr "ناسنامە"
 
@@ -66,7 +66,7 @@ msgid "Published"
 msgstr "بڵاوکراوەتەوە"
 
 #: apps/blog/models.py:35 apps/leads/models.py:28 apps/navigation/models.py:7
-#: apps/offerings/models.py:17
+#: apps/offerings/models.py:17 apps/pages/models.py:9
 msgid "Title"
 msgstr "ناونیشان"
 
@@ -87,6 +87,7 @@ msgid "Excerpt"
 msgstr "کورتە"
 
 #: apps/blog/models.py:53 apps/blog/models.py:95 apps/offerings/models.py:20
+#: apps/pages/models.py:16
 msgid "Body"
 msgstr "دەق"
 
@@ -391,6 +392,18 @@ msgstr "تۆمارکردنەکان"
 msgid "Thanks — we received your enrollment."
 msgstr "سوپاس — تۆمارکردنەکەت وەرگیرا."
 
+#: apps/pages/models.py:14
+msgid "Must match a routed page name, e.g. 'about' or 'contact'."
+msgstr "دەبێت لەگەڵ ناوی پەڕەیەکی ڕێگاکراو بگونجێت، بۆ نموونە 'about' یان 'contact'."
+
+#: apps/pages/models.py:19
+msgid "page"
+msgstr "پەڕە"
+
+#: apps/pages/models.py:20
+msgid "pages"
+msgstr "پەڕەکان"
+
 #: apps/testimonials/models.py:9
 msgid "Author name"
 msgstr "ناوی کەس"
@@ -689,7 +702,8 @@ msgstr "سڕینەوەی بۆچوون"
 msgid ""
 "Are you sure you want to delete the testimonial from “%(name)s”? This cannot "
 "be undone."
-msgstr "دڵنیایت لە سڕینەوەی بۆچوونی «%(name)s»؟ ئەم کردارە ناتوانرێت بگەڕێندرێتەوە."
+msgstr ""
+"دڵنیایت لە سڕینەوەی بۆچوونی «%(name)s»؟ ئەم کردارە ناتوانرێت بگەڕێندرێتەوە."
 
 #: templates/dashboard/testimonial_form.html:4
 #: templates/dashboard/testimonial_form.html:8
