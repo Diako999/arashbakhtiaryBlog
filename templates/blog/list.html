@@ -1,0 +1,36 @@
+{% extends "base/blog_layout.html" %}
+{% load i18n %}
+
+{% block blog_content %}
+<div class="flex flex-col gap-6">
+  <form method="get" class="flex gap-2">
+    <input type="search" name="q" value="{{ query }}" placeholder="{% trans 'Search posts…' %}"
+           class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-900">
+    <button type="submit" class="shrink-0 rounded-md bg-gray-900 px-4 py-2 text-sm text-white dark:bg-gray-100 dark:text-gray-900">
+      {% trans "Search" %}
+    </button>
+  </form>
+
+  {% for post in posts %}
+    {% include "partials/_post_card.html" %}
+  {% empty %}
+    <p class="text-gray-500 dark:text-gray-400">{% trans "No posts yet." %}</p>
+  {% endfor %}
+
+  {% if is_paginated %}
+    <nav class="flex justify-center gap-2 pt-4">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"
+           class="rounded-md border border-gray-200 px-3 py-1 text-sm dark:border-gray-700">{% trans "Previous" %}</a>
+      {% endif %}
+      <span class="px-3 py-1 text-sm text-gray-500 dark:text-gray-400">
+        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+      </span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}"
+           class="rounded-md border border-gray-200 px-3 py-1 text-sm dark:border-gray-700">{% trans "Next" %}</a>
+      {% endif %}
+    </nav>
+  {% endif %}
+</div>
+{% endblock %}

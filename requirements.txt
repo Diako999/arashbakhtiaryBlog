@@ -1,0 +1,13 @@
+Django>=5.0,<5.1
+psycopg[binary]>=3.1
+gunicorn
+whitenoise
+django-environ
+django-ratelimit
+django-otp
+qrcode
+django-taggit
+django-tinymce
+Pillow
+django-widget-tweaks
+django-modeltranslation
