@@ -154,10 +154,13 @@ LOGIN_URL = "dashboard:login"
 LOGIN_REDIRECT_URL = "dashboard:overview"
 LOGOUT_REDIRECT_URL = "home"
 
-# django-tinymce
+# django-tinymce — content is Persian/Kurdish (Sorani), both RTL
 TINYMCE_DEFAULT_CONFIG = {
     "height": 400,
     "width": "100%",
+    "directionality": "rtl",
+    "promotion": False,  # hides the "Get all features" upsell banner
+    "branding": False,
     "menubar": "file edit view insert format tools table",
     "plugins": "advlist autolink lists link image charmap preview anchor "
     "searchreplace visualblocks code fullscreen insertdatetime media "

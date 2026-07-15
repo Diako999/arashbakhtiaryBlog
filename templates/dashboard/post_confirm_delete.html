@@ -1,0 +1,16 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete post" %} · {{ site_settings.site_name }}{% endblock %}
+
+{% block dashboard_content %}
+<h1 class="mb-4 text-xl font-bold">{% trans "Delete post" %}</h1>
+<p class="mb-6 text-sm text-gray-600 dark:text-gray-400">
+  {% blocktrans with title=object.title %}Are you sure you want to delete “{{ title }}”? This cannot be undone.{% endblocktrans %}
+</p>
+<form method="post" class="flex gap-3">
+  {% csrf_token %}
+  <button type="submit" class="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white">{% trans "Delete" %}</button>
+  <a href="{% url 'dashboard:content' %}" class="rounded-md border border-gray-200 px-4 py-2 text-sm dark:border-gray-700">{% trans "Cancel" %}</a>
+</form>
+{% endblock %}

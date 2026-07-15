@@ -28,6 +28,25 @@ Deviations from those two docs, agreed with the user during this build:
   Installed Python 3.12 (deadsnakes PPA) and PostgreSQL via apt — user ran
   these themselves since sudo needs an interactive password this session
   can't supply.
+- **Every model field needs an explicit `verbose_name=_("...")`**: Django
+  auto-generates a field's form/admin label from its Python attribute name
+  when no `verbose_name` is set (e.g. `cover_image` → "Cover image") — always
+  in English, regardless of `LANGUAGES`/active locale, since it's derived
+  from the field name, not looked up in any translation catalog. This showed
+  up as English labels ("Slug", "Category", "Status"...) on the dashboard
+  post form even after `{% trans %}` was used everywhere in templates. Fix:
+  every field on every model needs `verbose_name=gettext_lazy("English source string")`,
+  then that string goes through the normal makemessages/compilemessages
+  cycle like any other. Done for `core`, `navigation`, `accounts`, `blog`
+  models so far — **must do the same for offerings/testimonials/leads/pages
+  models when building them**, or their dashboard forms will leak English.
+  (TinyMCE and django-taggit's own bundled fields already localize
+  themselves automatically — no action needed there.)
+- **TinyMCE promotional banner**: the free/open-source build shows a "Get all
+  features💝" upsell nag by default. Suppressed via
+  `TINYMCE_DEFAULT_CONFIG = {"promotion": False, "branding": False, ...}` in
+  `config/settings/base.py` — apply this to any other TinyMCE configs added
+  later too.
 
 ## Environment (local dev)
 
@@ -49,30 +68,43 @@ Deviations from those two docs, agreed with the user during this build:
    legacy JS config file the architecture doc calls for). Compiles clean.
    **Note:** `output.css` is a build artifact (gitignored) — regenerate it as
    part of the deploy step, same as `collectstatic`.
-3. [ ] core + navigation apps: `NavItem` model, nav context processor,
+3. [x] core + navigation apps: `NavItem` model, nav context processor,
    `ThemeConfig`/`SiteSetting` singletons, theme context processor,
-   `base/layout.html`. **Not started yet.**
-4. [ ] blog app (Phase 1 deliverable): Post/Category/Tag/Comment, list/detail
-   views+templates, live in nav.
-5. [ ] accounts app: Author profile (OneToOne on `auth.User`).
-6. [ ] dashboard app: Overview/Content/Pages screens (login-gated, plain
-   CBVs, not ModelAdmin).
+   `base/layout.html` (responsive nav, theme toggle, language switcher, RTL).
+4. [x] blog app (Phase 1 deliverable): Category/Post/Comment models
+   (django-taggit for tags), Postgres full-text search, list/detail views,
+   templates. Verified end to end in browser (Persian + Kurdish content).
+5. [x] accounts app: Author profile (OneToOne on `auth.User`), auto-created
+   via post_save signal.
+6. [x] dashboard app: Overview, Content (post + category CRUD, TinyMCE),
+   Pages visibility-switch screen. Login-gated (`dashboard:login`). Verified
+   end to end in browser: login, create post, toggle a section
+   Published/Hidden and watched the public nav update live with no restart.
 7. [ ] offerings/testimonials/leads apps: models + hidden-by-default views
-   (404/redirect enforced at view level) + their dashboard screens. Seed
-   NavItem data (blog visible=True, rest False).
+   (404/redirect enforced at view level via `apps/navigation/mixins.py`'s
+   `SectionVisibleRequiredMixin`) + their dashboard screens.
+   **Remember: verbose_name=_(...) on every model field (see deviations above).**
 8. [ ] pages app (flat pages).
 9. [ ] SEO: sitemap.xml (stub sitemaps already wired in `config/urls.py`,
-   `items()` empty until blog/offerings models exist), meta fields, OG/Twitter
-   tags, robots.txt.
+   `PostSitemap.items()` now returns real published posts; `OfferingSitemap`
+   still stubbed empty until offerings models exist), meta fields, OG/Twitter
+   tags (basic version already in `base/layout.html`), robots.txt (basic
+   version already in `templates/robots.txt`).
 10. [ ] Security settings pass in `config/settings/prod.py` (mostly drafted
     already — SSL/HSTS/cookie flags in place; still need: admin URL renamed,
     django-otp 2FA wired to dashboard login, django-ratelimit on public
     forms, upload validators).
-11. [ ] i18n: Persian+Kurdish `.po`/`.mo` translations for actual UI strings
-    (framework is wired — `LocaleMiddleware`, `LANGUAGES`, `modeltranslation`
-    settings — but no templates/strings exist yet to translate).
+11. [ ] i18n: only remaining work here is translating strings from the
+    offerings/testimonials/leads/pages apps once built (see "translate as you
+    go" practice above) — Persian/Kurdish is otherwise fully wired and
+    verified working for everything built so far.
 12. [ ] End-to-end verification against the "Definition of done" in the
     kickoff prompt, then a stop-and-review summary for the user.
+
+## Local test login (dev DB only)
+
+Superuser `admin` / password `test-only-not-for-prod` — created for manual
+testing during this build. Not a credential for any real environment.
 
 ## Key architectural decisions already locked in
 
@@ -81,8 +113,14 @@ Deviations from those two docs, agreed with the user during this build:
   `/i18n/` (language switcher endpoint) stay unprefixed; language there is
   cookie/session-driven via the same switcher.
 - `LOGIN_URL = "dashboard:login"`, `LOGIN_REDIRECT_URL = "dashboard:overview"`
-  — these named URLs don't exist yet, will be added when the dashboard app
-  is built (step 6 above).
+  — wired and working.
+- Phased-rollout visibility is a **single flag**, not the doc's literal
+  "NavItem flag + separate app-level flag": `NavItem.is_visible` is checked
+  both by the nav context processor (hides the link) and by
+  `SectionVisibleRequiredMixin` at the view layer (404s the page). Two
+  separate flags per section seemed likely to drift out of sync; reading the
+  same NavItem row from both places gives the doc's required behavior
+  (nav-hidden AND URL-blocked) from one source of truth.
 - Every app under `apps/` uses `name = "apps.<app>"` with an explicit
   `label = "<app>"` in its `AppConfig`.
 - `modeltranslation` is installed and listed first in `INSTALLED_APPS`
@@ -96,5 +134,5 @@ source .venv/bin/activate
 python manage.py check      # should say "no issues"
 ```
 
-Then continue at step 3 above (core + navigation apps) unless this file has
-been updated since.
+Then continue at step 7 above (offerings/testimonials/leads apps) unless
+this file has been updated since.

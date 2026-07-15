@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 13:07+0330\n"
-"PO-Revision-Date: 2026-07-15 13:07+0330\n"
+"POT-Creation-Date: 2026-07-15 14:44+0330\n"
+"PO-Revision-Date: 2026-07-15 14:19+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
 "Language: ckb\n"
@@ -13,11 +13,250 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/base/blog_layout.html:11
+#: apps/accounts/models.py:13
+msgid "User"
+msgstr "بەکارهێنەر"
+
+#: apps/accounts/models.py:15
+msgid "Bio"
+msgstr "بایۆگرافیا"
+
+#: apps/accounts/models.py:16
+msgid "Avatar"
+msgstr "وێنەی بەکارهێنەر"
+
+#: apps/accounts/models.py:17
+msgid "Website"
+msgstr "ماڵپەڕ"
+
+#: apps/accounts/models.py:20
+msgid "author"
+msgstr "نووسەر"
+
+#: apps/accounts/models.py:21
+msgid "authors"
+msgstr "نووسەران"
+
+#: apps/blog/models.py:12 apps/blog/models.py:93
+msgid "Name"
+msgstr "ناو"
+
+#: apps/blog/models.py:13 apps/blog/models.py:36
+msgid "Slug"
+msgstr "ناسنامە"
+
+#: apps/blog/models.py:16
+msgid "category"
+msgstr "پۆل"
+
+#: apps/blog/models.py:17
+msgid "categories"
+msgstr "پۆلەکان"
+
+#: apps/blog/models.py:31
+msgid "Draft"
+msgstr "ڕەشنووس"
+
+#: apps/blog/models.py:32 apps/dashboard/views.py:131
+#: templates/dashboard/overview.html:15 templates/dashboard/pages.html:24
+msgid "Published"
+msgstr "بڵاوکراوەتەوە"
+
+#: apps/blog/models.py:35 apps/navigation/models.py:7
+msgid "Title"
+msgstr "ناونیشان"
+
+#: apps/blog/models.py:41
+msgid "Author"
+msgstr "نووسەر"
+
+#: apps/blog/models.py:49 templates/dashboard/category_form.html:4
+msgid "Category"
+msgstr "پۆل"
+
+#: apps/blog/models.py:51
+msgid "Tags"
+msgstr "تاگەکان"
+
+#: apps/blog/models.py:52
+msgid "Excerpt"
+msgstr "کورتە"
+
+#: apps/blog/models.py:53 apps/blog/models.py:95
+msgid "Body"
+msgstr "دەق"
+
+#: apps/blog/models.py:55
+msgid "Cover image"
+msgstr "وێنەی سەرەکی"
+
+#: apps/blog/models.py:58
+msgid "Status"
+msgstr "دۆخ"
+
+#: apps/blog/models.py:60
+msgid "Published at"
+msgstr "کاتی بڵاوکردنەوە"
+
+#: apps/blog/models.py:63
+msgid "post"
+msgstr "بابەت"
+
+#: apps/blog/models.py:64
+msgid "posts"
+msgstr "بابەتەکان"
+
+#: apps/blog/models.py:91
+msgid "Post"
+msgstr "بابەت"
+
+#: apps/blog/models.py:94
+msgid "Email"
+msgstr "ئیمەیل"
+
+#: apps/blog/models.py:96
+msgid "Approved"
+msgstr "پەسندکراو"
+
+#: apps/blog/models.py:99
+msgid "comment"
+msgstr "کۆمێنت"
+
+#: apps/blog/models.py:100
+msgid "comments"
+msgstr "کۆمێنتەکان"
+
+#: apps/core/models.py:6
+msgid "Created at"
+msgstr "کاتی دروستکردن"
+
+#: apps/core/models.py:7
+msgid "Updated at"
+msgstr "کاتی نوێکردنەوە"
+
+#: apps/core/models.py:14
+msgid "Meta title"
+msgstr "ناونیشانی مێتا"
+
+#: apps/core/models.py:15 apps/core/models.py:73
+msgid "Meta description"
+msgstr "وەسفی مێتا"
+
+#: apps/core/models.py:42
+msgid "Colors"
+msgstr "ڕەنگەکان"
+
+#: apps/core/models.py:45
+msgid "Brand color tokens, e.g. {'brand': '#0f9d8e', 'accent': '#f0b429'}"
+msgstr "کۆدی ڕەنگی براند، بۆ نموونە {'brand': '#0f9d8e', 'accent': '#f0b429'}"
+
+#: apps/core/models.py:48
+msgid "Default mode"
+msgstr "دۆخی بنەڕەت"
+
+#: apps/core/models.py:50
+msgid "Light"
+msgstr "ڕووناک"
+
+#: apps/core/models.py:50
+msgid "Dark"
+msgstr "تاریک"
+
+#: apps/core/models.py:55 apps/core/models.py:56
+msgid "theme configuration"
+msgstr "ڕێکخستنی ڕووکار"
+
+#: apps/core/models.py:59
+msgid "Theme configuration"
+msgstr "ڕێکخستنی ڕووکار"
+
+#: apps/core/models.py:63
+msgid "Site name"
+msgstr "ناوی ماڵپەڕ"
+
+#: apps/core/models.py:64
+msgid "Logo"
+msgstr "لۆگۆ"
+
+#: apps/core/models.py:65
+msgid "Contact email"
+msgstr "ئیمەیلی پەیوەندی"
+
+#: apps/core/models.py:66
+msgid "Contact phone"
+msgstr "ژمارەی پەیوەندی"
+
+#: apps/core/models.py:68
+msgid "Social links"
+msgstr "لینکی سۆشیال میدیا"
+
+#: apps/core/models.py:71
+msgid "e.g. {'instagram': 'https://...', 'telegram': 'https://...'}"
+msgstr "بۆ نموونە {'instagram': 'https://...', 'telegram': 'https://...'}"
+
+#: apps/core/models.py:76 apps/core/models.py:77
+msgid "site settings"
+msgstr "ڕێکخستنەکانی ماڵپەڕ"
+
+#: apps/core/models.py:80
+msgid "Site settings"
+msgstr "ڕێکخستنەکانی ماڵپەڕ"
+
+#: apps/dashboard/views.py:74
+msgid "Post saved."
+msgstr "بابەت پاشەکەوت کرا."
+
+#: apps/dashboard/views.py:86
+msgid "Post updated."
+msgstr "بابەت نوێکرایەوە."
+
+#: apps/dashboard/views.py:131 templates/dashboard/pages.html:24
+msgid "Hidden"
+msgstr "شاراوە"
+
+#: apps/dashboard/views.py:132
+#, python-format
+msgid "%(title)s is now %(state)s."
+msgstr "«%(title)s» ئێستا %(state)s ە."
+
+#: apps/navigation/models.py:9
+msgid "URL name"
+msgstr "ناوی URL"
+
+#: apps/navigation/models.py:11
+msgid "Named URL to resolve, e.g. 'blog:list'"
+msgstr "ناوی URL بۆ چارەسەرکردن، بۆ نموونە 'blog:list'"
+
+#: apps/navigation/models.py:14
+msgid "Visible"
+msgstr "دیار"
+
+#: apps/navigation/models.py:16
+msgid "The phased-rollout switch. Blog starts True, everything else False."
+msgstr ""
+"کلیلی چالاککردنی قۆناغ بە قۆناغ. بلۆگ لە سەرەتاوە چالاکە، ماوە شاراوەن."
+
+#: apps/navigation/models.py:18
+msgid "Order"
+msgstr "ڕیز"
+
+#: apps/navigation/models.py:25
+msgid "Parent"
+msgstr "باوان"
+
+#: apps/navigation/models.py:29
+msgid "navigation item"
+msgstr "بڕگەی مینیو"
+
+#: apps/navigation/models.py:30
+msgid "navigation items"
+msgstr "بڕگەکانی مینیو"
+
+#: templates/base/blog_layout.html:11 templates/dashboard/content_list.html:52
 msgid "Categories"
 msgstr "پۆلەکان"
 
-#: templates/base/layout.html:47
+#: templates/base/layout.html:32
 msgid "Open menu"
 msgstr "کردنەوەی مینیو"
 
@@ -30,20 +269,132 @@ msgid "Search"
 msgstr "گەڕان"
 
 #: templates/blog/list.html:17 templates/core/home.html:17
+#: templates/dashboard/content_list.html:35
+#: templates/dashboard/overview.html:34
 msgid "No posts yet."
 msgstr "هێشتا بابەتێک نییە."
 
-#: templates/blog/list.html:24
+#: templates/blog/list.html:24 templates/dashboard/content_list.html:42
 msgid "Previous"
 msgstr "پێشوو"
 
-#: templates/blog/list.html:31
+#: templates/blog/list.html:31 templates/dashboard/content_list.html:46
 msgid "Next"
 msgstr "دواتر"
 
 #: templates/core/home.html:23
 msgid "See all posts"
 msgstr "بینینی هەموو بابەتەکان"
+
+#: templates/dashboard/base.html:8
+msgid "Dashboard"
+msgstr "داشبۆرد"
+
+#: templates/dashboard/base.html:20 templates/dashboard/overview.html:4
+#: templates/dashboard/overview.html:7
+msgid "Overview"
+msgstr "گشتی"
+
+#: templates/dashboard/base.html:21 templates/dashboard/content_list.html:4
+#: templates/dashboard/content_list.html:8
+msgid "Content"
+msgstr "ناوەڕۆک"
+
+#: templates/dashboard/base.html:22 templates/dashboard/pages.html:4
+#: templates/dashboard/pages.html:7
+msgid "Pages"
+msgstr "پەڕەکان"
+
+#: templates/dashboard/base.html:25
+msgid "View site"
+msgstr "بینینی ماڵپەڕ"
+
+#: templates/dashboard/base.html:28
+msgid "Log out"
+msgstr "چوونەدەرەوە"
+
+#: templates/dashboard/category_form.html:8
+msgid "Edit category"
+msgstr "دەستکاریکردنی پۆل"
+
+#: templates/dashboard/category_form.html:8
+#: templates/dashboard/content_list.html:11
+msgid "New category"
+msgstr "پۆلی نوێ"
+
+#: templates/dashboard/category_form.html:24
+#: templates/dashboard/post_form.html:29
+msgid "Save"
+msgstr "پاشەکەوتکردن"
+
+#: templates/dashboard/category_form.html:27
+#: templates/dashboard/post_confirm_delete.html:14
+#: templates/dashboard/post_form.html:32
+msgid "Cancel"
+msgstr "پاشگەزبوونەوە"
+
+#: templates/dashboard/content_list.html:13
+#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
+msgid "New post"
+msgstr "بابەتی نوێ"
+
+#: templates/dashboard/content_list.html:30
+msgid "Edit"
+msgstr "دەستکاری"
+
+#: templates/dashboard/content_list.html:31
+#: templates/dashboard/post_confirm_delete.html:13
+msgid "Delete"
+msgstr "سڕینەوە"
+
+#: templates/dashboard/content_list.html:60
+msgid "No categories yet."
+msgstr "هێشتا پۆلێک نییە."
+
+#: templates/dashboard/login.html:8 templates/dashboard/login.html:33
+msgid "Log in"
+msgstr "چوونەژوورەوە"
+
+#: templates/dashboard/login.html:17
+msgid "Incorrect username or password."
+msgstr "ناوی بەکارهێنەر یان وشەی نهێنی هەڵەیە."
+
+#: templates/dashboard/login.html:24
+msgid "Username"
+msgstr "ناوی بەکارهێنەر"
+
+#: templates/dashboard/login.html:28
+msgid "Password"
+msgstr "وشەی نهێنی"
+
+#: templates/dashboard/overview.html:11
+msgid "Drafts"
+msgstr "ڕەشنووسەکان"
+
+#: templates/dashboard/overview.html:22
+msgid "Recent posts"
+msgstr "بابەتە دواییەکان"
+
+#: templates/dashboard/pages.html:9
+msgid ""
+"Publish a section to make it live immediately — no redeploy, no migration."
+msgstr ""
+"بڵاوکردنەوەی بەشێک دەیکات بە کارا دەستبەجێ — بەبێ پێویستی بە دووبارە "
+"بڵاوکردنەوە یان کۆچ."
+
+#: templates/dashboard/post_confirm_delete.html:4
+#: templates/dashboard/post_confirm_delete.html:7
+msgid "Delete post"
+msgstr "سڕینەوەی بابەت"
+
+#: templates/dashboard/post_confirm_delete.html:9
+#, python-format
+msgid "Are you sure you want to delete “%(title)s”? This cannot be undone."
+msgstr "دڵنیایت لە سڕینەوەی «%(title)s»؟ ئەم کردارە ناتوانرێت بگەڕێندرێتەوە."
+
+#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
+msgid "Edit post"
+msgstr "دەستکاریکردنی بابەت"
 
 #: templates/partials/_theme_switcher.html:3
 msgid "Toggle light/dark theme"

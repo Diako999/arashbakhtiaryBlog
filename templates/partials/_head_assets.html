@@ -1,0 +1,17 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/output.css' %}">
+
+<style>
+  :root{
+    {% for key, value in theme_colors.items %}--{{ key }}: {{ value }};
+    {% endfor %}
+  }
+</style>
+
+<script>
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var initial = saved || '{{ theme_default_mode }}';
+    document.documentElement.setAttribute('data-theme', initial);
+  })();
+</script>

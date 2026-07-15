@@ -14,22 +14,7 @@
   <meta name="twitter:card" content="summary_large_image">
   {% endblock %}
 
-  <link rel="stylesheet" href="{% static 'css/output.css' %}">
-
-  <style>
-    :root{
-      {% for key, value in theme_colors.items %}--{{ key }}: {{ value }};
-      {% endfor %}
-    }
-  </style>
-
-  <script>
-    (function () {
-      var saved = localStorage.getItem('theme');
-      var initial = saved || '{{ theme_default_mode }}';
-      document.documentElement.setAttribute('data-theme', initial);
-    })();
-  </script>
+  {% include "partials/_head_assets.html" %}
 
   {% block extra_head %}{% endblock %}
 </head>
@@ -95,17 +80,9 @@
         });
       }
 
-      document.querySelectorAll('.theme-toggle-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var html = document.documentElement;
-          var current = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-          var next = current === 'light' ? 'dark' : 'light';
-          html.setAttribute('data-theme', next);
-          localStorage.setItem('theme', next);
-        });
-      });
     })();
   </script>
+  {% include "partials/_theme_toggle_script.html" %}
   {% block extra_js %}{% endblock %}
 </body>
 </html>

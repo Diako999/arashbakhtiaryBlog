@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 13:07+0330\n"
-"PO-Revision-Date: 2026-07-15 13:07+0330\n"
+"POT-Creation-Date: 2026-07-15 14:44+0330\n"
+"PO-Revision-Date: 2026-07-15 14:19+0330\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -13,11 +13,249 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: templates/base/blog_layout.html:11
+#: apps/accounts/models.py:13
+msgid "User"
+msgstr "کاربر"
+
+#: apps/accounts/models.py:15
+msgid "Bio"
+msgstr "بیوگرافی"
+
+#: apps/accounts/models.py:16
+msgid "Avatar"
+msgstr "آواتار"
+
+#: apps/accounts/models.py:17
+msgid "Website"
+msgstr "وب‌سایت"
+
+#: apps/accounts/models.py:20
+msgid "author"
+msgstr "نویسنده"
+
+#: apps/accounts/models.py:21
+msgid "authors"
+msgstr "نویسندگان"
+
+#: apps/blog/models.py:12 apps/blog/models.py:93
+msgid "Name"
+msgstr "نام"
+
+#: apps/blog/models.py:13 apps/blog/models.py:36
+msgid "Slug"
+msgstr "نامک"
+
+#: apps/blog/models.py:16
+msgid "category"
+msgstr "دسته"
+
+#: apps/blog/models.py:17
+msgid "categories"
+msgstr "دسته‌ها"
+
+#: apps/blog/models.py:31
+msgid "Draft"
+msgstr "پیش‌نویس"
+
+#: apps/blog/models.py:32 apps/dashboard/views.py:131
+#: templates/dashboard/overview.html:15 templates/dashboard/pages.html:24
+msgid "Published"
+msgstr "منتشرشده"
+
+#: apps/blog/models.py:35 apps/navigation/models.py:7
+msgid "Title"
+msgstr "عنوان"
+
+#: apps/blog/models.py:41
+msgid "Author"
+msgstr "نویسنده"
+
+#: apps/blog/models.py:49 templates/dashboard/category_form.html:4
+msgid "Category"
+msgstr "دسته"
+
+#: apps/blog/models.py:51
+msgid "Tags"
+msgstr "برچسب‌ها"
+
+#: apps/blog/models.py:52
+msgid "Excerpt"
+msgstr "خلاصه"
+
+#: apps/blog/models.py:53 apps/blog/models.py:95
+msgid "Body"
+msgstr "متن"
+
+#: apps/blog/models.py:55
+msgid "Cover image"
+msgstr "تصویر کاور"
+
+#: apps/blog/models.py:58
+msgid "Status"
+msgstr "وضعیت"
+
+#: apps/blog/models.py:60
+msgid "Published at"
+msgstr "تاریخ انتشار"
+
+#: apps/blog/models.py:63
+msgid "post"
+msgstr "نوشته"
+
+#: apps/blog/models.py:64
+msgid "posts"
+msgstr "نوشته‌ها"
+
+#: apps/blog/models.py:91
+msgid "Post"
+msgstr "نوشته"
+
+#: apps/blog/models.py:94
+msgid "Email"
+msgstr "ایمیل"
+
+#: apps/blog/models.py:96
+msgid "Approved"
+msgstr "تأیید شده"
+
+#: apps/blog/models.py:99
+msgid "comment"
+msgstr "دیدگاه"
+
+#: apps/blog/models.py:100
+msgid "comments"
+msgstr "دیدگاه‌ها"
+
+#: apps/core/models.py:6
+msgid "Created at"
+msgstr "تاریخ ایجاد"
+
+#: apps/core/models.py:7
+msgid "Updated at"
+msgstr "تاریخ به‌روزرسانی"
+
+#: apps/core/models.py:14
+msgid "Meta title"
+msgstr "عنوان متا"
+
+#: apps/core/models.py:15 apps/core/models.py:73
+msgid "Meta description"
+msgstr "توضیحات متا"
+
+#: apps/core/models.py:42
+msgid "Colors"
+msgstr "رنگ‌ها"
+
+#: apps/core/models.py:45
+msgid "Brand color tokens, e.g. {'brand': '#0f9d8e', 'accent': '#f0b429'}"
+msgstr "کدهای رنگ برند، مثلاً {'brand': '#0f9d8e', 'accent': '#f0b429'}"
+
+#: apps/core/models.py:48
+msgid "Default mode"
+msgstr "حالت پیش‌فرض"
+
+#: apps/core/models.py:50
+msgid "Light"
+msgstr "روشن"
+
+#: apps/core/models.py:50
+msgid "Dark"
+msgstr "تاریک"
+
+#: apps/core/models.py:55 apps/core/models.py:56
+msgid "theme configuration"
+msgstr "تنظیمات پوسته"
+
+#: apps/core/models.py:59
+msgid "Theme configuration"
+msgstr "تنظیمات پوسته"
+
+#: apps/core/models.py:63
+msgid "Site name"
+msgstr "نام سایت"
+
+#: apps/core/models.py:64
+msgid "Logo"
+msgstr "لوگو"
+
+#: apps/core/models.py:65
+msgid "Contact email"
+msgstr "ایمیل تماس"
+
+#: apps/core/models.py:66
+msgid "Contact phone"
+msgstr "تلفن تماس"
+
+#: apps/core/models.py:68
+msgid "Social links"
+msgstr "شبکه‌های اجتماعی"
+
+#: apps/core/models.py:71
+msgid "e.g. {'instagram': 'https://...', 'telegram': 'https://...'}"
+msgstr "مثلاً {'instagram': 'https://...', 'telegram': 'https://...'}"
+
+#: apps/core/models.py:76 apps/core/models.py:77
+msgid "site settings"
+msgstr "تنظیمات سایت"
+
+#: apps/core/models.py:80
+msgid "Site settings"
+msgstr "تنظیمات سایت"
+
+#: apps/dashboard/views.py:74
+msgid "Post saved."
+msgstr "نوشته ذخیره شد."
+
+#: apps/dashboard/views.py:86
+msgid "Post updated."
+msgstr "نوشته به‌روزرسانی شد."
+
+#: apps/dashboard/views.py:131 templates/dashboard/pages.html:24
+msgid "Hidden"
+msgstr "مخفی"
+
+#: apps/dashboard/views.py:132
+#, python-format
+msgid "%(title)s is now %(state)s."
+msgstr "«%(title)s» اکنون %(state)s است."
+
+#: apps/navigation/models.py:9
+msgid "URL name"
+msgstr "نام URL"
+
+#: apps/navigation/models.py:11
+msgid "Named URL to resolve, e.g. 'blog:list'"
+msgstr "نام URL برای تشخیص، مثلاً 'blog:list'"
+
+#: apps/navigation/models.py:14
+msgid "Visible"
+msgstr "نمایان"
+
+#: apps/navigation/models.py:16
+msgid "The phased-rollout switch. Blog starts True, everything else False."
+msgstr "کلید فعال‌سازی مرحله‌ای. وبلاگ از ابتدا فعال است، بقیه غیرفعال."
+
+#: apps/navigation/models.py:18
+msgid "Order"
+msgstr "ترتیب"
+
+#: apps/navigation/models.py:25
+msgid "Parent"
+msgstr "والد"
+
+#: apps/navigation/models.py:29
+msgid "navigation item"
+msgstr "آیتم منو"
+
+#: apps/navigation/models.py:30
+msgid "navigation items"
+msgstr "آیتم‌های منو"
+
+#: templates/base/blog_layout.html:11 templates/dashboard/content_list.html:52
 msgid "Categories"
 msgstr "دسته‌بندی‌ها"
 
-#: templates/base/layout.html:47
+#: templates/base/layout.html:32
 msgid "Open menu"
 msgstr "باز کردن منو"
 
@@ -30,20 +268,133 @@ msgid "Search"
 msgstr "جستجو"
 
 #: templates/blog/list.html:17 templates/core/home.html:17
+#: templates/dashboard/content_list.html:35
+#: templates/dashboard/overview.html:34
 msgid "No posts yet."
 msgstr "هنوز نوشته‌ای وجود ندارد."
 
-#: templates/blog/list.html:24
+#: templates/blog/list.html:24 templates/dashboard/content_list.html:42
 msgid "Previous"
 msgstr "قبلی"
 
-#: templates/blog/list.html:31
+#: templates/blog/list.html:31 templates/dashboard/content_list.html:46
 msgid "Next"
 msgstr "بعدی"
 
 #: templates/core/home.html:23
 msgid "See all posts"
 msgstr "مشاهده همه نوشته‌ها"
+
+#: templates/dashboard/base.html:8
+msgid "Dashboard"
+msgstr "داشبورد"
+
+#: templates/dashboard/base.html:20 templates/dashboard/overview.html:4
+#: templates/dashboard/overview.html:7
+msgid "Overview"
+msgstr "نمای کلی"
+
+#: templates/dashboard/base.html:21 templates/dashboard/content_list.html:4
+#: templates/dashboard/content_list.html:8
+msgid "Content"
+msgstr "محتوا"
+
+#: templates/dashboard/base.html:22 templates/dashboard/pages.html:4
+#: templates/dashboard/pages.html:7
+msgid "Pages"
+msgstr "صفحات"
+
+#: templates/dashboard/base.html:25
+msgid "View site"
+msgstr "مشاهده سایت"
+
+#: templates/dashboard/base.html:28
+msgid "Log out"
+msgstr "خروج"
+
+#: templates/dashboard/category_form.html:8
+msgid "Edit category"
+msgstr "ویرایش دسته"
+
+#: templates/dashboard/category_form.html:8
+#: templates/dashboard/content_list.html:11
+msgid "New category"
+msgstr "دسته جدید"
+
+#: templates/dashboard/category_form.html:24
+#: templates/dashboard/post_form.html:29
+msgid "Save"
+msgstr "ذخیره"
+
+#: templates/dashboard/category_form.html:27
+#: templates/dashboard/post_confirm_delete.html:14
+#: templates/dashboard/post_form.html:32
+msgid "Cancel"
+msgstr "انصراف"
+
+#: templates/dashboard/content_list.html:13
+#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
+msgid "New post"
+msgstr "نوشته جدید"
+
+#: templates/dashboard/content_list.html:30
+msgid "Edit"
+msgstr "ویرایش"
+
+#: templates/dashboard/content_list.html:31
+#: templates/dashboard/post_confirm_delete.html:13
+msgid "Delete"
+msgstr "حذف"
+
+#: templates/dashboard/content_list.html:60
+msgid "No categories yet."
+msgstr "هنوز دسته‌ای وجود ندارد."
+
+#: templates/dashboard/login.html:8 templates/dashboard/login.html:33
+msgid "Log in"
+msgstr "ورود"
+
+#: templates/dashboard/login.html:17
+msgid "Incorrect username or password."
+msgstr "نام کاربری یا رمز عبور اشتباه است."
+
+#: templates/dashboard/login.html:24
+msgid "Username"
+msgstr "نام کاربری"
+
+#: templates/dashboard/login.html:28
+msgid "Password"
+msgstr "رمز عبور"
+
+#: templates/dashboard/overview.html:11
+msgid "Drafts"
+msgstr "پیش‌نویس‌ها"
+
+#: templates/dashboard/overview.html:22
+msgid "Recent posts"
+msgstr "نوشته‌های اخیر"
+
+#: templates/dashboard/pages.html:9
+msgid ""
+"Publish a section to make it live immediately — no redeploy, no migration."
+msgstr ""
+"با انتشار یک بخش، بلافاصله فعال می‌شود — بدون نیاز به دیپلوی مجدد یا مایگریشن."
+
+#: templates/dashboard/post_confirm_delete.html:4
+#: templates/dashboard/post_confirm_delete.html:7
+msgid "Delete post"
+msgstr "حذف نوشته"
+
+#: templates/dashboard/post_confirm_delete.html:9
+#, python-format
+msgid "Are you sure you want to delete “%(title)s”? This cannot be undone."
+msgstr ""
+"آیا مطمئن هستید که می‌خواهید «%(title)s» را حذف کنید؟ این کار قابل بازگشت "
+"نیست."
+
+#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
+msgid "Edit post"
+msgstr "ویرایش نوشته"
 
 #: templates/partials/_theme_switcher.html:3
 msgid "Toggle light/dark theme"

@@ -1,0 +1,30 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Pages" %} · {{ site_settings.site_name }}{% endblock %}
+
+{% block dashboard_content %}
+<h1 class="mb-2 text-xl font-bold">{% trans "Pages" %}</h1>
+<p class="mb-6 text-sm text-gray-500 dark:text-gray-400">
+  {% trans "Publish a section to make it live immediately — no redeploy, no migration." %}
+</p>
+
+<div class="flex max-w-xl flex-col divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-900">
+  {% for item in sections %}
+    <div class="flex items-center justify-between gap-4 p-4">
+      <div>
+        <p class="font-medium">{{ item.title }}</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">/{{ item.url_name }}</p>
+      </div>
+      <form method="post" action="{% url 'dashboard:pages_toggle' item.pk %}">
+        {% csrf_token %}
+        <button type="submit"
+                class="rounded-full border px-3 py-1 text-xs font-medium
+                       {% if item.is_visible %}border-green-500 bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300{% else %}border-gray-300 bg-gray-100 text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300{% endif %}">
+          {% if item.is_visible %}● {% trans "Published" %}{% else %}● {% trans "Hidden" %}{% endif %}
+        </button>
+      </form>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
