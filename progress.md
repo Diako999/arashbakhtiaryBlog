@@ -153,8 +153,16 @@ Deviations from those two docs, agreed with the user during this build:
 11. [x] i18n: fully wired and verified for everything built, including the
     2FA/contact/comment additions from step 10 — nothing left to translate
     as of this writing.
-12. [ ] End-to-end verification against the "Definition of done" in the
-    kickoff prompt, then a stop-and-review summary for the user.
+12. [x] End-to-end verification against the "Definition of done" in the
+    kickoff prompt — all five criteria confirmed on the live dev server:
+    homepage/post detail render styled in fa+ckb; /dashboard/ is
+    login+2FA-gated and post CRUD + Pages toggle work; /courses/,
+    /testimonials/, /free-resource/, /about/ all 404 while hidden and go
+    live (nav + URL) the instant the dashboard toggle flips, no restart;
+    no npm/node_modules anywhere; requirements.txt matches the tech stack
+    doc plus two justified additions (qrcode, django-modeltranslation).
+    Stopped here per the kickoff prompt's own instruction — see the
+    summary given to the user in this session for what's next.
 
 ## Local test login (dev DB only)
 
