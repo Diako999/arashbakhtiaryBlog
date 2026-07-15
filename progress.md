@@ -4,6 +4,20 @@ Source of truth for scope/architecture: `Production_Blog_Architecture.html` and
 `Production_Blog_Tech_Stack.md` (paths given at project kickoff, not stored in
 this repo — re-read them from the original location if unsure about a rule).
 
+**Post-"done" fix (after the step-12 summary was given)**: the Dashboard's
+**Settings** screen was missing entirely — the tech stack doc explicitly
+calls for one (site info, social links, theme editor, "editable without a
+deploy") but only the underlying `ThemeConfig`/`SiteSetting` models existed,
+with no dashboard UI. Built now: `/dashboard/settings/` with a site/contact
+form (name, logo, contact info, 5 common social links) and a theme form
+(HTML5 color pickers for brand/accent, light/dark default). Verified saved
+theme colors go live in the public site's CSS custom properties immediately.
+**Lesson**: when doing a final "definition of done" pass, check it against
+*every* module the docs list for a screen (Overview/Content/Pages/
+Offerings/Leads/Testimonials/**Settings**), not just the ones already
+built — this one was silently dropped from the task list early on and
+never resurfaced until the user asked "how does admin edit the theme?".
+
 Deviations from those two docs, agreed with the user during this build:
 - **Bilingual i18n added**: Persian (`fa`, default) + Kurdish Sorani (`ckb`),
   both RTL, live at launch with a language switcher — not in the original
