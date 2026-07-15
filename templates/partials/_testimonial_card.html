@@ -1,0 +1,12 @@
+<figure class="flex flex-col gap-3 rounded-lg border border-gray-200 p-4 dark:border-gray-800">
+  {% if testimonial.photo %}
+    <img src="{{ testimonial.photo.url }}" alt="{{ testimonial.author_name }}" class="h-12 w-12 rounded-full object-cover">
+  {% endif %}
+  <blockquote class="text-sm text-gray-700 dark:text-gray-300">“{{ testimonial.quote }}”</blockquote>
+  <figcaption class="text-sm font-medium">
+    {{ testimonial.author_name }}
+    {% if testimonial.author_role %}
+      <span class="font-normal text-gray-500 dark:text-gray-400"> — {{ testimonial.author_role }}</span>
+    {% endif %}
+  </figcaption>
+</figure>

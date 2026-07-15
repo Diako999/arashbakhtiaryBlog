@@ -1,0 +1,79 @@
+{% extends "dashboard/base.html" %}
+{% load i18n widget_tweaks %}
+
+{% block title %}{% if object %}{% trans "Edit offering" %}{% else %}{% trans "New offering" %}{% endif %} · {{ site_settings.site_name }}{% endblock %}
+
+{% block extra_head %}{{ form.media }}{% endblock %}
+
+{% block dashboard_content %}
+<h1 class="mb-6 text-xl font-bold">
+  {% if object %}{% trans "Edit offering" %}{% else %}{% trans "New offering" %}{% endif %}
+</h1>
+
+<form method="post" enctype="multipart/form-data" class="flex max-w-3xl flex-col gap-5">
+  {% csrf_token %}
+  {% for field in form %}
+    <div>
+      <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
+      {% render_field field class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800" %}
+      {% if field.errors %}
+        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ field.errors|join:", " }}</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  {% if session_formset %}
+    <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
+      <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+        {% trans "Sessions" %}
+      </h2>
+      {{ session_formset.management_form }}
+      <div class="flex flex-col gap-4">
+        {% for session_form in session_formset %}
+          <div class="grid gap-3 border-b border-gray-100 pb-4 last:border-none dark:border-gray-800 sm:grid-cols-2">
+            {% for field in session_form.visible_fields %}
+              <div>
+                <label class="mb-1 block text-xs font-medium">{{ field.label }}</label>
+                {% render_field field class="w-full rounded-md border border-gray-200 px-2 py-1.5 text-sm dark:border-gray-700 dark:bg-gray-800" %}
+              </div>
+            {% endfor %}
+            {% for hidden in session_form.hidden_fields %}{{ hidden }}{% endfor %}
+            {% if session_form.instance.pk %}
+              <label class="flex items-center gap-2 text-xs text-red-600 dark:text-red-400">
+                {{ session_form.DELETE }} {% trans "Delete this session" %}
+              </label>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="flex gap-3">
+    <button type="submit" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white dark:bg-gray-100 dark:text-gray-900">
+      {% trans "Save" %}
+    </button>
+    <a href="{% url 'dashboard:offerings' %}" class="rounded-md border border-gray-200 px-4 py-2 text-sm dark:border-gray-700">
+      {% trans "Cancel" %}
+    </a>
+  </div>
+</form>
+
+{% if enrollments %}
+  <div class="mt-8 max-w-3xl">
+    <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+      {% trans "Enrollments" %}
+    </h2>
+    <div class="flex flex-col gap-2">
+      {% for enrollment in enrollments %}
+        <div class="rounded-md border border-gray-200 p-3 text-sm dark:border-gray-800">
+          <p class="font-medium">{{ enrollment.name }} — {{ enrollment.email }}</p>
+          {% if enrollment.session %}
+            <p class="text-xs text-gray-500 dark:text-gray-400">{{ enrollment.session.starts_at|date:"SHORT_DATETIME_FORMAT" }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

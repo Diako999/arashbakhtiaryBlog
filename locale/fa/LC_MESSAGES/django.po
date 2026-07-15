@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 14:44+0330\n"
-"PO-Revision-Date: 2026-07-15 14:19+0330\n"
+"POT-Creation-Date: 2026-07-15 16:52+0330\n"
+"PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -37,11 +37,13 @@ msgstr "نویسنده"
 msgid "authors"
 msgstr "نویسندگان"
 
-#: apps/blog/models.py:12 apps/blog/models.py:93
+#: apps/blog/models.py:12 apps/blog/models.py:93 apps/leads/models.py:75
+#: apps/offerings/models.py:90
 msgid "Name"
 msgstr "نام"
 
-#: apps/blog/models.py:13 apps/blog/models.py:36
+#: apps/blog/models.py:13 apps/blog/models.py:36 apps/leads/models.py:29
+#: apps/offerings/models.py:18
 msgid "Slug"
 msgstr "نامک"
 
@@ -53,16 +55,18 @@ msgstr "دسته"
 msgid "categories"
 msgstr "دسته‌ها"
 
-#: apps/blog/models.py:31
+#: apps/blog/models.py:31 apps/leads/models.py:24 apps/offerings/models.py:13
 msgid "Draft"
 msgstr "پیش‌نویس"
 
-#: apps/blog/models.py:32 apps/dashboard/views.py:131
-#: templates/dashboard/overview.html:15 templates/dashboard/pages.html:24
+#: apps/blog/models.py:32 apps/dashboard/views.py:144 apps/leads/models.py:25
+#: apps/offerings/models.py:14 templates/dashboard/overview.html:15
+#: templates/dashboard/pages.html:24
 msgid "Published"
 msgstr "منتشرشده"
 
-#: apps/blog/models.py:35 apps/navigation/models.py:7
+#: apps/blog/models.py:35 apps/leads/models.py:28 apps/navigation/models.py:7
+#: apps/offerings/models.py:17
 msgid "Title"
 msgstr "عنوان"
 
@@ -82,15 +86,15 @@ msgstr "برچسب‌ها"
 msgid "Excerpt"
 msgstr "خلاصه"
 
-#: apps/blog/models.py:53 apps/blog/models.py:95
+#: apps/blog/models.py:53 apps/blog/models.py:95 apps/offerings/models.py:20
 msgid "Body"
 msgstr "متن"
 
-#: apps/blog/models.py:55
+#: apps/blog/models.py:55 apps/leads/models.py:32 apps/offerings/models.py:22
 msgid "Cover image"
 msgstr "تصویر کاور"
 
-#: apps/blog/models.py:58
+#: apps/blog/models.py:58 apps/leads/models.py:38 apps/offerings/models.py:28
 msgid "Status"
 msgstr "وضعیت"
 
@@ -110,11 +114,12 @@ msgstr "نوشته‌ها"
 msgid "Post"
 msgstr "نوشته"
 
-#: apps/blog/models.py:94
+#: apps/blog/models.py:94 apps/leads/models.py:76 apps/offerings/models.py:91
 msgid "Email"
 msgstr "ایمیل"
 
-#: apps/blog/models.py:96
+#: apps/blog/models.py:96 apps/testimonials/models.py:24
+#: templates/dashboard/testimonial_list.html:36
 msgid "Approved"
 msgstr "تأیید شده"
 
@@ -202,22 +207,83 @@ msgstr "تنظیمات سایت"
 msgid "Site settings"
 msgstr "تنظیمات سایت"
 
-#: apps/dashboard/views.py:74
+#: apps/dashboard/views.py:87
 msgid "Post saved."
 msgstr "نوشته ذخیره شد."
 
-#: apps/dashboard/views.py:86
+#: apps/dashboard/views.py:99
 msgid "Post updated."
 msgstr "نوشته به‌روزرسانی شد."
 
-#: apps/dashboard/views.py:131 templates/dashboard/pages.html:24
+#: apps/dashboard/views.py:144 templates/dashboard/pages.html:24
 msgid "Hidden"
 msgstr "مخفی"
 
-#: apps/dashboard/views.py:132
+#: apps/dashboard/views.py:145
 #, python-format
 msgid "%(title)s is now %(state)s."
 msgstr "«%(title)s» اکنون %(state)s است."
+
+#: apps/dashboard/views.py:169
+msgid "Offering saved."
+msgstr "دوره ذخیره شد."
+
+#: apps/dashboard/views.py:196
+msgid "Offering updated."
+msgstr "دوره به‌روزرسانی شد."
+
+#: apps/dashboard/views.py:228
+msgid "Lead magnet saved."
+msgstr "منبع رایگان ذخیره شد."
+
+#: apps/dashboard/views.py:240
+msgid "Lead magnet updated."
+msgstr "منبع رایگان به‌روزرسانی شد."
+
+#: apps/dashboard/views.py:309
+msgid "Testimonial saved."
+msgstr "نظر مشتری ذخیره شد."
+
+#: apps/dashboard/views.py:321
+msgid "Testimonial updated."
+msgstr "نظر مشتری به‌روزرسانی شد."
+
+#: apps/leads/models.py:16
+#, python-format
+msgid "File too large. Max size is %(max)s MB."
+msgstr "حجم فایل زیاد است. حداکثر اندازه %(max)s مگابایت است."
+
+#: apps/leads/models.py:30
+msgid "Description"
+msgstr "توضیحات"
+
+#: apps/leads/models.py:35
+msgid "File"
+msgstr "فایل"
+
+#: apps/leads/models.py:42
+msgid "lead magnet"
+msgstr "منبع رایگان"
+
+#: apps/leads/models.py:43
+msgid "lead magnets"
+msgstr "منابع رایگان"
+
+#: apps/leads/models.py:73
+msgid "Lead magnet"
+msgstr "منبع رایگان"
+
+#: apps/leads/models.py:77 templates/dashboard/submission_list.html:28
+msgid "Contacted"
+msgstr "تماس گرفته شد"
+
+#: apps/leads/models.py:80
+msgid "submission"
+msgstr "درخواست"
+
+#: apps/leads/models.py:81 templates/dashboard/leadmagnet_list.html:21
+msgid "submissions"
+msgstr "درخواست‌ها"
 
 #: apps/navigation/models.py:9
 msgid "URL name"
@@ -235,7 +301,7 @@ msgstr "نمایان"
 msgid "The phased-rollout switch. Blog starts True, everything else False."
 msgstr "کلید فعال‌سازی مرحله‌ای. وبلاگ از ابتدا فعال است، بقیه غیرفعال."
 
-#: apps/navigation/models.py:18
+#: apps/navigation/models.py:18 apps/testimonials/models.py:25
 msgid "Order"
 msgstr "ترتیب"
 
@@ -250,6 +316,107 @@ msgstr "آیتم منو"
 #: apps/navigation/models.py:30
 msgid "navigation items"
 msgstr "آیتم‌های منو"
+
+#: apps/offerings/models.py:19
+msgid "Summary"
+msgstr "خلاصه"
+
+#: apps/offerings/models.py:25
+msgid "Price"
+msgstr "قیمت"
+
+#: apps/offerings/models.py:32
+msgid "offering"
+msgstr "دوره"
+
+#: apps/offerings/models.py:33
+msgid "offerings"
+msgstr "دوره‌ها"
+
+#: apps/offerings/models.py:60 apps/offerings/models.py:80
+#: apps/testimonials/models.py:22
+msgid "Offering"
+msgstr "دوره"
+
+#: apps/offerings/models.py:62
+msgid "Starts at"
+msgstr "شروع در"
+
+#: apps/offerings/models.py:63
+msgid "Ends at"
+msgstr "پایان در"
+
+#: apps/offerings/models.py:65
+msgid "Location"
+msgstr "مکان"
+
+#: apps/offerings/models.py:65
+msgid "Online link or venue address"
+msgstr "لینک آنلاین یا آدرس مکان"
+
+#: apps/offerings/models.py:67
+msgid "Capacity"
+msgstr "ظرفیت"
+
+#: apps/offerings/models.py:70
+msgid "session"
+msgstr "جلسه"
+
+#: apps/offerings/models.py:71 templates/dashboard/offering_list.html:21
+msgid "sessions"
+msgstr "جلسات"
+
+#: apps/offerings/models.py:88
+msgid "Session"
+msgstr "جلسه"
+
+#: apps/offerings/models.py:92
+msgid "Phone"
+msgstr "تلفن"
+
+#: apps/offerings/models.py:93
+msgid "Notes"
+msgstr "یادداشت‌ها"
+
+#: apps/offerings/models.py:96
+msgid "enrollment"
+msgstr "ثبت‌نام"
+
+#: apps/offerings/models.py:97 templates/dashboard/offering_list.html:21
+msgid "enrollments"
+msgstr "ثبت‌نام‌ها"
+
+#: apps/offerings/views.py:46
+msgid "Thanks — we received your enrollment."
+msgstr "متشکریم — ثبت‌نام شما دریافت شد."
+
+#: apps/testimonials/models.py:9
+msgid "Author name"
+msgstr "نام گوینده"
+
+#: apps/testimonials/models.py:10
+msgid "Author role"
+msgstr "سمت"
+
+#: apps/testimonials/models.py:11
+msgid "Quote"
+msgstr "متن نظر"
+
+#: apps/testimonials/models.py:13
+msgid "Photo"
+msgstr "عکس"
+
+#: apps/testimonials/models.py:15
+msgid "Video URL"
+msgstr "لینک ویدیو"
+
+#: apps/testimonials/models.py:28
+msgid "testimonial"
+msgstr "نظر مشتری"
+
+#: apps/testimonials/models.py:29
+msgid "testimonials"
+msgstr "نظرات مشتریان"
 
 #: templates/base/blog_layout.html:11 templates/dashboard/content_list.html:52
 msgid "Categories"
@@ -274,10 +441,12 @@ msgid "No posts yet."
 msgstr "هنوز نوشته‌ای وجود ندارد."
 
 #: templates/blog/list.html:24 templates/dashboard/content_list.html:42
+#: templates/dashboard/submission_list.html:40
 msgid "Previous"
 msgstr "قبلی"
 
 #: templates/blog/list.html:31 templates/dashboard/content_list.html:46
+#: templates/dashboard/submission_list.html:44
 msgid "Next"
 msgstr "بعدی"
 
@@ -304,11 +473,26 @@ msgstr "محتوا"
 msgid "Pages"
 msgstr "صفحات"
 
-#: templates/dashboard/base.html:25
+#: templates/dashboard/base.html:23 templates/dashboard/offering_list.html:4
+#: templates/dashboard/offering_list.html:8
+msgid "Offerings"
+msgstr "دوره‌ها"
+
+#: templates/dashboard/base.html:24
+msgid "Leads"
+msgstr "سرنخ‌ها"
+
+#: templates/dashboard/base.html:25 templates/dashboard/testimonial_list.html:4
+#: templates/dashboard/testimonial_list.html:8
+#: templates/testimonials/list.html:4 templates/testimonials/list.html:7
+msgid "Testimonials"
+msgstr "نظرات مشتریان"
+
+#: templates/dashboard/base.html:28
 msgid "View site"
 msgstr "مشاهده سایت"
 
-#: templates/dashboard/base.html:28
+#: templates/dashboard/base.html:31
 msgid "Log out"
 msgstr "خروج"
 
@@ -322,13 +506,22 @@ msgid "New category"
 msgstr "دسته جدید"
 
 #: templates/dashboard/category_form.html:24
+#: templates/dashboard/leadmagnet_form.html:24
+#: templates/dashboard/offering_form.html:54
 #: templates/dashboard/post_form.html:29
+#: templates/dashboard/testimonial_form.html:24
 msgid "Save"
 msgstr "ذخیره"
 
 #: templates/dashboard/category_form.html:27
+#: templates/dashboard/leadmagnet_confirm_delete.html:14
+#: templates/dashboard/leadmagnet_form.html:27
+#: templates/dashboard/offering_confirm_delete.html:14
+#: templates/dashboard/offering_form.html:57
 #: templates/dashboard/post_confirm_delete.html:14
 #: templates/dashboard/post_form.html:32
+#: templates/dashboard/testimonial_confirm_delete.html:14
+#: templates/dashboard/testimonial_form.html:27
 msgid "Cancel"
 msgstr "انصراف"
 
@@ -338,17 +531,65 @@ msgid "New post"
 msgstr "نوشته جدید"
 
 #: templates/dashboard/content_list.html:30
+#: templates/dashboard/leadmagnet_list.html:28
+#: templates/dashboard/offering_list.html:28
+#: templates/dashboard/testimonial_list.html:39
 msgid "Edit"
 msgstr "ویرایش"
 
 #: templates/dashboard/content_list.html:31
+#: templates/dashboard/leadmagnet_confirm_delete.html:13
+#: templates/dashboard/leadmagnet_list.html:29
+#: templates/dashboard/offering_confirm_delete.html:13
+#: templates/dashboard/offering_list.html:29
 #: templates/dashboard/post_confirm_delete.html:13
+#: templates/dashboard/testimonial_confirm_delete.html:13
+#: templates/dashboard/testimonial_list.html:40
 msgid "Delete"
 msgstr "حذف"
 
 #: templates/dashboard/content_list.html:60
 msgid "No categories yet."
 msgstr "هنوز دسته‌ای وجود ندارد."
+
+#: templates/dashboard/leadmagnet_confirm_delete.html:4
+#: templates/dashboard/leadmagnet_confirm_delete.html:7
+msgid "Delete resource"
+msgstr "حذف منبع"
+
+#: templates/dashboard/leadmagnet_confirm_delete.html:9
+#: templates/dashboard/offering_confirm_delete.html:9
+#: templates/dashboard/post_confirm_delete.html:9
+#, python-format
+msgid "Are you sure you want to delete “%(title)s”? This cannot be undone."
+msgstr ""
+"آیا مطمئن هستید که می‌خواهید «%(title)s» را حذف کنید؟ این کار قابل بازگشت "
+"نیست."
+
+#: templates/dashboard/leadmagnet_form.html:4
+#: templates/dashboard/leadmagnet_form.html:8
+msgid "Edit resource"
+msgstr "ویرایش منبع"
+
+#: templates/dashboard/leadmagnet_form.html:4
+#: templates/dashboard/leadmagnet_form.html:8
+#: templates/dashboard/leadmagnet_list.html:11
+msgid "New resource"
+msgstr "منبع جدید"
+
+#: templates/dashboard/leadmagnet_list.html:4
+#: templates/dashboard/leadmagnet_list.html:8 templates/leads/list.html:4
+#: templates/leads/list.html:7
+msgid "Free Resources"
+msgstr "منابع رایگان"
+
+#: templates/dashboard/leadmagnet_list.html:10
+msgid "Submissions inbox"
+msgstr "صندوق درخواست‌ها"
+
+#: templates/dashboard/leadmagnet_list.html:33
+msgid "No resources yet."
+msgstr "هنوز منبعی وجود ندارد."
 
 #: templates/dashboard/login.html:8 templates/dashboard/login.html:33
 msgid "Log in"
@@ -365,6 +606,38 @@ msgstr "نام کاربری"
 #: templates/dashboard/login.html:28
 msgid "Password"
 msgstr "رمز عبور"
+
+#: templates/dashboard/offering_confirm_delete.html:4
+#: templates/dashboard/offering_confirm_delete.html:7
+msgid "Delete offering"
+msgstr "حذف دوره"
+
+#: templates/dashboard/offering_form.html:4
+#: templates/dashboard/offering_form.html:10
+msgid "Edit offering"
+msgstr "ویرایش دوره"
+
+#: templates/dashboard/offering_form.html:4
+#: templates/dashboard/offering_form.html:10
+#: templates/dashboard/offering_list.html:11
+msgid "New offering"
+msgstr "دوره جدید"
+
+#: templates/dashboard/offering_form.html:28 templates/offerings/detail.html:23
+msgid "Sessions"
+msgstr "جلسات"
+
+#: templates/dashboard/offering_form.html:43
+msgid "Delete this session"
+msgstr "حذف این جلسه"
+
+#: templates/dashboard/offering_form.html:65
+msgid "Enrollments"
+msgstr "ثبت‌نام‌ها"
+
+#: templates/dashboard/offering_list.html:33
+msgid "No offerings yet."
+msgstr "هنوز دوره‌ای وجود ندارد."
 
 #: templates/dashboard/overview.html:11
 msgid "Drafts"
@@ -385,16 +658,96 @@ msgstr ""
 msgid "Delete post"
 msgstr "حذف نوشته"
 
-#: templates/dashboard/post_confirm_delete.html:9
-#, python-format
-msgid "Are you sure you want to delete “%(title)s”? This cannot be undone."
-msgstr ""
-"آیا مطمئن هستید که می‌خواهید «%(title)s» را حذف کنید؟ این کار قابل بازگشت "
-"نیست."
-
 #: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
 msgid "Edit post"
 msgstr "ویرایش نوشته"
+
+#: templates/dashboard/submission_list.html:4
+#: templates/dashboard/submission_list.html:8
+msgid "Submissions"
+msgstr "درخواست‌ها"
+
+#: templates/dashboard/submission_list.html:10
+msgid "Export CSV"
+msgstr "خروجی CSV"
+
+#: templates/dashboard/submission_list.html:28
+msgid "Mark as contacted"
+msgstr "علامت‌گذاری به‌عنوان تماس گرفته‌شده"
+
+#: templates/dashboard/submission_list.html:33
+msgid "No submissions yet."
+msgstr "هنوز درخواستی وجود ندارد."
+
+#: templates/dashboard/testimonial_confirm_delete.html:4
+#: templates/dashboard/testimonial_confirm_delete.html:7
+msgid "Delete testimonial"
+msgstr "حذف نظر"
+
+#: templates/dashboard/testimonial_confirm_delete.html:9
+#, python-format
+msgid ""
+"Are you sure you want to delete the testimonial from “%(name)s”? This cannot "
+"be undone."
+msgstr ""
+"آیا مطمئن هستید که می‌خواهید نظر «%(name)s» را حذف کنید؟ این کار قابل بازگشت "
+"نیست."
+
+#: templates/dashboard/testimonial_form.html:4
+#: templates/dashboard/testimonial_form.html:8
+msgid "Edit testimonial"
+msgstr "ویرایش نظر"
+
+#: templates/dashboard/testimonial_form.html:4
+#: templates/dashboard/testimonial_form.html:8
+#: templates/dashboard/testimonial_list.html:11
+msgid "New testimonial"
+msgstr "نظر جدید"
+
+#: templates/dashboard/testimonial_list.html:25
+msgid "Move up"
+msgstr "انتقال به بالا"
+
+#: templates/dashboard/testimonial_list.html:29
+msgid "Move down"
+msgstr "انتقال به پایین"
+
+#: templates/dashboard/testimonial_list.html:36
+msgid "Pending"
+msgstr "در انتظار"
+
+#: templates/dashboard/testimonial_list.html:44
+msgid "No testimonials yet."
+msgstr "هنوز نظری وجود ندارد."
+
+#: templates/leads/list.html:22 templates/offerings/list.html:25
+#: templates/testimonials/list.html:13
+msgid "Nothing here yet."
+msgstr "هنوز چیزی وجود ندارد."
+
+#: templates/offerings/detail.html:40
+msgid "Enroll"
+msgstr "ثبت‌نام"
+
+#: templates/offerings/detail.html:54
+msgid "Submit"
+msgstr "ارسال"
+
+#: templates/offerings/list.html:4 templates/offerings/list.html:7
+msgid "Courses & Workshops"
+msgstr "دوره‌ها و کارگاه‌ها"
+
+#: templates/partials/_lead_form.html:4
+msgid "Thanks! Your download is ready."
+msgstr "متشکریم! فایل شما آماده دانلود است."
+
+#: templates/partials/_lead_form.html:7
+msgid "Download"
+msgstr "دانلود"
+
+#: templates/partials/_lead_form.html:23
+msgid "Get the download link"
+msgstr "دریافت لینک دانلود"
 
 #: templates/partials/_theme_switcher.html:3
 msgid "Toggle light/dark theme"

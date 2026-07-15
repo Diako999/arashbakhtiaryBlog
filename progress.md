@@ -80,24 +80,34 @@ Deviations from those two docs, agreed with the user during this build:
    Pages visibility-switch screen. Login-gated (`dashboard:login`). Verified
    end to end in browser: login, create post, toggle a section
    Published/Hidden and watched the public nav update live with no restart.
-7. [ ] offerings/testimonials/leads apps: models + hidden-by-default views
-   (404/redirect enforced at view level via `apps/navigation/mixins.py`'s
-   `SectionVisibleRequiredMixin`) + their dashboard screens.
-   **Remember: verbose_name=_(...) on every model field (see deviations above).**
+7. [x] offerings/testimonials/leads apps: Offering/Session/Enrollment,
+   Testimonial, LeadMagnet/Submission models (all with `verbose_name=_(...)`
+   on every field). Public views 404 while hidden via
+   `SectionVisibleRequiredMixin` (`apps/navigation/mixins.py`), verified: all
+   three returned 404 while hidden, 200 immediately after toggling visible
+   via the dashboard Pages screen, no restart needed. Dashboard screens:
+   Offerings (CRUD + inline session formset + read-only enrollment list),
+   Leads (CRUD + submissions inbox + CSV export + mark-contacted toggle),
+   Testimonials (CRUD + approve/reject toggle + up/down reorder). Public
+   forms (enrollment, lead-magnet gate) both verified working end to end via
+   curl, including django-ratelimit decorators. All new UI strings
+   translated (fa/ckb) and compiled.
 8. [ ] pages app (flat pages).
-9. [ ] SEO: sitemap.xml (stub sitemaps already wired in `config/urls.py`,
-   `PostSitemap.items()` now returns real published posts; `OfferingSitemap`
-   still stubbed empty until offerings models exist), meta fields, OG/Twitter
-   tags (basic version already in `base/layout.html`), robots.txt (basic
-   version already in `templates/robots.txt`).
+9. [ ] SEO: sitemap.xml (`PostSitemap` and `OfferingSitemap` both wired to
+   real published querysets now), meta fields, OG/Twitter tags (basic
+   version already in `base/layout.html`), robots.txt (basic version already
+   in `templates/robots.txt`).
 10. [ ] Security settings pass in `config/settings/prod.py` (mostly drafted
     already — SSL/HSTS/cookie flags in place; still need: admin URL renamed,
-    django-otp 2FA wired to dashboard login, django-ratelimit on public
-    forms, upload validators).
+    django-otp 2FA wired to dashboard login, django-ratelimit is already
+    applied to the enrollment and lead-gate POST views but double check
+    blog comments if a submission view is ever added, upload validators —
+    `apps/leads/models.py` has a size validator already, apply the same
+    pattern to any other upload fields).
 11. [ ] i18n: only remaining work here is translating strings from the
-    offerings/testimonials/leads/pages apps once built (see "translate as you
-    go" practice above) — Persian/Kurdish is otherwise fully wired and
-    verified working for everything built so far.
+    pages app once built (see "translate as you go" practice above) —
+    Persian/Kurdish is otherwise fully wired and verified working for
+    everything built so far, including offerings/testimonials/leads.
 12. [ ] End-to-end verification against the "Definition of done" in the
     kickoff prompt, then a stop-and-review summary for the user.
 
@@ -134,5 +144,5 @@ source .venv/bin/activate
 python manage.py check      # should say "no issues"
 ```
 
-Then continue at step 7 above (offerings/testimonials/leads apps) unless
-this file has been updated since.
+Then continue at step 8 above (pages app) unless this file has been updated
+since.

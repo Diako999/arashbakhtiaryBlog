@@ -1,0 +1,25 @@
+{% extends "base/layout.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Free Resources" %} · {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<h1 class="mb-6 text-2xl font-bold sm:text-3xl">{% trans "Free Resources" %}</h1>
+
+<div class="grid gap-6 sm:grid-cols-2">
+  {% for lead_magnet in lead_magnets %}
+    <a href="{{ lead_magnet.get_absolute_url }}"
+       class="flex flex-col gap-2 rounded-lg border border-gray-200 p-4 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900">
+      {% if lead_magnet.cover_image %}
+        <img src="{{ lead_magnet.cover_image.url }}" alt="{{ lead_magnet.title }}" class="h-40 w-full rounded-md object-cover">
+      {% endif %}
+      <h2 class="text-lg font-semibold">{{ lead_magnet.title }}</h2>
+      {% if lead_magnet.description %}
+        <p class="text-sm text-gray-500 dark:text-gray-400">{{ lead_magnet.description|truncatewords:20 }}</p>
+      {% endif %}
+    </a>
+  {% empty %}
+    <p class="text-gray-500 dark:text-gray-400">{% trans "Nothing here yet." %}</p>
+  {% endfor %}
+</div>
+{% endblock %}

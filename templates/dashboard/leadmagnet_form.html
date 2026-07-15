@@ -1,0 +1,31 @@
+{% extends "dashboard/base.html" %}
+{% load i18n widget_tweaks %}
+
+{% block title %}{% if object %}{% trans "Edit resource" %}{% else %}{% trans "New resource" %}{% endif %} · {{ site_settings.site_name }}{% endblock %}
+
+{% block dashboard_content %}
+<h1 class="mb-6 text-xl font-bold">
+  {% if object %}{% trans "Edit resource" %}{% else %}{% trans "New resource" %}{% endif %}
+</h1>
+
+<form method="post" enctype="multipart/form-data" class="flex max-w-3xl flex-col gap-5">
+  {% csrf_token %}
+  {% for field in form %}
+    <div>
+      <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
+      {% render_field field class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800" %}
+      {% if field.errors %}
+        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ field.errors|join:", " }}</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+  <div class="flex gap-3">
+    <button type="submit" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white dark:bg-gray-100 dark:text-gray-900">
+      {% trans "Save" %}
+    </button>
+    <a href="{% url 'dashboard:leads' %}" class="rounded-md border border-gray-200 px-4 py-2 text-sm dark:border-gray-700">
+      {% trans "Cancel" %}
+    </a>
+  </div>
+</form>
+{% endblock %}

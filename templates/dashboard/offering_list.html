@@ -1,0 +1,36 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Offerings" %} · {{ site_settings.site_name }}{% endblock %}
+
+{% block dashboard_content %}
+<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+  <h1 class="text-xl font-bold">{% trans "Offerings" %}</h1>
+  <a href="{% url 'dashboard:offering_create' %}"
+     class="rounded-md bg-gray-900 px-3 py-2 text-sm text-white dark:bg-gray-100 dark:text-gray-900">
+    {% trans "New offering" %}
+  </a>
+</div>
+
+<div class="flex flex-col gap-2">
+  {% for offering in offerings %}
+    <div class="flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-900 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="font-medium">{{ offering.title }}</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">
+          {{ offering.sessions.count }} {% trans "sessions" %} · {{ offering.enrollments.count }} {% trans "enrollments" %}
+        </p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="rounded-full px-2 py-0.5 text-xs {% if offering.status == 'published' %}bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300{% else %}bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300{% endif %}">
+          {{ offering.get_status_display }}
+        </span>
+        <a href="{% url 'dashboard:offering_edit' offering.pk %}" class="text-sm hover:underline">{% trans "Edit" %}</a>
+        <a href="{% url 'dashboard:offering_delete' offering.pk %}" class="text-sm text-red-600 hover:underline dark:text-red-400">{% trans "Delete" %}</a>
+      </div>
+    </div>
+  {% empty %}
+    <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "No offerings yet." %}</p>
+  {% endfor %}
+</div>
+{% endblock %}

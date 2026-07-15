@@ -1,0 +1,48 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Submissions" %} · {{ site_settings.site_name }}{% endblock %}
+
+{% block dashboard_content %}
+<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+  <h1 class="text-xl font-bold">{% trans "Submissions" %}</h1>
+  <a href="{% url 'dashboard:submission_export' %}" class="rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700">
+    {% trans "Export CSV" %}
+  </a>
+</div>
+
+<div class="flex flex-col gap-2">
+  {% for submission in submissions %}
+    <div class="flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-900 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="font-medium">{{ submission.name }} — {{ submission.email }}</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">
+          {{ submission.lead_magnet.title }} · {{ submission.created_at|date:"SHORT_DATETIME_FORMAT" }}
+        </p>
+      </div>
+      <form method="post" action="{% url 'dashboard:submission_toggle' submission.pk %}">
+        {% csrf_token %}
+        <button type="submit"
+                class="rounded-full border px-3 py-1 text-xs font-medium
+                       {% if submission.is_contacted %}border-green-500 bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300{% else %}border-gray-300 bg-gray-100 text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300{% endif %}">
+          {% if submission.is_contacted %}{% trans "Contacted" %}{% else %}{% trans "Mark as contacted" %}{% endif %}
+        </button>
+      </form>
+    </div>
+  {% empty %}
+    <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "No submissions yet." %}</p>
+  {% endfor %}
+</div>
+
+{% if is_paginated %}
+  <nav class="mt-6 flex justify-center gap-2">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}" class="rounded-md border border-gray-200 px-3 py-1 text-sm dark:border-gray-700">{% trans "Previous" %}</a>
+    {% endif %}
+    <span class="px-3 py-1 text-sm text-gray-500 dark:text-gray-400">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="rounded-md border border-gray-200 px-3 py-1 text-sm dark:border-gray-700">{% trans "Next" %}</a>
+    {% endif %}
+  </nav>
+{% endif %}
+{% endblock %}

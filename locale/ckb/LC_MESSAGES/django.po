@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 14:44+0330\n"
-"PO-Revision-Date: 2026-07-15 14:19+0330\n"
+"POT-Creation-Date: 2026-07-15 16:52+0330\n"
+"PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
 "Language: ckb\n"
@@ -37,11 +37,13 @@ msgstr "نووسەر"
 msgid "authors"
 msgstr "نووسەران"
 
-#: apps/blog/models.py:12 apps/blog/models.py:93
+#: apps/blog/models.py:12 apps/blog/models.py:93 apps/leads/models.py:75
+#: apps/offerings/models.py:90
 msgid "Name"
 msgstr "ناو"
 
-#: apps/blog/models.py:13 apps/blog/models.py:36
+#: apps/blog/models.py:13 apps/blog/models.py:36 apps/leads/models.py:29
+#: apps/offerings/models.py:18
 msgid "Slug"
 msgstr "ناسنامە"
 
@@ -53,16 +55,18 @@ msgstr "پۆل"
 msgid "categories"
 msgstr "پۆلەکان"
 
-#: apps/blog/models.py:31
+#: apps/blog/models.py:31 apps/leads/models.py:24 apps/offerings/models.py:13
 msgid "Draft"
 msgstr "ڕەشنووس"
 
-#: apps/blog/models.py:32 apps/dashboard/views.py:131
-#: templates/dashboard/overview.html:15 templates/dashboard/pages.html:24
+#: apps/blog/models.py:32 apps/dashboard/views.py:144 apps/leads/models.py:25
+#: apps/offerings/models.py:14 templates/dashboard/overview.html:15
+#: templates/dashboard/pages.html:24
 msgid "Published"
 msgstr "بڵاوکراوەتەوە"
 
-#: apps/blog/models.py:35 apps/navigation/models.py:7
+#: apps/blog/models.py:35 apps/leads/models.py:28 apps/navigation/models.py:7
+#: apps/offerings/models.py:17
 msgid "Title"
 msgstr "ناونیشان"
 
@@ -82,15 +86,15 @@ msgstr "تاگەکان"
 msgid "Excerpt"
 msgstr "کورتە"
 
-#: apps/blog/models.py:53 apps/blog/models.py:95
+#: apps/blog/models.py:53 apps/blog/models.py:95 apps/offerings/models.py:20
 msgid "Body"
 msgstr "دەق"
 
-#: apps/blog/models.py:55
+#: apps/blog/models.py:55 apps/leads/models.py:32 apps/offerings/models.py:22
 msgid "Cover image"
 msgstr "وێنەی سەرەکی"
 
-#: apps/blog/models.py:58
+#: apps/blog/models.py:58 apps/leads/models.py:38 apps/offerings/models.py:28
 msgid "Status"
 msgstr "دۆخ"
 
@@ -110,11 +114,12 @@ msgstr "بابەتەکان"
 msgid "Post"
 msgstr "بابەت"
 
-#: apps/blog/models.py:94
+#: apps/blog/models.py:94 apps/leads/models.py:76 apps/offerings/models.py:91
 msgid "Email"
 msgstr "ئیمەیل"
 
-#: apps/blog/models.py:96
+#: apps/blog/models.py:96 apps/testimonials/models.py:24
+#: templates/dashboard/testimonial_list.html:36
 msgid "Approved"
 msgstr "پەسندکراو"
 
@@ -202,22 +207,83 @@ msgstr "ڕێکخستنەکانی ماڵپەڕ"
 msgid "Site settings"
 msgstr "ڕێکخستنەکانی ماڵپەڕ"
 
-#: apps/dashboard/views.py:74
+#: apps/dashboard/views.py:87
 msgid "Post saved."
 msgstr "بابەت پاشەکەوت کرا."
 
-#: apps/dashboard/views.py:86
+#: apps/dashboard/views.py:99
 msgid "Post updated."
 msgstr "بابەت نوێکرایەوە."
 
-#: apps/dashboard/views.py:131 templates/dashboard/pages.html:24
+#: apps/dashboard/views.py:144 templates/dashboard/pages.html:24
 msgid "Hidden"
 msgstr "شاراوە"
 
-#: apps/dashboard/views.py:132
+#: apps/dashboard/views.py:145
 #, python-format
 msgid "%(title)s is now %(state)s."
 msgstr "«%(title)s» ئێستا %(state)s ە."
+
+#: apps/dashboard/views.py:169
+msgid "Offering saved."
+msgstr "کۆرس پاشەکەوت کرا."
+
+#: apps/dashboard/views.py:196
+msgid "Offering updated."
+msgstr "کۆرس نوێکرایەوە."
+
+#: apps/dashboard/views.py:228
+msgid "Lead magnet saved."
+msgstr "سەرچاوە بەخۆڕایی پاشەکەوت کرا."
+
+#: apps/dashboard/views.py:240
+msgid "Lead magnet updated."
+msgstr "سەرچاوە بەخۆڕایی نوێکرایەوە."
+
+#: apps/dashboard/views.py:309
+msgid "Testimonial saved."
+msgstr "بۆچوون پاشەکەوت کرا."
+
+#: apps/dashboard/views.py:321
+msgid "Testimonial updated."
+msgstr "بۆچوون نوێکرایەوە."
+
+#: apps/leads/models.py:16
+#, python-format
+msgid "File too large. Max size is %(max)s MB."
+msgstr "قەبارەی فایل زۆرە. زۆرترین قەبارە %(max)s میگابایتە."
+
+#: apps/leads/models.py:30
+msgid "Description"
+msgstr "وەسف"
+
+#: apps/leads/models.py:35
+msgid "File"
+msgstr "فایل"
+
+#: apps/leads/models.py:42
+msgid "lead magnet"
+msgstr "سەرچاوەی بەخۆڕایی"
+
+#: apps/leads/models.py:43
+msgid "lead magnets"
+msgstr "سەرچاوە بەخۆڕاییەکان"
+
+#: apps/leads/models.py:73
+msgid "Lead magnet"
+msgstr "سەرچاوەی بەخۆڕایی"
+
+#: apps/leads/models.py:77 templates/dashboard/submission_list.html:28
+msgid "Contacted"
+msgstr "پەیوەندی کرا"
+
+#: apps/leads/models.py:80
+msgid "submission"
+msgstr "داواکاری"
+
+#: apps/leads/models.py:81 templates/dashboard/leadmagnet_list.html:21
+msgid "submissions"
+msgstr "داواکارییەکان"
 
 #: apps/navigation/models.py:9
 msgid "URL name"
@@ -236,7 +302,7 @@ msgid "The phased-rollout switch. Blog starts True, everything else False."
 msgstr ""
 "کلیلی چالاککردنی قۆناغ بە قۆناغ. بلۆگ لە سەرەتاوە چالاکە، ماوە شاراوەن."
 
-#: apps/navigation/models.py:18
+#: apps/navigation/models.py:18 apps/testimonials/models.py:25
 msgid "Order"
 msgstr "ڕیز"
 
@@ -251,6 +317,107 @@ msgstr "بڕگەی مینیو"
 #: apps/navigation/models.py:30
 msgid "navigation items"
 msgstr "بڕگەکانی مینیو"
+
+#: apps/offerings/models.py:19
+msgid "Summary"
+msgstr "کورتە"
+
+#: apps/offerings/models.py:25
+msgid "Price"
+msgstr "نرخ"
+
+#: apps/offerings/models.py:32
+msgid "offering"
+msgstr "کۆرس"
+
+#: apps/offerings/models.py:33
+msgid "offerings"
+msgstr "کۆرسەکان"
+
+#: apps/offerings/models.py:60 apps/offerings/models.py:80
+#: apps/testimonials/models.py:22
+msgid "Offering"
+msgstr "کۆرس"
+
+#: apps/offerings/models.py:62
+msgid "Starts at"
+msgstr "دەستپێکردن لە"
+
+#: apps/offerings/models.py:63
+msgid "Ends at"
+msgstr "کۆتایی لە"
+
+#: apps/offerings/models.py:65
+msgid "Location"
+msgstr "شوێن"
+
+#: apps/offerings/models.py:65
+msgid "Online link or venue address"
+msgstr "لینکی ئۆنلاین یان ناونیشانی شوێن"
+
+#: apps/offerings/models.py:67
+msgid "Capacity"
+msgstr "گونجایی"
+
+#: apps/offerings/models.py:70
+msgid "session"
+msgstr "دانیشتن"
+
+#: apps/offerings/models.py:71 templates/dashboard/offering_list.html:21
+msgid "sessions"
+msgstr "دانیشتنەکان"
+
+#: apps/offerings/models.py:88
+msgid "Session"
+msgstr "دانیشتن"
+
+#: apps/offerings/models.py:92
+msgid "Phone"
+msgstr "تەلەفۆن"
+
+#: apps/offerings/models.py:93
+msgid "Notes"
+msgstr "تێبینیەکان"
+
+#: apps/offerings/models.py:96
+msgid "enrollment"
+msgstr "تۆمارکردن"
+
+#: apps/offerings/models.py:97 templates/dashboard/offering_list.html:21
+msgid "enrollments"
+msgstr "تۆمارکردنەکان"
+
+#: apps/offerings/views.py:46
+msgid "Thanks — we received your enrollment."
+msgstr "سوپاس — تۆمارکردنەکەت وەرگیرا."
+
+#: apps/testimonials/models.py:9
+msgid "Author name"
+msgstr "ناوی کەس"
+
+#: apps/testimonials/models.py:10
+msgid "Author role"
+msgstr "ڕۆڵ"
+
+#: apps/testimonials/models.py:11
+msgid "Quote"
+msgstr "وتە"
+
+#: apps/testimonials/models.py:13
+msgid "Photo"
+msgstr "وێنە"
+
+#: apps/testimonials/models.py:15
+msgid "Video URL"
+msgstr "لینکی ڤیدیۆ"
+
+#: apps/testimonials/models.py:28
+msgid "testimonial"
+msgstr "بۆچوون"
+
+#: apps/testimonials/models.py:29
+msgid "testimonials"
+msgstr "بۆچوونەکان"
 
 #: templates/base/blog_layout.html:11 templates/dashboard/content_list.html:52
 msgid "Categories"
@@ -275,10 +442,12 @@ msgid "No posts yet."
 msgstr "هێشتا بابەتێک نییە."
 
 #: templates/blog/list.html:24 templates/dashboard/content_list.html:42
+#: templates/dashboard/submission_list.html:40
 msgid "Previous"
 msgstr "پێشوو"
 
 #: templates/blog/list.html:31 templates/dashboard/content_list.html:46
+#: templates/dashboard/submission_list.html:44
 msgid "Next"
 msgstr "دواتر"
 
@@ -305,11 +474,26 @@ msgstr "ناوەڕۆک"
 msgid "Pages"
 msgstr "پەڕەکان"
 
-#: templates/dashboard/base.html:25
+#: templates/dashboard/base.html:23 templates/dashboard/offering_list.html:4
+#: templates/dashboard/offering_list.html:8
+msgid "Offerings"
+msgstr "کۆرسەکان"
+
+#: templates/dashboard/base.html:24
+msgid "Leads"
+msgstr "داواکارییەکان"
+
+#: templates/dashboard/base.html:25 templates/dashboard/testimonial_list.html:4
+#: templates/dashboard/testimonial_list.html:8
+#: templates/testimonials/list.html:4 templates/testimonials/list.html:7
+msgid "Testimonials"
+msgstr "بۆچوونەکان"
+
+#: templates/dashboard/base.html:28
 msgid "View site"
 msgstr "بینینی ماڵپەڕ"
 
-#: templates/dashboard/base.html:28
+#: templates/dashboard/base.html:31
 msgid "Log out"
 msgstr "چوونەدەرەوە"
 
@@ -323,13 +507,22 @@ msgid "New category"
 msgstr "پۆلی نوێ"
 
 #: templates/dashboard/category_form.html:24
+#: templates/dashboard/leadmagnet_form.html:24
+#: templates/dashboard/offering_form.html:54
 #: templates/dashboard/post_form.html:29
+#: templates/dashboard/testimonial_form.html:24
 msgid "Save"
 msgstr "پاشەکەوتکردن"
 
 #: templates/dashboard/category_form.html:27
+#: templates/dashboard/leadmagnet_confirm_delete.html:14
+#: templates/dashboard/leadmagnet_form.html:27
+#: templates/dashboard/offering_confirm_delete.html:14
+#: templates/dashboard/offering_form.html:57
 #: templates/dashboard/post_confirm_delete.html:14
 #: templates/dashboard/post_form.html:32
+#: templates/dashboard/testimonial_confirm_delete.html:14
+#: templates/dashboard/testimonial_form.html:27
 msgid "Cancel"
 msgstr "پاشگەزبوونەوە"
 
@@ -339,17 +532,63 @@ msgid "New post"
 msgstr "بابەتی نوێ"
 
 #: templates/dashboard/content_list.html:30
+#: templates/dashboard/leadmagnet_list.html:28
+#: templates/dashboard/offering_list.html:28
+#: templates/dashboard/testimonial_list.html:39
 msgid "Edit"
 msgstr "دەستکاری"
 
 #: templates/dashboard/content_list.html:31
+#: templates/dashboard/leadmagnet_confirm_delete.html:13
+#: templates/dashboard/leadmagnet_list.html:29
+#: templates/dashboard/offering_confirm_delete.html:13
+#: templates/dashboard/offering_list.html:29
 #: templates/dashboard/post_confirm_delete.html:13
+#: templates/dashboard/testimonial_confirm_delete.html:13
+#: templates/dashboard/testimonial_list.html:40
 msgid "Delete"
 msgstr "سڕینەوە"
 
 #: templates/dashboard/content_list.html:60
 msgid "No categories yet."
 msgstr "هێشتا پۆلێک نییە."
+
+#: templates/dashboard/leadmagnet_confirm_delete.html:4
+#: templates/dashboard/leadmagnet_confirm_delete.html:7
+msgid "Delete resource"
+msgstr "سڕینەوەی سەرچاوە"
+
+#: templates/dashboard/leadmagnet_confirm_delete.html:9
+#: templates/dashboard/offering_confirm_delete.html:9
+#: templates/dashboard/post_confirm_delete.html:9
+#, python-format
+msgid "Are you sure you want to delete “%(title)s”? This cannot be undone."
+msgstr "دڵنیایت لە سڕینەوەی «%(title)s»؟ ئەم کردارە ناتوانرێت بگەڕێندرێتەوە."
+
+#: templates/dashboard/leadmagnet_form.html:4
+#: templates/dashboard/leadmagnet_form.html:8
+msgid "Edit resource"
+msgstr "دەستکاریکردنی سەرچاوە"
+
+#: templates/dashboard/leadmagnet_form.html:4
+#: templates/dashboard/leadmagnet_form.html:8
+#: templates/dashboard/leadmagnet_list.html:11
+msgid "New resource"
+msgstr "سەرچاوەی نوێ"
+
+#: templates/dashboard/leadmagnet_list.html:4
+#: templates/dashboard/leadmagnet_list.html:8 templates/leads/list.html:4
+#: templates/leads/list.html:7
+msgid "Free Resources"
+msgstr "سەرچاوە بەخۆڕاییەکان"
+
+#: templates/dashboard/leadmagnet_list.html:10
+msgid "Submissions inbox"
+msgstr "سندوقی داواکارییەکان"
+
+#: templates/dashboard/leadmagnet_list.html:33
+msgid "No resources yet."
+msgstr "هێشتا سەرچاوەیەک نییە."
 
 #: templates/dashboard/login.html:8 templates/dashboard/login.html:33
 msgid "Log in"
@@ -366,6 +605,38 @@ msgstr "ناوی بەکارهێنەر"
 #: templates/dashboard/login.html:28
 msgid "Password"
 msgstr "وشەی نهێنی"
+
+#: templates/dashboard/offering_confirm_delete.html:4
+#: templates/dashboard/offering_confirm_delete.html:7
+msgid "Delete offering"
+msgstr "سڕینەوەی کۆرس"
+
+#: templates/dashboard/offering_form.html:4
+#: templates/dashboard/offering_form.html:10
+msgid "Edit offering"
+msgstr "دەستکاریکردنی کۆرس"
+
+#: templates/dashboard/offering_form.html:4
+#: templates/dashboard/offering_form.html:10
+#: templates/dashboard/offering_list.html:11
+msgid "New offering"
+msgstr "کۆرسی نوێ"
+
+#: templates/dashboard/offering_form.html:28 templates/offerings/detail.html:23
+msgid "Sessions"
+msgstr "دانیشتنەکان"
+
+#: templates/dashboard/offering_form.html:43
+msgid "Delete this session"
+msgstr "سڕینەوەی ئەم دانیشتنە"
+
+#: templates/dashboard/offering_form.html:65
+msgid "Enrollments"
+msgstr "تۆمارکردنەکان"
+
+#: templates/dashboard/offering_list.html:33
+msgid "No offerings yet."
+msgstr "هێشتا کۆرسێک نییە."
 
 #: templates/dashboard/overview.html:11
 msgid "Drafts"
@@ -387,14 +658,94 @@ msgstr ""
 msgid "Delete post"
 msgstr "سڕینەوەی بابەت"
 
-#: templates/dashboard/post_confirm_delete.html:9
-#, python-format
-msgid "Are you sure you want to delete “%(title)s”? This cannot be undone."
-msgstr "دڵنیایت لە سڕینەوەی «%(title)s»؟ ئەم کردارە ناتوانرێت بگەڕێندرێتەوە."
-
 #: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
 msgid "Edit post"
 msgstr "دەستکاریکردنی بابەت"
+
+#: templates/dashboard/submission_list.html:4
+#: templates/dashboard/submission_list.html:8
+msgid "Submissions"
+msgstr "داواکارییەکان"
+
+#: templates/dashboard/submission_list.html:10
+msgid "Export CSV"
+msgstr "دەرهێنانی CSV"
+
+#: templates/dashboard/submission_list.html:28
+msgid "Mark as contacted"
+msgstr "نیشانکردن وەک پەیوەندیکراو"
+
+#: templates/dashboard/submission_list.html:33
+msgid "No submissions yet."
+msgstr "هێشتا داواکارییەک نییە."
+
+#: templates/dashboard/testimonial_confirm_delete.html:4
+#: templates/dashboard/testimonial_confirm_delete.html:7
+msgid "Delete testimonial"
+msgstr "سڕینەوەی بۆچوون"
+
+#: templates/dashboard/testimonial_confirm_delete.html:9
+#, python-format
+msgid ""
+"Are you sure you want to delete the testimonial from “%(name)s”? This cannot "
+"be undone."
+msgstr "دڵنیایت لە سڕینەوەی بۆچوونی «%(name)s»؟ ئەم کردارە ناتوانرێت بگەڕێندرێتەوە."
+
+#: templates/dashboard/testimonial_form.html:4
+#: templates/dashboard/testimonial_form.html:8
+msgid "Edit testimonial"
+msgstr "دەستکاریکردنی بۆچوون"
+
+#: templates/dashboard/testimonial_form.html:4
+#: templates/dashboard/testimonial_form.html:8
+#: templates/dashboard/testimonial_list.html:11
+msgid "New testimonial"
+msgstr "بۆچوونی نوێ"
+
+#: templates/dashboard/testimonial_list.html:25
+msgid "Move up"
+msgstr "بردن بۆ سەرەوە"
+
+#: templates/dashboard/testimonial_list.html:29
+msgid "Move down"
+msgstr "بردن بۆ خوارەوە"
+
+#: templates/dashboard/testimonial_list.html:36
+msgid "Pending"
+msgstr "چاوەڕوان"
+
+#: templates/dashboard/testimonial_list.html:44
+msgid "No testimonials yet."
+msgstr "هێشتا بۆچوونێک نییە."
+
+#: templates/leads/list.html:22 templates/offerings/list.html:25
+#: templates/testimonials/list.html:13
+msgid "Nothing here yet."
+msgstr "هێشتا هیچ شتێک نییە."
+
+#: templates/offerings/detail.html:40
+msgid "Enroll"
+msgstr "تۆمارکردن"
+
+#: templates/offerings/detail.html:54
+msgid "Submit"
+msgstr "ناردن"
+
+#: templates/offerings/list.html:4 templates/offerings/list.html:7
+msgid "Courses & Workshops"
+msgstr "کۆرس و کارگەکان"
+
+#: templates/partials/_lead_form.html:4
+msgid "Thanks! Your download is ready."
+msgstr "سوپاس! فایلەکەت ئامادەیە بۆ داگرتن."
+
+#: templates/partials/_lead_form.html:7
+msgid "Download"
+msgstr "داگرتن"
+
+#: templates/partials/_lead_form.html:23
+msgid "Get the download link"
+msgstr "وەرگرتنی لینکی داگرتن"
 
 #: templates/partials/_theme_switcher.html:3
 msgid "Toggle light/dark theme"
