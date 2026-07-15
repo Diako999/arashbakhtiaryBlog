@@ -34,11 +34,15 @@ urlpatterns = i18n_patterns(
 urlpatterns += [
     path("i18n/", include("django.conf.urls.i18n")),
     path("dashboard/", include("apps.dashboard.urls")),
-    path("admin/", admin.site.urls),
+    path(settings.ADMIN_URL, admin.site.urls),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
     path(
         "robots.txt",
-        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
+        TemplateView.as_view(
+            template_name="robots.txt",
+            content_type="text/plain",
+            extra_context={"admin_url": settings.ADMIN_URL},
+        ),
         name="robots",
     ),
 ]

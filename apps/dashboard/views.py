@@ -1,8 +1,6 @@
 import csv
 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
@@ -25,6 +23,7 @@ from .forms import (
     SessionFormSet,
     TestimonialForm,
 )
+from .otp_views import OTPRequiredMixin, dashboard_login_required
 
 DASHBOARD_LOGIN_URL = "dashboard:login"
 
@@ -48,7 +47,7 @@ class DashboardLogoutView(LogoutView):
     next_page = "home"
 
 
-class OverviewView(LoginRequiredMixin, TemplateView):
+class OverviewView(OTPRequiredMixin, TemplateView):
     login_url = DASHBOARD_LOGIN_URL
     template_name = "dashboard/overview.html"
 
@@ -60,7 +59,7 @@ class OverviewView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class PostDashboardListView(LoginRequiredMixin, ListView):
+class PostDashboardListView(OTPRequiredMixin, ListView):
     login_url = DASHBOARD_LOGIN_URL
     template_name = "dashboard/content_list.html"
     context_object_name = "posts"
@@ -75,7 +74,7 @@ class PostDashboardListView(LoginRequiredMixin, ListView):
         return context
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
+class PostCreateView(OTPRequiredMixin, CreateView):
     login_url = DASHBOARD_LOGIN_URL
     model = Post
     form_class = PostForm
@@ -88,7 +87,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView(OTPRequiredMixin, UpdateView):
     login_url = DASHBOARD_LOGIN_URL
     model = Post
     form_class = PostForm
@@ -100,14 +99,14 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class PostDeleteView(LoginRequiredMixin, DeleteView):
+class PostDeleteView(OTPRequiredMixin, DeleteView):
     login_url = DASHBOARD_LOGIN_URL
     model = Post
     template_name = "dashboard/post_confirm_delete.html"
     success_url = reverse_lazy("dashboard:content")
 
 
-class CategoryCreateView(LoginRequiredMixin, CreateView):
+class CategoryCreateView(OTPRequiredMixin, CreateView):
     login_url = DASHBOARD_LOGIN_URL
     model = Category
     form_class = CategoryForm
@@ -115,7 +114,7 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("dashboard:content")
 
 
-class CategoryUpdateView(LoginRequiredMixin, UpdateView):
+class CategoryUpdateView(OTPRequiredMixin, UpdateView):
     login_url = DASHBOARD_LOGIN_URL
     model = Category
     form_class = CategoryForm
@@ -123,7 +122,7 @@ class CategoryUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("dashboard:content")
 
 
-class PagesVisibilityView(LoginRequiredMixin, TemplateView):
+class PagesVisibilityView(OTPRequiredMixin, TemplateView):
     login_url = DASHBOARD_LOGIN_URL
     template_name = "dashboard/pages.html"
 
@@ -135,7 +134,7 @@ class PagesVisibilityView(LoginRequiredMixin, TemplateView):
         return context
 
 
-@login_required(login_url=DASHBOARD_LOGIN_URL)
+@dashboard_login_required
 @require_POST
 def toggle_section_visibility(request, pk):
     item = get_object_or_404(NavItem, pk=pk, url_name__in=TOGGLEABLE_SECTION_URL_NAMES)
@@ -149,7 +148,7 @@ def toggle_section_visibility(request, pk):
 # --- Offerings ---------------------------------------------------------
 
 
-class OfferingDashboardListView(LoginRequiredMixin, ListView):
+class OfferingDashboardListView(OTPRequiredMixin, ListView):
     login_url = DASHBOARD_LOGIN_URL
     template_name = "dashboard/offering_list.html"
     context_object_name = "offerings"
@@ -158,7 +157,7 @@ class OfferingDashboardListView(LoginRequiredMixin, ListView):
         return Offering.objects.order_by("-created_at")
 
 
-class OfferingCreateView(LoginRequiredMixin, CreateView):
+class OfferingCreateView(OTPRequiredMixin, CreateView):
     login_url = DASHBOARD_LOGIN_URL
     model = Offering
     form_class = OfferingForm
@@ -170,7 +169,7 @@ class OfferingCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class OfferingUpdateView(LoginRequiredMixin, UpdateView):
+class OfferingUpdateView(OTPRequiredMixin, UpdateView):
     login_url = DASHBOARD_LOGIN_URL
     model = Offering
     form_class = OfferingForm
@@ -198,7 +197,7 @@ class OfferingUpdateView(LoginRequiredMixin, UpdateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class OfferingDeleteView(LoginRequiredMixin, DeleteView):
+class OfferingDeleteView(OTPRequiredMixin, DeleteView):
     login_url = DASHBOARD_LOGIN_URL
     model = Offering
     template_name = "dashboard/offering_confirm_delete.html"
@@ -208,7 +207,7 @@ class OfferingDeleteView(LoginRequiredMixin, DeleteView):
 # --- Leads --------------------------------------------------------------
 
 
-class LeadMagnetDashboardListView(LoginRequiredMixin, ListView):
+class LeadMagnetDashboardListView(OTPRequiredMixin, ListView):
     login_url = DASHBOARD_LOGIN_URL
     template_name = "dashboard/leadmagnet_list.html"
     context_object_name = "lead_magnets"
@@ -217,7 +216,7 @@ class LeadMagnetDashboardListView(LoginRequiredMixin, ListView):
         return LeadMagnet.objects.order_by("-created_at")
 
 
-class LeadMagnetCreateView(LoginRequiredMixin, CreateView):
+class LeadMagnetCreateView(OTPRequiredMixin, CreateView):
     login_url = DASHBOARD_LOGIN_URL
     model = LeadMagnet
     form_class = LeadMagnetForm
@@ -229,7 +228,7 @@ class LeadMagnetCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class LeadMagnetUpdateView(LoginRequiredMixin, UpdateView):
+class LeadMagnetUpdateView(OTPRequiredMixin, UpdateView):
     login_url = DASHBOARD_LOGIN_URL
     model = LeadMagnet
     form_class = LeadMagnetForm
@@ -241,14 +240,14 @@ class LeadMagnetUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class LeadMagnetDeleteView(LoginRequiredMixin, DeleteView):
+class LeadMagnetDeleteView(OTPRequiredMixin, DeleteView):
     login_url = DASHBOARD_LOGIN_URL
     model = LeadMagnet
     template_name = "dashboard/leadmagnet_confirm_delete.html"
     success_url = reverse_lazy("dashboard:leads")
 
 
-class SubmissionInboxView(LoginRequiredMixin, ListView):
+class SubmissionInboxView(OTPRequiredMixin, ListView):
     login_url = DASHBOARD_LOGIN_URL
     template_name = "dashboard/submission_list.html"
     context_object_name = "submissions"
@@ -258,7 +257,7 @@ class SubmissionInboxView(LoginRequiredMixin, ListView):
         return Submission.objects.select_related("lead_magnet").order_by("-created_at")
 
 
-@login_required(login_url=DASHBOARD_LOGIN_URL)
+@dashboard_login_required
 @require_POST
 def toggle_submission_contacted(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
@@ -267,7 +266,7 @@ def toggle_submission_contacted(request, pk):
     return redirect("dashboard:leads_inbox")
 
 
-@login_required(login_url=DASHBOARD_LOGIN_URL)
+@dashboard_login_required
 def export_submissions_csv(request):
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = 'attachment; filename="submissions.csv"'
@@ -289,7 +288,7 @@ def export_submissions_csv(request):
 # --- Testimonials ---------------------------------------------------------
 
 
-class TestimonialDashboardListView(LoginRequiredMixin, ListView):
+class TestimonialDashboardListView(OTPRequiredMixin, ListView):
     login_url = DASHBOARD_LOGIN_URL
     template_name = "dashboard/testimonial_list.html"
     context_object_name = "testimonials"
@@ -298,7 +297,7 @@ class TestimonialDashboardListView(LoginRequiredMixin, ListView):
         return Testimonial.objects.order_by("order", "-created_at")
 
 
-class TestimonialCreateView(LoginRequiredMixin, CreateView):
+class TestimonialCreateView(OTPRequiredMixin, CreateView):
     login_url = DASHBOARD_LOGIN_URL
     model = Testimonial
     form_class = TestimonialForm
@@ -310,7 +309,7 @@ class TestimonialCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class TestimonialUpdateView(LoginRequiredMixin, UpdateView):
+class TestimonialUpdateView(OTPRequiredMixin, UpdateView):
     login_url = DASHBOARD_LOGIN_URL
     model = Testimonial
     form_class = TestimonialForm
@@ -322,14 +321,14 @@ class TestimonialUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class TestimonialDeleteView(LoginRequiredMixin, DeleteView):
+class TestimonialDeleteView(OTPRequiredMixin, DeleteView):
     login_url = DASHBOARD_LOGIN_URL
     model = Testimonial
     template_name = "dashboard/testimonial_confirm_delete.html"
     success_url = reverse_lazy("dashboard:testimonials")
 
 
-@login_required(login_url=DASHBOARD_LOGIN_URL)
+@dashboard_login_required
 @require_POST
 def toggle_testimonial_approved(request, pk):
     testimonial = get_object_or_404(Testimonial, pk=pk)
@@ -338,7 +337,7 @@ def toggle_testimonial_approved(request, pk):
     return redirect("dashboard:testimonials")
 
 
-@login_required(login_url=DASHBOARD_LOGIN_URL)
+@dashboard_login_required
 @require_POST
 def move_testimonial(request, pk, direction):
     ordered_ids = list(

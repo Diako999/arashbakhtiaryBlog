@@ -1,8 +1,13 @@
+from django.contrib import messages
 from django.contrib.postgres.search import SearchVector
+from django.utils.decorators import method_decorator
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView
+from django_ratelimit.decorators import ratelimit
 
 from apps.core.mixins import SeoContextMixin
 
+from .forms import CommentForm
 from .models import Category, Post
 
 
@@ -51,3 +56,28 @@ class PostDetailView(PublishedPostQuerysetMixin, SeoContextMixin, DetailView):
 
     def get_queryset(self):
         return self.get_base_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["comments"] = self.object.comments.filter(is_approved=True).order_by(
+            "created_at"
+        )
+        context.setdefault("comment_form", CommentForm())
+        return context
+
+    @method_decorator(ratelimit(key="ip", rate="5/m", block=True))
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = self.object
+            comment.save()
+            messages.success(
+                request, _("Thanks — your comment will appear once it's approved.")
+            )
+            return self.render_to_response(
+                self.get_context_data(object=self.object, comment_form=CommentForm())
+            )
+        context = self.get_context_data(object=self.object, comment_form=form)
+        return self.render_to_response(context)

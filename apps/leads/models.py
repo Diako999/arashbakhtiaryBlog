@@ -4,17 +4,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import SeoModelMixin, TimeStampedModel
-
-
-def validate_upload_size(value):
-    from django.conf import settings
-    from django.core.exceptions import ValidationError
-
-    max_bytes = settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024
-    if value.size > max_bytes:
-        raise ValidationError(
-            _("File too large. Max size is %(max)s MB.") % {"max": settings.MAX_UPLOAD_SIZE_MB}
-        )
+from apps.core.validators import validate_document_file, validate_image_file
 
 
 class LeadMagnet(SeoModelMixin, TimeStampedModel):
@@ -29,10 +19,14 @@ class LeadMagnet(SeoModelMixin, TimeStampedModel):
     slug = models.SlugField(_("Slug"), max_length=220, unique=True, blank=True)
     description = models.TextField(_("Description"), blank=True)
     cover_image = models.ImageField(
-        _("Cover image"), upload_to="leads/%Y/%m/", blank=True, null=True
+        _("Cover image"),
+        upload_to="leads/%Y/%m/",
+        blank=True,
+        null=True,
+        validators=[validate_image_file],
     )
     file = models.FileField(
-        _("File"), upload_to="leads/files/%Y/%m/", validators=[validate_upload_size]
+        _("File"), upload_to="leads/files/%Y/%m/", validators=[validate_document_file]
     )
     status = models.CharField(
         _("Status"), max_length=10, choices=STATUS_CHOICES, default=STATUS_DRAFT

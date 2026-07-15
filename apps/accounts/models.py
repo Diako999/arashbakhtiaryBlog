@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import TimeStampedModel
+from apps.core.validators import validate_image_file
 
 
 class Author(TimeStampedModel):
@@ -13,7 +14,13 @@ class Author(TimeStampedModel):
         verbose_name=_("User"),
     )
     bio = models.TextField(_("Bio"), blank=True)
-    avatar = models.ImageField(_("Avatar"), upload_to="authors/", blank=True, null=True)
+    avatar = models.ImageField(
+        _("Avatar"),
+        upload_to="authors/",
+        blank=True,
+        null=True,
+        validators=[validate_image_file],
+    )
     website = models.URLField(_("Website"), blank=True)
 
     class Meta:

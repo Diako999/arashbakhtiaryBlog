@@ -19,6 +19,11 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
+# Stock django.contrib.admin stays installed as a technical fallback (per
+# the tech stack doc) but is moved off /admin/. Set a unique ADMIN_URL in
+# production's .env — this default is only safe for local dev.
+ADMIN_URL = env("ADMIN_URL", default="manage-portal/")
+
 
 # Application definition
 

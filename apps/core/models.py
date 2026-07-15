@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from apps.core.validators import validate_image_file
+
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
@@ -61,7 +63,9 @@ class ThemeConfig(SingletonModel):
 
 class SiteSetting(SingletonModel):
     site_name = models.CharField(_("Site name"), max_length=120, default="Prod Blog")
-    logo = models.ImageField(_("Logo"), upload_to="site/", blank=True, null=True)
+    logo = models.ImageField(
+        _("Logo"), upload_to="site/", blank=True, null=True, validators=[validate_image_file]
+    )
     contact_email = models.EmailField(_("Contact email"), blank=True)
     contact_phone = models.CharField(_("Contact phone"), max_length=40, blank=True)
     social_links = models.JSONField(

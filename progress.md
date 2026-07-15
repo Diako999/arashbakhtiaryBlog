@@ -116,17 +116,43 @@ Deviations from those two docs, agreed with the user during this build:
    (falls back to `SiteSetting.logo`), and `twitter:title`/`description` to
    `base/layout.html`. `SeoContextMixin` gained `get_seo_image()` (checks
    `cover_image` then `photo` on the view's object).
-10. [ ] Security settings pass in `config/settings/prod.py` (mostly drafted
-    already — SSL/HSTS/cookie flags in place; still need: admin URL renamed,
-    django-otp 2FA wired to dashboard login, django-ratelimit is already
-    applied to the enrollment and lead-gate POST views but double check
-    blog comments if a submission view is ever added, upload validators —
-    `apps/leads/models.py` has a size validator already, apply the same
-    pattern to any other upload fields).
-11. [x] i18n: fully wired and verified for everything built (blog, dashboard,
-    offerings, testimonials, leads, pages) — nothing left to translate as of
-    this writing. Keep following the "translate as you go" practice for
-    anything still to come (SEO templates, security-related UI if any).
+10. [x] Security settings pass:
+    - **Admin URL**: moved off `/admin/` via `settings.ADMIN_URL` (env var,
+      defaults to `manage-portal/` for local dev — **production must set a
+      unique value in `.env`**). `robots.txt` disallows it dynamically.
+    - **2FA on the dashboard**: `apps/dashboard/otp_views.py` — TOTP enrollment
+      (QR code via the `qrcode` package, no external service) + verification,
+      gating every dashboard view through `OTPRequiredMixin` /
+      `dashboard_login_required` instead of plain `LoginRequiredMixin`. First
+      login with no confirmed device → forced to `/dashboard/otp/setup/`;
+      every later fresh session → `/dashboard/otp/verify/`. Verified full
+      cycle end to end via curl (computed valid/invalid TOTP tokens with
+      `django_otp.oath.totp()`): setup, wrong-token rejection, correct-token
+      acceptance, and that a verified session reaches the dashboard directly
+      while an unverified one keeps bouncing to `/otp/verify/`.
+    - **Upload validators**: `apps/core/validators.py` (`validate_image_file`,
+      `validate_document_file` — size + MIME type) applied to every
+      ImageField/FileField across all apps (blog, offerings, testimonials,
+      leads, accounts, core).
+    - **django-ratelimit on every public form**: enrollment, lead-magnet
+      gate, **and two forms that didn't exist until this pass** — blog
+      comment submission (`apps/blog/views.py`, `Comment` model already
+      existed but had no way to actually submit one) and a contact form on
+      the `/contact/` flat page (`apps/pages/forms.py` — emails
+      `SiteSetting.contact_email` with `reply_to` set to the sender). The
+      tech stack doc's security section explicitly named "contact, lead
+      download, comments" as rate-limit targets, so these were real gaps,
+      not scope creep.
+    - **Found and fixed while testing this**: `base/layout.html` (the
+      public site layout) never rendered `{{ messages }}` at all — every
+      public-facing success/error message (comment submitted, enrollment
+      received, contact sent) was silently swallowed. Dashboard's own
+      layout had this right; the public one didn't. Fixed by adding the
+      same messages block to `base/layout.html`.
+    - All new strings translated (fa/ckb) and verified rendering correctly.
+11. [x] i18n: fully wired and verified for everything built, including the
+    2FA/contact/comment additions from step 10 — nothing left to translate
+    as of this writing.
 12. [ ] End-to-end verification against the "Definition of done" in the
     kickoff prompt, then a stop-and-review summary for the user.
 
@@ -134,6 +160,18 @@ Deviations from those two docs, agreed with the user during this build:
 
 Superuser `admin` / password `test-only-not-for-prod` — created for manual
 testing during this build. Not a credential for any real environment.
+
+**The dashboard now requires 2FA** (see step 10 above) — this user has a
+confirmed `TOTPDevice` in the dev DB from testing. To generate a valid code
+for it without a phone, in `manage.py shell`:
+```python
+from django_otp.plugins.otp_totp.models import TOTPDevice
+from django.contrib.auth.models import User
+from django_otp.oath import totp
+device = TOTPDevice.objects.get(user=User.objects.get(username="admin"), confirmed=True)
+print(totp(device.bin_key))
+```
+That prints the current 6-digit code to submit at `/dashboard/otp/verify/`.
 
 ## Key architectural decisions already locked in
 
@@ -163,5 +201,5 @@ source .venv/bin/activate
 python manage.py check      # should say "no issues"
 ```
 
-Then continue at step 10 above (security settings) unless this file has
-been updated since.
+Then continue at step 12 above (final end-to-end verification + summary for
+the user) unless this file has been updated since.

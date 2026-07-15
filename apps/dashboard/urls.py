@@ -1,12 +1,14 @@
 from django.urls import path
 
-from . import views
+from . import otp_views, views
 
 app_name = "dashboard"
 
 urlpatterns = [
     path("login/", views.DashboardLoginView.as_view(), name="login"),
     path("logout/", views.DashboardLogoutView.as_view(), name="logout"),
+    path("otp/setup/", otp_views.OTPSetupView.as_view(), name="otp_setup"),
+    path("otp/verify/", otp_views.OTPVerifyView.as_view(), name="otp_verify"),
     path("", views.OverviewView.as_view(), name="overview"),
     path("content/", views.PostDashboardListView.as_view(), name="content"),
     path("content/new/", views.PostCreateView.as_view(), name="post_create"),

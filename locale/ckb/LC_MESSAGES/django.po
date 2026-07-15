@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 17:16+0330\n"
+"POT-Creation-Date: 2026-07-15 17:51+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
@@ -13,276 +13,301 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/accounts/models.py:13
+#: apps/accounts/models.py:14
 msgid "User"
 msgstr "بەکارهێنەر"
 
-#: apps/accounts/models.py:15
+#: apps/accounts/models.py:16
 msgid "Bio"
 msgstr "بایۆگرافیا"
 
-#: apps/accounts/models.py:16
+#: apps/accounts/models.py:18
 msgid "Avatar"
 msgstr "وێنەی بەکارهێنەر"
 
-#: apps/accounts/models.py:17
+#: apps/accounts/models.py:24
 msgid "Website"
 msgstr "ماڵپەڕ"
 
-#: apps/accounts/models.py:20
+#: apps/accounts/models.py:27
 msgid "author"
 msgstr "نووسەر"
 
-#: apps/accounts/models.py:21
+#: apps/accounts/models.py:28
 msgid "authors"
 msgstr "نووسەران"
 
-#: apps/blog/models.py:12 apps/blog/models.py:93 apps/leads/models.py:75
-#: apps/offerings/models.py:90
+#: apps/blog/models.py:13 apps/blog/models.py:98 apps/leads/models.py:69
+#: apps/offerings/models.py:95 apps/pages/forms.py:6
 msgid "Name"
 msgstr "ناو"
 
-#: apps/blog/models.py:13 apps/blog/models.py:36 apps/leads/models.py:29
-#: apps/offerings/models.py:18 apps/pages/models.py:11
+#: apps/blog/models.py:14 apps/blog/models.py:37 apps/leads/models.py:19
+#: apps/offerings/models.py:19 apps/pages/models.py:11
 msgid "Slug"
 msgstr "ناسنامە"
 
-#: apps/blog/models.py:16
+#: apps/blog/models.py:17
 msgid "category"
 msgstr "پۆل"
 
-#: apps/blog/models.py:17
+#: apps/blog/models.py:18
 msgid "categories"
 msgstr "پۆلەکان"
 
-#: apps/blog/models.py:31 apps/leads/models.py:24 apps/offerings/models.py:13
+#: apps/blog/models.py:32 apps/leads/models.py:14 apps/offerings/models.py:14
 msgid "Draft"
 msgstr "ڕەشنووس"
 
-#: apps/blog/models.py:32 apps/dashboard/views.py:144 apps/leads/models.py:25
-#: apps/offerings/models.py:14 templates/dashboard/overview.html:15
+#: apps/blog/models.py:33 apps/dashboard/views.py:143 apps/leads/models.py:15
+#: apps/offerings/models.py:15 templates/dashboard/overview.html:15
 #: templates/dashboard/pages.html:24
 msgid "Published"
 msgstr "بڵاوکراوەتەوە"
 
-#: apps/blog/models.py:35 apps/leads/models.py:28 apps/navigation/models.py:7
-#: apps/offerings/models.py:17 apps/pages/models.py:9
+#: apps/blog/models.py:36 apps/leads/models.py:18 apps/navigation/models.py:7
+#: apps/offerings/models.py:18 apps/pages/models.py:9
 msgid "Title"
 msgstr "ناونیشان"
 
-#: apps/blog/models.py:41
+#: apps/blog/models.py:42
 msgid "Author"
 msgstr "نووسەر"
 
-#: apps/blog/models.py:49 templates/dashboard/category_form.html:4
+#: apps/blog/models.py:50 templates/dashboard/category_form.html:4
 msgid "Category"
 msgstr "پۆل"
 
-#: apps/blog/models.py:51
+#: apps/blog/models.py:52
 msgid "Tags"
 msgstr "تاگەکان"
 
-#: apps/blog/models.py:52
+#: apps/blog/models.py:53
 msgid "Excerpt"
 msgstr "کورتە"
 
-#: apps/blog/models.py:53 apps/blog/models.py:95 apps/offerings/models.py:20
+#: apps/blog/models.py:54 apps/blog/models.py:100 apps/offerings/models.py:21
 #: apps/pages/models.py:16
 msgid "Body"
 msgstr "دەق"
 
-#: apps/blog/models.py:55 apps/leads/models.py:32 apps/offerings/models.py:22
+#: apps/blog/models.py:56 apps/leads/models.py:22 apps/offerings/models.py:23
 msgid "Cover image"
 msgstr "وێنەی سەرەکی"
 
-#: apps/blog/models.py:58 apps/leads/models.py:38 apps/offerings/models.py:28
+#: apps/blog/models.py:63 apps/leads/models.py:32 apps/offerings/models.py:33
 msgid "Status"
 msgstr "دۆخ"
 
-#: apps/blog/models.py:60
+#: apps/blog/models.py:65
 msgid "Published at"
 msgstr "کاتی بڵاوکردنەوە"
 
-#: apps/blog/models.py:63
+#: apps/blog/models.py:68
 msgid "post"
 msgstr "بابەت"
 
-#: apps/blog/models.py:64
+#: apps/blog/models.py:69
 msgid "posts"
 msgstr "بابەتەکان"
 
-#: apps/blog/models.py:91
+#: apps/blog/models.py:96
 msgid "Post"
 msgstr "بابەت"
 
-#: apps/blog/models.py:94 apps/leads/models.py:76 apps/offerings/models.py:91
+#: apps/blog/models.py:99 apps/leads/models.py:70 apps/offerings/models.py:96
+#: apps/pages/forms.py:7
 msgid "Email"
 msgstr "ئیمەیل"
 
-#: apps/blog/models.py:96 apps/testimonials/models.py:24
+#: apps/blog/models.py:101 apps/testimonials/models.py:29
 #: templates/dashboard/testimonial_list.html:36
 msgid "Approved"
 msgstr "پەسندکراو"
 
-#: apps/blog/models.py:99
+#: apps/blog/models.py:104
 msgid "comment"
 msgstr "کۆمێنت"
 
-#: apps/blog/models.py:100
+#: apps/blog/models.py:105
 msgid "comments"
 msgstr "کۆمێنتەکان"
 
-#: apps/core/models.py:6
+#: apps/blog/views.py:77
+msgid "Thanks — your comment will appear once it's approved."
+msgstr "سوپاس — کۆمێنتەکەت دوای پەسندکردن دەردەکەوێت."
+
+#: apps/core/models.py:8
 msgid "Created at"
 msgstr "کاتی دروستکردن"
 
-#: apps/core/models.py:7
+#: apps/core/models.py:9
 msgid "Updated at"
 msgstr "کاتی نوێکردنەوە"
 
-#: apps/core/models.py:14
+#: apps/core/models.py:16
 msgid "Meta title"
 msgstr "ناونیشانی مێتا"
 
-#: apps/core/models.py:15 apps/core/models.py:73
+#: apps/core/models.py:17 apps/core/models.py:77
 msgid "Meta description"
 msgstr "وەسفی مێتا"
 
-#: apps/core/models.py:42
+#: apps/core/models.py:44
 msgid "Colors"
 msgstr "ڕەنگەکان"
 
-#: apps/core/models.py:45
+#: apps/core/models.py:47
 msgid "Brand color tokens, e.g. {'brand': '#0f9d8e', 'accent': '#f0b429'}"
 msgstr "کۆدی ڕەنگی براند، بۆ نموونە {'brand': '#0f9d8e', 'accent': '#f0b429'}"
 
-#: apps/core/models.py:48
+#: apps/core/models.py:50
 msgid "Default mode"
 msgstr "دۆخی بنەڕەت"
 
-#: apps/core/models.py:50
+#: apps/core/models.py:52
 msgid "Light"
 msgstr "ڕووناک"
 
-#: apps/core/models.py:50
+#: apps/core/models.py:52
 msgid "Dark"
 msgstr "تاریک"
 
-#: apps/core/models.py:55 apps/core/models.py:56
+#: apps/core/models.py:57 apps/core/models.py:58
 msgid "theme configuration"
 msgstr "ڕێکخستنی ڕووکار"
 
-#: apps/core/models.py:59
+#: apps/core/models.py:61
 msgid "Theme configuration"
 msgstr "ڕێکخستنی ڕووکار"
 
-#: apps/core/models.py:63
+#: apps/core/models.py:65
 msgid "Site name"
 msgstr "ناوی ماڵپەڕ"
 
-#: apps/core/models.py:64
+#: apps/core/models.py:67
 msgid "Logo"
 msgstr "لۆگۆ"
 
-#: apps/core/models.py:65
+#: apps/core/models.py:69
 msgid "Contact email"
 msgstr "ئیمەیلی پەیوەندی"
 
-#: apps/core/models.py:66
+#: apps/core/models.py:70
 msgid "Contact phone"
 msgstr "ژمارەی پەیوەندی"
 
-#: apps/core/models.py:68
+#: apps/core/models.py:72
 msgid "Social links"
 msgstr "لینکی سۆشیال میدیا"
 
-#: apps/core/models.py:71
+#: apps/core/models.py:75
 msgid "e.g. {'instagram': 'https://...', 'telegram': 'https://...'}"
 msgstr "بۆ نموونە {'instagram': 'https://...', 'telegram': 'https://...'}"
 
-#: apps/core/models.py:76 apps/core/models.py:77
+#: apps/core/models.py:80 apps/core/models.py:81
 msgid "site settings"
 msgstr "ڕێکخستنەکانی ماڵپەڕ"
 
-#: apps/core/models.py:80
+#: apps/core/models.py:84
 msgid "Site settings"
 msgstr "ڕێکخستنەکانی ماڵپەڕ"
 
-#: apps/dashboard/views.py:87
-msgid "Post saved."
-msgstr "بابەت پاشەکەوت کرا."
-
-#: apps/dashboard/views.py:99
-msgid "Post updated."
-msgstr "بابەت نوێکرایەوە."
-
-#: apps/dashboard/views.py:144 templates/dashboard/pages.html:24
-msgid "Hidden"
-msgstr "شاراوە"
-
-#: apps/dashboard/views.py:145
-#, python-format
-msgid "%(title)s is now %(state)s."
-msgstr "«%(title)s» ئێستا %(state)s ە."
-
-#: apps/dashboard/views.py:169
-msgid "Offering saved."
-msgstr "کۆرس پاشەکەوت کرا."
-
-#: apps/dashboard/views.py:196
-msgid "Offering updated."
-msgstr "کۆرس نوێکرایەوە."
-
-#: apps/dashboard/views.py:228
-msgid "Lead magnet saved."
-msgstr "سەرچاوە بەخۆڕایی پاشەکەوت کرا."
-
-#: apps/dashboard/views.py:240
-msgid "Lead magnet updated."
-msgstr "سەرچاوە بەخۆڕایی نوێکرایەوە."
-
-#: apps/dashboard/views.py:309
-msgid "Testimonial saved."
-msgstr "بۆچوون پاشەکەوت کرا."
-
-#: apps/dashboard/views.py:321
-msgid "Testimonial updated."
-msgstr "بۆچوون نوێکرایەوە."
-
-#: apps/leads/models.py:16
+#: apps/core/validators.py:10
 #, python-format
 msgid "File too large. Max size is %(max)s MB."
 msgstr "قەبارەی فایل زۆرە. زۆرترین قەبارە %(max)s میگابایتە."
 
-#: apps/leads/models.py:30
+#: apps/core/validators.py:18
+msgid "Unsupported image type."
+msgstr "جۆری وێنە پشتگیری ناکرێت."
+
+#: apps/core/validators.py:25
+msgid "Unsupported file type."
+msgstr "جۆری فایل پشتگیری ناکرێت."
+
+#: apps/dashboard/otp_views.py:25
+msgid "Authenticator code"
+msgstr "کۆدی ئەپی ڕاستکردنەوە"
+
+#: apps/dashboard/otp_views.py:101
+msgid "Two-factor authentication enabled."
+msgstr "دووچینی پشتڕاستکردنەوە چالاک کرا."
+
+#: apps/dashboard/otp_views.py:103 apps/dashboard/otp_views.py:130
+msgid "Invalid code. Please try again."
+msgstr "کۆدەکە هەڵەیە. دووبارە هەوڵ بدەرەوە."
+
+#: apps/dashboard/views.py:86
+msgid "Post saved."
+msgstr "بابەت پاشەکەوت کرا."
+
+#: apps/dashboard/views.py:98
+msgid "Post updated."
+msgstr "بابەت نوێکرایەوە."
+
+#: apps/dashboard/views.py:143 templates/dashboard/pages.html:24
+msgid "Hidden"
+msgstr "شاراوە"
+
+#: apps/dashboard/views.py:144
+#, python-format
+msgid "%(title)s is now %(state)s."
+msgstr "«%(title)s» ئێستا %(state)s ە."
+
+#: apps/dashboard/views.py:168
+msgid "Offering saved."
+msgstr "کۆرس پاشەکەوت کرا."
+
+#: apps/dashboard/views.py:195
+msgid "Offering updated."
+msgstr "کۆرس نوێکرایەوە."
+
+#: apps/dashboard/views.py:227
+msgid "Lead magnet saved."
+msgstr "سەرچاوە بەخۆڕایی پاشەکەوت کرا."
+
+#: apps/dashboard/views.py:239
+msgid "Lead magnet updated."
+msgstr "سەرچاوە بەخۆڕایی نوێکرایەوە."
+
+#: apps/dashboard/views.py:308
+msgid "Testimonial saved."
+msgstr "بۆچوون پاشەکەوت کرا."
+
+#: apps/dashboard/views.py:320
+msgid "Testimonial updated."
+msgstr "بۆچوون نوێکرایەوە."
+
+#: apps/leads/models.py:20
 msgid "Description"
 msgstr "وەسف"
 
-#: apps/leads/models.py:35
+#: apps/leads/models.py:29
 msgid "File"
 msgstr "فایل"
 
-#: apps/leads/models.py:42
+#: apps/leads/models.py:36
 msgid "lead magnet"
 msgstr "سەرچاوەی بەخۆڕایی"
 
-#: apps/leads/models.py:43
+#: apps/leads/models.py:37
 msgid "lead magnets"
 msgstr "سەرچاوە بەخۆڕاییەکان"
 
-#: apps/leads/models.py:73
+#: apps/leads/models.py:67
 msgid "Lead magnet"
 msgstr "سەرچاوەی بەخۆڕایی"
 
-#: apps/leads/models.py:77 templates/dashboard/submission_list.html:28
+#: apps/leads/models.py:71 templates/dashboard/submission_list.html:28
 msgid "Contacted"
 msgstr "پەیوەندی کرا"
 
-#: apps/leads/models.py:80
+#: apps/leads/models.py:74
 msgid "submission"
 msgstr "داواکاری"
 
-#: apps/leads/models.py:81 templates/dashboard/leadmagnet_list.html:21
+#: apps/leads/models.py:75 templates/dashboard/leadmagnet_list.html:21
 msgid "submissions"
 msgstr "داواکارییەکان"
 
@@ -303,7 +328,7 @@ msgid "The phased-rollout switch. Blog starts True, everything else False."
 msgstr ""
 "کلیلی چالاککردنی قۆناغ بە قۆناغ. بلۆگ لە سەرەتاوە چالاکە، ماوە شاراوەن."
 
-#: apps/navigation/models.py:18 apps/testimonials/models.py:25
+#: apps/navigation/models.py:18 apps/testimonials/models.py:30
 msgid "Order"
 msgstr "ڕیز"
 
@@ -319,72 +344,72 @@ msgstr "بڕگەی مینیو"
 msgid "navigation items"
 msgstr "بڕگەکانی مینیو"
 
-#: apps/offerings/models.py:19
+#: apps/offerings/models.py:20
 msgid "Summary"
 msgstr "کورتە"
 
-#: apps/offerings/models.py:25
+#: apps/offerings/models.py:30
 msgid "Price"
 msgstr "نرخ"
 
-#: apps/offerings/models.py:32
+#: apps/offerings/models.py:37
 msgid "offering"
 msgstr "کۆرس"
 
-#: apps/offerings/models.py:33
+#: apps/offerings/models.py:38
 msgid "offerings"
 msgstr "کۆرسەکان"
 
-#: apps/offerings/models.py:60 apps/offerings/models.py:80
-#: apps/testimonials/models.py:22
+#: apps/offerings/models.py:65 apps/offerings/models.py:85
+#: apps/testimonials/models.py:27
 msgid "Offering"
 msgstr "کۆرس"
 
-#: apps/offerings/models.py:62
+#: apps/offerings/models.py:67
 msgid "Starts at"
 msgstr "دەستپێکردن لە"
 
-#: apps/offerings/models.py:63
+#: apps/offerings/models.py:68
 msgid "Ends at"
 msgstr "کۆتایی لە"
 
-#: apps/offerings/models.py:65
+#: apps/offerings/models.py:70
 msgid "Location"
 msgstr "شوێن"
 
-#: apps/offerings/models.py:65
+#: apps/offerings/models.py:70
 msgid "Online link or venue address"
 msgstr "لینکی ئۆنلاین یان ناونیشانی شوێن"
 
-#: apps/offerings/models.py:67
+#: apps/offerings/models.py:72
 msgid "Capacity"
 msgstr "گونجایی"
 
-#: apps/offerings/models.py:70
+#: apps/offerings/models.py:75
 msgid "session"
 msgstr "دانیشتن"
 
-#: apps/offerings/models.py:71 templates/dashboard/offering_list.html:21
+#: apps/offerings/models.py:76 templates/dashboard/offering_list.html:21
 msgid "sessions"
 msgstr "دانیشتنەکان"
 
-#: apps/offerings/models.py:88
+#: apps/offerings/models.py:93
 msgid "Session"
 msgstr "دانیشتن"
 
-#: apps/offerings/models.py:92
+#: apps/offerings/models.py:97
 msgid "Phone"
 msgstr "تەلەفۆن"
 
-#: apps/offerings/models.py:93
+#: apps/offerings/models.py:98
 msgid "Notes"
 msgstr "تێبینیەکان"
 
-#: apps/offerings/models.py:96
+#: apps/offerings/models.py:101
 msgid "enrollment"
 msgstr "تۆمارکردن"
 
-#: apps/offerings/models.py:97 templates/dashboard/offering_list.html:21
+#: apps/offerings/models.py:102 templates/dashboard/offering_list.html:21
 msgid "enrollments"
 msgstr "تۆمارکردنەکان"
 
@@ -392,9 +417,14 @@ msgstr "تۆمارکردنەکان"
 msgid "Thanks — we received your enrollment."
 msgstr "سوپاس — تۆمارکردنەکەت وەرگیرا."
 
+#: apps/pages/forms.py:8
+msgid "Message"
+msgstr "پەیام"
+
 #: apps/pages/models.py:14
 msgid "Must match a routed page name, e.g. 'about' or 'contact'."
-msgstr "دەبێت لەگەڵ ناوی پەڕەیەکی ڕێگاکراو بگونجێت، بۆ نموونە 'about' یان 'contact'."
+msgstr ""
+"دەبێت لەگەڵ ناوی پەڕەیەکی ڕێگاکراو بگونجێت، بۆ نموونە 'about' یان 'contact'."
 
 #: apps/pages/models.py:19
 msgid "page"
@@ -404,31 +434,35 @@ msgstr "پەڕە"
 msgid "pages"
 msgstr "پەڕەکان"
 
-#: apps/testimonials/models.py:9
+#: apps/pages/views.py:51
+msgid "Thanks — your message has been sent."
+msgstr "سوپاس — پەیامەکەت نێردرا."
+
+#: apps/testimonials/models.py:10
 msgid "Author name"
 msgstr "ناوی کەس"
 
-#: apps/testimonials/models.py:10
+#: apps/testimonials/models.py:11
 msgid "Author role"
 msgstr "ڕۆڵ"
 
-#: apps/testimonials/models.py:11
+#: apps/testimonials/models.py:12
 msgid "Quote"
 msgstr "وتە"
 
-#: apps/testimonials/models.py:13
+#: apps/testimonials/models.py:14
 msgid "Photo"
 msgstr "وێنە"
 
-#: apps/testimonials/models.py:15
+#: apps/testimonials/models.py:20
 msgid "Video URL"
 msgstr "لینکی ڤیدیۆ"
 
-#: apps/testimonials/models.py:28
+#: apps/testimonials/models.py:33
 msgid "testimonial"
 msgstr "بۆچوون"
 
-#: apps/testimonials/models.py:29
+#: apps/testimonials/models.py:34
 msgid "testimonials"
 msgstr "بۆچوونەکان"
 
@@ -436,9 +470,23 @@ msgstr "بۆچوونەکان"
 msgid "Categories"
 msgstr "پۆلەکان"
 
-#: templates/base/layout.html:32
+#: templates/base/layout.html:39
 msgid "Open menu"
 msgstr "کردنەوەی مینیو"
+
+#: templates/blog/detail.html:50
+#, fuzzy
+#| msgid "comments"
+msgid "Comments"
+msgstr "کۆمێنتەکان"
+
+#: templates/blog/detail.html:58
+msgid "No comments yet."
+msgstr "هێشتا کۆمێنتێک نییە."
+
+#: templates/blog/detail.html:73
+msgid "Post comment"
+msgstr "ناردنی کۆمێنت"
 
 #: templates/blog/list.html:7
 msgid "Search posts…"
@@ -651,6 +699,34 @@ msgstr "تۆمارکردنەکان"
 msgid "No offerings yet."
 msgstr "هێشتا کۆرسێک نییە."
 
+#: templates/dashboard/otp_setup.html:8 templates/dashboard/otp_setup.html:13
+msgid "Set up two-factor authentication"
+msgstr "ڕێکخستنی دووچینی پشتڕاستکردنەوە"
+
+#: templates/dashboard/otp_setup.html:15
+msgid ""
+"Scan this code with an authenticator app (e.g. Google Authenticator), then "
+"enter the 6-digit code it shows."
+msgstr ""
+"ئەم کۆدە بە ئەپێکی ڕاستکردنەوە (بۆ نموونە Google Authenticator) سکان بکە، "
+"پاشان کۆدی ٦ ژمارەیی پیشانراو بنووسە."
+
+#: templates/dashboard/otp_setup.html:24
+msgid "QR code"
+msgstr "کۆدی QR"
+
+#: templates/dashboard/otp_setup.html:33
+msgid "Confirm"
+msgstr "دڵنیاکردنەوە"
+
+#: templates/dashboard/otp_verify.html:8 templates/dashboard/otp_verify.html:13
+msgid "Verify your identity"
+msgstr "ناسنامەکەت پشتڕاست بکەرەوە"
+
+#: templates/dashboard/otp_verify.html:28
+msgid "Verify"
+msgstr "پشتڕاستکردنەوە"
+
 #: templates/dashboard/overview.html:11
 msgid "Drafts"
 msgstr "ڕەشنووسەکان"
@@ -748,6 +824,10 @@ msgstr "ناردن"
 #: templates/offerings/list.html:4 templates/offerings/list.html:7
 msgid "Courses & Workshops"
 msgstr "کۆرس و کارگەکان"
+
+#: templates/pages/detail.html:26
+msgid "Send"
+msgstr "ناردن"
 
 #: templates/partials/_lead_form.html:4
 msgid "Thanks! Your download is ready."

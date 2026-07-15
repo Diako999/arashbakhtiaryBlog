@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 
 from apps.core.models import SeoModelMixin, TimeStampedModel
+from apps.core.validators import validate_image_file
 
 
 class Category(TimeStampedModel):
@@ -52,7 +53,11 @@ class Post(SeoModelMixin, TimeStampedModel):
     excerpt = models.CharField(_("Excerpt"), max_length=300, blank=True)
     body = models.TextField(_("Body"))
     cover_image = models.ImageField(
-        _("Cover image"), upload_to="blog/%Y/%m/", blank=True, null=True
+        _("Cover image"),
+        upload_to="blog/%Y/%m/",
+        blank=True,
+        null=True,
+        validators=[validate_image_file],
     )
     status = models.CharField(
         _("Status"), max_length=10, choices=STATUS_CHOICES, default=STATUS_DRAFT

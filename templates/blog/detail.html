@@ -1,5 +1,5 @@
 {% extends "base/blog_layout.html" %}
-{% load i18n %}
+{% load i18n widget_tweaks %}
 
 {% block blog_content %}
 <article class="flex flex-col gap-4">
@@ -45,5 +45,34 @@
       </div>
     {% endif %}
   {% endwith %}
+
+  <section class="mt-8 flex flex-col gap-4 border-t border-gray-100 pt-6 dark:border-gray-800">
+    <h2 class="text-lg font-semibold">{% trans "Comments" %}</h2>
+
+    {% for comment in comments %}
+      <div class="rounded-md border border-gray-100 p-3 text-sm dark:border-gray-800">
+        <p class="font-medium">{{ comment.name }}</p>
+        <p class="text-gray-600 dark:text-gray-400">{{ comment.body }}</p>
+      </div>
+    {% empty %}
+      <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "No comments yet." %}</p>
+    {% endfor %}
+
+    <form method="post" class="flex flex-col gap-3">
+      {% csrf_token %}
+      {% for field in comment_form %}
+        <div>
+          <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
+          {% render_field field class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-900" %}
+          {% if field.errors %}
+            <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ field.errors|join:", " }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="self-start rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white dark:bg-gray-100 dark:text-gray-900">
+        {% trans "Post comment" %}
+      </button>
+    </form>
+  </section>
 </article>
 {% endblock %}

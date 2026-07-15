@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import SeoModelMixin, TimeStampedModel
+from apps.core.validators import validate_image_file
 
 
 class Offering(SeoModelMixin, TimeStampedModel):
@@ -19,7 +20,11 @@ class Offering(SeoModelMixin, TimeStampedModel):
     summary = models.CharField(_("Summary"), max_length=300, blank=True)
     body = models.TextField(_("Body"), blank=True)
     cover_image = models.ImageField(
-        _("Cover image"), upload_to="offerings/%Y/%m/", blank=True, null=True
+        _("Cover image"),
+        upload_to="offerings/%Y/%m/",
+        blank=True,
+        null=True,
+        validators=[validate_image_file],
     )
     price = models.DecimalField(
         _("Price"), max_digits=10, decimal_places=2, blank=True, null=True

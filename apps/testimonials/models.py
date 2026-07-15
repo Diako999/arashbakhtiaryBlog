@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import TimeStampedModel
+from apps.core.validators import validate_image_file
 from apps.offerings.models import Offering
 
 
@@ -10,7 +11,11 @@ class Testimonial(TimeStampedModel):
     author_role = models.CharField(_("Author role"), max_length=150, blank=True)
     quote = models.TextField(_("Quote"))
     photo = models.ImageField(
-        _("Photo"), upload_to="testimonials/%Y/%m/", blank=True, null=True
+        _("Photo"),
+        upload_to="testimonials/%Y/%m/",
+        blank=True,
+        null=True,
+        validators=[validate_image_file],
     )
     video_url = models.URLField(_("Video URL"), blank=True)
     offering = models.ForeignKey(
