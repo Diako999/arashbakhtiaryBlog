@@ -7,11 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{{ seo_title|default:site_settings.site_name }}{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}{{ seo_description|default:site_settings.meta_description }}{% endblock %}">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
   {% block og_tags %}
   <meta property="og:title" content="{{ seo_title|default:site_settings.site_name }}">
   <meta property="og:description" content="{{ seo_description|default:site_settings.meta_description }}">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  {% if seo_image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ seo_image.url }}">
+  {% elif site_settings.logo %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.logo.url }}">
+  {% endif %}
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ seo_title|default:site_settings.site_name }}">
+  <meta name="twitter:description" content="{{ seo_description|default:site_settings.meta_description }}">
   {% endblock %}
 
   {% include "partials/_head_assets.html" %}

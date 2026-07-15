@@ -7,11 +7,15 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 
 from apps.blog.sitemaps import PostSitemap
+from apps.leads.sitemaps import LeadMagnetSitemap
 from apps.offerings.sitemaps import OfferingSitemap
+from apps.pages.sitemaps import FlatPageSitemap
 
 sitemaps = {
     "posts": PostSitemap,
     "offerings": OfferingSitemap,
+    "leads": LeadMagnetSitemap,
+    "pages": FlatPageSitemap,
 }
 
 # Public-facing site is language-prefixed (/fa/..., /ckb/...) so content and

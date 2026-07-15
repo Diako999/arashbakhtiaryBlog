@@ -105,10 +105,17 @@ Deviations from those two docs, agreed with the user during this build:
    list flat-page content editing as a screen. Verified end to end: 404
    while hidden, 200 + correct content immediately after toggling visible,
    nav link appears live.
-9. [ ] SEO: sitemap.xml (`PostSitemap` and `OfferingSitemap` both wired to
-   real published querysets now), meta fields, OG/Twitter tags (basic
-   version already in `base/layout.html`), robots.txt (basic version already
-   in `templates/robots.txt`).
+9. [x] SEO: sitemap.xml now includes posts, offerings, leads, and pages —
+   **and, importantly, each hidden-until-published section's sitemap
+   entries respect `NavItem.is_visible` too** (`section_is_visible()` from
+   `apps/navigation/mixins.py`), so `/sitemap.xml` never leaks a hidden
+   section's URLs to search engines before the admin actually publishes it.
+   Verified: created a published Offering while its section was hidden —
+   sitemap.xml stayed empty; toggling the section visible made the URL
+   appear immediately. Added `<link rel="canonical">`, `og:url`, `og:image`
+   (falls back to `SiteSetting.logo`), and `twitter:title`/`description` to
+   `base/layout.html`. `SeoContextMixin` gained `get_seo_image()` (checks
+   `cover_image` then `photo` on the view's object).
 10. [ ] Security settings pass in `config/settings/prod.py` (mostly drafted
     already — SSL/HSTS/cookie flags in place; still need: admin URL renamed,
     django-otp 2FA wired to dashboard login, django-ratelimit is already
@@ -156,5 +163,5 @@ source .venv/bin/activate
 python manage.py check      # should say "no issues"
 ```
 
-Then continue at step 9 above (SEO basics) unless this file has been
-updated since.
+Then continue at step 10 above (security settings) unless this file has
+been updated since.
