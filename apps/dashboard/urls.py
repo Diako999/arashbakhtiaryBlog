@@ -50,4 +50,6 @@ urlpatterns = [
         views.move_testimonial,
         name="testimonial_move",
     ),
+    # Settings
+    path("settings/", views.SettingsView.as_view(), name="settings"),
 ]

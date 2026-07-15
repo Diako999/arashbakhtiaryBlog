@@ -10,6 +10,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, DeleteView, ListView, TemplateView, UpdateView
 
 from apps.blog.models import Category, Post
+from apps.core.models import SiteSetting, ThemeConfig
 from apps.leads.models import LeadMagnet, Submission
 from apps.navigation.models import NavItem
 from apps.offerings.models import Offering
@@ -21,7 +22,9 @@ from .forms import (
     OfferingForm,
     PostForm,
     SessionFormSet,
+    SiteSettingForm,
     TestimonialForm,
+    ThemeConfigForm,
 )
 from .otp_views import OTPRequiredMixin, dashboard_login_required
 
@@ -352,3 +355,38 @@ def move_testimonial(request, pk, direction):
         for position, testimonial_id in enumerate(ordered_ids):
             Testimonial.objects.filter(pk=testimonial_id).update(order=position)
     return redirect("dashboard:testimonials")
+
+
+# --- Settings ---------------------------------------------------------
+
+
+class SettingsView(OTPRequiredMixin, TemplateView):
+    login_url = DASHBOARD_LOGIN_URL
+    template_name = "dashboard/settings.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.setdefault("site_form", SiteSettingForm(instance=SiteSetting.load()))
+        context.setdefault("theme_form", ThemeConfigForm(instance=ThemeConfig.load()))
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if "save_site" in request.POST:
+            site_form = SiteSettingForm(
+                request.POST, request.FILES, instance=SiteSetting.load()
+            )
+            if site_form.is_valid():
+                site_form.save()
+                messages.success(request, _("Site settings saved."))
+                return redirect("dashboard:settings")
+            return self.render_to_response(self.get_context_data(site_form=site_form))
+
+        if "save_theme" in request.POST:
+            theme_form = ThemeConfigForm(request.POST, instance=ThemeConfig.load())
+            if theme_form.is_valid():
+                theme_form.save()
+                messages.success(request, _("Theme updated."))
+                return redirect("dashboard:settings")
+            return self.render_to_response(self.get_context_data(theme_form=theme_form))
+
+        return redirect("dashboard:settings")

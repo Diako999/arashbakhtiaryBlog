@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 17:51+0330\n"
+"POT-Creation-Date: 2026-07-15 19:17+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
@@ -59,7 +59,7 @@ msgstr "دسته‌ها"
 msgid "Draft"
 msgstr "پیش‌نویس"
 
-#: apps/blog/models.py:33 apps/dashboard/views.py:143 apps/leads/models.py:15
+#: apps/blog/models.py:33 apps/dashboard/views.py:146 apps/leads/models.py:15
 #: apps/offerings/models.py:15 templates/dashboard/overview.html:15
 #: templates/dashboard/pages.html:24
 msgid "Published"
@@ -226,6 +226,34 @@ msgstr "نوع تصویر پشتیبانی نمی‌شود."
 msgid "Unsupported file type."
 msgstr "نوع فایل پشتیبانی نمی‌شود."
 
+#: apps/dashboard/forms.py:119 apps/dashboard/forms.py:128
+msgid "Instagram"
+msgstr "اینستاگرام"
+
+#: apps/dashboard/forms.py:120 apps/dashboard/forms.py:129
+msgid "Telegram"
+msgstr "تلگرام"
+
+#: apps/dashboard/forms.py:121 apps/dashboard/forms.py:130
+msgid "Twitter / X"
+msgstr "توییتر / ایکس"
+
+#: apps/dashboard/forms.py:122 apps/dashboard/forms.py:131
+msgid "LinkedIn"
+msgstr "لینکدین"
+
+#: apps/dashboard/forms.py:123 apps/dashboard/forms.py:132
+msgid "WhatsApp"
+msgstr "واتساپ"
+
+#: apps/dashboard/forms.py:159
+msgid "Brand color"
+msgstr "رنگ برند"
+
+#: apps/dashboard/forms.py:162
+msgid "Accent color"
+msgstr "رنگ تأکیدی"
+
 #: apps/dashboard/otp_views.py:25
 msgid "Authenticator code"
 msgstr "کد اپلیکیشن احراز هویت"
@@ -238,46 +266,54 @@ msgstr "احراز هویت دومرحله‌ای فعال شد."
 msgid "Invalid code. Please try again."
 msgstr "کد نامعتبر است. دوباره تلاش کنید."
 
-#: apps/dashboard/views.py:86
+#: apps/dashboard/views.py:89
 msgid "Post saved."
 msgstr "نوشته ذخیره شد."
 
-#: apps/dashboard/views.py:98
+#: apps/dashboard/views.py:101
 msgid "Post updated."
 msgstr "نوشته به‌روزرسانی شد."
 
-#: apps/dashboard/views.py:143 templates/dashboard/pages.html:24
+#: apps/dashboard/views.py:146 templates/dashboard/pages.html:24
 msgid "Hidden"
 msgstr "مخفی"
 
-#: apps/dashboard/views.py:144
+#: apps/dashboard/views.py:147
 #, python-format
 msgid "%(title)s is now %(state)s."
 msgstr "«%(title)s» اکنون %(state)s است."
 
-#: apps/dashboard/views.py:168
+#: apps/dashboard/views.py:171
 msgid "Offering saved."
 msgstr "دوره ذخیره شد."
 
-#: apps/dashboard/views.py:195
+#: apps/dashboard/views.py:198
 msgid "Offering updated."
 msgstr "دوره به‌روزرسانی شد."
 
-#: apps/dashboard/views.py:227
+#: apps/dashboard/views.py:230
 msgid "Lead magnet saved."
 msgstr "منبع رایگان ذخیره شد."
 
-#: apps/dashboard/views.py:239
+#: apps/dashboard/views.py:242
 msgid "Lead magnet updated."
 msgstr "منبع رایگان به‌روزرسانی شد."
 
-#: apps/dashboard/views.py:308
+#: apps/dashboard/views.py:311
 msgid "Testimonial saved."
 msgstr "نظر مشتری ذخیره شد."
 
-#: apps/dashboard/views.py:320
+#: apps/dashboard/views.py:323
 msgid "Testimonial updated."
 msgstr "نظر مشتری به‌روزرسانی شد."
+
+#: apps/dashboard/views.py:380
+msgid "Site settings saved."
+msgstr "تنظیمات سایت ذخیره شد."
+
+#: apps/dashboard/views.py:388
+msgid "Theme updated."
+msgstr "پوسته به‌روزرسانی شد."
 
 #: apps/leads/models.py:20
 msgid "Description"
@@ -433,7 +469,7 @@ msgstr "صفحه"
 msgid "pages"
 msgstr "صفحات"
 
-#: apps/pages/views.py:51
+#: apps/pages/views.py:50
 msgid "Thanks — your message has been sent."
 msgstr "متشکریم — پیام شما ارسال شد."
 
@@ -549,11 +585,16 @@ msgstr "سرنخ‌ها"
 msgid "Testimonials"
 msgstr "نظرات مشتریان"
 
-#: templates/dashboard/base.html:28
+#: templates/dashboard/base.html:26 templates/dashboard/settings.html:4
+#: templates/dashboard/settings.html:7
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: templates/dashboard/base.html:29
 msgid "View site"
 msgstr "مشاهده سایت"
 
-#: templates/dashboard/base.html:31
+#: templates/dashboard/base.html:32
 msgid "Log out"
 msgstr "خروج"
 
@@ -569,7 +610,8 @@ msgstr "دسته جدید"
 #: templates/dashboard/category_form.html:24
 #: templates/dashboard/leadmagnet_form.html:24
 #: templates/dashboard/offering_form.html:54
-#: templates/dashboard/post_form.html:29
+#: templates/dashboard/post_form.html:29 templates/dashboard/settings.html:27
+#: templates/dashboard/settings.html:49
 #: templates/dashboard/testimonial_form.html:24
 msgid "Save"
 msgstr "ذخیره"
@@ -750,6 +792,14 @@ msgstr "حذف نوشته"
 #: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
 msgid "Edit post"
 msgstr "ویرایش نوشته"
+
+#: templates/dashboard/settings.html:12
+msgid "Site & contact"
+msgstr "سایت و تماس"
+
+#: templates/dashboard/settings.html:34
+msgid "Theme"
+msgstr "پوسته"
 
 #: templates/dashboard/submission_list.html:4
 #: templates/dashboard/submission_list.html:8

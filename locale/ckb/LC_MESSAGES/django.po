@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 17:51+0330\n"
+"POT-Creation-Date: 2026-07-15 19:17+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
@@ -59,7 +59,7 @@ msgstr "پۆلەکان"
 msgid "Draft"
 msgstr "ڕەشنووس"
 
-#: apps/blog/models.py:33 apps/dashboard/views.py:143 apps/leads/models.py:15
+#: apps/blog/models.py:33 apps/dashboard/views.py:146 apps/leads/models.py:15
 #: apps/offerings/models.py:15 templates/dashboard/overview.html:15
 #: templates/dashboard/pages.html:24
 msgid "Published"
@@ -226,6 +226,34 @@ msgstr "جۆری وێنە پشتگیری ناکرێت."
 msgid "Unsupported file type."
 msgstr "جۆری فایل پشتگیری ناکرێت."
 
+#: apps/dashboard/forms.py:119 apps/dashboard/forms.py:128
+msgid "Instagram"
+msgstr "ئینستاگرام"
+
+#: apps/dashboard/forms.py:120 apps/dashboard/forms.py:129
+msgid "Telegram"
+msgstr "تلگرام"
+
+#: apps/dashboard/forms.py:121 apps/dashboard/forms.py:130
+msgid "Twitter / X"
+msgstr "تویتەر / ئێکس"
+
+#: apps/dashboard/forms.py:122 apps/dashboard/forms.py:131
+msgid "LinkedIn"
+msgstr "لینکدین"
+
+#: apps/dashboard/forms.py:123 apps/dashboard/forms.py:132
+msgid "WhatsApp"
+msgstr "واتساپ"
+
+#: apps/dashboard/forms.py:159
+msgid "Brand color"
+msgstr "ڕەنگی براند"
+
+#: apps/dashboard/forms.py:162
+msgid "Accent color"
+msgstr "ڕەنگی جیاکەرەوە"
+
 #: apps/dashboard/otp_views.py:25
 msgid "Authenticator code"
 msgstr "کۆدی ئەپی ڕاستکردنەوە"
@@ -238,46 +266,54 @@ msgstr "دووچینی پشتڕاستکردنەوە چالاک کرا."
 msgid "Invalid code. Please try again."
 msgstr "کۆدەکە هەڵەیە. دووبارە هەوڵ بدەرەوە."
 
-#: apps/dashboard/views.py:86
+#: apps/dashboard/views.py:89
 msgid "Post saved."
 msgstr "بابەت پاشەکەوت کرا."
 
-#: apps/dashboard/views.py:98
+#: apps/dashboard/views.py:101
 msgid "Post updated."
 msgstr "بابەت نوێکرایەوە."
 
-#: apps/dashboard/views.py:143 templates/dashboard/pages.html:24
+#: apps/dashboard/views.py:146 templates/dashboard/pages.html:24
 msgid "Hidden"
 msgstr "شاراوە"
 
-#: apps/dashboard/views.py:144
+#: apps/dashboard/views.py:147
 #, python-format
 msgid "%(title)s is now %(state)s."
 msgstr "«%(title)s» ئێستا %(state)s ە."
 
-#: apps/dashboard/views.py:168
+#: apps/dashboard/views.py:171
 msgid "Offering saved."
 msgstr "کۆرس پاشەکەوت کرا."
 
-#: apps/dashboard/views.py:195
+#: apps/dashboard/views.py:198
 msgid "Offering updated."
 msgstr "کۆرس نوێکرایەوە."
 
-#: apps/dashboard/views.py:227
+#: apps/dashboard/views.py:230
 msgid "Lead magnet saved."
 msgstr "سەرچاوە بەخۆڕایی پاشەکەوت کرا."
 
-#: apps/dashboard/views.py:239
+#: apps/dashboard/views.py:242
 msgid "Lead magnet updated."
 msgstr "سەرچاوە بەخۆڕایی نوێکرایەوە."
 
-#: apps/dashboard/views.py:308
+#: apps/dashboard/views.py:311
 msgid "Testimonial saved."
 msgstr "بۆچوون پاشەکەوت کرا."
 
-#: apps/dashboard/views.py:320
+#: apps/dashboard/views.py:323
 msgid "Testimonial updated."
 msgstr "بۆچوون نوێکرایەوە."
+
+#: apps/dashboard/views.py:380
+msgid "Site settings saved."
+msgstr "ڕێکخستنەکانی ماڵپەڕ پاشەکەوت کران."
+
+#: apps/dashboard/views.py:388
+msgid "Theme updated."
+msgstr "ڕووکار نوێکرایەوە."
 
 #: apps/leads/models.py:20
 msgid "Description"
@@ -434,7 +470,7 @@ msgstr "پەڕە"
 msgid "pages"
 msgstr "پەڕەکان"
 
-#: apps/pages/views.py:51
+#: apps/pages/views.py:50
 msgid "Thanks — your message has been sent."
 msgstr "سوپاس — پەیامەکەت نێردرا."
 
@@ -550,11 +586,16 @@ msgstr "داواکارییەکان"
 msgid "Testimonials"
 msgstr "بۆچوونەکان"
 
-#: templates/dashboard/base.html:28
+#: templates/dashboard/base.html:26 templates/dashboard/settings.html:4
+#: templates/dashboard/settings.html:7
+msgid "Settings"
+msgstr "ڕێکخستنەکان"
+
+#: templates/dashboard/base.html:29
 msgid "View site"
 msgstr "بینینی ماڵپەڕ"
 
-#: templates/dashboard/base.html:31
+#: templates/dashboard/base.html:32
 msgid "Log out"
 msgstr "چوونەدەرەوە"
 
@@ -570,7 +611,8 @@ msgstr "پۆلی نوێ"
 #: templates/dashboard/category_form.html:24
 #: templates/dashboard/leadmagnet_form.html:24
 #: templates/dashboard/offering_form.html:54
-#: templates/dashboard/post_form.html:29
+#: templates/dashboard/post_form.html:29 templates/dashboard/settings.html:27
+#: templates/dashboard/settings.html:49
 #: templates/dashboard/testimonial_form.html:24
 msgid "Save"
 msgstr "پاشەکەوتکردن"
@@ -750,6 +792,14 @@ msgstr "سڕینەوەی بابەت"
 #: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
 msgid "Edit post"
 msgstr "دەستکاریکردنی بابەت"
+
+#: templates/dashboard/settings.html:12
+msgid "Site & contact"
+msgstr "ماڵپەڕ و پەیوەندی"
+
+#: templates/dashboard/settings.html:34
+msgid "Theme"
+msgstr "ڕووکار"
 
 #: templates/dashboard/submission_list.html:4
 #: templates/dashboard/submission_list.html:8
