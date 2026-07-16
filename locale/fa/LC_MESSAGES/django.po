@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 19:17+0330\n"
+"POT-Creation-Date: 2026-07-16 18:56+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
@@ -225,6 +225,55 @@ msgstr "نوع تصویر پشتیبانی نمی‌شود."
 #: apps/core/validators.py:25
 msgid "Unsupported file type."
 msgstr "نوع فایل پشتیبانی نمی‌شود."
+
+#: apps/dashboard/context_processors.py:37
+msgid "General"
+msgstr "عمومی"
+
+#: apps/dashboard/context_processors.py:39 templates/dashboard/overview.html:4
+#: templates/dashboard/overview.html:7
+msgid "Overview"
+msgstr "نمای کلی"
+
+#: apps/dashboard/context_processors.py:43
+#: templates/dashboard/content_list.html:4
+#: templates/dashboard/content_list.html:8
+msgid "Content"
+msgstr "محتوا"
+
+#: apps/dashboard/context_processors.py:45
+msgid "Posts & categories"
+msgstr "نوشته‌ها و دسته‌ها"
+
+#: apps/dashboard/context_processors.py:46
+msgid "Offerings & sessions"
+msgstr "دوره‌ها و جلسات"
+
+#: apps/dashboard/context_processors.py:47
+#: templates/dashboard/testimonial_list.html:4
+#: templates/dashboard/testimonial_list.html:8
+#: templates/testimonials/list.html:4 templates/testimonials/list.html:7
+msgid "Testimonials"
+msgstr "نظرات مشتریان"
+
+#: apps/dashboard/context_processors.py:48
+msgid "Site pages"
+msgstr "صفحات سایت"
+
+#: apps/dashboard/context_processors.py:52
+msgid "Audience"
+msgstr "مخاطبان"
+
+#: apps/dashboard/context_processors.py:54
+#: templates/dashboard/leadmagnet_list.html:10
+msgid "Submissions inbox"
+msgstr "صندوق درخواست‌ها"
+
+#: apps/dashboard/context_processors.py:58
+#: apps/dashboard/context_processors.py:60 templates/dashboard/settings.html:4
+#: templates/dashboard/settings.html:7
+msgid "Settings"
+msgstr "تنظیمات"
 
 #: apps/dashboard/forms.py:119 apps/dashboard/forms.py:128
 msgid "Instagram"
@@ -458,7 +507,7 @@ msgstr "پیام"
 
 #: apps/pages/models.py:14
 msgid "Must match a routed page name, e.g. 'about' or 'contact'."
-msgstr ""
+msgstr "باید با نام یکی از صفحات مسیریابی‌شده مطابقت داشته باشد، مثلاً «about» یا «contact»."
 "باید با نام یک صفحه مسیریابی‌شده مطابقت داشته باشد، مثلاً 'about' یا 'contact'."
 
 #: apps/pages/models.py:19
@@ -505,13 +554,19 @@ msgstr "نظرات مشتریان"
 msgid "Categories"
 msgstr "دسته‌بندی‌ها"
 
-#: templates/base/layout.html:39
+#: templates/base/layout.html:49
 msgid "Open menu"
 msgstr "باز کردن منو"
 
+#: templates/base/layout.html:95
+msgid "Quick links"
+msgstr "پیوندهای سریع"
+
+#: templates/base/layout.html:103
+msgid "Contact"
+msgstr "تماس"
+
 #: templates/blog/detail.html:50
-#, fuzzy
-#| msgid "comments"
 msgid "Comments"
 msgstr "دیدگاه‌ها"
 
@@ -555,46 +610,15 @@ msgstr "مشاهده همه نوشته‌ها"
 msgid "Dashboard"
 msgstr "داشبورد"
 
-#: templates/dashboard/base.html:20 templates/dashboard/overview.html:4
-#: templates/dashboard/overview.html:7
-msgid "Overview"
-msgstr "نمای کلی"
+#: templates/dashboard/base.html:18
+msgid "Admin dashboard"
+msgstr "داشبورد مدیریت"
 
-#: templates/dashboard/base.html:21 templates/dashboard/content_list.html:4
-#: templates/dashboard/content_list.html:8
-msgid "Content"
-msgstr "محتوا"
+#: templates/dashboard/base.html:36
+msgid "Display mode"
+msgstr "حالت نمایش"
 
-#: templates/dashboard/base.html:22 templates/dashboard/pages.html:4
-#: templates/dashboard/pages.html:7
-msgid "Pages"
-msgstr "صفحات"
-
-#: templates/dashboard/base.html:23 templates/dashboard/offering_list.html:4
-#: templates/dashboard/offering_list.html:8
-msgid "Offerings"
-msgstr "دوره‌ها"
-
-#: templates/dashboard/base.html:24
-msgid "Leads"
-msgstr "سرنخ‌ها"
-
-#: templates/dashboard/base.html:25 templates/dashboard/testimonial_list.html:4
-#: templates/dashboard/testimonial_list.html:8
-#: templates/testimonials/list.html:4 templates/testimonials/list.html:7
-msgid "Testimonials"
-msgstr "نظرات مشتریان"
-
-#: templates/dashboard/base.html:26 templates/dashboard/settings.html:4
-#: templates/dashboard/settings.html:7
-msgid "Settings"
-msgstr "تنظیمات"
-
-#: templates/dashboard/base.html:29
-msgid "View site"
-msgstr "مشاهده سایت"
-
-#: templates/dashboard/base.html:32
+#: templates/dashboard/base.html:41
 msgid "Log out"
 msgstr "خروج"
 
@@ -686,10 +710,6 @@ msgstr "منبع جدید"
 msgid "Free Resources"
 msgstr "منابع رایگان"
 
-#: templates/dashboard/leadmagnet_list.html:10
-msgid "Submissions inbox"
-msgstr "صندوق درخواست‌ها"
-
 #: templates/dashboard/leadmagnet_list.html:33
 msgid "No resources yet."
 msgstr "هنوز منبعی وجود ندارد."
@@ -738,6 +758,11 @@ msgstr "حذف این جلسه"
 msgid "Enrollments"
 msgstr "ثبت‌نام‌ها"
 
+#: templates/dashboard/offering_list.html:4
+#: templates/dashboard/offering_list.html:8
+msgid "Offerings"
+msgstr "دوره‌ها"
+
 #: templates/dashboard/offering_list.html:33
 msgid "No offerings yet."
 msgstr "هنوز دوره‌ای وجود ندارد."
@@ -777,6 +802,10 @@ msgstr "پیش‌نویس‌ها"
 #: templates/dashboard/overview.html:22
 msgid "Recent posts"
 msgstr "نوشته‌های اخیر"
+
+#: templates/dashboard/pages.html:4 templates/dashboard/pages.html:7
+msgid "Pages"
+msgstr "صفحات"
 
 #: templates/dashboard/pages.html:9
 msgid ""
@@ -892,6 +921,6 @@ msgstr "دانلود"
 msgid "Get the download link"
 msgstr "دریافت لینک دانلود"
 
-#: templates/partials/_theme_switcher.html:3
+#: templates/partials/_theme_switcher.html:4
 msgid "Toggle light/dark theme"
 msgstr "تغییر حالت روشن/تاریک"

@@ -1,18 +1,22 @@
 {% for item in nav_items %}
+  {% with item_url=item.get_url %}
   {% if item.children.all %}
     <div class="group relative">
-      <button type="button" class="flex items-center gap-1 text-sm font-medium hover:text-[var(--accent,inherit)]">
+      <button type="button" class="flex items-center gap-1 text-[14.5px] font-semibold text-ink-muted transition-colors hover:text-brand">
         {{ item.title }}
       </button>
-      <div class="absolute start-0 top-full hidden min-w-40 flex-col rounded-md border border-gray-200 bg-white py-1 shadow-lg group-hover:flex dark:border-gray-800 dark:bg-gray-900">
+      <div class="absolute start-0 top-full hidden min-w-40 flex-col rounded-md border border-line bg-card py-1 shadow-lg group-hover:flex">
         {% for child in item.children.all %}
-          <a href="{{ child.get_url }}" class="px-3 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">{{ child.title }}</a>
+          <a href="{{ child.get_url }}" class="px-3 py-2 text-sm text-ink hover:bg-surface-soft">{{ child.title }}</a>
         {% endfor %}
       </div>
     </div>
   {% else %}
-    <a href="{{ item.get_url }}" class="text-sm font-medium hover:text-[var(--accent,inherit)]">
+    <a href="{{ item_url }}"
+       class="whitespace-nowrap border-b-2 pb-0.5 text-[14.5px] font-semibold transition-colors hover:text-brand
+              {% if request.path == item_url %}border-brand text-brand{% else %}border-transparent text-ink-muted{% endif %}">
       {{ item.title }}
     </a>
   {% endif %}
+  {% endwith %}
 {% endfor %}

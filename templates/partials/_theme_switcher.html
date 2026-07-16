@@ -1,5 +1,7 @@
 {% load i18n %}
-<button type="button" class="theme-toggle-btn rounded-full border border-gray-200 px-3 py-1 text-xs font-medium dark:border-gray-700"
+<button type="button"
+        class="theme-toggle-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-card text-base text-ink transition-transform duration-300 hover:rotate-[20deg] hover:scale-105 hover:border-brand"
         aria-label="{% trans 'Toggle light/dark theme' %}">
-  <span aria-hidden="true">◐</span>
+  <span class="hidden dark:inline">☾</span>
+  <span class="inline dark:hidden">☀</span>
 </button>

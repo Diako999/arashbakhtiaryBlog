@@ -25,40 +25,44 @@
 
   {% block extra_head %}{% endblock %}
 </head>
-<body class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors">
+<body class="min-h-screen bg-surface font-sans text-ink transition-colors">
 
-  <header class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur dark:border-gray-800 dark:bg-gray-950/90">
-    <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-      <a href="{% url 'home' %}" class="text-lg font-bold">
-        {{ site_settings.site_name }}
+  <header class="sticky top-0 z-50 border-b border-line bg-surface-translucent shadow-[0_8px_30px_-18px_rgba(0,0,0,.55)] backdrop-blur-[18px] backdrop-saturate-[1.4]">
+    <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
+      <a href="{% url 'home' %}" class="flex shrink-0 items-center gap-2.5 text-ink transition-transform hover:-translate-y-px">
+        {% include "partials/_logo.html" with size="36" %}
+        <span class="text-[17px] font-extrabold">{{ site_settings.site_name }}</span>
       </a>
 
-      <button id="nav-toggle" type="button"
-              class="inline-flex items-center justify-center rounded-md p-2 md:hidden"
-              aria-controls="primary-nav" aria-expanded="false">
-        <span class="sr-only">{% trans "Open menu" %}</span>
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-
-      <div class="hidden items-center gap-6 md:flex">
+      <nav class="hidden flex-wrap items-center gap-6 md:flex">
         {% include "partials/_nav.html" %}
-      </div>
+      </nav>
 
-      <div class="hidden items-center gap-3 md:flex">
-        {% include "partials/_theme_switcher.html" %}
-        {% include "partials/_language_switcher.html" %}
+      <div class="flex shrink-0 items-center gap-2.5">
+        <div class="hidden items-center gap-2.5 md:flex">
+          {% include "partials/_language_switcher.html" %}
+          {% include "partials/_theme_switcher.html" %}
+        </div>
+        <button id="nav-toggle" type="button"
+                class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-line bg-card text-ink md:hidden"
+                aria-controls="primary-nav" aria-expanded="false">
+          <span class="sr-only">{% trans "Open menu" %}</span>
+          <svg class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
     </div>
 
-    <div id="primary-nav" class="hidden border-t border-gray-200 px-4 py-3 md:hidden dark:border-gray-800">
-      <div class="flex flex-col gap-3">
-        {% include "partials/_nav.html" %}
-      </div>
-      <div class="mt-4 flex items-center gap-3">
-        {% include "partials/_theme_switcher.html" %}
-        {% include "partials/_language_switcher.html" %}
+    <div id="primary-nav" class="grid grid-rows-[0fr] overflow-hidden opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-out md:hidden">
+      <div class="min-h-0 overflow-hidden">
+        <div class="flex flex-col gap-4 border-t border-line px-4 py-5">
+          {% include "partials/_nav.html" %}
+          <div class="mt-2 flex items-center gap-3">
+            {% include "partials/_language_switcher.html" %}
+            {% include "partials/_theme_switcher.html" %}
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -67,19 +71,49 @@
     {% if messages %}
       <div class="mb-6 flex flex-col gap-2">
         {% for message in messages %}
-          <div class="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm dark:border-gray-800 dark:bg-gray-900">{{ message }}</div>
+          <div class="rounded-md border border-line bg-card px-3 py-2 text-sm text-ink">{{ message }}</div>
         {% endfor %}
       </div>
     {% endif %}
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="mt-16 border-t border-gray-200 px-4 py-8 text-sm text-gray-500 sm:px-6 dark:border-gray-800 dark:text-gray-400">
-    <div class="mx-auto flex max-w-5xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-      <p>&copy; {% now "Y" %} {{ site_settings.site_name }}</p>
-      {% if site_settings.contact_email %}
-        <a href="mailto:{{ site_settings.contact_email }}" class="hover:underline">{{ site_settings.contact_email }}</a>
-      {% endif %}
+  <footer class="mt-16 border-t border-line">
+    <div class="mx-auto flex max-w-5xl flex-col gap-8 px-4 py-12 pb-8 sm:px-6">
+      <div class="flex flex-wrap justify-between gap-10">
+        <div class="flex max-w-xs flex-col gap-3">
+          <div class="flex items-center gap-2.5">
+            {% include "partials/_logo.html" with size="32" %}
+            <span class="text-base font-extrabold text-ink">{{ site_settings.site_name }}</span>
+          </div>
+          {% if site_settings.meta_description %}
+            <p class="text-sm leading-loose text-ink-muted">{{ site_settings.meta_description }}</p>
+          {% endif %}
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <span class="text-[13.5px] font-bold text-ink">{% trans "Quick links" %}</span>
+          {% for item in nav_items %}
+            <a href="{{ item.get_url }}" class="w-fit text-sm text-ink-muted transition-colors hover:text-brand">{{ item.title }}</a>
+          {% endfor %}
+        </div>
+
+        {% if site_settings.contact_email or site_settings.social_links %}
+          <div class="flex flex-col gap-3">
+            <span class="text-[13.5px] font-bold text-ink">{% trans "Contact" %}</span>
+            {% for key, url in site_settings.social_links.items %}
+              <a href="{{ url }}" class="w-fit text-sm text-ink-muted transition-colors hover:text-brand">{{ key|capfirst }}</a>
+            {% endfor %}
+            {% if site_settings.contact_email %}
+              <a href="mailto:{{ site_settings.contact_email }}" dir="ltr" class="w-fit text-end text-sm text-ink-muted transition-colors hover:text-brand">{{ site_settings.contact_email }}</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
+        <span class="text-[13px] text-ink-faint">&copy; {% now "Y" %} {{ site_settings.site_name }}</span>
+      </div>
     </div>
   </footer>
 
@@ -89,11 +123,14 @@
       var nav = document.getElementById('primary-nav');
       if (toggle && nav) {
         toggle.addEventListener('click', function () {
-          var isOpen = nav.classList.toggle('hidden') === false;
-          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          var isOpen = nav.classList.contains('grid-rows-[1fr]');
+          nav.classList.toggle('grid-rows-[0fr]', isOpen);
+          nav.classList.toggle('grid-rows-[1fr]', !isOpen);
+          nav.classList.toggle('opacity-0', isOpen);
+          nav.classList.toggle('opacity-100', !isOpen);
+          toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
         });
       }
-
     })();
   </script>
   {% include "partials/_theme_toggle_script.html" %}

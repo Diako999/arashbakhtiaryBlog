@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 19:17+0330\n"
+"POT-Creation-Date: 2026-07-16 18:56+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
@@ -225,6 +225,55 @@ msgstr "جۆری وێنە پشتگیری ناکرێت."
 #: apps/core/validators.py:25
 msgid "Unsupported file type."
 msgstr "جۆری فایل پشتگیری ناکرێت."
+
+#: apps/dashboard/context_processors.py:37
+msgid "General"
+msgstr "گشتی"
+
+#: apps/dashboard/context_processors.py:39 templates/dashboard/overview.html:4
+#: templates/dashboard/overview.html:7
+msgid "Overview"
+msgstr "گشتی"
+
+#: apps/dashboard/context_processors.py:43
+#: templates/dashboard/content_list.html:4
+#: templates/dashboard/content_list.html:8
+msgid "Content"
+msgstr "ناوەڕۆک"
+
+#: apps/dashboard/context_processors.py:45
+msgid "Posts & categories"
+msgstr "بابەتەکان و پۆلەکان"
+
+#: apps/dashboard/context_processors.py:46
+msgid "Offerings & sessions"
+msgstr "کۆرسەکان و دانیشتنەکان"
+
+#: apps/dashboard/context_processors.py:47
+#: templates/dashboard/testimonial_list.html:4
+#: templates/dashboard/testimonial_list.html:8
+#: templates/testimonials/list.html:4 templates/testimonials/list.html:7
+msgid "Testimonials"
+msgstr "بۆچوونەکان"
+
+#: apps/dashboard/context_processors.py:48
+msgid "Site pages"
+msgstr "پەڕەکانی ماڵپەڕ"
+
+#: apps/dashboard/context_processors.py:52
+msgid "Audience"
+msgstr "خەڵک"
+
+#: apps/dashboard/context_processors.py:54
+#: templates/dashboard/leadmagnet_list.html:10
+msgid "Submissions inbox"
+msgstr "سندوقی داواکارییەکان"
+
+#: apps/dashboard/context_processors.py:58
+#: apps/dashboard/context_processors.py:60 templates/dashboard/settings.html:4
+#: templates/dashboard/settings.html:7
+msgid "Settings"
+msgstr "ڕێکخستنەکان"
 
 #: apps/dashboard/forms.py:119 apps/dashboard/forms.py:128
 msgid "Instagram"
@@ -506,13 +555,19 @@ msgstr "بۆچوونەکان"
 msgid "Categories"
 msgstr "پۆلەکان"
 
-#: templates/base/layout.html:39
+#: templates/base/layout.html:49
 msgid "Open menu"
 msgstr "کردنەوەی مینیو"
 
+#: templates/base/layout.html:95
+msgid "Quick links"
+msgstr "لینکە خێراکان"
+
+#: templates/base/layout.html:103
+msgid "Contact"
+msgstr "پەیوەندی"
+
 #: templates/blog/detail.html:50
-#, fuzzy
-#| msgid "comments"
 msgid "Comments"
 msgstr "کۆمێنتەکان"
 
@@ -556,46 +611,15 @@ msgstr "بینینی هەموو بابەتەکان"
 msgid "Dashboard"
 msgstr "داشبۆرد"
 
-#: templates/dashboard/base.html:20 templates/dashboard/overview.html:4
-#: templates/dashboard/overview.html:7
-msgid "Overview"
-msgstr "گشتی"
+#: templates/dashboard/base.html:18
+msgid "Admin dashboard"
+msgstr "داشبۆردی بەڕێوەبردن"
 
-#: templates/dashboard/base.html:21 templates/dashboard/content_list.html:4
-#: templates/dashboard/content_list.html:8
-msgid "Content"
-msgstr "ناوەڕۆک"
+#: templates/dashboard/base.html:36
+msgid "Display mode"
+msgstr "شێوازی پیشاندان"
 
-#: templates/dashboard/base.html:22 templates/dashboard/pages.html:4
-#: templates/dashboard/pages.html:7
-msgid "Pages"
-msgstr "پەڕەکان"
-
-#: templates/dashboard/base.html:23 templates/dashboard/offering_list.html:4
-#: templates/dashboard/offering_list.html:8
-msgid "Offerings"
-msgstr "کۆرسەکان"
-
-#: templates/dashboard/base.html:24
-msgid "Leads"
-msgstr "داواکارییەکان"
-
-#: templates/dashboard/base.html:25 templates/dashboard/testimonial_list.html:4
-#: templates/dashboard/testimonial_list.html:8
-#: templates/testimonials/list.html:4 templates/testimonials/list.html:7
-msgid "Testimonials"
-msgstr "بۆچوونەکان"
-
-#: templates/dashboard/base.html:26 templates/dashboard/settings.html:4
-#: templates/dashboard/settings.html:7
-msgid "Settings"
-msgstr "ڕێکخستنەکان"
-
-#: templates/dashboard/base.html:29
-msgid "View site"
-msgstr "بینینی ماڵپەڕ"
-
-#: templates/dashboard/base.html:32
+#: templates/dashboard/base.html:41
 msgid "Log out"
 msgstr "چوونەدەرەوە"
 
@@ -685,10 +709,6 @@ msgstr "سەرچاوەی نوێ"
 msgid "Free Resources"
 msgstr "سەرچاوە بەخۆڕاییەکان"
 
-#: templates/dashboard/leadmagnet_list.html:10
-msgid "Submissions inbox"
-msgstr "سندوقی داواکارییەکان"
-
 #: templates/dashboard/leadmagnet_list.html:33
 msgid "No resources yet."
 msgstr "هێشتا سەرچاوەیەک نییە."
@@ -737,6 +757,11 @@ msgstr "سڕینەوەی ئەم دانیشتنە"
 msgid "Enrollments"
 msgstr "تۆمارکردنەکان"
 
+#: templates/dashboard/offering_list.html:4
+#: templates/dashboard/offering_list.html:8
+msgid "Offerings"
+msgstr "کۆرسەکان"
+
 #: templates/dashboard/offering_list.html:33
 msgid "No offerings yet."
 msgstr "هێشتا کۆرسێک نییە."
@@ -776,6 +801,10 @@ msgstr "ڕەشنووسەکان"
 #: templates/dashboard/overview.html:22
 msgid "Recent posts"
 msgstr "بابەتە دواییەکان"
+
+#: templates/dashboard/pages.html:4 templates/dashboard/pages.html:7
+msgid "Pages"
+msgstr "پەڕەکان"
 
 #: templates/dashboard/pages.html:9
 msgid ""
@@ -891,6 +920,6 @@ msgstr "داگرتن"
 msgid "Get the download link"
 msgstr "وەرگرتنی لینکی داگرتن"
 
-#: templates/partials/_theme_switcher.html:3
+#: templates/partials/_theme_switcher.html:4
 msgid "Toggle light/dark theme"
 msgstr "گۆڕینی دۆخی ڕووناک/تاریک"

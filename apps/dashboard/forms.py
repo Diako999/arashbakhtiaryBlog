@@ -169,8 +169,8 @@ class ThemeConfigForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         colors = self.instance.colors or {}
-        self.fields["brand_color"].initial = colors.get("brand", "#0f9d8e")
-        self.fields["accent_color"].initial = colors.get("accent", "#f0b429")
+        self.fields["brand_color"].initial = colors.get("brand", "#E5484D")
+        self.fields["accent_color"].initial = colors.get("accent", "#8B9098")
 
     def save(self, commit=True):
         instance = super().save(commit=False)

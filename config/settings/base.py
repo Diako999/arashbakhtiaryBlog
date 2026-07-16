@@ -87,6 +87,7 @@ TEMPLATES = [
                 "apps.core.context_processors.theme",
                 "apps.core.context_processors.site_settings",
                 "apps.navigation.context_processors.nav_items",
+                "apps.dashboard.context_processors.dashboard_nav",
             ],
         },
     },

@@ -2,7 +2,8 @@
 <form action="{% url 'set_language' %}" method="post" class="lang-switcher-form">
   {% csrf_token %}
   <input name="next" type="hidden" value="{{ request.path }}">
-  <select name="language" class="rounded-md border border-gray-200 bg-white px-2 py-1 text-xs dark:border-gray-700 dark:bg-gray-900"
+  <select name="language"
+          class="cursor-pointer rounded-full border border-line bg-card px-3.5 py-1.5 text-[13px] font-semibold text-ink transition-colors hover:border-brand"
           onchange="this.form.submit()">
     {% get_current_language as CURRENT_LANGUAGE %}
     {% get_available_languages as AVAILABLE_LANGUAGES %}

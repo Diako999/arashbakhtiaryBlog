@@ -1,0 +1,7 @@
+{% comment %}Usage: {% include "partials/_logo.html" with size="36" %} (size in px, default 36){% endcomment %}
+<div class="flex shrink-0 items-center justify-center rounded-[28%] bg-linear-to-br from-brand to-accent shadow-[0_4px_14px_-4px_rgba(0,0,0,.45)]"
+     style="width:{{ size|default:"36" }}px; height:{{ size|default:"36" }}px;">
+  <svg viewBox="0 0 28 28" fill="none" style="width:58%; height:58%;">
+    <path d="M14 3L23.5 24H19L16.7 18.8H11.3L9 24H4.5L14 3ZM14 9.6L12.1 15.1H15.9L14 9.6Z" fill="white"/>
+  </svg>
+</div>

@@ -9,36 +9,59 @@
   {% include "partials/_head_assets.html" %}
   {% block extra_head %}{% endblock %}
 </head>
-<body class="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors">
+<body class="min-h-screen bg-surface font-sans text-ink transition-colors">
   <div class="flex min-h-screen flex-col md:flex-row">
-    <aside class="border-b border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-900 md:w-56 md:shrink-0 md:border-b-0 md:border-e">
-      <div class="mb-6 flex items-center justify-between md:block md:mb-8">
-        <a href="{% url 'dashboard:overview' %}" class="text-lg font-bold">{{ site_settings.site_name }}</a>
-        <div class="md:mt-3">{% include "partials/_theme_switcher.html" %}</div>
-      </div>
-      <nav class="flex flex-wrap gap-2 md:flex-col md:gap-1">
-        <a href="{% url 'dashboard:overview' %}" class="rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800">{% trans "Overview" %}</a>
-        <a href="{% url 'dashboard:content' %}" class="rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800">{% trans "Content" %}</a>
-        <a href="{% url 'dashboard:pages' %}" class="rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800">{% trans "Pages" %}</a>
-        <a href="{% url 'dashboard:offerings' %}" class="rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800">{% trans "Offerings" %}</a>
-        <a href="{% url 'dashboard:leads_inbox' %}" class="rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800">{% trans "Leads" %}</a>
-        <a href="{% url 'dashboard:testimonials' %}" class="rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800">{% trans "Testimonials" %}</a>
-        <a href="{% url 'dashboard:settings' %}" class="rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800">{% trans "Settings" %}</a>
-      </nav>
-      <div class="mt-6 flex flex-col gap-2 border-t border-gray-200 pt-4 text-sm dark:border-gray-800 md:mt-8">
-        <a href="{% url 'home' %}" class="hover:underline">{% trans "View site" %} ←</a>
+    {% with active=dash_active|default:"" %}
+    <aside class="hidden shrink-0 flex-col gap-1 border-line bg-surface-translucent p-3.5 backdrop-blur-[16px] backdrop-saturate-[1.3] md:flex md:w-[250px] md:border-e md:shadow-[-6px_0_24px_-16px_rgba(0,0,0,.5)]">
+      <a href="{% url 'dashboard:overview' %}" class="mb-2 flex items-center gap-2.5 px-2.5 py-2 pb-5">
+        {% include "partials/_logo.html" with size="32" %}
+        <span class="text-[15px] font-extrabold text-ink">{% trans "Admin dashboard" %}</span>
+      </a>
+
+      {% for group in dash_nav_groups %}
+        <div class="mb-2.5 flex flex-col gap-0.5">
+          <span class="px-3 pb-1.5 pt-2.5 text-[11.5px] font-bold tracking-wide text-ink-faint">{{ group.label }}</span>
+          {% for item in group.items %}
+            <a href="{{ item.url }}"
+               class="flex items-center gap-2.5 rounded-[10px] px-3 py-2.5 text-sm font-semibold transition-colors
+                      {% if active == item.id %}bg-brand-soft text-brand{% else %}text-ink-muted hover:bg-brand-soft hover:text-brand{% endif %}">
+              <span class="text-[15px]">{{ item.icon }}</span>{{ item.label }}
+            </a>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <div class="mt-auto flex flex-col gap-2 border-t border-line pt-3.5">
+        <button type="button" class="theme-toggle-btn flex items-center gap-2 rounded-[10px] border border-line bg-surface-soft px-3 py-2.5 text-[13.5px] font-semibold text-ink transition-colors hover:border-brand">
+          <span class="hidden dark:inline">☾</span><span class="inline dark:hidden">☀</span> {% trans "Display mode" %}
+        </button>
         <form action="{% url 'dashboard:logout' %}" method="post">
           {% csrf_token %}
-          <button type="submit" class="text-start hover:underline">{% trans "Log out" %}</button>
+          <button type="submit" class="flex w-full items-center gap-2 rounded-[10px] px-3 py-2.5 text-[13.5px] font-semibold text-danger transition-colors hover:bg-danger/10">
+            ⎋ {% trans "Log out" %}
+          </button>
         </form>
       </div>
     </aside>
+
+    <div class="flex gap-2 overflow-x-auto border-b border-line bg-card px-4 py-3.5 md:hidden">
+      {% for group in dash_nav_groups %}
+        {% for item in group.items %}
+          <a href="{{ item.url }}"
+             class="flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-2 text-[12.5px] font-semibold transition-colors
+                    {% if active == item.id %}bg-brand text-white{% else %}bg-surface-soft text-ink-muted{% endif %}">
+            <span>{{ item.icon }}</span>{{ item.label }}
+          </a>
+        {% endfor %}
+      {% endfor %}
+    </div>
+    {% endwith %}
 
     <main class="flex-1 p-4 sm:p-6">
       {% if messages %}
         <div class="mb-4 flex flex-col gap-2">
           {% for message in messages %}
-            <div class="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm dark:border-gray-800 dark:bg-gray-900">{{ message }}</div>
+            <div class="rounded-md border border-line bg-card px-3 py-2 text-sm text-ink">{{ message }}</div>
           {% endfor %}
         </div>
       {% endif %}
