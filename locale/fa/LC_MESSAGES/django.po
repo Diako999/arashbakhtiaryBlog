@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-16 18:56+0330\n"
+"POT-Creation-Date: 2026-07-16 19:58+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
@@ -252,7 +252,7 @@ msgstr "دوره‌ها و جلسات"
 #: apps/dashboard/context_processors.py:47
 #: templates/dashboard/testimonial_list.html:4
 #: templates/dashboard/testimonial_list.html:8
-#: templates/testimonials/list.html:4 templates/testimonials/list.html:7
+#: templates/testimonials/list.html:4 templates/testimonials/list.html:8
 msgid "Testimonials"
 msgstr "نظرات مشتریان"
 
@@ -507,8 +507,10 @@ msgstr "پیام"
 
 #: apps/pages/models.py:14
 msgid "Must match a routed page name, e.g. 'about' or 'contact'."
-msgstr "باید با نام یکی از صفحات مسیریابی‌شده مطابقت داشته باشد، مثلاً «about» یا «contact»."
-"باید با نام یک صفحه مسیریابی‌شده مطابقت داشته باشد، مثلاً 'about' یا 'contact'."
+msgstr ""
+"باید با نام یکی از صفحات مسیریابی‌شده مطابقت داشته باشد، مثلاً «about» یا "
+"«contact».باید با نام یک صفحه مسیریابی‌شده مطابقت داشته باشد، مثلاً 'about' یا "
+"'contact'."
 
 #: apps/pages/models.py:19
 msgid "page"
@@ -550,10 +552,6 @@ msgstr "نظر مشتری"
 msgid "testimonials"
 msgstr "نظرات مشتریان"
 
-#: templates/base/blog_layout.html:11 templates/dashboard/content_list.html:52
-msgid "Categories"
-msgstr "دسته‌بندی‌ها"
-
 #: templates/base/layout.html:49
 msgid "Open menu"
 msgstr "باز کردن منو"
@@ -566,45 +564,102 @@ msgstr "پیوندهای سریع"
 msgid "Contact"
 msgstr "تماس"
 
-#: templates/blog/detail.html:50
+#: templates/blog/detail.html:9 templates/blog/list.html:4
+#: templates/blog/list.html:9
+msgid "Blog"
+msgstr "وبلاگ"
+
+#: templates/blog/detail.html:43 templates/partials/_post_card.html:9
+msgid "Article cover image"
+msgstr "تصویر کاور مقاله"
+
+#: templates/blog/detail.html:78
 msgid "Comments"
 msgstr "دیدگاه‌ها"
 
-#: templates/blog/detail.html:58
+#: templates/blog/detail.html:92
 msgid "No comments yet."
 msgstr "هنوز دیدگاهی وجود ندارد."
 
-#: templates/blog/detail.html:73
+#: templates/blog/detail.html:97 templates/blog/detail.html:108
 msgid "Post comment"
 msgstr "ارسال دیدگاه"
 
-#: templates/blog/list.html:7
+#: templates/blog/list.html:11
 msgid "Search posts…"
 msgstr "جستجوی نوشته‌ها…"
 
-#: templates/blog/list.html:10
+#: templates/blog/list.html:14
 msgid "Search"
 msgstr "جستجو"
 
-#: templates/blog/list.html:17 templates/core/home.html:17
+#: templates/blog/list.html:23
+msgid "All"
+msgstr "همه"
+
+#: templates/blog/list.html:38 templates/core/home.html:87
 #: templates/dashboard/content_list.html:35
 #: templates/dashboard/overview.html:34
 msgid "No posts yet."
 msgstr "هنوز نوشته‌ای وجود ندارد."
 
-#: templates/blog/list.html:24 templates/dashboard/content_list.html:42
+#: templates/blog/list.html:46 templates/dashboard/content_list.html:42
 #: templates/dashboard/submission_list.html:40
 msgid "Previous"
 msgstr "قبلی"
 
-#: templates/blog/list.html:31 templates/dashboard/content_list.html:46
+#: templates/blog/list.html:53 templates/dashboard/content_list.html:46
 #: templates/dashboard/submission_list.html:44
 msgid "Next"
 msgstr "بعدی"
 
 #: templates/core/home.html:23
-msgid "See all posts"
-msgstr "مشاهده همه نوشته‌ها"
+msgid "Browse courses"
+msgstr "مشاهده دوره‌ها"
+
+#: templates/core/home.html:29
+msgid "Get a free resource"
+msgstr "دریافت منبع رایگان"
+
+#: templates/core/home.html:35
+msgid "Read the blog"
+msgstr "مطالعه وبلاگ"
+
+#: templates/core/home.html:47
+msgid "Portrait photo"
+msgstr "تصویر پروفایل"
+
+#: templates/core/home.html:63
+msgid "Active courses & programs"
+msgstr "دوره‌ها و برنامه‌های فعال"
+
+#: templates/core/home.html:65
+msgid "See all"
+msgstr "مشاهده همه"
+
+#: templates/core/home.html:78
+msgid "Latest posts"
+msgstr "آخرین نوشته‌ها"
+
+#: templates/core/home.html:80
+msgid "All posts"
+msgstr "همه نوشته‌ها"
+
+#: templates/core/home.html:94
+msgid "What people are saying"
+msgstr "تجربه دیگران"
+
+#: templates/core/home.html:106
+msgid "Free resources"
+msgstr "منابع رایگان"
+
+#: templates/core/home.html:107
+msgid "Get it now, for free."
+msgstr "همین حالا رایگان دریافت کن."
+
+#: templates/core/home.html:111 templates/partials/_lead_card.html:19
+msgid "Get it for free"
+msgstr "دریافت رایگان"
 
 #: templates/dashboard/base.html:8
 msgid "Dashboard"
@@ -675,6 +730,10 @@ msgstr "ویرایش"
 msgid "Delete"
 msgstr "حذف"
 
+#: templates/dashboard/content_list.html:52
+msgid "Categories"
+msgstr "دسته‌بندی‌ها"
+
 #: templates/dashboard/content_list.html:60
 msgid "No categories yet."
 msgstr "هنوز دسته‌ای وجود ندارد."
@@ -706,7 +765,7 @@ msgstr "منبع جدید"
 
 #: templates/dashboard/leadmagnet_list.html:4
 #: templates/dashboard/leadmagnet_list.html:8 templates/leads/list.html:4
-#: templates/leads/list.html:7
+#: templates/leads/list.html:8
 msgid "Free Resources"
 msgstr "منابع رایگان"
 
@@ -746,7 +805,7 @@ msgstr "ویرایش دوره"
 msgid "New offering"
 msgstr "دوره جدید"
 
-#: templates/dashboard/offering_form.html:28 templates/offerings/detail.html:23
+#: templates/dashboard/offering_form.html:28 templates/offerings/detail.html:28
 msgid "Sessions"
 msgstr "جلسات"
 
@@ -888,20 +947,28 @@ msgstr "در انتظار"
 msgid "No testimonials yet."
 msgstr "هنوز نظری وجود ندارد."
 
-#: templates/leads/list.html:22 templates/offerings/list.html:25
-#: templates/testimonials/list.html:13
+#: templates/leads/detail.html:14 templates/partials/_lead_card.html:9
+msgid "Resource cover image"
+msgstr "تصویر کاور"
+
+#: templates/leads/list.html:14 templates/offerings/list.html:14
+#: templates/testimonials/list.html:14
 msgid "Nothing here yet."
 msgstr "هنوز چیزی وجود ندارد."
 
-#: templates/offerings/detail.html:40
+#: templates/offerings/detail.html:15 templates/partials/_offering_card.html:9
+msgid "Course cover image"
+msgstr "تصویر کاور دوره"
+
+#: templates/offerings/detail.html:43
 msgid "Enroll"
 msgstr "ثبت‌نام"
 
-#: templates/offerings/detail.html:54
+#: templates/offerings/detail.html:56
 msgid "Submit"
 msgstr "ارسال"
 
-#: templates/offerings/list.html:4 templates/offerings/list.html:7
+#: templates/offerings/list.html:4 templates/offerings/list.html:8
 msgid "Courses & Workshops"
 msgstr "دوره‌ها و کارگاه‌ها"
 
@@ -920,6 +987,14 @@ msgstr "دانلود"
 #: templates/partials/_lead_form.html:23
 msgid "Get the download link"
 msgstr "دریافت لینک دانلود"
+
+#: templates/partials/_offering_card.html:20
+msgid "Free"
+msgstr "رایگان"
+
+#: templates/partials/_offering_card.html:23
+msgid "View course"
+msgstr "مشاهده دوره"
 
 #: templates/partials/_theme_switcher.html:4
 msgid "Toggle light/dark theme"

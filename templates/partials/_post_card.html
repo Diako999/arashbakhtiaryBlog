@@ -1,23 +1,27 @@
 {% load i18n %}
-<article class="flex flex-col gap-2 border-b border-gray-100 pb-6 dark:border-gray-800 sm:flex-row sm:gap-4">
-  {% if post.cover_image %}
-    <img src="{{ post.cover_image.url }}" alt="{{ post.title }}"
-         class="h-40 w-full rounded-md object-cover sm:h-28 sm:w-40 sm:shrink-0">
-  {% endif %}
-  <div class="flex flex-col gap-1">
-    <h2 class="text-lg font-semibold">
-      <a href="{{ post.get_absolute_url }}" class="hover:underline">{{ post.title }}</a>
-    </h2>
-    {% if post.excerpt %}
-      <p class="text-sm text-gray-500 dark:text-gray-400">{{ post.excerpt }}</p>
+<a href="{{ post.get_absolute_url }}"
+   class="group flex h-full flex-col gap-3.5 overflow-hidden rounded-[18px] border border-line bg-card text-ink no-underline shadow-[0_1px_3px_rgba(0,0,0,.25)] transition-all duration-300 ease-[cubic-bezier(.2,.8,.2,1)] hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_20px_40px_-14px_rgba(0,0,0,.5)]">
+  <div class="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-gradient-to-br from-brand to-accent">
+    {% if post.cover_image %}
+      <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" class="h-full w-full object-cover">
+    {% else %}
+      <span class="absolute inset-0 flex items-center justify-center text-[13px] font-semibold tracking-wide text-white/65">
+        {% trans "Article cover image" %}
+      </span>
     {% endif %}
-    <div class="flex flex-wrap gap-2 text-xs text-gray-400">
-      {% if post.category %}
-        <a href="{{ post.category.get_absolute_url }}" class="hover:underline">{{ post.category.name }}</a>
-      {% endif %}
-      {% if post.published_at %}
-        <time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"SHORT_DATE_FORMAT" }}</time>
-      {% endif %}
-    </div>
   </div>
-</article>
+  <div class="flex flex-col gap-2.5 px-5 pb-[22px] pt-1">
+    {% if post.category %}
+      <span class="text-[13px] font-semibold text-brand">{{ post.category.name }}</span>
+    {% endif %}
+    <h3 class="m-0 text-[19px] font-bold leading-[1.5]">{{ post.title }}</h3>
+    {% if post.excerpt %}
+      <p class="m-0 text-[14.5px] leading-[1.9] text-ink-muted">{{ post.excerpt }}</p>
+    {% endif %}
+    {% if post.published_at %}
+      <div class="mt-1.5 text-[13px] text-ink-faint">
+        <time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"SHORT_DATE_FORMAT" }}</time>
+      </div>
+    {% endif %}
+  </div>
+</a>

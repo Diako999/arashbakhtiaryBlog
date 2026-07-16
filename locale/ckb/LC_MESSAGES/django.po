@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-16 18:56+0330\n"
+"POT-Creation-Date: 2026-07-16 19:58+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
@@ -252,7 +252,7 @@ msgstr "کۆرسەکان و دانیشتنەکان"
 #: apps/dashboard/context_processors.py:47
 #: templates/dashboard/testimonial_list.html:4
 #: templates/dashboard/testimonial_list.html:8
-#: templates/testimonials/list.html:4 templates/testimonials/list.html:7
+#: templates/testimonials/list.html:4 templates/testimonials/list.html:8
 msgid "Testimonials"
 msgstr "بۆچوونەکان"
 
@@ -551,10 +551,6 @@ msgstr "بۆچوون"
 msgid "testimonials"
 msgstr "بۆچوونەکان"
 
-#: templates/base/blog_layout.html:11 templates/dashboard/content_list.html:52
-msgid "Categories"
-msgstr "پۆلەکان"
-
 #: templates/base/layout.html:49
 msgid "Open menu"
 msgstr "کردنەوەی مینیو"
@@ -567,45 +563,102 @@ msgstr "لینکە خێراکان"
 msgid "Contact"
 msgstr "پەیوەندی"
 
-#: templates/blog/detail.html:50
+#: templates/blog/detail.html:9 templates/blog/list.html:4
+#: templates/blog/list.html:9
+msgid "Blog"
+msgstr "بلۆگ"
+
+#: templates/blog/detail.html:43 templates/partials/_post_card.html:9
+msgid "Article cover image"
+msgstr "وێنەی سەرەکی بابەت"
+
+#: templates/blog/detail.html:78
 msgid "Comments"
 msgstr "کۆمێنتەکان"
 
-#: templates/blog/detail.html:58
+#: templates/blog/detail.html:92
 msgid "No comments yet."
 msgstr "هێشتا کۆمێنتێک نییە."
 
-#: templates/blog/detail.html:73
+#: templates/blog/detail.html:97 templates/blog/detail.html:108
 msgid "Post comment"
 msgstr "ناردنی کۆمێنت"
 
-#: templates/blog/list.html:7
+#: templates/blog/list.html:11
 msgid "Search posts…"
 msgstr "گەڕان بۆ بابەتەکان…"
 
-#: templates/blog/list.html:10
+#: templates/blog/list.html:14
 msgid "Search"
 msgstr "گەڕان"
 
-#: templates/blog/list.html:17 templates/core/home.html:17
+#: templates/blog/list.html:23
+msgid "All"
+msgstr "هەموو"
+
+#: templates/blog/list.html:38 templates/core/home.html:87
 #: templates/dashboard/content_list.html:35
 #: templates/dashboard/overview.html:34
 msgid "No posts yet."
 msgstr "هێشتا بابەتێک نییە."
 
-#: templates/blog/list.html:24 templates/dashboard/content_list.html:42
+#: templates/blog/list.html:46 templates/dashboard/content_list.html:42
 #: templates/dashboard/submission_list.html:40
 msgid "Previous"
 msgstr "پێشوو"
 
-#: templates/blog/list.html:31 templates/dashboard/content_list.html:46
+#: templates/blog/list.html:53 templates/dashboard/content_list.html:46
 #: templates/dashboard/submission_list.html:44
 msgid "Next"
 msgstr "دواتر"
 
 #: templates/core/home.html:23
-msgid "See all posts"
-msgstr "بینینی هەموو بابەتەکان"
+msgid "Browse courses"
+msgstr "بینینی کۆرسەکان"
+
+#: templates/core/home.html:29
+msgid "Get a free resource"
+msgstr "وەرگرتنی سەرچاوەیەکی بەخۆڕایی"
+
+#: templates/core/home.html:35
+msgid "Read the blog"
+msgstr "خوێندنەوەی بلۆگ"
+
+#: templates/core/home.html:47
+msgid "Portrait photo"
+msgstr "وێنەی پرۆفایل"
+
+#: templates/core/home.html:63
+msgid "Active courses & programs"
+msgstr "کۆرس و بەرنامە چالاکەکان"
+
+#: templates/core/home.html:65
+msgid "See all"
+msgstr "بینینی هەموو"
+
+#: templates/core/home.html:78
+msgid "Latest posts"
+msgstr "دوایین بابەتەکان"
+
+#: templates/core/home.html:80
+msgid "All posts"
+msgstr "هەموو بابەتەکان"
+
+#: templates/core/home.html:94
+msgid "What people are saying"
+msgstr "ڕای خەڵک"
+
+#: templates/core/home.html:106
+msgid "Free resources"
+msgstr "سەرچاوە بەخۆڕاییەکان"
+
+#: templates/core/home.html:107
+msgid "Get it now, for free."
+msgstr "ئێستا بەخۆڕایی وەریبگرە."
+
+#: templates/core/home.html:111 templates/partials/_lead_card.html:19
+msgid "Get it for free"
+msgstr "بەخۆڕایی وەریبگرە"
 
 #: templates/dashboard/base.html:8
 msgid "Dashboard"
@@ -676,6 +729,10 @@ msgstr "دەستکاری"
 msgid "Delete"
 msgstr "سڕینەوە"
 
+#: templates/dashboard/content_list.html:52
+msgid "Categories"
+msgstr "پۆلەکان"
+
 #: templates/dashboard/content_list.html:60
 msgid "No categories yet."
 msgstr "هێشتا پۆلێک نییە."
@@ -705,7 +762,7 @@ msgstr "سەرچاوەی نوێ"
 
 #: templates/dashboard/leadmagnet_list.html:4
 #: templates/dashboard/leadmagnet_list.html:8 templates/leads/list.html:4
-#: templates/leads/list.html:7
+#: templates/leads/list.html:8
 msgid "Free Resources"
 msgstr "سەرچاوە بەخۆڕاییەکان"
 
@@ -745,7 +802,7 @@ msgstr "دەستکاریکردنی کۆرس"
 msgid "New offering"
 msgstr "کۆرسی نوێ"
 
-#: templates/dashboard/offering_form.html:28 templates/offerings/detail.html:23
+#: templates/dashboard/offering_form.html:28 templates/offerings/detail.html:28
 msgid "Sessions"
 msgstr "دانیشتنەکان"
 
@@ -887,20 +944,28 @@ msgstr "چاوەڕوان"
 msgid "No testimonials yet."
 msgstr "هێشتا بۆچوونێک نییە."
 
-#: templates/leads/list.html:22 templates/offerings/list.html:25
-#: templates/testimonials/list.html:13
+#: templates/leads/detail.html:14 templates/partials/_lead_card.html:9
+msgid "Resource cover image"
+msgstr "وێنەی سەرەکی سەرچاوە"
+
+#: templates/leads/list.html:14 templates/offerings/list.html:14
+#: templates/testimonials/list.html:14
 msgid "Nothing here yet."
 msgstr "هێشتا هیچ شتێک نییە."
 
-#: templates/offerings/detail.html:40
+#: templates/offerings/detail.html:15 templates/partials/_offering_card.html:9
+msgid "Course cover image"
+msgstr "وێنەی سەرەکی کۆرس"
+
+#: templates/offerings/detail.html:43
 msgid "Enroll"
 msgstr "تۆمارکردن"
 
-#: templates/offerings/detail.html:54
+#: templates/offerings/detail.html:56
 msgid "Submit"
 msgstr "ناردن"
 
-#: templates/offerings/list.html:4 templates/offerings/list.html:7
+#: templates/offerings/list.html:4 templates/offerings/list.html:8
 msgid "Courses & Workshops"
 msgstr "کۆرس و کارگەکان"
 
@@ -919,6 +984,14 @@ msgstr "داگرتن"
 #: templates/partials/_lead_form.html:23
 msgid "Get the download link"
 msgstr "وەرگرتنی لینکی داگرتن"
+
+#: templates/partials/_offering_card.html:20
+msgid "Free"
+msgstr "بەخۆڕایی"
+
+#: templates/partials/_offering_card.html:23
+msgid "View course"
+msgstr "بینینی کۆرس"
 
 #: templates/partials/_theme_switcher.html:4
 msgid "Toggle light/dark theme"

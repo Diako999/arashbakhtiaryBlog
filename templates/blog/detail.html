@@ -1,75 +1,110 @@
-{% extends "base/blog_layout.html" %}
+{% extends "base/layout.html" %}
 {% load i18n widget_tweaks %}
 
-{% block blog_content %}
-<article class="flex flex-col gap-4">
-  <h1 class="text-2xl font-bold sm:text-3xl">{{ post.title }}</h1>
-  <div class="flex flex-wrap gap-2 text-xs text-gray-400">
-    <span>{{ post.author.get_full_name|default:post.author.username }}</span>
-    {% if post.published_at %}
-      <time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"SHORT_DATE_FORMAT" }}</time>
-    {% endif %}
+{% block title %}{{ post.title }} · {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<article class="mx-auto flex max-w-[760px] flex-col gap-7">
+  <div class="flex items-center gap-2 text-[13px] text-ink-faint">
+    <a href="{% url 'blog:list' %}" class="text-ink-faint no-underline transition-colors hover:text-brand">{% trans "Blog" %}</a>
     {% if post.category %}
-      <a href="{{ post.category.get_absolute_url }}" class="hover:underline">{{ post.category.name }}</a>
+      <span>/</span>
+      <span>{{ post.category.name }}</span>
     {% endif %}
   </div>
 
-  {% if post.cover_image %}
-    <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" class="w-full rounded-lg object-cover">
-  {% endif %}
+  <div class="flex flex-col gap-4">
+    {% if post.category %}
+      <span class="text-[13.5px] font-bold text-brand">{{ post.category.name }}</span>
+    {% endif %}
+    <h1 class="m-0 text-[clamp(26px,4vw,38px)] font-extrabold leading-[1.5]">{{ post.title }}</h1>
+    <div class="flex items-center gap-3">
+      {% with author_profile=post.author.author_profile %}
+        {% if author_profile.avatar %}
+          <img src="{{ author_profile.avatar.url }}" alt="{{ post.author.get_full_name }}" class="h-[38px] w-[38px] shrink-0 rounded-full object-cover">
+        {% else %}
+          <span class="h-[38px] w-[38px] shrink-0 rounded-full bg-gradient-to-br from-brand to-accent"></span>
+        {% endif %}
+      {% endwith %}
+      <div class="flex flex-col gap-0.5">
+        <span class="text-sm font-bold text-ink">{{ post.author.get_full_name|default:post.author.username }}</span>
+        {% if post.published_at %}
+          <span class="text-[12.5px] text-ink-faint">{{ post.published_at|date:"SHORT_DATE_FORMAT" }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 
-  <div class="prose max-w-none dark:prose-invert">
+  <div class="relative aspect-[16/8] w-full overflow-hidden rounded-[18px] bg-gradient-to-br from-brand to-accent">
+    {% if post.cover_image %}
+      <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" class="h-full w-full object-cover">
+    {% else %}
+      <span class="absolute inset-0 flex items-center justify-center text-[13px] font-semibold text-white/65">
+        {% trans "Article cover image" %}
+      </span>
+    {% endif %}
+  </div>
+
+  <div class="prose max-w-none text-ink prose-headings:text-ink prose-a:text-brand dark:prose-invert">
     {{ post.body|safe }}
   </div>
 
   {% if post.tags.all %}
-    <div class="flex flex-wrap gap-2 pt-4">
+    <div class="flex flex-wrap gap-2 border-t border-line pt-3.5">
       {% for tag in post.tags.all %}
         <a href="{% url 'blog:list_by_tag' tag.slug %}"
-           class="rounded-full border border-gray-200 px-3 py-1 text-xs dark:border-gray-700">#{{ tag.name }}</a>
+           class="rounded-full border border-line bg-card px-3.5 py-1.5 text-[12.5px] font-semibold text-ink-muted no-underline transition-colors hover:text-brand">#{{ tag.name }}</a>
       {% endfor %}
     </div>
   {% endif %}
 
   {% with author_profile=post.author.author_profile %}
     {% if author_profile.bio %}
-      <div class="mt-6 flex flex-col gap-2 rounded-lg border border-gray-100 p-4 dark:border-gray-800 sm:flex-row sm:items-start sm:gap-4">
+      <div class="flex gap-4 rounded-[18px] border border-line bg-card p-6">
         {% if author_profile.avatar %}
-          <img src="{{ author_profile.avatar.url }}" alt="{{ post.author.get_full_name }}"
-               class="h-14 w-14 shrink-0 rounded-full object-cover">
+          <img src="{{ author_profile.avatar.url }}" alt="{{ post.author.get_full_name }}" class="h-14 w-14 shrink-0 rounded-full object-cover">
+        {% else %}
+          <span class="h-14 w-14 shrink-0 rounded-full bg-gradient-to-br from-brand to-accent"></span>
         {% endif %}
-        <div>
-          <p class="font-semibold">{{ post.author.get_full_name|default:post.author.username }}</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400">{{ author_profile.bio }}</p>
+        <div class="flex flex-col gap-1.5">
+          <span class="text-[15px] font-extrabold text-ink">{{ post.author.get_full_name|default:post.author.username }}</span>
+          <p class="m-0 text-[13.5px] leading-[1.9] text-ink-muted">{{ author_profile.bio }}</p>
         </div>
       </div>
     {% endif %}
   {% endwith %}
 
-  <section class="mt-8 flex flex-col gap-4 border-t border-gray-100 pt-6 dark:border-gray-800">
-    <h2 class="text-lg font-semibold">{% trans "Comments" %}</h2>
+  <section class="flex flex-col gap-5 border-t border-line pt-6">
+    <h2 class="m-0 text-[19px] font-extrabold">{% trans "Comments" %} ({{ comments|length }})</h2>
 
     {% for comment in comments %}
-      <div class="rounded-md border border-gray-100 p-3 text-sm dark:border-gray-800">
-        <p class="font-medium">{{ comment.name }}</p>
-        <p class="text-gray-600 dark:text-gray-400">{{ comment.body }}</p>
+      <div class="flex gap-3.5">
+        <span class="h-[38px] w-[38px] shrink-0 rounded-full bg-brand-soft"></span>
+        <div class="flex flex-col gap-1.5">
+          <div class="flex items-center gap-2.5">
+            <span class="text-sm font-bold text-ink">{{ comment.name }}</span>
+            <span class="text-xs text-ink-faint">{{ comment.created_at|date:"SHORT_DATE_FORMAT" }}</span>
+          </div>
+          <p class="m-0 text-sm leading-[1.9] text-ink-muted">{{ comment.body }}</p>
+        </div>
       </div>
     {% empty %}
-      <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "No comments yet." %}</p>
+      <p class="text-sm text-ink-muted">{% trans "No comments yet." %}</p>
     {% endfor %}
 
-    <form method="post" class="flex flex-col gap-3">
+    <form method="post" class="mt-2 flex flex-col gap-3.5 rounded-[16px] border border-line bg-card p-[22px]">
       {% csrf_token %}
+      <span class="text-[14.5px] font-bold text-ink">{% trans "Post comment" %}</span>
       {% for field in comment_form %}
         <div>
-          <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
-          {% render_field field class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-900" %}
+          <label for="{{ field.id_for_label }}" class="mb-1.5 block text-sm font-semibold text-ink">{{ field.label }}</label>
+          {% render_field field class="w-full rounded-[10px] border border-line bg-surface-soft px-3.5 py-2.5 text-sm text-ink" %}
           {% if field.errors %}
-            <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ field.errors|join:", " }}</p>
+            <p class="mt-1 text-xs text-danger">{{ field.errors|join:", " }}</p>
           {% endif %}
         </div>
       {% endfor %}
-      <button type="submit" class="self-start rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white dark:bg-gray-100 dark:text-gray-900">
+      <button type="submit" class="self-start rounded-[10px] bg-brand px-6 py-2.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5">
         {% trans "Post comment" %}
       </button>
     </form>

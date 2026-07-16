@@ -1,34 +1,56 @@
-{% extends "base/blog_layout.html" %}
+{% extends "base/layout.html" %}
 {% load i18n %}
 
-{% block blog_content %}
-<div class="flex flex-col gap-6">
-  <form method="get" class="flex gap-2">
-    <input type="search" name="q" value="{{ query }}" placeholder="{% trans 'Search posts…' %}"
-           class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-900">
-    <button type="submit" class="shrink-0 rounded-md bg-gray-900 px-4 py-2 text-sm text-white dark:bg-gray-100 dark:text-gray-900">
-      {% trans "Search" %}
-    </button>
-  </form>
+{% block title %}{% trans "Blog" %} · {{ site_settings.site_name }}{% endblock %}
 
-  {% for post in posts %}
-    {% include "partials/_post_card.html" %}
-  {% empty %}
-    <p class="text-gray-500 dark:text-gray-400">{% trans "No posts yet." %}</p>
-  {% endfor %}
+{% block content %}
+<div class="flex flex-col gap-9">
+  <div class="flex max-w-xl flex-col gap-3.5">
+    <h1 class="m-0 text-[clamp(26px,4vw,38px)] font-extrabold">{% trans "Blog" %}</h1>
+    <form method="get" class="flex gap-2">
+      <input type="search" name="q" value="{{ query }}" placeholder="{% trans 'Search posts…' %}"
+             class="w-full rounded-[10px] border border-line bg-surface-soft px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-faint">
+      <button type="submit" class="shrink-0 rounded-[10px] bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5">
+        {% trans "Search" %}
+      </button>
+    </form>
+  </div>
+
+  {% if categories %}
+    <div class="flex flex-wrap gap-2.5">
+      <a href="{% url 'blog:list' %}"
+         class="rounded-full border border-line px-4 py-2 text-[13.5px] font-semibold transition-colors {% if not current_category %}bg-brand-soft text-brand{% else %}text-ink-muted hover:text-brand{% endif %}">
+        {% trans "All" %}
+      </a>
+      {% for category in categories %}
+        <a href="{% url 'blog:list_by_category' category.slug %}"
+           class="rounded-full border border-line px-4 py-2 text-[13.5px] font-semibold transition-colors {% if category.slug == current_category %}bg-brand-soft text-brand{% else %}text-ink-muted hover:text-brand{% endif %}">
+          {{ category.name }}
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="grid gap-[22px] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
+    {% for post in posts %}
+      {% include "partials/_post_card.html" %}
+    {% empty %}
+      <p class="text-ink-muted">{% trans "No posts yet." %}</p>
+    {% endfor %}
+  </div>
 
   {% if is_paginated %}
     <nav class="flex justify-center gap-2 pt-4">
       {% if page_obj.has_previous %}
         <a href="?page={{ page_obj.previous_page_number }}"
-           class="rounded-md border border-gray-200 px-3 py-1 text-sm dark:border-gray-700">{% trans "Previous" %}</a>
+           class="rounded-[10px] border border-line px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-brand hover:text-brand">{% trans "Previous" %}</a>
       {% endif %}
-      <span class="px-3 py-1 text-sm text-gray-500 dark:text-gray-400">
+      <span class="px-3 py-2 text-sm text-ink-muted">
         {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
       </span>
       {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}"
-           class="rounded-md border border-gray-200 px-3 py-1 text-sm dark:border-gray-700">{% trans "Next" %}</a>
+           class="rounded-[10px] border border-line px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-brand hover:text-brand">{% trans "Next" %}</a>
       {% endif %}
     </nav>
   {% endif %}

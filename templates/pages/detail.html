@@ -4,25 +4,25 @@
 {% block title %}{{ page.title }} · {{ site_settings.site_name }}{% endblock %}
 
 {% block content %}
-<article class="mx-auto flex max-w-2xl flex-col gap-4">
-  <h1 class="text-2xl font-bold sm:text-3xl">{{ page.title }}</h1>
-  <div class="prose max-w-none dark:prose-invert">
+<article class="mx-auto flex max-w-2xl flex-col gap-6">
+  <h1 class="m-0 text-[clamp(26px,4vw,38px)] font-extrabold leading-[1.4]">{{ page.title }}</h1>
+  <div class="prose max-w-none text-ink prose-headings:text-ink prose-a:text-brand dark:prose-invert">
     {{ page.body|safe }}
   </div>
 
   {% if contact_form %}
-    <form method="post" class="mt-4 flex flex-col gap-3">
+    <form method="post" class="mt-2 flex flex-col gap-3.5 rounded-[18px] border border-line bg-card p-6">
       {% csrf_token %}
       {% for field in contact_form %}
         <div>
-          <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
-          {% render_field field class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-900" %}
+          <label for="{{ field.id_for_label }}" class="mb-1.5 block text-sm font-semibold text-ink">{{ field.label }}</label>
+          {% render_field field class="w-full rounded-[10px] border border-line bg-surface-soft px-3.5 py-2.5 text-sm text-ink" %}
           {% if field.errors %}
-            <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ field.errors|join:", " }}</p>
+            <p class="mt-1 text-xs text-danger">{{ field.errors|join:", " }}</p>
           {% endif %}
         </div>
       {% endfor %}
-      <button type="submit" class="self-start rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white dark:bg-gray-100 dark:text-gray-900">
+      <button type="submit" class="self-start rounded-[10px] bg-brand px-6 py-2.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5">
         {% trans "Send" %}
       </button>
     </form>

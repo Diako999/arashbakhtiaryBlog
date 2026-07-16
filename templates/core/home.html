@@ -2,26 +2,116 @@
 {% load i18n %}
 
 {% block content %}
-  <section class="flex flex-col gap-6">
-    <div>
-      <h1 class="text-2xl font-bold sm:text-3xl">{{ site_settings.site_name }}</h1>
+<div class="flex flex-col gap-16 sm:gap-24">
+
+  <section class="relative flex flex-wrap items-center gap-12">
+    <div class="pointer-events-none absolute -top-16 -start-24 h-[340px] w-[340px] animate-float-slow rounded-full bg-[radial-gradient(circle,var(--brand-soft),transparent_70%)]"></div>
+
+    <div class="relative z-10 flex min-w-[280px] flex-1 basis-[440px] flex-col items-start gap-5">
+      <h1 class="animate-fade-in-up m-0 max-w-[600px] text-[clamp(32px,5vw,54px)] font-extrabold leading-[1.35]">
+        {{ site_settings.site_name }}
+      </h1>
       {% if site_settings.meta_description %}
-        <p class="mt-2 text-gray-500 dark:text-gray-400">{{ site_settings.meta_description }}</p>
+        <p class="animate-fade-in-up m-0 max-w-[520px] text-[clamp(15px,2vw,17.5px)] leading-[2] text-ink-muted" style="animation-delay:.16s">
+          {{ site_settings.meta_description }}
+        </p>
       {% endif %}
+      <div class="animate-fade-in-up mt-2 flex flex-wrap gap-3.5" style="animation-delay:.24s">
+        {% if offerings_visible %}
+          <a href="{% url 'offerings:list' %}"
+             class="rounded-xl bg-brand px-7 py-3.5 text-[15px] font-bold text-white no-underline shadow-[0_12px_28px_-10px_var(--brand)] transition-all hover:-translate-y-0.5 hover:brightness-110">
+            {% trans "Browse courses" %}
+          </a>
+        {% endif %}
+        {% if leads_visible %}
+          <a href="{% url 'leads:list' %}"
+             class="rounded-xl border border-line px-7 py-3.5 text-[15px] font-bold text-ink no-underline transition-all hover:-translate-y-0.5 hover:border-brand hover:bg-surface-soft">
+            {% trans "Get a free resource" %}
+          </a>
+        {% endif %}
+        {% if not offerings_visible and not leads_visible %}
+          <a href="{% url 'blog:list' %}"
+             class="rounded-xl bg-brand px-7 py-3.5 text-[15px] font-bold text-white no-underline shadow-[0_12px_28px_-10px_var(--brand)] transition-all hover:-translate-y-0.5 hover:brightness-110">
+            {% trans "Read the blog" %}
+          </a>
+        {% endif %}
+      </div>
     </div>
 
-    <div class="flex flex-col gap-6">
+    <div class="relative z-10 mx-auto max-w-[400px] min-w-[240px] flex-1 basis-[320px]" style="animation:fadeIn .8s ease .15s both;">
+      <div class="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-line bg-gradient-to-br from-brand to-accent shadow-[0_30px_60px_-18px_rgba(0,0,0,.55)]">
+        {% if site_settings.logo %}
+          <img src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }}" class="h-full w-full object-cover">
+        {% else %}
+          <span class="absolute inset-0 flex items-center justify-center text-[13px] font-semibold text-white/65">
+            {% trans "Portrait photo" %}
+          </span>
+        {% endif %}
+      </div>
+      {% if testimonials_visible and testimonials %}
+        <div class="animate-fade-in-up absolute -bottom-5 -start-5 flex max-w-[220px] items-center gap-2.5 rounded-2xl border border-line bg-card px-[18px] py-3.5 shadow-[0_20px_40px_-16px_rgba(0,0,0,.5)]" style="animation-delay:.55s">
+          <span class="shrink-0 text-xl text-brand">❝</span>
+          <span class="text-[12.5px] leading-[1.7] text-ink-muted">{{ testimonials.0.quote }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  {% if offerings_visible and offerings %}
+    <section class="flex flex-col gap-7">
+      <div class="flex flex-wrap items-baseline justify-between gap-3">
+        <h2 class="m-0 text-[clamp(22px,3vw,28px)] font-extrabold">{% trans "Active courses & programs" %}</h2>
+        <a href="{% url 'offerings:list' %}" class="inline-flex gap-1 text-sm font-bold text-brand no-underline transition-opacity hover:opacity-75">
+          {% trans "See all" %} ←
+        </a>
+      </div>
+      <div class="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
+        {% for offering in offerings %}
+          {% include "partials/_offering_card.html" %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="flex flex-col gap-7">
+    <div class="flex flex-wrap items-baseline justify-between gap-3">
+      <h2 class="m-0 text-[clamp(22px,3vw,28px)] font-extrabold">{% trans "Latest posts" %}</h2>
+      <a href="{% url 'blog:list' %}" class="inline-flex gap-1 text-sm font-bold text-brand no-underline transition-opacity hover:opacity-75">
+        {% trans "All posts" %} ←
+      </a>
+    </div>
+    <div class="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
       {% for post in latest_posts %}
         {% include "partials/_post_card.html" %}
       {% empty %}
-        <p class="text-gray-500 dark:text-gray-400">{% trans "No posts yet." %}</p>
+        <p class="text-ink-muted">{% trans "No posts yet." %}</p>
       {% endfor %}
     </div>
-
-    {% if latest_posts %}
-      <a href="{% url 'blog:list' %}" class="self-start text-sm font-medium hover:underline">
-        {% trans "See all posts" %} →
-      </a>
-    {% endif %}
   </section>
+
+  {% if testimonials_visible and testimonials %}
+    <section class="flex flex-col gap-7">
+      <h2 class="m-0 text-[clamp(22px,3vw,28px)] font-extrabold">{% trans "What people are saying" %}</h2>
+      <div class="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(240px,1fr))]">
+        {% for testimonial in testimonials %}
+          {% include "partials/_testimonial_card.html" %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% if leads_visible %}
+    <section class="flex cursor-default flex-wrap items-center justify-between gap-6 rounded-[22px] border border-line bg-gradient-to-br from-[var(--brand-soft)] to-transparent p-[clamp(28px,4vw,44px)] transition-all hover:-translate-y-1 hover:border-brand">
+      <div class="flex max-w-[480px] flex-col gap-2.5">
+        <h3 class="m-0 text-[22px] font-extrabold">{% trans "Free resources" %}</h3>
+        <p class="m-0 text-[14.5px] leading-[1.9] text-ink-muted">{% trans "Get it now, for free." %}</p>
+      </div>
+      <a href="{% url 'leads:list' %}"
+         class="whitespace-nowrap rounded-xl bg-brand px-[30px] py-3.5 text-[15px] font-bold text-white no-underline transition-all hover:-translate-y-0.5 hover:brightness-110">
+        {% trans "Get it for free" %}
+      </a>
+    </section>
+  {% endif %}
+
+</div>
 {% endblock %}
