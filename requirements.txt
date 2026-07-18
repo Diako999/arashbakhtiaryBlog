@@ -13,6 +13,7 @@ django-widget-tweaks==1.5.1
 django-modeltranslation==0.19.17
 nh3==0.3.6
 sentry-sdk==2.66.0
+redis==8.0.1
 
 # Transitive dependencies, pinned for byte-identical installs across deploys.
 asgiref==3.12.1

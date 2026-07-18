@@ -64,3 +64,17 @@ if SENTRY_DSN:
         integrations=[DjangoIntegration()],
         send_default_pii=False,
     )
+
+# Without this, django-ratelimit (and any other cache use) falls back to the
+# default per-process LocMemCache — correct for a single Gunicorn worker, but
+# each additional worker would keep its own independent counter, silently
+# turning "10/m" into "10/m × worker count" instead of a real shared limit.
+# Set REDIS_URL once the deployment moves beyond a single worker.
+REDIS_URL = env("REDIS_URL", default="")
+if REDIS_URL:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": REDIS_URL,
+        }
+    }

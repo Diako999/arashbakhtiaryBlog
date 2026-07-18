@@ -1,0 +1,32 @@
+{% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!-- Django's csrf_failure() view calls template.render(context_dict) with no
+     request — this is a separate code path from the generic 403 handler in
+     views.py, so it never sees site_settings/theme_colors either. Same
+     constraint as 500.html: fully self-contained, no context processors.
+     `main` below is already translated by Django's own bundled fa/ckb
+     catalogs (LocaleMiddleware has already activated the request's
+     language by the time this fires). -->
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% trans "Access denied" %}</title>
+  <link rel="stylesheet" href="{% static 'css/output.css' %}">
+  <style>:root{ --brand:#0f9d8e; --accent:#f0b429; }</style>
+</head>
+<body class="flex min-h-screen items-center justify-center bg-surface px-4 font-sans text-ink">
+  <div class="flex flex-col items-center gap-4 text-center">
+    <span class="font-mono text-sm tracking-[.2em] text-ink-faint">403</span>
+    <h1 class="m-0 text-2xl font-extrabold text-ink">{{ main }}</h1>
+    <p class="max-w-md text-ink-muted">
+      {% trans "Your session may have expired. Please go back and try submitting the form again." %}
+    </p>
+    <a href="{% url 'home' %}" class="mt-2 rounded-[10px] bg-brand px-5 py-2.5 text-[14px] font-bold text-white transition-transform hover:-translate-y-0.5">
+      {% trans "Back to home" %}
+    </a>
+  </div>
+</body>
+</html>

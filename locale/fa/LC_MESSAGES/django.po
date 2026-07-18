@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-18 19:06+0330\n"
+"POT-Creation-Date: 2026-07-18 20:13+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
@@ -37,8 +37,8 @@ msgstr "نویسنده"
 msgid "authors"
 msgstr "نویسندگان"
 
-#: apps/blog/models.py:16 apps/blog/models.py:117 apps/leads/models.py:69
-#: apps/offerings/models.py:97 apps/pages/forms.py:6
+#: apps/blog/models.py:16 apps/blog/models.py:121 apps/leads/models.py:69
+#: apps/offerings/models.py:101 apps/pages/forms.py:6
 #: templates/dashboard/submission_list.html:18
 msgid "Name"
 msgstr "نام"
@@ -91,7 +91,7 @@ msgstr "برچسب‌ها"
 msgid "Excerpt"
 msgstr "خلاصه"
 
-#: apps/blog/models.py:57 apps/blog/models.py:119 apps/offerings/models.py:22
+#: apps/blog/models.py:57 apps/blog/models.py:123 apps/offerings/models.py:22
 #: apps/pages/models.py:17
 msgid "Body"
 msgstr "متن"
@@ -127,27 +127,27 @@ msgstr "نوشته"
 msgid "posts"
 msgstr "نوشته‌ها"
 
-#: apps/blog/models.py:115
+#: apps/blog/models.py:119
 msgid "Post"
 msgstr "نوشته"
 
-#: apps/blog/models.py:118 apps/leads/models.py:70 apps/offerings/models.py:98
+#: apps/blog/models.py:122 apps/leads/models.py:70 apps/offerings/models.py:102
 #: apps/pages/forms.py:7 templates/dashboard/submission_list.html:18
 #: templates/dashboard/submission_list.html:24
 msgid "Email"
 msgstr "ایمیل"
 
-#: apps/blog/models.py:120 apps/testimonials/models.py:29
+#: apps/blog/models.py:124 apps/testimonials/models.py:29
 #: templates/dashboard/comment_list.html:25
 #: templates/dashboard/testimonial_list.html:28
 msgid "Approved"
 msgstr "تأیید شده"
 
-#: apps/blog/models.py:123
+#: apps/blog/models.py:127
 msgid "comment"
 msgstr "دیدگاه"
 
-#: apps/blog/models.py:124
+#: apps/blog/models.py:128
 msgid "comments"
 msgstr "دیدگاه‌ها"
 
@@ -501,56 +501,56 @@ msgstr "دوره"
 msgid "offerings"
 msgstr "دوره‌ها"
 
-#: apps/offerings/models.py:67 apps/offerings/models.py:87
+#: apps/offerings/models.py:71 apps/offerings/models.py:91
 #: apps/testimonials/models.py:27
 msgid "Offering"
 msgstr "دوره"
 
-#: apps/offerings/models.py:69
+#: apps/offerings/models.py:73
 msgid "Starts at"
 msgstr "شروع در"
 
-#: apps/offerings/models.py:70
+#: apps/offerings/models.py:74
 msgid "Ends at"
 msgstr "پایان در"
 
-#: apps/offerings/models.py:72
+#: apps/offerings/models.py:76
 msgid "Location"
 msgstr "مکان"
 
-#: apps/offerings/models.py:72
+#: apps/offerings/models.py:76
 msgid "Online link or venue address"
 msgstr "لینک آنلاین یا آدرس مکان"
 
-#: apps/offerings/models.py:74
+#: apps/offerings/models.py:78
 msgid "Capacity"
 msgstr "ظرفیت"
 
-#: apps/offerings/models.py:77
+#: apps/offerings/models.py:81
 msgid "session"
 msgstr "جلسه"
 
-#: apps/offerings/models.py:78
+#: apps/offerings/models.py:82
 msgid "sessions"
 msgstr "جلسات"
 
-#: apps/offerings/models.py:95
+#: apps/offerings/models.py:99
 msgid "Session"
 msgstr "جلسه"
 
-#: apps/offerings/models.py:99
+#: apps/offerings/models.py:103
 msgid "Phone"
 msgstr "تلفن"
 
-#: apps/offerings/models.py:100
+#: apps/offerings/models.py:104
 msgid "Notes"
 msgstr "یادداشت‌ها"
 
-#: apps/offerings/models.py:103
+#: apps/offerings/models.py:107
 msgid "enrollment"
 msgstr "ثبت‌نام"
 
-#: apps/offerings/models.py:104
+#: apps/offerings/models.py:108
 msgid "enrollments"
 msgstr "ثبت‌نام‌ها"
 
@@ -608,7 +608,7 @@ msgstr "نظر مشتری"
 msgid "testimonials"
 msgstr "نظرات مشتریان"
 
-#: templates/403.html:4
+#: templates/403.html:4 templates/403_csrf.html:16
 msgid "Access denied"
 msgstr "دسترسی مجاز نیست"
 
@@ -620,9 +620,16 @@ msgstr "شما به این صفحه دسترسی ندارید"
 msgid "If you think this is a mistake, please try logging in again."
 msgstr "اگر فکر می‌کنید این یک اشتباه است، لطفاً دوباره وارد شوید."
 
-#: templates/403.html:15 templates/404.html:15 templates/500.html:25
+#: templates/403.html:15 templates/403_csrf.html:28 templates/404.html:15
+#: templates/500.html:25
 msgid "Back to home"
 msgstr "بازگشت به سایت"
+
+#: templates/403_csrf.html:25
+msgid ""
+"Your session may have expired. Please go back and try submitting the form "
+"again."
+msgstr "ممکن است نشست شما منقضی شده باشد. لطفاً بازگردید و فرم را دوباره ارسال کنید."
 
 #: templates/404.html:4
 msgid "Page not found"
@@ -650,15 +657,15 @@ msgid ""
 msgstr ""
 "به ما اطلاع داده شد و در حال بررسی هستیم. لطفاً کمی بعد دوباره امتحان کنید."
 
-#: templates/base/layout.html:49
+#: templates/base/layout.html:50
 msgid "Open menu"
 msgstr "باز کردن منو"
 
-#: templates/base/layout.html:95
+#: templates/base/layout.html:96
 msgid "Quick links"
 msgstr "پیوندهای سریع"
 
-#: templates/base/layout.html:103
+#: templates/base/layout.html:104
 msgid "Contact"
 msgstr "تماس"
 
@@ -691,19 +698,19 @@ msgstr "جستجو"
 msgid "All"
 msgstr "همه"
 
-#: templates/blog/list.html:38 templates/core/home.html:87
+#: templates/blog/list.html:40 templates/core/home.html:87
 #: templates/dashboard/content_list.html:52
 #: templates/dashboard/overview.html:54
 msgid "No posts yet."
 msgstr "هنوز نوشته‌ای وجود ندارد."
 
-#: templates/blog/list.html:46 templates/dashboard/comment_list.html:45
+#: templates/blog/list.html:48 templates/dashboard/comment_list.html:45
 #: templates/dashboard/content_list.html:59
 #: templates/dashboard/submission_list.html:48
 msgid "Previous"
 msgstr "قبلی"
 
-#: templates/blog/list.html:53 templates/dashboard/comment_list.html:49
+#: templates/blog/list.html:55 templates/dashboard/comment_list.html:49
 #: templates/dashboard/content_list.html:63
 #: templates/dashboard/submission_list.html:52
 msgid "Next"
@@ -778,8 +785,8 @@ msgid "Most-viewed posts"
 msgstr "پربازدیدترین نوشته‌ها"
 
 #: templates/dashboard/analytics.html:43 templates/dashboard/analytics.html:62
-#: templates/dashboard/overview.html:69 templates/leads/list.html:14
-#: templates/offerings/list.html:14 templates/testimonials/list.html:14
+#: templates/dashboard/overview.html:69 templates/leads/list.html:16
+#: templates/offerings/list.html:16 templates/testimonials/list.html:16
 msgid "Nothing here yet."
 msgstr "هنوز چیزی وجود ندارد."
 
@@ -795,15 +802,15 @@ msgstr "بدون دسته"
 msgid "Dashboard"
 msgstr "داشبورد"
 
-#: templates/dashboard/base.html:18
+#: templates/dashboard/base.html:19
 msgid "Admin dashboard"
 msgstr "داشبورد مدیریت"
 
-#: templates/dashboard/base.html:36
+#: templates/dashboard/base.html:37
 msgid "Display mode"
 msgstr "حالت نمایش"
 
-#: templates/dashboard/base.html:41
+#: templates/dashboard/base.html:42
 msgid "Log out"
 msgstr "خروج"
 

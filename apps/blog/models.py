@@ -95,7 +95,11 @@ class Post(SeoModelMixin, TimeStampedModel):
                 counter += 1
                 slug = f"{base}-{counter}"
             self.slug = slug
-        self.body = sanitize_html(self.body)
+        # Explicit per-language fields, not the modeltranslation `self.body`
+        # proxy — that only resolves to whichever language is currently
+        # active, silently leaving the other language's HTML unsanitized.
+        self.body_fa = sanitize_html(self.body_fa)
+        self.body_ckb = sanitize_html(self.body_ckb)
         super().save(*args, **kwargs)
         Post.objects.filter(pk=self.pk).update(
             search_vector_fa=SearchVector("title_fa", "excerpt_fa", "body_fa"),

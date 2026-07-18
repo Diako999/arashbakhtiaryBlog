@@ -25,7 +25,11 @@ class FlatPage(SeoModelMixin, TimeStampedModel):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.body = sanitize_html(self.body)
+        # Explicit per-language fields — `self.body` is a modeltranslation
+        # proxy for whichever language is currently active, so it would
+        # silently leave the other language's HTML unsanitized.
+        self.body_fa = sanitize_html(self.body_fa)
+        self.body_ckb = sanitize_html(self.body_ckb)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

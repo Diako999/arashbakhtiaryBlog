@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import translation
 
 from .models import Post
 
@@ -24,6 +25,24 @@ class PostBodySanitizationTests(TestCase):
         self.assertNotIn("<script", post.body)
         self.assertNotIn("onerror", post.body)
         self.assertIn("<p>Hello</p>", post.body)
+
+    def test_both_language_fields_are_sanitized_regardless_of_active_language(self):
+        """Regression test: `self.body = sanitize_html(self.body)` only ever
+        touched whichever language modeltranslation currently has active,
+        leaving the other language's raw HTML (including <script>) stored
+        and later rendered with |safe — a live stored-XSS path caught by
+        the round-2 QA re-audit. Both fa and ckb must be sanitized on every
+        save, regardless of which language is active at save time."""
+        translation.activate("fa")
+        post = Post.objects.create(
+            title="XSS regression check",
+            author=self.author,
+            body_fa='<p>سلام</p><script>alert("fa-xss")</script>',
+            body_ckb='<p>سلاو</p><script>alert("ckb-xss")</script>',
+        )
+        post.refresh_from_db()
+        self.assertNotIn("<script", post.body_fa)
+        self.assertNotIn("<script", post.body_ckb)
 
 
 class SearchVectorTests(TestCase):

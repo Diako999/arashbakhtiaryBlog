@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-18 19:06+0330\n"
+"POT-Creation-Date: 2026-07-18 20:13+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
@@ -37,8 +37,8 @@ msgstr "نووسەر"
 msgid "authors"
 msgstr "نووسەران"
 
-#: apps/blog/models.py:16 apps/blog/models.py:117 apps/leads/models.py:69
-#: apps/offerings/models.py:97 apps/pages/forms.py:6
+#: apps/blog/models.py:16 apps/blog/models.py:121 apps/leads/models.py:69
+#: apps/offerings/models.py:101 apps/pages/forms.py:6
 #: templates/dashboard/submission_list.html:18
 msgid "Name"
 msgstr "ناو"
@@ -91,7 +91,7 @@ msgstr "تاگەکان"
 msgid "Excerpt"
 msgstr "کورتە"
 
-#: apps/blog/models.py:57 apps/blog/models.py:119 apps/offerings/models.py:22
+#: apps/blog/models.py:57 apps/blog/models.py:123 apps/offerings/models.py:22
 #: apps/pages/models.py:17
 msgid "Body"
 msgstr "دەق"
@@ -127,27 +127,27 @@ msgstr "بابەت"
 msgid "posts"
 msgstr "بابەتەکان"
 
-#: apps/blog/models.py:115
+#: apps/blog/models.py:119
 msgid "Post"
 msgstr "بابەت"
 
-#: apps/blog/models.py:118 apps/leads/models.py:70 apps/offerings/models.py:98
+#: apps/blog/models.py:122 apps/leads/models.py:70 apps/offerings/models.py:102
 #: apps/pages/forms.py:7 templates/dashboard/submission_list.html:18
 #: templates/dashboard/submission_list.html:24
 msgid "Email"
 msgstr "ئیمەیل"
 
-#: apps/blog/models.py:120 apps/testimonials/models.py:29
+#: apps/blog/models.py:124 apps/testimonials/models.py:29
 #: templates/dashboard/comment_list.html:25
 #: templates/dashboard/testimonial_list.html:28
 msgid "Approved"
 msgstr "پەسندکراو"
 
-#: apps/blog/models.py:123
+#: apps/blog/models.py:127
 msgid "comment"
 msgstr "کۆمێنت"
 
-#: apps/blog/models.py:124
+#: apps/blog/models.py:128
 msgid "comments"
 msgstr "کۆمێنتەکان"
 
@@ -502,56 +502,56 @@ msgstr "کۆرس"
 msgid "offerings"
 msgstr "کۆرسەکان"
 
-#: apps/offerings/models.py:67 apps/offerings/models.py:87
+#: apps/offerings/models.py:71 apps/offerings/models.py:91
 #: apps/testimonials/models.py:27
 msgid "Offering"
 msgstr "کۆرس"
 
-#: apps/offerings/models.py:69
+#: apps/offerings/models.py:73
 msgid "Starts at"
 msgstr "دەستپێکردن لە"
 
-#: apps/offerings/models.py:70
+#: apps/offerings/models.py:74
 msgid "Ends at"
 msgstr "کۆتایی لە"
 
-#: apps/offerings/models.py:72
+#: apps/offerings/models.py:76
 msgid "Location"
 msgstr "شوێن"
 
-#: apps/offerings/models.py:72
+#: apps/offerings/models.py:76
 msgid "Online link or venue address"
 msgstr "لینکی ئۆنلاین یان ناونیشانی شوێن"
 
-#: apps/offerings/models.py:74
+#: apps/offerings/models.py:78
 msgid "Capacity"
 msgstr "گونجایی"
 
-#: apps/offerings/models.py:77
+#: apps/offerings/models.py:81
 msgid "session"
 msgstr "دانیشتن"
 
-#: apps/offerings/models.py:78
+#: apps/offerings/models.py:82
 msgid "sessions"
 msgstr "دانیشتنەکان"
 
-#: apps/offerings/models.py:95
+#: apps/offerings/models.py:99
 msgid "Session"
 msgstr "دانیشتن"
 
-#: apps/offerings/models.py:99
+#: apps/offerings/models.py:103
 msgid "Phone"
 msgstr "تەلەفۆن"
 
-#: apps/offerings/models.py:100
+#: apps/offerings/models.py:104
 msgid "Notes"
 msgstr "تێبینیەکان"
 
-#: apps/offerings/models.py:103
+#: apps/offerings/models.py:107
 msgid "enrollment"
 msgstr "تۆمارکردن"
 
-#: apps/offerings/models.py:104
+#: apps/offerings/models.py:108
 msgid "enrollments"
 msgstr "تۆمارکردنەکان"
 
@@ -608,7 +608,7 @@ msgstr "بۆچوون"
 msgid "testimonials"
 msgstr "بۆچوونەکان"
 
-#: templates/403.html:4
+#: templates/403.html:4 templates/403_csrf.html:16
 msgid "Access denied"
 msgstr "ڕێگەپێدان نییە"
 
@@ -620,9 +620,16 @@ msgstr "تۆ دەسەڵاتی سەردانکردنی ئەم پەڕەیەت نی�
 msgid "If you think this is a mistake, please try logging in again."
 msgstr "ئەگەر وا دەزانیت ئەمە هەڵەیە، تکایە دووبارە بچۆرە ژوورەوە."
 
-#: templates/403.html:15 templates/404.html:15 templates/500.html:25
+#: templates/403.html:15 templates/403_csrf.html:28 templates/404.html:15
+#: templates/500.html:25
 msgid "Back to home"
 msgstr "گەڕانەوە بۆ ماڵپەڕ"
+
+#: templates/403_csrf.html:25
+msgid ""
+"Your session may have expired. Please go back and try submitting the form "
+"again."
+msgstr "لەوانەیە دانیشتنەکەت بەسەرچووبێت. تکایە بگەڕێوە و فۆرمەکە دووبارە بنێرە."
 
 #: templates/404.html:4
 msgid "Page not found"
@@ -652,15 +659,15 @@ msgstr ""
 "ئێمە ئاگادار بووینەوە و لێی دەکۆڵینەوە. تکایە دوای ماوەیەک دووبارە هەوڵ "
 "بدەرەوە."
 
-#: templates/base/layout.html:49
+#: templates/base/layout.html:50
 msgid "Open menu"
 msgstr "کردنەوەی مینیو"
 
-#: templates/base/layout.html:95
+#: templates/base/layout.html:96
 msgid "Quick links"
 msgstr "لینکە خێراکان"
 
-#: templates/base/layout.html:103
+#: templates/base/layout.html:104
 msgid "Contact"
 msgstr "پەیوەندی"
 
@@ -693,19 +700,19 @@ msgstr "گەڕان"
 msgid "All"
 msgstr "هەموو"
 
-#: templates/blog/list.html:38 templates/core/home.html:87
+#: templates/blog/list.html:40 templates/core/home.html:87
 #: templates/dashboard/content_list.html:52
 #: templates/dashboard/overview.html:54
 msgid "No posts yet."
 msgstr "هێشتا بابەتێک نییە."
 
-#: templates/blog/list.html:46 templates/dashboard/comment_list.html:45
+#: templates/blog/list.html:48 templates/dashboard/comment_list.html:45
 #: templates/dashboard/content_list.html:59
 #: templates/dashboard/submission_list.html:48
 msgid "Previous"
 msgstr "پێشوو"
 
-#: templates/blog/list.html:53 templates/dashboard/comment_list.html:49
+#: templates/blog/list.html:55 templates/dashboard/comment_list.html:49
 #: templates/dashboard/content_list.html:63
 #: templates/dashboard/submission_list.html:52
 msgid "Next"
@@ -780,8 +787,8 @@ msgid "Most-viewed posts"
 msgstr "بابەتە زۆر بینراوەکان"
 
 #: templates/dashboard/analytics.html:43 templates/dashboard/analytics.html:62
-#: templates/dashboard/overview.html:69 templates/leads/list.html:14
-#: templates/offerings/list.html:14 templates/testimonials/list.html:14
+#: templates/dashboard/overview.html:69 templates/leads/list.html:16
+#: templates/offerings/list.html:16 templates/testimonials/list.html:16
 msgid "Nothing here yet."
 msgstr "هێشتا هیچ شتێک نییە."
 
@@ -797,15 +804,15 @@ msgstr "بێ پۆل"
 msgid "Dashboard"
 msgstr "داشبۆرد"
 
-#: templates/dashboard/base.html:18
+#: templates/dashboard/base.html:19
 msgid "Admin dashboard"
 msgstr "داشبۆردی بەڕێوەبردن"
 
-#: templates/dashboard/base.html:36
+#: templates/dashboard/base.html:37
 msgid "Display mode"
 msgstr "شێوازی پیشاندان"
 
-#: templates/dashboard/base.html:41
+#: templates/dashboard/base.html:42
 msgid "Log out"
 msgstr "چوونەدەرەوە"
 
