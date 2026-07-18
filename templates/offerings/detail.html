@@ -30,7 +30,8 @@
         <ul class="flex flex-col gap-2.5 p-0">
           {% for session in offering.sessions.all %}
             <li class="list-none rounded-[12px] border border-line bg-card px-4 py-3 text-sm">
-              <span class="font-semibold text-ink">{{ session.starts_at|date:"SHORT_DATETIME_FORMAT" }}</span>
+              {# dir=ltr: the fa locale's date+comma+time format gets its groups reordered by the browser's bidi algorithm inside RTL text otherwise #}
+              <span class="font-semibold text-ink" dir="ltr">{{ session.starts_at|date:"SHORT_DATETIME_FORMAT" }}</span>
               {% if session.location %}<span class="text-ink-muted"> — {{ session.location }}</span>{% endif %}
             </li>
           {% endfor %}

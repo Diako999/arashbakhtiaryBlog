@@ -74,19 +74,22 @@
 }
 
 /* Scroll-triggered reveal (see partials/_scroll_reveal.html for the
-   IntersectionObserver that toggles .is-visible). Falls back to always-visible
-   when JS is unavailable or prefers-reduced-motion is set. */
-.reveal {
+   IntersectionObserver that toggles .is-visible). Scoped under html.js-reveal
+   — a class the script itself adds — so .reveal content is fully visible by
+   default and only gets hidden-then-revealed when JS actually runs. Without
+   this scoping, a slow/blocked/failed script load would leave most of the
+   page permanently invisible (opacity:0 with nothing left to remove it). */
+html.js-reveal .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.reveal.is-visible {
+html.js-reveal .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  html.js-reveal .reveal {
     opacity: 1;
     transform: none;
     transition: none;

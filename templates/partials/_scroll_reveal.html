@@ -1,8 +1,11 @@
 {% comment %}
 Scroll-triggered reveal for elements marked with the `.reveal` class (see
 tailwind/input.css). Each element fades/slides in once, the first time it
-enters the viewport — not on every scroll pass, and not at all if the visitor
-prefers reduced motion or the browser lacks IntersectionObserver.
+enters the viewport. The hidden-then-revealed CSS is scoped under the
+html.js-reveal class added below — added only once we know we can actually
+run the animation — so a slow/blocked/failed script load leaves .reveal
+content visible by default instead of permanently hidden (this script runs
+synchronously and unminified inline, so it executes before first paint).
 {% endcomment %}
 <script>
   (function () {
@@ -13,9 +16,10 @@ prefers reduced motion or the browser lacks IntersectionObserver.
       window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
       !('IntersectionObserver' in window)
     ) {
-      items.forEach(function (el) { el.classList.add('is-visible'); });
       return;
     }
+
+    document.documentElement.classList.add('js-reveal');
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {

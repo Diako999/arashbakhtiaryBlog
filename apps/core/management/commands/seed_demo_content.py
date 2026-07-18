@@ -52,7 +52,11 @@ class Command(BaseCommand):
     help = "Seeds realistic bilingual (fa/ckb) demo content across every public page, and publishes the phased-rollout sections so they're all reachable."
 
     def handle(self, *args, **options):
-        author = User.objects.filter(is_superuser=True).order_by("pk").first()
+        # Prefer a superuser with a real email over a bare bootstrap account
+        # (e.g. a generic "admin" from initial setup with no email/name set)
+        # — otherwise every seeded post ends up authored by a placeholder.
+        superusers = User.objects.filter(is_superuser=True).order_by("pk")
+        author = superusers.exclude(email="").first() or superusers.first()
         if not author:
             self.stdout.write(self.style.ERROR("No user found — create one first (createsuperuser)."))
             return

@@ -65,7 +65,8 @@
         <div class="flex flex-wrap items-center justify-between gap-2.5 border-t border-line py-2.5">
           <span class="text-[13.5px] font-semibold text-ink">{{ enrollment.name }} — {{ enrollment.email }}</span>
           {% if enrollment.session %}
-            <span class="text-xs text-ink-faint">{{ enrollment.session.starts_at|date:"SHORT_DATETIME_FORMAT" }}</span>
+            {# dir=ltr: the fa locale's date+comma+time format gets its groups reordered by the browser's bidi algorithm inside RTL text otherwise #}
+            <span class="text-xs text-ink-faint" dir="ltr">{{ enrollment.session.starts_at|date:"SHORT_DATETIME_FORMAT" }}</span>
           {% endif %}
         </div>
       {% endfor %}
