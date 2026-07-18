@@ -147,6 +147,17 @@ class SiteSettingForm(forms.ModelForm):
         for key, field_name, _label in SOCIAL_LINK_FIELDS:
             self.fields[field_name].initial = links.get(key, "")
 
+        # Phone numbers, emails, and URLs are inherently LTR content. Without
+        # this, a value like "+98 912 000 0000" gets its space-separated
+        # groups reordered by the browser's bidi algorithm inside an RTL
+        # page (e.g. "0000 000 912 98+") — digits have no letters to anchor
+        # the run as LTR, unlike email/URL values which usually do.
+        ltr_fields = ["contact_email", "contact_phone"] + [
+            field_name for _key, field_name, _label in SOCIAL_LINK_FIELDS
+        ]
+        for field_name in ltr_fields:
+            self.fields[field_name].widget.attrs["dir"] = "ltr"
+
     def save(self, commit=True):
         instance = super().save(commit=False)
         links = {}
