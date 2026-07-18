@@ -1,5 +1,5 @@
 {% extends "base/layout.html" %}
-{% load i18n widget_tweaks %}
+{% load i18n widget_tweaks humanize %}
 
 {% block title %}{{ offering.title }} · {{ site_settings.site_name }}{% endblock %}
 
@@ -17,7 +17,8 @@
       {% endif %}
     </div>
     {% if offering.price %}
-      <p class="m-0 text-[19px] font-bold text-brand">{{ offering.price }}</p>
+      {# intcomma:False — the fa locale's NUMBER_GROUPING is 0, which silently disables the default l10n-aware grouping #}
+      <p class="m-0 text-[19px] font-bold text-brand">{{ offering.price|floatformat:0|intcomma:False }} {% trans "Toman" %}</p>
     {% endif %}
     <div class="prose max-w-none text-ink prose-headings:text-ink prose-a:text-brand dark:prose-invert">
       {{ offering.body|safe }}

@@ -1,5 +1,5 @@
 {% extends "dashboard/base.html" %}
-{% load i18n %}
+{% load i18n humanize %}
 
 {% block title %}{% trans "Offerings" %} · {{ site_settings.site_name }}{% endblock %}
 
@@ -22,7 +22,9 @@
         <span class="font-semibold text-ink">{{ offering.title }}</span>
         <div class="flex items-center justify-between sm:contents">
           <span class="text-xs text-ink-faint sm:hidden">{% trans "Price" %}</span>
-          <span class="text-ink-muted">{{ offering.price|default:"—" }}</span>
+          <span class="text-ink-muted">
+            {% if offering.price %}{{ offering.price|floatformat:0|intcomma:False }} {% trans "Toman" %}{% else %}—{% endif %}
+          </span>
         </div>
         <div class="flex items-center justify-between sm:contents">
           <span class="text-xs text-ink-faint sm:hidden">{% trans "Status" %}</span>

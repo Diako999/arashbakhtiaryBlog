@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-18 20:13+0330\n"
+"POT-Creation-Date: 2026-07-19 01:22+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
@@ -106,7 +106,7 @@ msgstr "وێنەی سەرەکی"
 #: templates/dashboard/leadmagnet_list.html:24
 #: templates/dashboard/leadmagnet_list.html:34
 #: templates/dashboard/offering_list.html:18
-#: templates/dashboard/offering_list.html:28
+#: templates/dashboard/offering_list.html:30
 #: templates/dashboard/submission_list.html:18
 msgid "Status"
 msgstr "دۆخ"
@@ -629,7 +629,8 @@ msgstr "گەڕانەوە بۆ ماڵپەڕ"
 msgid ""
 "Your session may have expired. Please go back and try submitting the form "
 "again."
-msgstr "لەوانەیە دانیشتنەکەت بەسەرچووبێت. تکایە بگەڕێوە و فۆرمەکە دووبارە بنێرە."
+msgstr ""
+"لەوانەیە دانیشتنەکەت بەسەرچووبێت. تکایە بگەڕێوە و فۆرمەکە دووبارە بنێرە."
 
 #: templates/404.html:4
 msgid "Page not found"
@@ -866,7 +867,7 @@ msgstr ""
 #: templates/dashboard/leadmagnet_confirm_delete.html:14
 #: templates/dashboard/leadmagnet_list.html:44
 #: templates/dashboard/offering_confirm_delete.html:14
-#: templates/dashboard/offering_list.html:42
+#: templates/dashboard/offering_list.html:44
 #: templates/dashboard/post_confirm_delete.html:14
 #: templates/dashboard/testimonial_confirm_delete.html:14
 #: templates/dashboard/testimonial_list.html:43
@@ -891,7 +892,7 @@ msgstr "بەروار"
 
 #: templates/dashboard/content_list.html:46
 #: templates/dashboard/leadmagnet_list.html:42
-#: templates/dashboard/offering_list.html:40
+#: templates/dashboard/offering_list.html:42
 #: templates/dashboard/testimonial_list.html:41
 msgid "Edit"
 msgstr "دەستکاری"
@@ -988,7 +989,7 @@ msgstr "کۆرسی نوێ"
 
 #: templates/dashboard/offering_form.html:27
 #: templates/dashboard/offering_list.html:18
-#: templates/dashboard/offering_list.html:35 templates/offerings/detail.html:28
+#: templates/dashboard/offering_list.html:37 templates/offerings/detail.html:28
 msgid "Sessions"
 msgstr "دانیشتنەکان"
 
@@ -1005,7 +1006,12 @@ msgstr "تۆمارکردنەکان"
 msgid "Offerings"
 msgstr "کۆرسەکان"
 
-#: templates/dashboard/offering_list.html:46
+#: templates/dashboard/offering_list.html:26 templates/offerings/detail.html:20
+#: templates/partials/_offering_card.html:20
+msgid "Toman"
+msgstr "تمەن"
+
+#: templates/dashboard/offering_list.html:48
 msgid "No offerings yet."
 msgstr "هێشتا کۆرسێک نییە."
 

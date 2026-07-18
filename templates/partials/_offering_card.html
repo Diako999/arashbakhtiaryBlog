@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n humanize %}
 <a href="{{ offering.get_absolute_url }}"
    class="group flex h-full flex-col overflow-hidden rounded-[18px] border border-line bg-card text-ink no-underline shadow-[0_1px_3px_rgba(0,0,0,.25)] transition-all duration-300 ease-[cubic-bezier(.2,.8,.2,1)] hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_20px_40px_-14px_rgba(0,0,0,.5)]">
   <div class="relative aspect-[16/9] w-full shrink-0 overflow-hidden bg-gradient-to-br from-accent to-brand">
@@ -17,7 +17,8 @@
     {% endif %}
     <div class="mt-1 flex items-center justify-between border-t border-line pt-3.5">
       <span class="text-[16px] font-bold text-brand">
-        {% if offering.price %}{{ offering.price }}{% else %}{% trans "Free" %}{% endif %}
+        {# intcomma:False — the fa locale's NUMBER_GROUPING is 0, which silently disables the default l10n-aware grouping #}
+        {% if offering.price %}{{ offering.price|floatformat:0|intcomma:False }} {% trans "Toman" %}{% else %}{% trans "Free" %}{% endif %}
       </span>
       <span class="flex items-center gap-1 text-[13.5px] font-semibold text-ink transition-[gap] duration-200 group-hover:gap-2">
         {% trans "View course" %} ←
