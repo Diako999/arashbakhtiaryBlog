@@ -1,0 +1,22 @@
+{% extends "dashboard/base_auth.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Save your recovery codes" %}{% endblock %}
+{% block width %}max-w-[460px]{% endblock %}
+{% block heading %}{% trans "Save your recovery codes" %}{% endblock %}
+{% block subheading %}
+  <span class="text-[13.5px] text-ink-muted">
+    {% trans "Each code works once. Store them somewhere safe — they're the only way back in if you lose your authenticator device." %}
+  </span>
+{% endblock %}
+
+{% block card_content %}
+  <div class="grid grid-cols-2 gap-2.5" dir="ltr">
+    {% for code in codes %}
+      <div class="rounded-[10px] border border-line bg-surface-soft px-3 py-2.5 text-center font-mono text-[14px] tracking-wider text-ink">{{ code }}</div>
+    {% endfor %}
+  </div>
+  <a href="{% url 'dashboard:overview' %}" class="rounded-[10px] bg-brand px-4 py-3 text-center text-[14.5px] font-bold text-white transition-transform hover:-translate-y-0.5">
+    {% trans "I've saved these — continue to the dashboard" %}
+  </a>
+{% endblock %}

@@ -62,7 +62,7 @@ class ThemeConfig(SingletonModel):
 
 
 class SiteSetting(SingletonModel):
-    site_name = models.CharField(_("Site name"), max_length=120, default="Prod Blog")
+    site_name = models.CharField(_("Site name"), max_length=120, default="وبلاگ")
     logo = models.ImageField(
         _("Logo"), upload_to="site/", blank=True, null=True, validators=[validate_image_file]
     )

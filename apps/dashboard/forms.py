@@ -1,6 +1,12 @@
 from django import forms
+from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
 from tinymce.widgets import TinyMCE
+
+hex_color_validator = RegexValidator(
+    regex=r"^#[0-9a-fA-F]{6}$",
+    message=_("Enter a valid hex color, e.g. #0f9d8e."),
+)
 
 from apps.blog.models import Category, Post
 from apps.core.models import SiteSetting, ThemeConfig
@@ -156,10 +162,14 @@ class SiteSettingForm(forms.ModelForm):
 
 class ThemeConfigForm(forms.ModelForm):
     brand_color = forms.CharField(
-        label=_("Brand color"), widget=forms.TextInput(attrs={"type": "color"})
+        label=_("Brand color"),
+        widget=forms.TextInput(attrs={"type": "color"}),
+        validators=[hex_color_validator],
     )
     accent_color = forms.CharField(
-        label=_("Accent color"), widget=forms.TextInput(attrs={"type": "color"})
+        label=_("Accent color"),
+        widget=forms.TextInput(attrs={"type": "color"}),
+        validators=[hex_color_validator],
     )
 
     class Meta:

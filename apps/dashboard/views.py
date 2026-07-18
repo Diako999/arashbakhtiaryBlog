@@ -2,14 +2,17 @@ import csv
 
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
+from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, DeleteView, ListView, TemplateView, UpdateView
+from django_ratelimit.decorators import ratelimit
 
-from apps.blog.models import Category, Post
+from apps.blog.models import Category, Comment, Post
 from apps.core.models import SiteSetting, ThemeConfig
 from apps.leads.models import LeadMagnet, Submission
 from apps.navigation.models import NavItem
@@ -38,6 +41,7 @@ DASHBOARD_LOGIN_URL = "dashboard:login"
 TOGGLEABLE_SECTION_URL_NAMES = ["offerings:list", "testimonials:list", "leads:list", "pages:about"]
 
 
+@method_decorator(ratelimit(key="ip", rate="10/m", block=True), name="post")
 class DashboardLoginView(LoginView):
     template_name = "dashboard/login.html"
     redirect_authenticated_user = True
@@ -64,6 +68,43 @@ class OverviewView(OTPRequiredMixin, TemplateView):
         context["recent_submissions"] = Submission.objects.select_related(
             "lead_magnet"
         ).order_by("-created_at")[:5]
+        return context
+
+
+class AnalyticsView(OTPRequiredMixin, TemplateView):
+    login_url = DASHBOARD_LOGIN_URL
+    template_name = "dashboard/analytics.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        published = Post.objects.filter(status=Post.STATUS_PUBLISHED)
+        total_views = published.aggregate(total=Sum("view_count"))["total"] or 0
+        post_count = published.count()
+        context["total_views"] = total_views
+        context["post_count"] = post_count
+        context["avg_views"] = round(total_views / post_count) if post_count else 0
+
+        top_posts = list(
+            published.select_related("category").order_by("-view_count")[:10]
+        )
+        max_post_views = max((p.view_count for p in top_posts), default=0) or 1
+        for post in top_posts:
+            post.bar_pct = round(post.view_count / max_post_views * 100)
+        context["top_posts"] = top_posts
+
+        category_stats = list(
+            published.values("category__name")
+            .annotate(total_views=Sum("view_count"))
+            .order_by("-total_views")[:10]
+        )
+        max_category_views = max(
+            (row["total_views"] or 0 for row in category_stats), default=0
+        ) or 1
+        for row in category_stats:
+            row["bar_pct"] = round((row["total_views"] or 0) / max_category_views * 100)
+        context["category_stats"] = category_stats
+
         return context
 
 
@@ -360,6 +401,35 @@ def move_testimonial(request, pk, direction):
         for position, testimonial_id in enumerate(ordered_ids):
             Testimonial.objects.filter(pk=testimonial_id).update(order=position)
     return redirect("dashboard:testimonials")
+
+
+# --- Comments ---------------------------------------------------------
+
+
+class CommentDashboardListView(OTPRequiredMixin, ListView):
+    login_url = DASHBOARD_LOGIN_URL
+    template_name = "dashboard/comment_list.html"
+    context_object_name = "comments"
+    paginate_by = 30
+
+    def get_queryset(self):
+        return Comment.objects.select_related("post").order_by("is_approved", "-created_at")
+
+
+class CommentDeleteView(OTPRequiredMixin, DeleteView):
+    login_url = DASHBOARD_LOGIN_URL
+    model = Comment
+    template_name = "dashboard/comment_confirm_delete.html"
+    success_url = reverse_lazy("dashboard:comments")
+
+
+@dashboard_login_required
+@require_POST
+def toggle_comment_approved(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.is_approved = not comment.is_approved
+    comment.save(update_fields=["is_approved"])
+    return redirect("dashboard:comments")
 
 
 # --- Settings ---------------------------------------------------------

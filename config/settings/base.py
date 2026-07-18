@@ -68,6 +68,9 @@ MIDDLEWARE = [
     "django_otp.middleware.OTPMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Without this, RATELIMIT_VIEW below is never actually consulted — a
+    # rate-limited request just falls through to Django's generic 403 page.
+    "django_ratelimit.middleware.RatelimitMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -183,3 +186,32 @@ RATELIMIT_VIEW = "apps.core.views.ratelimited"
 MAX_UPLOAD_SIZE_MB = 5
 ALLOWED_UPLOAD_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"]
 ALLOWED_UPLOAD_DOCUMENT_TYPES = ["application/pdf"]
+
+# Without this, an unhandled error in production (DEBUG=False) leaves no
+# record anywhere — no log file, no email, nothing. django.request already
+# logs 500s at ERROR with full tracebacks; this just makes sure that reaches
+# somewhere. ADMINS below turns the same event into an email in prod.py.
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {"class": "logging.StreamHandler"},
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
+ADMINS = [
+    tuple(pair.split(":", 1))
+    for pair in env.list("ADMINS", default=[])
+    if ":" in pair
+]

@@ -1,7 +1,7 @@
 from django.contrib import messages
-from django.contrib.postgres.search import SearchVector
+from django.db.models import F
 from django.utils.decorators import method_decorator
-from django.utils.translation import gettext as _
+from django.utils.translation import get_language, gettext as _
 from django.views.generic import DetailView, ListView
 from django_ratelimit.decorators import ratelimit
 
@@ -35,9 +35,9 @@ class PostListView(PublishedPostQuerysetMixin, SeoContextMixin, ListView):
             qs = qs.filter(tags__slug=tag_slug)
         query = self.request.GET.get("q")
         if query:
-            qs = qs.annotate(search=SearchVector("title", "excerpt", "body")).filter(
-                search=query
-            )
+            # Stored, GIN-indexed vector (populated on save) — one per
+            # language, since title/excerpt/body are separate fa/ckb columns.
+            qs = qs.filter(**{f"search_vector_{get_language()}": query})
         return qs.distinct()
 
     def get_context_data(self, **kwargs):
@@ -56,6 +56,11 @@ class PostDetailView(PublishedPostQuerysetMixin, SeoContextMixin, DetailView):
 
     def get_queryset(self):
         return self.get_base_queryset()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        Post.objects.filter(pk=self.object.pk).update(view_count=F("view_count") + 1)
+        return response
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

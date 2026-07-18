@@ -1,0 +1,56 @@
+{% comment %}
+Top loading bar shown during page navigation and form submits — the
+project's audience is Iran-based with often slow/unreliable connections,
+so a visible "something is happening" signal matters more than usual.
+No JS framework: this is a classic server-rendered site, so the bar just
+shows on click/submit and disappears naturally when the browser replaces
+the page with the new one.
+{% endcomment %}
+<div id="page-progress" style="position:fixed; top:0; inset-inline-start:0; inset-inline-end:0; height:3px; width:0%; opacity:0; z-index:200; pointer-events:none; background:linear-gradient(to right, var(--brand), var(--accent));"></div>
+<script>
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var bar = document.getElementById('page-progress');
+
+    function start() {
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      bar.style.opacity = '1';
+      void bar.offsetWidth; // force reflow so width:0 applies before animating
+      bar.style.transition = 'width 4s cubic-bezier(0.1, 0.6, 0.2, 1)';
+      bar.style.width = '85%';
+    }
+
+    function isPlainLeftClick(e) {
+      return e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
+    }
+
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href]');
+      if (!link || !isPlainLeftClick(e)) return;
+      if (link.target === '_blank' || link.hasAttribute('download')) return;
+      var url;
+      try {
+        url = new URL(link.href, window.location.href);
+      } catch (err) {
+        return;
+      }
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) return;
+      start();
+    });
+
+    document.addEventListener('submit', function (e) {
+      if (e.target instanceof HTMLFormElement && e.target.target !== '_blank') {
+        start();
+      }
+    });
+
+    window.addEventListener('pageshow', function () {
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      bar.style.opacity = '0';
+    });
+  })();
+</script>

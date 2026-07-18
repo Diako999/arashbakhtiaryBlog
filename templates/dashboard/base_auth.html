@@ -9,6 +9,7 @@
   {% include "partials/_head_assets.html" %}
 </head>
 <body class="flex min-h-screen items-center justify-center bg-surface px-4 py-10 font-sans text-ink transition-colors">
+  {% include "partials/_progress_bar.html" %}
   <div class="flex w-full flex-col items-center gap-[22px] {% block width %}max-w-sm{% endblock %}">
     {% block logo %}
       {% include "partials/_logo.html" with size="52" %}

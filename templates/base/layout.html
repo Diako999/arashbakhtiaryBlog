@@ -26,6 +26,7 @@
   {% block extra_head %}{% endblock %}
 </head>
 <body class="min-h-screen bg-surface font-sans text-ink transition-colors">
+  {% include "partials/_progress_bar.html" %}
 
   <header class="sticky top-0 z-50 border-b border-line bg-surface-translucent shadow-[0_8px_30px_-18px_rgba(0,0,0,.55)] backdrop-blur-[18px] backdrop-saturate-[1.4]">
     <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
@@ -134,6 +135,7 @@
     })();
   </script>
   {% include "partials/_theme_toggle_script.html" %}
+  {% include "partials/_scroll_reveal.html" %}
   {% block extra_js %}{% endblock %}
 </body>
 </html>

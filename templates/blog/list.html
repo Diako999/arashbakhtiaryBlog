@@ -33,7 +33,9 @@
 
   <div class="grid gap-[22px] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
     {% for post in posts %}
-      {% include "partials/_post_card.html" %}
+      <div class="reveal" style="transition-delay:{{ forloop.counter0|add:0 }}00ms">
+        {% include "partials/_post_card.html" %}
+      </div>
     {% empty %}
       <p class="text-ink-muted">{% trans "No posts yet." %}</p>
     {% endfor %}

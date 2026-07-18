@@ -9,7 +9,9 @@
 
   <div class="grid gap-[22px] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
     {% for offering in offerings %}
-      {% include "partials/_offering_card.html" %}
+      <div class="reveal" style="transition-delay:{{ forloop.counter0|add:0 }}00ms">
+        {% include "partials/_offering_card.html" %}
+      </div>
     {% empty %}
       <p class="text-ink-muted">{% trans "Nothing here yet." %}</p>
     {% endfor %}

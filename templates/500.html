@@ -1,0 +1,29 @@
+{% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!-- This page renders with NO request context (Django's server_error handler
+     calls template.render() with no context/context processors), so it can't
+     use site_settings, theme_colors, or nav_items — it has to be fully
+     self-contained and never touch the database. -->
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% trans "Something went wrong" %}</title>
+  <link rel="stylesheet" href="{% static 'css/output.css' %}">
+  <style>:root{ --brand:#0f9d8e; --accent:#f0b429; }</style>
+</head>
+<body class="flex min-h-screen items-center justify-center bg-surface px-4 font-sans text-ink">
+  <div class="flex flex-col items-center gap-4 text-center">
+    <span class="font-mono text-sm tracking-[.2em] text-ink-faint">500</span>
+    <h1 class="m-0 text-2xl font-extrabold text-ink">{% trans "Something went wrong on our end" %}</h1>
+    <p class="max-w-md text-ink-muted">
+      {% trans "We've been notified and are looking into it. Please try again in a moment." %}
+    </p>
+    <a href="{% url 'home' %}" class="mt-2 rounded-[10px] bg-brand px-5 py-2.5 text-[14px] font-bold text-white transition-transform hover:-translate-y-0.5">
+      {% trans "Back to home" %}
+    </a>
+  </div>
+</body>
+</html>

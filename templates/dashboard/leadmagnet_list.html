@@ -19,30 +19,34 @@
     </div>
   </div>
 
-  <div class="overflow-x-auto rounded-2xl border border-line bg-card">
-    <div class="min-w-[480px]">
-      <div class="grid grid-cols-[2fr_1fr_1fr_auto] gap-3 border-b border-line px-5 py-3.5 text-[12.5px] font-bold text-ink-faint">
-        <span>{% trans "Title" %}</span><span>{% trans "Submissions" %}</span><span>{% trans "Status" %}</span><span></span>
-      </div>
-      {% for lead_magnet in lead_magnets %}
-        <div class="grid grid-cols-[2fr_1fr_1fr_auto] items-center gap-3 border-b border-line px-5 py-3.5 text-[13.5px] transition-colors hover:bg-surface-soft">
-          <span class="font-semibold text-ink">{{ lead_magnet.title }}</span>
+  <div class="rounded-2xl border border-line bg-card">
+    <div class="hidden gap-3 border-b border-line px-5 py-3.5 text-[12.5px] font-bold text-ink-faint sm:grid sm:grid-cols-[2fr_1fr_1fr_auto]">
+      <span>{% trans "Title" %}</span><span>{% trans "Submissions" %}</span><span>{% trans "Status" %}</span><span></span>
+    </div>
+    {% for lead_magnet in lead_magnets %}
+      <div class="flex flex-col gap-2 border-b border-line px-5 py-3.5 text-[13.5px] transition-colors hover:bg-surface-soft sm:grid sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center sm:gap-3">
+        <span class="font-semibold text-ink">{{ lead_magnet.title }}</span>
+        <div class="flex items-center justify-between sm:contents">
+          <span class="text-xs text-ink-faint sm:hidden">{% trans "Submissions" %}</span>
           <span class="text-ink-muted">{{ lead_magnet.submissions.count }}</span>
+        </div>
+        <div class="flex items-center justify-between sm:contents">
+          <span class="text-xs text-ink-faint sm:hidden">{% trans "Status" %}</span>
           <span class="w-fit rounded-full px-2.5 py-1 text-xs font-semibold
                        {% if lead_magnet.status == 'published' %}bg-brand-soft text-brand{% else %}bg-surface-soft text-ink-muted{% endif %}">
             {{ lead_magnet.get_status_display }}
           </span>
-          <div class="flex gap-1.5">
-            <a href="{% url 'dashboard:leadmagnet_edit' lead_magnet.pk %}"
-               class="rounded-lg border border-line px-2.5 py-1.5 text-xs text-ink-muted no-underline transition-colors hover:border-brand hover:bg-surface-soft">{% trans "Edit" %}</a>
-            <a href="{% url 'dashboard:leadmagnet_delete' lead_magnet.pk %}"
-               class="rounded-lg border border-line px-2.5 py-1.5 text-xs text-danger no-underline transition-colors hover:border-brand hover:bg-surface-soft">{% trans "Delete" %}</a>
-          </div>
         </div>
-      {% empty %}
-        <p class="px-5 py-4 text-sm text-ink-muted">{% trans "No resources yet." %}</p>
-      {% endfor %}
-    </div>
+        <div class="flex gap-1.5 pt-1 sm:pt-0">
+          <a href="{% url 'dashboard:leadmagnet_edit' lead_magnet.pk %}"
+             class="rounded-lg border border-line px-2.5 py-1.5 text-xs text-ink-muted no-underline transition-colors hover:border-brand hover:bg-surface-soft">{% trans "Edit" %}</a>
+          <a href="{% url 'dashboard:leadmagnet_delete' lead_magnet.pk %}"
+             class="rounded-lg border border-line px-2.5 py-1.5 text-xs text-danger no-underline transition-colors hover:border-brand hover:bg-surface-soft">{% trans "Delete" %}</a>
+        </div>
+      </div>
+    {% empty %}
+      <p class="px-5 py-4 text-sm text-ink-muted">{% trans "No resources yet." %}</p>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

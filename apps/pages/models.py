@@ -3,6 +3,7 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import SeoModelMixin, TimeStampedModel
+from apps.core.sanitizers import sanitize_html
 
 
 class FlatPage(SeoModelMixin, TimeStampedModel):
@@ -22,6 +23,10 @@ class FlatPage(SeoModelMixin, TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.body = sanitize_html(self.body)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         try:

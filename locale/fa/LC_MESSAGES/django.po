@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-18 11:45+0330\n"
+"POT-Creation-Date: 2026-07-18 19:06+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
@@ -37,111 +37,121 @@ msgstr "نویسنده"
 msgid "authors"
 msgstr "نویسندگان"
 
-#: apps/blog/models.py:13 apps/blog/models.py:98 apps/leads/models.py:69
-#: apps/offerings/models.py:95 apps/pages/forms.py:6
-#: templates/dashboard/submission_list.html:19
+#: apps/blog/models.py:16 apps/blog/models.py:117 apps/leads/models.py:69
+#: apps/offerings/models.py:97 apps/pages/forms.py:6
+#: templates/dashboard/submission_list.html:18
 msgid "Name"
 msgstr "نام"
 
-#: apps/blog/models.py:14 apps/blog/models.py:37 apps/leads/models.py:19
-#: apps/offerings/models.py:19 apps/pages/models.py:11
+#: apps/blog/models.py:17 apps/blog/models.py:40 apps/leads/models.py:19
+#: apps/offerings/models.py:20 apps/pages/models.py:12
 msgid "Slug"
 msgstr "نامک"
 
-#: apps/blog/models.py:17
+#: apps/blog/models.py:20
 msgid "category"
 msgstr "دسته"
 
-#: apps/blog/models.py:18
+#: apps/blog/models.py:21
 msgid "categories"
 msgstr "دسته‌ها"
 
-#: apps/blog/models.py:32 apps/leads/models.py:14 apps/offerings/models.py:14
+#: apps/blog/models.py:35 apps/leads/models.py:14 apps/offerings/models.py:15
 msgid "Draft"
 msgstr "پیش‌نویس"
 
-#: apps/blog/models.py:33 apps/dashboard/views.py:151 apps/leads/models.py:15
-#: apps/offerings/models.py:15 templates/dashboard/overview.html:21
+#: apps/blog/models.py:36 apps/dashboard/views.py:192 apps/leads/models.py:15
+#: apps/offerings/models.py:16 templates/dashboard/overview.html:21
 msgid "Published"
 msgstr "منتشرشده"
 
-#: apps/blog/models.py:36 apps/leads/models.py:18 apps/navigation/models.py:7
-#: apps/offerings/models.py:18 apps/pages/models.py:9
-#: templates/dashboard/content_list.html:25
-#: templates/dashboard/leadmagnet_list.html:25
-#: templates/dashboard/offering_list.html:19
+#: apps/blog/models.py:39 apps/leads/models.py:18 apps/navigation/models.py:7
+#: apps/offerings/models.py:19 apps/pages/models.py:10
+#: templates/dashboard/content_list.html:24
+#: templates/dashboard/leadmagnet_list.html:24
+#: templates/dashboard/offering_list.html:18
 msgid "Title"
 msgstr "عنوان"
 
-#: apps/blog/models.py:42
+#: apps/blog/models.py:45
 msgid "Author"
 msgstr "نویسنده"
 
-#: apps/blog/models.py:50 templates/dashboard/category_form.html:4
-#: templates/dashboard/content_list.html:25
+#: apps/blog/models.py:53 templates/dashboard/category_form.html:4
+#: templates/dashboard/content_list.html:24
+#: templates/dashboard/content_list.html:30
 msgid "Category"
 msgstr "دسته"
 
-#: apps/blog/models.py:52
+#: apps/blog/models.py:55
 msgid "Tags"
 msgstr "برچسب‌ها"
 
-#: apps/blog/models.py:53
+#: apps/blog/models.py:56
 msgid "Excerpt"
 msgstr "خلاصه"
 
-#: apps/blog/models.py:54 apps/blog/models.py:100 apps/offerings/models.py:21
-#: apps/pages/models.py:16
+#: apps/blog/models.py:57 apps/blog/models.py:119 apps/offerings/models.py:22
+#: apps/pages/models.py:17
 msgid "Body"
 msgstr "متن"
 
-#: apps/blog/models.py:56 apps/leads/models.py:22 apps/offerings/models.py:23
+#: apps/blog/models.py:59 apps/leads/models.py:22 apps/offerings/models.py:24
 msgid "Cover image"
 msgstr "تصویر کاور"
 
-#: apps/blog/models.py:63 apps/leads/models.py:32 apps/offerings/models.py:33
-#: templates/dashboard/content_list.html:25
-#: templates/dashboard/leadmagnet_list.html:25
-#: templates/dashboard/offering_list.html:19
-#: templates/dashboard/submission_list.html:19
+#: apps/blog/models.py:66 apps/leads/models.py:32 apps/offerings/models.py:34
+#: templates/dashboard/content_list.html:24
+#: templates/dashboard/content_list.html:34
+#: templates/dashboard/leadmagnet_list.html:24
+#: templates/dashboard/leadmagnet_list.html:34
+#: templates/dashboard/offering_list.html:18
+#: templates/dashboard/offering_list.html:28
+#: templates/dashboard/submission_list.html:18
 msgid "Status"
 msgstr "وضعیت"
 
-#: apps/blog/models.py:65
+#: apps/blog/models.py:68
 msgid "Published at"
 msgstr "تاریخ انتشار"
 
-#: apps/blog/models.py:68
+#: apps/blog/models.py:69
+msgid "Views"
+msgstr "بازدیدها"
+
+#: apps/blog/models.py:78
 msgid "post"
 msgstr "نوشته"
 
-#: apps/blog/models.py:69
+#: apps/blog/models.py:79
 msgid "posts"
 msgstr "نوشته‌ها"
 
-#: apps/blog/models.py:96
+#: apps/blog/models.py:115
 msgid "Post"
 msgstr "نوشته"
 
-#: apps/blog/models.py:99 apps/leads/models.py:70 apps/offerings/models.py:96
-#: apps/pages/forms.py:7 templates/dashboard/submission_list.html:19
+#: apps/blog/models.py:118 apps/leads/models.py:70 apps/offerings/models.py:98
+#: apps/pages/forms.py:7 templates/dashboard/submission_list.html:18
+#: templates/dashboard/submission_list.html:24
 msgid "Email"
 msgstr "ایمیل"
 
-#: apps/blog/models.py:101 apps/testimonials/models.py:29
+#: apps/blog/models.py:120 apps/testimonials/models.py:29
+#: templates/dashboard/comment_list.html:25
 #: templates/dashboard/testimonial_list.html:28
 msgid "Approved"
 msgstr "تأیید شده"
 
-#: apps/blog/models.py:104
+#: apps/blog/models.py:123
 msgid "comment"
 msgstr "دیدگاه"
 
-#: apps/blog/models.py:105
+#: apps/blog/models.py:124
 msgid "comments"
 msgstr "دیدگاه‌ها"
 
-#: apps/blog/views.py:77
+#: apps/blog/views.py:82
 msgid "Thanks — your comment will appear once it's approved."
 msgstr "متشکریم — دیدگاه شما پس از تأیید نمایش داده می‌شود."
 
@@ -221,157 +231,192 @@ msgstr "تنظیمات سایت"
 msgid "Site settings"
 msgstr "تنظیمات سایت"
 
-#: apps/core/validators.py:10
+#: apps/core/validators.py:25
 #, python-format
 msgid "File too large. Max size is %(max)s MB."
 msgstr "حجم فایل زیاد است. حداکثر اندازه %(max)s مگابایت است."
 
-#: apps/core/validators.py:18
+#: apps/core/validators.py:37
+msgid "Unsupported or corrupt image file."
+msgstr "فایل تصویر پشتیبانی نمی‌شود یا خراب است."
+
+#: apps/core/validators.py:45
 msgid "Unsupported image type."
 msgstr "نوع تصویر پشتیبانی نمی‌شود."
 
-#: apps/core/validators.py:25
+#: apps/core/validators.py:60
 msgid "Unsupported file type."
 msgstr "نوع فایل پشتیبانی نمی‌شود."
 
-#: apps/dashboard/context_processors.py:37
+#: apps/core/views.py:38
+msgid "Too many requests. Please try again later."
+msgstr "تعداد درخواست‌ها بیش از حد مجاز است. لطفاً کمی بعد دوباره تلاش کنید."
+
+#: apps/dashboard/context_processors.py:40
 msgid "General"
 msgstr "عمومی"
 
-#: apps/dashboard/context_processors.py:39 templates/dashboard/overview.html:4
+#: apps/dashboard/context_processors.py:42 templates/dashboard/overview.html:4
 #: templates/dashboard/overview.html:10
 msgid "Overview"
 msgstr "نمای کلی"
 
-#: apps/dashboard/context_processors.py:43
+#: apps/dashboard/context_processors.py:43 templates/dashboard/analytics.html:4
+#: templates/dashboard/analytics.html:9
+msgid "Analytics"
+msgstr "تحلیل‌ها"
+
+#: apps/dashboard/context_processors.py:47
 #: templates/dashboard/content_list.html:4
 #: templates/dashboard/content_list.html:9
 msgid "Content"
 msgstr "محتوا"
 
-#: apps/dashboard/context_processors.py:45
+#: apps/dashboard/context_processors.py:49
 #: templates/dashboard/post_form.html:11
 msgid "Posts & categories"
 msgstr "نوشته‌ها و دسته‌ها"
 
-#: apps/dashboard/context_processors.py:46
+#: apps/dashboard/context_processors.py:50
 #: templates/dashboard/offering_form.html:11
 msgid "Offerings & sessions"
 msgstr "دوره‌ها و جلسات"
 
-#: apps/dashboard/context_processors.py:47
+#: apps/dashboard/context_processors.py:51
 #: templates/dashboard/testimonial_list.html:4
 #: templates/dashboard/testimonial_list.html:9
 #: templates/testimonials/list.html:4 templates/testimonials/list.html:8
 msgid "Testimonials"
 msgstr "نظرات مشتریان"
 
-#: apps/dashboard/context_processors.py:48 templates/dashboard/pages.html:9
+#: apps/dashboard/context_processors.py:52 templates/blog/detail.html:78
+#: templates/dashboard/comment_list.html:4
+#: templates/dashboard/comment_list.html:8
+msgid "Comments"
+msgstr "دیدگاه‌ها"
+
+#: apps/dashboard/context_processors.py:53 templates/dashboard/pages.html:9
 msgid "Site pages"
 msgstr "صفحات سایت"
 
-#: apps/dashboard/context_processors.py:52
+#: apps/dashboard/context_processors.py:57
 msgid "Audience"
 msgstr "مخاطبان"
 
-#: apps/dashboard/context_processors.py:54
+#: apps/dashboard/context_processors.py:59
 #: templates/dashboard/leadmagnet_list.html:13
 #: templates/dashboard/overview.html:33
 msgid "Submissions inbox"
 msgstr "صندوق درخواست‌ها"
 
-#: apps/dashboard/context_processors.py:58
-#: apps/dashboard/context_processors.py:60 templates/dashboard/settings.html:4
+#: apps/dashboard/context_processors.py:63
+#: apps/dashboard/context_processors.py:65 templates/dashboard/settings.html:4
 #: templates/dashboard/settings.html:8
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: apps/dashboard/forms.py:119 apps/dashboard/forms.py:128
+#: apps/dashboard/forms.py:8
+msgid "Enter a valid hex color, e.g. #0f9d8e."
+msgstr "یک کد رنگ هگزادسیمال معتبر وارد کنید، مثلاً #0f9d8e."
+
+#: apps/dashboard/forms.py:125 apps/dashboard/forms.py:134
 msgid "Instagram"
 msgstr "اینستاگرام"
 
-#: apps/dashboard/forms.py:120 apps/dashboard/forms.py:129
+#: apps/dashboard/forms.py:126 apps/dashboard/forms.py:135
 msgid "Telegram"
 msgstr "تلگرام"
 
-#: apps/dashboard/forms.py:121 apps/dashboard/forms.py:130
+#: apps/dashboard/forms.py:127 apps/dashboard/forms.py:136
 msgid "Twitter / X"
 msgstr "توییتر / ایکس"
 
-#: apps/dashboard/forms.py:122 apps/dashboard/forms.py:131
+#: apps/dashboard/forms.py:128 apps/dashboard/forms.py:137
 msgid "LinkedIn"
 msgstr "لینکدین"
 
-#: apps/dashboard/forms.py:123 apps/dashboard/forms.py:132
+#: apps/dashboard/forms.py:129 apps/dashboard/forms.py:138
 msgid "WhatsApp"
 msgstr "واتساپ"
 
-#: apps/dashboard/forms.py:159
+#: apps/dashboard/forms.py:165
 msgid "Brand color"
 msgstr "رنگ برند"
 
-#: apps/dashboard/forms.py:162
+#: apps/dashboard/forms.py:170
 msgid "Accent color"
 msgstr "رنگ تأکیدی"
 
-#: apps/dashboard/otp_views.py:25
+#: apps/dashboard/otp_views.py:44
 msgid "Authenticator code"
 msgstr "کد اپلیکیشن احراز هویت"
 
-#: apps/dashboard/otp_views.py:102
+#: apps/dashboard/otp_views.py:123
 msgid "Two-factor authentication enabled."
 msgstr "احراز هویت دومرحله‌ای فعال شد."
 
-#: apps/dashboard/otp_views.py:104 apps/dashboard/otp_views.py:131
+#: apps/dashboard/otp_views.py:125 apps/dashboard/otp_views.py:186
 msgid "Invalid code. Please try again."
 msgstr "کد نامعتبر است. دوباره تلاش کنید."
 
-#: apps/dashboard/views.py:94
+#: apps/dashboard/otp_views.py:147
+msgid "New recovery codes generated. Your old codes no longer work."
+msgstr "کدهای بازیابی جدید ساخته شد. کدهای قبلی شما دیگر کار نمی‌کنند."
+
+#: apps/dashboard/otp_views.py:182
+msgid ""
+"You signed in with a recovery code. It can't be used again — generate new "
+"codes from Settings if you're running low."
+msgstr ""
+"شما با یک کد بازیابی وارد شدید. این کد دیگر قابل استفاده نیست — اگر کدهای "
+"شما رو به اتمام است، از بخش تنظیمات کدهای جدید بسازید."
+
+#: apps/dashboard/views.py:135
 msgid "Post saved."
 msgstr "نوشته ذخیره شد."
 
-#: apps/dashboard/views.py:106
+#: apps/dashboard/views.py:147
 msgid "Post updated."
 msgstr "نوشته به‌روزرسانی شد."
 
-#: apps/dashboard/views.py:151
+#: apps/dashboard/views.py:192
 msgid "Hidden"
 msgstr "مخفی"
 
-#: apps/dashboard/views.py:152
+#: apps/dashboard/views.py:193
 #, python-format
 msgid "%(title)s is now %(state)s."
 msgstr "«%(title)s» اکنون %(state)s است."
 
-#: apps/dashboard/views.py:176
+#: apps/dashboard/views.py:217
 msgid "Offering saved."
 msgstr "دوره ذخیره شد."
 
-#: apps/dashboard/views.py:203
+#: apps/dashboard/views.py:244
 msgid "Offering updated."
 msgstr "دوره به‌روزرسانی شد."
 
-#: apps/dashboard/views.py:235
+#: apps/dashboard/views.py:276
 msgid "Lead magnet saved."
 msgstr "منبع رایگان ذخیره شد."
 
-#: apps/dashboard/views.py:247
+#: apps/dashboard/views.py:288
 msgid "Lead magnet updated."
 msgstr "منبع رایگان به‌روزرسانی شد."
 
-#: apps/dashboard/views.py:316
+#: apps/dashboard/views.py:357
 msgid "Testimonial saved."
 msgstr "نظر مشتری ذخیره شد."
 
-#: apps/dashboard/views.py:328
+#: apps/dashboard/views.py:369
 msgid "Testimonial updated."
 msgstr "نظر مشتری به‌روزرسانی شد."
 
-#: apps/dashboard/views.py:385
+#: apps/dashboard/views.py:455
 msgid "Site settings saved."
 msgstr "تنظیمات سایت ذخیره شد."
 
-#: apps/dashboard/views.py:393
+#: apps/dashboard/views.py:463
 msgid "Theme updated."
 msgstr "پوسته به‌روزرسانی شد."
 
@@ -395,7 +440,7 @@ msgstr "منابع رایگان"
 msgid "Lead magnet"
 msgstr "منبع رایگان"
 
-#: apps/leads/models.py:71 templates/dashboard/submission_list.html:31
+#: apps/leads/models.py:71 templates/dashboard/submission_list.html:36
 msgid "Contacted"
 msgstr "تماس گرفته شد"
 
@@ -439,72 +484,73 @@ msgstr "آیتم منو"
 msgid "navigation items"
 msgstr "آیتم‌های منو"
 
-#: apps/offerings/models.py:20
+#: apps/offerings/models.py:21
 msgid "Summary"
 msgstr "خلاصه"
 
-#: apps/offerings/models.py:30 templates/dashboard/offering_list.html:19
+#: apps/offerings/models.py:31 templates/dashboard/offering_list.html:18
+#: templates/dashboard/offering_list.html:24
 msgid "Price"
 msgstr "قیمت"
 
-#: apps/offerings/models.py:37
+#: apps/offerings/models.py:38
 msgid "offering"
 msgstr "دوره"
 
-#: apps/offerings/models.py:38
+#: apps/offerings/models.py:39
 msgid "offerings"
 msgstr "دوره‌ها"
 
-#: apps/offerings/models.py:65 apps/offerings/models.py:85
+#: apps/offerings/models.py:67 apps/offerings/models.py:87
 #: apps/testimonials/models.py:27
 msgid "Offering"
 msgstr "دوره"
 
-#: apps/offerings/models.py:67
+#: apps/offerings/models.py:69
 msgid "Starts at"
 msgstr "شروع در"
 
-#: apps/offerings/models.py:68
+#: apps/offerings/models.py:70
 msgid "Ends at"
 msgstr "پایان در"
 
-#: apps/offerings/models.py:70
+#: apps/offerings/models.py:72
 msgid "Location"
 msgstr "مکان"
 
-#: apps/offerings/models.py:70
+#: apps/offerings/models.py:72
 msgid "Online link or venue address"
 msgstr "لینک آنلاین یا آدرس مکان"
 
-#: apps/offerings/models.py:72
+#: apps/offerings/models.py:74
 msgid "Capacity"
 msgstr "ظرفیت"
 
-#: apps/offerings/models.py:75
+#: apps/offerings/models.py:77
 msgid "session"
 msgstr "جلسه"
 
-#: apps/offerings/models.py:76
+#: apps/offerings/models.py:78
 msgid "sessions"
 msgstr "جلسات"
 
-#: apps/offerings/models.py:93
+#: apps/offerings/models.py:95
 msgid "Session"
 msgstr "جلسه"
 
-#: apps/offerings/models.py:97
+#: apps/offerings/models.py:99
 msgid "Phone"
 msgstr "تلفن"
 
-#: apps/offerings/models.py:98
+#: apps/offerings/models.py:100
 msgid "Notes"
 msgstr "یادداشت‌ها"
 
-#: apps/offerings/models.py:101
+#: apps/offerings/models.py:103
 msgid "enrollment"
 msgstr "ثبت‌نام"
 
-#: apps/offerings/models.py:102
+#: apps/offerings/models.py:104
 msgid "enrollments"
 msgstr "ثبت‌نام‌ها"
 
@@ -516,18 +562,17 @@ msgstr "متشکریم — ثبت‌نام شما دریافت شد."
 msgid "Message"
 msgstr "پیام"
 
-#: apps/pages/models.py:14
+#: apps/pages/models.py:15
 msgid "Must match a routed page name, e.g. 'about' or 'contact'."
 msgstr ""
 "باید با نام یکی از صفحات مسیریابی‌شده مطابقت داشته باشد، مثلاً «about» یا "
-"«contact».باید با نام یک صفحه مسیریابی‌شده مطابقت داشته باشد، مثلاً 'about' یا "
-"'contact'."
+"«contact»."
 
-#: apps/pages/models.py:19
+#: apps/pages/models.py:20
 msgid "page"
 msgstr "صفحه"
 
-#: apps/pages/models.py:20
+#: apps/pages/models.py:21
 msgid "pages"
 msgstr "صفحات"
 
@@ -563,6 +608,48 @@ msgstr "نظر مشتری"
 msgid "testimonials"
 msgstr "نظرات مشتریان"
 
+#: templates/403.html:4
+msgid "Access denied"
+msgstr "دسترسی مجاز نیست"
+
+#: templates/403.html:9
+msgid "You don't have access to this page"
+msgstr "شما به این صفحه دسترسی ندارید"
+
+#: templates/403.html:11
+msgid "If you think this is a mistake, please try logging in again."
+msgstr "اگر فکر می‌کنید این یک اشتباه است، لطفاً دوباره وارد شوید."
+
+#: templates/403.html:15 templates/404.html:15 templates/500.html:25
+msgid "Back to home"
+msgstr "بازگشت به سایت"
+
+#: templates/404.html:4
+msgid "Page not found"
+msgstr "صفحه پیدا نشد"
+
+#: templates/404.html:9
+msgid "This page doesn't exist"
+msgstr "این صفحه وجود ندارد"
+
+#: templates/404.html:11
+msgid "The link may be broken, or the page may have been moved or removed."
+msgstr "ممکن است لینک خراب باشد یا صفحه جابه‌جا یا حذف شده باشد."
+
+#: templates/500.html:13
+msgid "Something went wrong"
+msgstr "مشکلی پیش آمد"
+
+#: templates/500.html:20
+msgid "Something went wrong on our end"
+msgstr "مشکلی از سمت ما پیش آمده است"
+
+#: templates/500.html:22
+msgid ""
+"We've been notified and are looking into it. Please try again in a moment."
+msgstr ""
+"به ما اطلاع داده شد و در حال بررسی هستیم. لطفاً کمی بعد دوباره امتحان کنید."
+
 #: templates/base/layout.html:49
 msgid "Open menu"
 msgstr "باز کردن منو"
@@ -584,11 +671,7 @@ msgstr "وبلاگ"
 msgid "Article cover image"
 msgstr "تصویر کاور مقاله"
 
-#: templates/blog/detail.html:78
-msgid "Comments"
-msgstr "دیدگاه‌ها"
-
-#: templates/blog/detail.html:92
+#: templates/blog/detail.html:92 templates/dashboard/comment_list.html:38
 msgid "No comments yet."
 msgstr "هنوز دیدگاهی وجود ندارد."
 
@@ -609,18 +692,20 @@ msgid "All"
 msgstr "همه"
 
 #: templates/blog/list.html:38 templates/core/home.html:87
-#: templates/dashboard/content_list.html:44
+#: templates/dashboard/content_list.html:52
 #: templates/dashboard/overview.html:54
 msgid "No posts yet."
 msgstr "هنوز نوشته‌ای وجود ندارد."
 
-#: templates/blog/list.html:46 templates/dashboard/content_list.html:52
-#: templates/dashboard/submission_list.html:44
+#: templates/blog/list.html:46 templates/dashboard/comment_list.html:45
+#: templates/dashboard/content_list.html:59
+#: templates/dashboard/submission_list.html:48
 msgid "Previous"
 msgstr "قبلی"
 
-#: templates/blog/list.html:53 templates/dashboard/content_list.html:56
-#: templates/dashboard/submission_list.html:48
+#: templates/blog/list.html:53 templates/dashboard/comment_list.html:49
+#: templates/dashboard/content_list.html:63
+#: templates/dashboard/submission_list.html:52
 msgid "Next"
 msgstr "بعدی"
 
@@ -672,6 +757,40 @@ msgstr "همین حالا رایگان دریافت کن."
 msgid "Get it for free"
 msgstr "دریافت رایگان"
 
+#: templates/dashboard/analytics.html:10
+msgid "Which posts and categories readers actually reach"
+msgstr "کدام نوشته‌ها و دسته‌ها بیشترین بازدید را دارند"
+
+#: templates/dashboard/analytics.html:15
+msgid "Total views"
+msgstr "مجموع بازدیدها"
+
+#: templates/dashboard/analytics.html:19
+msgid "Published posts"
+msgstr "نوشته‌های منتشرشده"
+
+#: templates/dashboard/analytics.html:23
+msgid "Average views per post"
+msgstr "میانگین بازدید هر نوشته"
+
+#: templates/dashboard/analytics.html:30
+msgid "Most-viewed posts"
+msgstr "پربازدیدترین نوشته‌ها"
+
+#: templates/dashboard/analytics.html:43 templates/dashboard/analytics.html:62
+#: templates/dashboard/overview.html:69 templates/leads/list.html:14
+#: templates/offerings/list.html:14 templates/testimonials/list.html:14
+msgid "Nothing here yet."
+msgstr "هنوز چیزی وجود ندارد."
+
+#: templates/dashboard/analytics.html:49
+msgid "Views by category"
+msgstr "بازدید بر اساس دسته"
+
+#: templates/dashboard/analytics.html:54
+msgid "Uncategorized"
+msgstr "بدون دسته"
+
 #: templates/dashboard/base.html:8 templates/dashboard/base_auth.html:8
 msgid "Dashboard"
 msgstr "داشبورد"
@@ -707,6 +826,7 @@ msgid "Save"
 msgstr "ذخیره"
 
 #: templates/dashboard/category_form.html:23
+#: templates/dashboard/comment_confirm_delete.html:15
 #: templates/dashboard/leadmagnet_confirm_delete.html:15
 #: templates/dashboard/leadmagnet_form.html:23
 #: templates/dashboard/offering_confirm_delete.html:15
@@ -718,39 +838,61 @@ msgstr "ذخیره"
 msgid "Cancel"
 msgstr "انصراف"
 
-#: templates/dashboard/content_list.html:17
-#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:13
-#: templates/dashboard/post_form.html:16
-msgid "New post"
-msgstr "نوشته جدید"
+#: templates/dashboard/comment_confirm_delete.html:4
+#: templates/dashboard/comment_confirm_delete.html:8
+msgid "Delete comment"
+msgstr "حذف دیدگاه"
 
-#: templates/dashboard/content_list.html:25
-msgid "Date"
-msgstr "تاریخ"
+#: templates/dashboard/comment_confirm_delete.html:10
+#, python-format
+msgid ""
+"Are you sure you want to delete the comment from “%(name)s”? This cannot be "
+"undone."
+msgstr ""
+"آیا مطمئن هستید که می‌خواهید دیدگاه «%(name)s» را حذف کنید؟ این کار قابل "
+"بازگشت نیست."
 
-#: templates/dashboard/content_list.html:38
-#: templates/dashboard/leadmagnet_list.html:37
-#: templates/dashboard/offering_list.html:32
-#: templates/dashboard/testimonial_list.html:41
-msgid "Edit"
-msgstr "ویرایش"
-
-#: templates/dashboard/content_list.html:40
+#: templates/dashboard/comment_confirm_delete.html:14
+#: templates/dashboard/comment_list.html:29
+#: templates/dashboard/content_list.html:48
 #: templates/dashboard/leadmagnet_confirm_delete.html:14
-#: templates/dashboard/leadmagnet_list.html:39
+#: templates/dashboard/leadmagnet_list.html:44
 #: templates/dashboard/offering_confirm_delete.html:14
-#: templates/dashboard/offering_list.html:34
+#: templates/dashboard/offering_list.html:42
 #: templates/dashboard/post_confirm_delete.html:14
 #: templates/dashboard/testimonial_confirm_delete.html:14
 #: templates/dashboard/testimonial_list.html:43
 msgid "Delete"
 msgstr "حذف"
 
-#: templates/dashboard/content_list.html:62
+#: templates/dashboard/comment_list.html:25
+#: templates/dashboard/testimonial_list.html:28
+msgid "Pending"
+msgstr "در انتظار"
+
+#: templates/dashboard/content_list.html:17
+#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:13
+#: templates/dashboard/post_form.html:16
+msgid "New post"
+msgstr "نوشته جدید"
+
+#: templates/dashboard/content_list.html:24
+#: templates/dashboard/content_list.html:41
+msgid "Date"
+msgstr "تاریخ"
+
+#: templates/dashboard/content_list.html:46
+#: templates/dashboard/leadmagnet_list.html:42
+#: templates/dashboard/offering_list.html:40
+#: templates/dashboard/testimonial_list.html:41
+msgid "Edit"
+msgstr "ویرایش"
+
+#: templates/dashboard/content_list.html:69
 msgid "Categories"
 msgstr "دسته‌بندی‌ها"
 
-#: templates/dashboard/content_list.html:70
+#: templates/dashboard/content_list.html:77
 msgid "No categories yet."
 msgstr "هنوز دسته‌ای وجود ندارد."
 
@@ -785,13 +927,14 @@ msgstr "منبع جدید"
 msgid "Free Resources"
 msgstr "منابع رایگان"
 
-#: templates/dashboard/leadmagnet_list.html:25
+#: templates/dashboard/leadmagnet_list.html:24
+#: templates/dashboard/leadmagnet_list.html:30
 #: templates/dashboard/submission_list.html:4
 #: templates/dashboard/submission_list.html:9
 msgid "Submissions"
 msgstr "درخواست‌ها"
 
-#: templates/dashboard/leadmagnet_list.html:43
+#: templates/dashboard/leadmagnet_list.html:48
 msgid "No resources yet."
 msgstr "هنوز منبعی وجود ندارد."
 
@@ -838,7 +981,8 @@ msgid "New offering"
 msgstr "دوره جدید"
 
 #: templates/dashboard/offering_form.html:27
-#: templates/dashboard/offering_list.html:19 templates/offerings/detail.html:28
+#: templates/dashboard/offering_list.html:18
+#: templates/dashboard/offering_list.html:35 templates/offerings/detail.html:28
 msgid "Sessions"
 msgstr "جلسات"
 
@@ -855,9 +999,26 @@ msgstr "ثبت‌نام‌ها"
 msgid "Offerings"
 msgstr "دوره‌ها"
 
-#: templates/dashboard/offering_list.html:38
+#: templates/dashboard/offering_list.html:46
 msgid "No offerings yet."
 msgstr "هنوز دوره‌ای وجود ندارد."
+
+#: templates/dashboard/otp_recovery_codes.html:4
+#: templates/dashboard/otp_recovery_codes.html:6
+msgid "Save your recovery codes"
+msgstr "کدهای بازیابی خود را ذخیره کنید"
+
+#: templates/dashboard/otp_recovery_codes.html:9
+msgid ""
+"Each code works once. Store them somewhere safe — they're the only way back "
+"in if you lose your authenticator device."
+msgstr ""
+"هر کد فقط یک‌بار قابل استفاده است. آن‌ها را جایی امن نگه دارید — تنها راه "
+"بازگشت به داشبورد در صورت گم‌کردن دستگاه احراز هویت شما همین کدها هستند."
+
+#: templates/dashboard/otp_recovery_codes.html:20
+msgid "I've saved these — continue to the dashboard"
+msgstr "این کدها را ذخیره کردم — ادامه به داشبورد"
 
 #: templates/dashboard/otp_setup.html:4 templates/dashboard/otp_setup.html:7
 msgid "Set up two-factor authentication"
@@ -896,8 +1057,12 @@ msgid "Enter your verification code"
 msgstr "کد تأیید را وارد کنید"
 
 #: templates/dashboard/otp_verify.html:7
-msgid "Enter the 6-digit code from your authenticator app"
-msgstr "کد ۶ رقمی اپلیکیشن احراز هویت خود را وارد کنید"
+msgid ""
+"Enter the 6-digit code from your authenticator app, or one of your saved "
+"recovery codes"
+msgstr ""
+"کد ۶ رقمی اپلیکیشن احراز هویت یا یکی از کدهای بازیابی ذخیره‌شده خود را وارد "
+"کنید"
 
 #: templates/dashboard/otp_verify.html:15
 msgid "Verify and log in"
@@ -932,11 +1097,6 @@ msgstr "مشاهده همه"
 msgid "Recent free-resource requests"
 msgstr "آخرین درخواست‌های منابع رایگان"
 
-#: templates/dashboard/overview.html:69 templates/leads/list.html:14
-#: templates/offerings/list.html:14 templates/testimonials/list.html:14
-msgid "Nothing here yet."
-msgstr "هنوز چیزی وجود ندارد."
-
 #: templates/dashboard/pages.html:4
 msgid "Pages"
 msgstr "صفحات"
@@ -965,19 +1125,36 @@ msgstr "سایت و تماس"
 msgid "Theme"
 msgstr "پوسته"
 
+#: templates/dashboard/settings.html:45
+msgid "Two-factor recovery codes"
+msgstr "کدهای بازیابی دو مرحله‌ای"
+
+#: templates/dashboard/settings.html:47
+msgid ""
+"Generating new codes immediately invalidates any codes issued before. Only "
+"do this if you've lost your current set."
+msgstr ""
+"ساخت کدهای جدید بلافاصله کدهای قبلی را باطل می‌کند. فقط در صورتی این کار را "
+"انجام دهید که کدهای فعلی خود را گم کرده‌اید."
+
+#: templates/dashboard/settings.html:53
+msgid "Generate new recovery codes"
+msgstr "ساخت کدهای بازیابی جدید"
+
 #: templates/dashboard/submission_list.html:12
 msgid "Export CSV"
 msgstr "خروجی CSV"
 
-#: templates/dashboard/submission_list.html:19
+#: templates/dashboard/submission_list.html:18
+#: templates/dashboard/submission_list.html:28
 msgid "Requested resource"
 msgstr "منبع درخواستی"
 
-#: templates/dashboard/submission_list.html:31
+#: templates/dashboard/submission_list.html:36
 msgid "Mark as contacted"
 msgstr "علامت‌گذاری به‌عنوان تماس گرفته‌شده"
 
-#: templates/dashboard/submission_list.html:36
+#: templates/dashboard/submission_list.html:41
 msgid "No submissions yet."
 msgstr "هنوز درخواستی وجود ندارد."
 
@@ -1005,10 +1182,6 @@ msgstr "ویرایش نظر"
 #: templates/dashboard/testimonial_list.html:12
 msgid "New testimonial"
 msgstr "نظر جدید"
-
-#: templates/dashboard/testimonial_list.html:28
-msgid "Pending"
-msgstr "در انتظار"
 
 #: templates/dashboard/testimonial_list.html:34
 msgid "Move up"

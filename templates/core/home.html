@@ -58,7 +58,7 @@
   </section>
 
   {% if offerings_visible and offerings %}
-    <section class="flex flex-col gap-7">
+    <section class="reveal flex flex-col gap-7">
       <div class="flex flex-wrap items-baseline justify-between gap-3">
         <h2 class="m-0 text-[clamp(22px,3vw,28px)] font-extrabold">{% trans "Active courses & programs" %}</h2>
         <a href="{% url 'offerings:list' %}" class="inline-flex gap-1 text-sm font-bold text-brand no-underline transition-opacity hover:opacity-75">
@@ -73,7 +73,7 @@
     </section>
   {% endif %}
 
-  <section class="flex flex-col gap-7">
+  <section class="reveal flex flex-col gap-7">
     <div class="flex flex-wrap items-baseline justify-between gap-3">
       <h2 class="m-0 text-[clamp(22px,3vw,28px)] font-extrabold">{% trans "Latest posts" %}</h2>
       <a href="{% url 'blog:list' %}" class="inline-flex gap-1 text-sm font-bold text-brand no-underline transition-opacity hover:opacity-75">
@@ -90,7 +90,7 @@
   </section>
 
   {% if testimonials_visible and testimonials %}
-    <section class="flex flex-col gap-7">
+    <section class="reveal flex flex-col gap-7">
       <h2 class="m-0 text-[clamp(22px,3vw,28px)] font-extrabold">{% trans "What people are saying" %}</h2>
       <div class="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(240px,1fr))]">
         {% for testimonial in testimonials %}
@@ -101,7 +101,7 @@
   {% endif %}
 
   {% if leads_visible %}
-    <section class="flex cursor-default flex-wrap items-center justify-between gap-6 rounded-[22px] border border-line bg-gradient-to-br from-[var(--brand-soft)] to-transparent p-[clamp(28px,4vw,44px)] transition-all hover:-translate-y-1 hover:border-brand">
+    <section class="reveal flex cursor-default flex-wrap items-center justify-between gap-6 rounded-[22px] border border-line bg-gradient-to-br from-[var(--brand-soft)] to-transparent p-[clamp(28px,4vw,44px)] transition-all hover:-translate-y-1 hover:border-brand">
       <div class="flex max-w-[480px] flex-col gap-2.5">
         <h3 class="m-0 text-[22px] font-extrabold">{% trans "Free resources" %}</h3>
         <p class="m-0 text-[14.5px] leading-[1.9] text-ink-muted">{% trans "Get it now, for free." %}</p>

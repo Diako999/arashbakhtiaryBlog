@@ -9,7 +9,10 @@ urlpatterns = [
     path("logout/", views.DashboardLogoutView.as_view(), name="logout"),
     path("otp/setup/", otp_views.OTPSetupView.as_view(), name="otp_setup"),
     path("otp/verify/", otp_views.OTPVerifyView.as_view(), name="otp_verify"),
+    path("otp/recovery-codes/", otp_views.OTPRecoveryCodesView.as_view(), name="otp_recovery_codes"),
+    path("otp/recovery-codes/regenerate/", otp_views.regenerate_recovery_codes, name="otp_recovery_regenerate"),
     path("", views.OverviewView.as_view(), name="overview"),
+    path("analytics/", views.AnalyticsView.as_view(), name="analytics"),
     path("content/", views.PostDashboardListView.as_view(), name="content"),
     path("content/new/", views.PostCreateView.as_view(), name="post_create"),
     path("content/<int:pk>/edit/", views.PostUpdateView.as_view(), name="post_edit"),
@@ -50,6 +53,10 @@ urlpatterns = [
         views.move_testimonial,
         name="testimonial_move",
     ),
+    # Comments
+    path("comments/", views.CommentDashboardListView.as_view(), name="comments"),
+    path("comments/<int:pk>/toggle/", views.toggle_comment_approved, name="comment_toggle"),
+    path("comments/<int:pk>/delete/", views.CommentDeleteView.as_view(), name="comment_delete"),
     # Settings
     path("settings/", views.SettingsView.as_view(), name="settings"),
 ]

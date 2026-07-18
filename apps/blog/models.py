@@ -1,4 +1,6 @@
 from django.conf import settings
+from django.contrib.postgres.indexes import GinIndex
+from django.contrib.postgres.search import SearchVector, SearchVectorField
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -6,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 
 from apps.core.models import SeoModelMixin, TimeStampedModel
+from apps.core.sanitizers import sanitize_html
 from apps.core.validators import validate_image_file
 
 
@@ -63,11 +66,22 @@ class Post(SeoModelMixin, TimeStampedModel):
         _("Status"), max_length=10, choices=STATUS_CHOICES, default=STATUS_DRAFT
     )
     published_at = models.DateTimeField(_("Published at"), null=True, blank=True)
+    view_count = models.PositiveIntegerField(_("Views"), default=0, editable=False)
+
+    # Stored (not recomputed per request) full-text search vectors, one per
+    # language since modeltranslation keeps title/excerpt/body as separate
+    # physical *_fa / *_ckb columns — a single vector can't cover both.
+    search_vector_fa = SearchVectorField(null=True, blank=True, editable=False)
+    search_vector_ckb = SearchVectorField(null=True, blank=True, editable=False)
 
     class Meta:
         verbose_name = _("post")
         verbose_name_plural = _("posts")
         ordering = ["-published_at", "-created_at"]
+        indexes = [
+            GinIndex(fields=["search_vector_fa"], name="blog_post_search_fa_gin"),
+            GinIndex(fields=["search_vector_ckb"], name="blog_post_search_ckb_gin"),
+        ]
 
     def __str__(self):
         return self.title
@@ -81,7 +95,12 @@ class Post(SeoModelMixin, TimeStampedModel):
                 counter += 1
                 slug = f"{base}-{counter}"
             self.slug = slug
+        self.body = sanitize_html(self.body)
         super().save(*args, **kwargs)
+        Post.objects.filter(pk=self.pk).update(
+            search_vector_fa=SearchVector("title_fa", "excerpt_fa", "body_fa"),
+            search_vector_ckb=SearchVector("title_ckb", "excerpt_ckb", "body_ckb"),
+        )
 
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"slug": self.slug})

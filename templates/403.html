@@ -1,0 +1,18 @@
+{% extends "base/layout.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Access denied" %} · {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center gap-4 py-20 text-center">
+  <span class="font-mono text-sm tracking-[.2em] text-ink-faint">403</span>
+  <h1 class="m-0 text-2xl font-extrabold text-ink">{% trans "You don't have access to this page" %}</h1>
+  <p class="max-w-md text-ink-muted">
+    {% trans "If you think this is a mistake, please try logging in again." %}
+  </p>
+  <a href="{% url 'home' %}"
+     class="mt-2 rounded-[10px] bg-brand px-5 py-2.5 text-[14px] font-bold text-white transition-transform hover:-translate-y-0.5">
+    {% trans "Back to home" %}
+  </a>
+</div>
+{% endblock %}

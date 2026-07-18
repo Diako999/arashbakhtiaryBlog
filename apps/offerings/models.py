@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import SeoModelMixin, TimeStampedModel
+from apps.core.sanitizers import sanitize_html
 from apps.core.validators import validate_image_file
 
 
@@ -50,6 +51,7 @@ class Offering(SeoModelMixin, TimeStampedModel):
                 counter += 1
                 slug = f"{base}-{counter}"
             self.slug = slug
+        self.body = sanitize_html(self.body)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

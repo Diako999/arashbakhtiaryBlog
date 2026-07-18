@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 
 from apps.blog.models import Post
@@ -34,4 +35,4 @@ class HomeView(SeoContextMixin, TemplateView):
 
 
 def ratelimited(request, exception):
-    return HttpResponse("Too many requests. Please try again later.", status=429)
+    return HttpResponse(_("Too many requests. Please try again later."), status=429)

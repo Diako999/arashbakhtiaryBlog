@@ -1,0 +1,68 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Analytics" %} · {{ site_settings.site_name }}{% endblock %}
+
+{% block dashboard_content %}
+<div class="flex flex-col gap-7">
+  <div class="flex flex-col gap-1">
+    <h1 class="m-0 text-[22px] font-extrabold">{% trans "Analytics" %}</h1>
+    <span class="text-[13.5px] text-ink-muted">{% trans "Which posts and categories readers actually reach" %}</span>
+  </div>
+
+  <div class="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(180px,1fr))]">
+    <div class="flex flex-col gap-2 rounded-2xl border border-line bg-card p-5 shadow-[0_1px_3px_rgba(0,0,0,.25)]">
+      <span class="text-[13px] text-ink-muted">{% trans "Total views" %}</span>
+      <span class="text-[26px] font-extrabold tabular-nums">{{ total_views }}</span>
+    </div>
+    <div class="flex flex-col gap-2 rounded-2xl border border-line bg-card p-5 shadow-[0_1px_3px_rgba(0,0,0,.25)]">
+      <span class="text-[13px] text-ink-muted">{% trans "Published posts" %}</span>
+      <span class="text-[26px] font-extrabold tabular-nums">{{ post_count }}</span>
+    </div>
+    <div class="flex flex-col gap-2 rounded-2xl border border-line bg-card p-5 shadow-[0_1px_3px_rgba(0,0,0,.25)]">
+      <span class="text-[13px] text-ink-muted">{% trans "Average views per post" %}</span>
+      <span class="text-[26px] font-extrabold tabular-nums">{{ avg_views }}</span>
+    </div>
+  </div>
+
+  <div class="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(360px,1fr))]">
+    <div class="flex flex-col gap-4 rounded-2xl border border-line bg-card p-[22px]">
+      <span class="text-[15px] font-bold">{% trans "Most-viewed posts" %}</span>
+      <div class="flex flex-col gap-3">
+        {% for post in top_posts %}
+          <a href="{% url 'dashboard:post_edit' post.pk %}" class="flex flex-col gap-1.5 text-ink no-underline">
+            <div class="flex items-center justify-between gap-2 text-[13px]">
+              <span class="truncate font-semibold">{{ post.title }}</span>
+              <span class="shrink-0 tabular-nums text-ink-muted">{{ post.view_count }}</span>
+            </div>
+            <div class="h-2 w-full overflow-hidden rounded-full bg-surface-soft">
+              <div class="h-full rounded-full bg-brand" style="width:{{ post.bar_pct }}%"></div>
+            </div>
+          </a>
+        {% empty %}
+          <p class="text-sm text-ink-muted">{% trans "Nothing here yet." %}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-4 rounded-2xl border border-line bg-card p-[22px]">
+      <span class="text-[15px] font-bold">{% trans "Views by category" %}</span>
+      <div class="flex flex-col gap-3">
+        {% for row in category_stats %}
+          <div class="flex flex-col gap-1.5">
+            <div class="flex items-center justify-between gap-2 text-[13px]">
+              <span class="truncate font-semibold text-ink">{{ row.category__name|default:_("Uncategorized") }}</span>
+              <span class="shrink-0 tabular-nums text-ink-muted">{{ row.total_views|default:0 }}</span>
+            </div>
+            <div class="h-2 w-full overflow-hidden rounded-full bg-surface-soft">
+              <div class="h-full rounded-full bg-accent" style="width:{{ row.bar_pct }}%"></div>
+            </div>
+          </div>
+        {% empty %}
+          <p class="text-sm text-ink-muted">{% trans "Nothing here yet." %}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
