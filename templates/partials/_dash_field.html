@@ -1,0 +1,11 @@
+{% load widget_tweaks %}
+<div>
+  <label for="{{ field.id_for_label }}" class="mb-1.5 block text-[13px] font-semibold text-ink-muted">{{ field.label }}</label>
+  {% render_field field class="w-full rounded-[10px] border border-line bg-surface-soft px-3.5 py-3 text-sm text-ink" %}
+  {% if field.errors %}
+    <p class="mt-1 text-xs text-danger">{{ field.errors|join:", " }}</p>
+  {% endif %}
+  {% if field.help_text %}
+    <p class="mt-1 text-xs text-ink-faint">{{ field.help_text }}</p>
+  {% endif %}
+</div>

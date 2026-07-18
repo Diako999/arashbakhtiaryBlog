@@ -4,48 +4,38 @@
 {% block title %}{% trans "Settings" %} · {{ site_settings.site_name }}{% endblock %}
 
 {% block dashboard_content %}
-<h1 class="mb-6 text-xl font-bold">{% trans "Settings" %}</h1>
+<div class="flex max-w-[720px] flex-col gap-7">
+  <h1 class="m-0 text-[22px] font-extrabold">{% trans "Settings" %}</h1>
 
-<div class="grid gap-8 lg:grid-cols-2">
-  <section class="flex flex-col gap-4 rounded-lg border border-gray-200 p-4 dark:border-gray-800">
-    <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-      {% trans "Site & contact" %}
-    </h2>
+  <section class="flex flex-col gap-4 rounded-2xl border border-line bg-card p-6">
+    <span class="text-[15px] font-bold text-ink">{% trans "Site & contact" %}</span>
     <form method="post" enctype="multipart/form-data" class="flex flex-col gap-4">
       {% csrf_token %}
       {% for field in site_form %}
-        <div>
-          <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
-          {% render_field field class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-900" %}
-          {% if field.errors %}
-            <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ field.errors|join:", " }}</p>
-          {% endif %}
-        </div>
+        {% include "partials/_dash_field.html" %}
       {% endfor %}
       <button type="submit" name="save_site" value="1"
-              class="self-start rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white dark:bg-gray-100 dark:text-gray-900">
+              class="self-start rounded-[10px] bg-brand px-5 py-2.5 text-[13.5px] font-bold text-white transition-transform hover:-translate-y-0.5">
         {% trans "Save" %}
       </button>
     </form>
   </section>
 
-  <section class="flex flex-col gap-4 rounded-lg border border-gray-200 p-4 dark:border-gray-800">
-    <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-      {% trans "Theme" %}
-    </h2>
+  <section class="flex flex-col gap-4 rounded-2xl border border-line bg-card p-6">
+    <span class="text-[15px] font-bold text-ink">{% trans "Theme" %}</span>
     <form method="post" class="flex flex-col gap-4">
       {% csrf_token %}
       {% for field in theme_form %}
         <div>
-          <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
-          {% render_field field class="h-10 w-full rounded-md border border-gray-200 dark:border-gray-700 dark:bg-gray-900" %}
+          <label for="{{ field.id_for_label }}" class="mb-1.5 block text-[13px] font-semibold text-ink-muted">{{ field.label }}</label>
+          {% render_field field class="h-11 w-full rounded-[10px] border border-line bg-surface-soft" %}
           {% if field.errors %}
-            <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ field.errors|join:", " }}</p>
+            <p class="mt-1 text-xs text-danger">{{ field.errors|join:", " }}</p>
           {% endif %}
         </div>
       {% endfor %}
       <button type="submit" name="save_theme" value="1"
-              class="self-start rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white dark:bg-gray-100 dark:text-gray-900">
+              class="self-start rounded-[10px] bg-brand px-5 py-2.5 text-[13.5px] font-bold text-white transition-transform hover:-translate-y-0.5">
         {% trans "Save" %}
       </button>
     </form>

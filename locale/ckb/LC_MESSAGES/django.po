@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: prodblog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-16 19:58+0330\n"
+"POT-Creation-Date: 2026-07-18 11:45+0330\n"
 "PO-Revision-Date: 2026-07-15 16:52+0330\n"
 "Last-Translator: \n"
 "Language-Team: Central Kurdish\n"
@@ -39,6 +39,7 @@ msgstr "نووسەران"
 
 #: apps/blog/models.py:13 apps/blog/models.py:98 apps/leads/models.py:69
 #: apps/offerings/models.py:95 apps/pages/forms.py:6
+#: templates/dashboard/submission_list.html:19
 msgid "Name"
 msgstr "ناو"
 
@@ -59,14 +60,16 @@ msgstr "پۆلەکان"
 msgid "Draft"
 msgstr "ڕەشنووس"
 
-#: apps/blog/models.py:33 apps/dashboard/views.py:146 apps/leads/models.py:15
-#: apps/offerings/models.py:15 templates/dashboard/overview.html:15
-#: templates/dashboard/pages.html:24
+#: apps/blog/models.py:33 apps/dashboard/views.py:151 apps/leads/models.py:15
+#: apps/offerings/models.py:15 templates/dashboard/overview.html:21
 msgid "Published"
 msgstr "بڵاوکراوەتەوە"
 
 #: apps/blog/models.py:36 apps/leads/models.py:18 apps/navigation/models.py:7
 #: apps/offerings/models.py:18 apps/pages/models.py:9
+#: templates/dashboard/content_list.html:25
+#: templates/dashboard/leadmagnet_list.html:25
+#: templates/dashboard/offering_list.html:19
 msgid "Title"
 msgstr "ناونیشان"
 
@@ -75,6 +78,7 @@ msgid "Author"
 msgstr "نووسەر"
 
 #: apps/blog/models.py:50 templates/dashboard/category_form.html:4
+#: templates/dashboard/content_list.html:25
 msgid "Category"
 msgstr "پۆل"
 
@@ -96,6 +100,10 @@ msgid "Cover image"
 msgstr "وێنەی سەرەکی"
 
 #: apps/blog/models.py:63 apps/leads/models.py:32 apps/offerings/models.py:33
+#: templates/dashboard/content_list.html:25
+#: templates/dashboard/leadmagnet_list.html:25
+#: templates/dashboard/offering_list.html:19
+#: templates/dashboard/submission_list.html:19
 msgid "Status"
 msgstr "دۆخ"
 
@@ -116,12 +124,12 @@ msgid "Post"
 msgstr "بابەت"
 
 #: apps/blog/models.py:99 apps/leads/models.py:70 apps/offerings/models.py:96
-#: apps/pages/forms.py:7
+#: apps/pages/forms.py:7 templates/dashboard/submission_list.html:19
 msgid "Email"
 msgstr "ئیمەیل"
 
 #: apps/blog/models.py:101 apps/testimonials/models.py:29
-#: templates/dashboard/testimonial_list.html:36
+#: templates/dashboard/testimonial_list.html:28
 msgid "Approved"
 msgstr "پەسندکراو"
 
@@ -231,32 +239,34 @@ msgid "General"
 msgstr "گشتی"
 
 #: apps/dashboard/context_processors.py:39 templates/dashboard/overview.html:4
-#: templates/dashboard/overview.html:7
+#: templates/dashboard/overview.html:10
 msgid "Overview"
 msgstr "گشتی"
 
 #: apps/dashboard/context_processors.py:43
 #: templates/dashboard/content_list.html:4
-#: templates/dashboard/content_list.html:8
+#: templates/dashboard/content_list.html:9
 msgid "Content"
 msgstr "ناوەڕۆک"
 
 #: apps/dashboard/context_processors.py:45
+#: templates/dashboard/post_form.html:11
 msgid "Posts & categories"
 msgstr "بابەتەکان و پۆلەکان"
 
 #: apps/dashboard/context_processors.py:46
+#: templates/dashboard/offering_form.html:11
 msgid "Offerings & sessions"
 msgstr "کۆرسەکان و دانیشتنەکان"
 
 #: apps/dashboard/context_processors.py:47
 #: templates/dashboard/testimonial_list.html:4
-#: templates/dashboard/testimonial_list.html:8
+#: templates/dashboard/testimonial_list.html:9
 #: templates/testimonials/list.html:4 templates/testimonials/list.html:8
 msgid "Testimonials"
 msgstr "بۆچوونەکان"
 
-#: apps/dashboard/context_processors.py:48
+#: apps/dashboard/context_processors.py:48 templates/dashboard/pages.html:9
 msgid "Site pages"
 msgstr "پەڕەکانی ماڵپەڕ"
 
@@ -265,13 +275,14 @@ msgid "Audience"
 msgstr "خەڵک"
 
 #: apps/dashboard/context_processors.py:54
-#: templates/dashboard/leadmagnet_list.html:10
+#: templates/dashboard/leadmagnet_list.html:13
+#: templates/dashboard/overview.html:33
 msgid "Submissions inbox"
 msgstr "سندوقی داواکارییەکان"
 
 #: apps/dashboard/context_processors.py:58
 #: apps/dashboard/context_processors.py:60 templates/dashboard/settings.html:4
-#: templates/dashboard/settings.html:7
+#: templates/dashboard/settings.html:8
 msgid "Settings"
 msgstr "ڕێکخستنەکان"
 
@@ -307,60 +318,60 @@ msgstr "ڕەنگی جیاکەرەوە"
 msgid "Authenticator code"
 msgstr "کۆدی ئەپی ڕاستکردنەوە"
 
-#: apps/dashboard/otp_views.py:101
+#: apps/dashboard/otp_views.py:102
 msgid "Two-factor authentication enabled."
 msgstr "دووچینی پشتڕاستکردنەوە چالاک کرا."
 
-#: apps/dashboard/otp_views.py:103 apps/dashboard/otp_views.py:130
+#: apps/dashboard/otp_views.py:104 apps/dashboard/otp_views.py:131
 msgid "Invalid code. Please try again."
 msgstr "کۆدەکە هەڵەیە. دووبارە هەوڵ بدەرەوە."
 
-#: apps/dashboard/views.py:89
+#: apps/dashboard/views.py:94
 msgid "Post saved."
 msgstr "بابەت پاشەکەوت کرا."
 
-#: apps/dashboard/views.py:101
+#: apps/dashboard/views.py:106
 msgid "Post updated."
 msgstr "بابەت نوێکرایەوە."
 
-#: apps/dashboard/views.py:146 templates/dashboard/pages.html:24
+#: apps/dashboard/views.py:151
 msgid "Hidden"
 msgstr "شاراوە"
 
-#: apps/dashboard/views.py:147
+#: apps/dashboard/views.py:152
 #, python-format
 msgid "%(title)s is now %(state)s."
 msgstr "«%(title)s» ئێستا %(state)s ە."
 
-#: apps/dashboard/views.py:171
+#: apps/dashboard/views.py:176
 msgid "Offering saved."
 msgstr "کۆرس پاشەکەوت کرا."
 
-#: apps/dashboard/views.py:198
+#: apps/dashboard/views.py:203
 msgid "Offering updated."
 msgstr "کۆرس نوێکرایەوە."
 
-#: apps/dashboard/views.py:230
+#: apps/dashboard/views.py:235
 msgid "Lead magnet saved."
 msgstr "سەرچاوە بەخۆڕایی پاشەکەوت کرا."
 
-#: apps/dashboard/views.py:242
+#: apps/dashboard/views.py:247
 msgid "Lead magnet updated."
 msgstr "سەرچاوە بەخۆڕایی نوێکرایەوە."
 
-#: apps/dashboard/views.py:311
+#: apps/dashboard/views.py:316
 msgid "Testimonial saved."
 msgstr "بۆچوون پاشەکەوت کرا."
 
-#: apps/dashboard/views.py:323
+#: apps/dashboard/views.py:328
 msgid "Testimonial updated."
 msgstr "بۆچوون نوێکرایەوە."
 
-#: apps/dashboard/views.py:380
+#: apps/dashboard/views.py:385
 msgid "Site settings saved."
 msgstr "ڕێکخستنەکانی ماڵپەڕ پاشەکەوت کران."
 
-#: apps/dashboard/views.py:388
+#: apps/dashboard/views.py:393
 msgid "Theme updated."
 msgstr "ڕووکار نوێکرایەوە."
 
@@ -384,7 +395,7 @@ msgstr "سەرچاوە بەخۆڕاییەکان"
 msgid "Lead magnet"
 msgstr "سەرچاوەی بەخۆڕایی"
 
-#: apps/leads/models.py:71 templates/dashboard/submission_list.html:28
+#: apps/leads/models.py:71 templates/dashboard/submission_list.html:31
 msgid "Contacted"
 msgstr "پەیوەندی کرا"
 
@@ -392,7 +403,7 @@ msgstr "پەیوەندی کرا"
 msgid "submission"
 msgstr "داواکاری"
 
-#: apps/leads/models.py:75 templates/dashboard/leadmagnet_list.html:21
+#: apps/leads/models.py:75
 msgid "submissions"
 msgstr "داواکارییەکان"
 
@@ -433,7 +444,7 @@ msgstr "بڕگەکانی مینیو"
 msgid "Summary"
 msgstr "کورتە"
 
-#: apps/offerings/models.py:30
+#: apps/offerings/models.py:30 templates/dashboard/offering_list.html:19
 msgid "Price"
 msgstr "نرخ"
 
@@ -474,7 +485,7 @@ msgstr "گونجایی"
 msgid "session"
 msgstr "دانیشتن"
 
-#: apps/offerings/models.py:76 templates/dashboard/offering_list.html:21
+#: apps/offerings/models.py:76
 msgid "sessions"
 msgstr "دانیشتنەکان"
 
@@ -494,7 +505,7 @@ msgstr "تێبینیەکان"
 msgid "enrollment"
 msgstr "تۆمارکردن"
 
-#: apps/offerings/models.py:102 templates/dashboard/offering_list.html:21
+#: apps/offerings/models.py:102
 msgid "enrollments"
 msgstr "تۆمارکردنەکان"
 
@@ -597,18 +608,18 @@ msgid "All"
 msgstr "هەموو"
 
 #: templates/blog/list.html:38 templates/core/home.html:87
-#: templates/dashboard/content_list.html:35
-#: templates/dashboard/overview.html:34
+#: templates/dashboard/content_list.html:44
+#: templates/dashboard/overview.html:54
 msgid "No posts yet."
 msgstr "هێشتا بابەتێک نییە."
 
-#: templates/blog/list.html:46 templates/dashboard/content_list.html:42
-#: templates/dashboard/submission_list.html:40
+#: templates/blog/list.html:46 templates/dashboard/content_list.html:52
+#: templates/dashboard/submission_list.html:44
 msgid "Previous"
 msgstr "پێشوو"
 
-#: templates/blog/list.html:53 templates/dashboard/content_list.html:46
-#: templates/dashboard/submission_list.html:44
+#: templates/blog/list.html:53 templates/dashboard/content_list.html:56
+#: templates/dashboard/submission_list.html:48
 msgid "Next"
 msgstr "دواتر"
 
@@ -660,7 +671,7 @@ msgstr "ئێستا بەخۆڕایی وەریبگرە."
 msgid "Get it for free"
 msgstr "بەخۆڕایی وەریبگرە"
 
-#: templates/dashboard/base.html:8
+#: templates/dashboard/base.html:8 templates/dashboard/base_auth.html:8
 msgid "Dashboard"
 msgstr "داشبۆرد"
 
@@ -676,194 +687,258 @@ msgstr "شێوازی پیشاندان"
 msgid "Log out"
 msgstr "چوونەدەرەوە"
 
-#: templates/dashboard/category_form.html:8
+#: templates/dashboard/category_form.html:9
 msgid "Edit category"
 msgstr "دەستکاریکردنی پۆل"
 
-#: templates/dashboard/category_form.html:8
-#: templates/dashboard/content_list.html:11
+#: templates/dashboard/category_form.html:9
+#: templates/dashboard/content_list.html:13
 msgid "New category"
 msgstr "پۆلی نوێ"
 
-#: templates/dashboard/category_form.html:24
-#: templates/dashboard/leadmagnet_form.html:24
-#: templates/dashboard/offering_form.html:54
-#: templates/dashboard/post_form.html:29 templates/dashboard/settings.html:27
-#: templates/dashboard/settings.html:49
-#: templates/dashboard/testimonial_form.html:24
+#: templates/dashboard/category_form.html:19
+#: templates/dashboard/leadmagnet_form.html:19
+#: templates/dashboard/offering_form.html:52
+#: templates/dashboard/post_form.html:26 templates/dashboard/settings.html:19
+#: templates/dashboard/settings.html:39
+#: templates/dashboard/testimonial_form.html:19
 msgid "Save"
 msgstr "پاشەکەوتکردن"
 
-#: templates/dashboard/category_form.html:27
-#: templates/dashboard/leadmagnet_confirm_delete.html:14
-#: templates/dashboard/leadmagnet_form.html:27
-#: templates/dashboard/offering_confirm_delete.html:14
-#: templates/dashboard/offering_form.html:57
-#: templates/dashboard/post_confirm_delete.html:14
-#: templates/dashboard/post_form.html:32
-#: templates/dashboard/testimonial_confirm_delete.html:14
-#: templates/dashboard/testimonial_form.html:27
+#: templates/dashboard/category_form.html:23
+#: templates/dashboard/leadmagnet_confirm_delete.html:15
+#: templates/dashboard/leadmagnet_form.html:23
+#: templates/dashboard/offering_confirm_delete.html:15
+#: templates/dashboard/offering_form.html:56
+#: templates/dashboard/post_confirm_delete.html:15
+#: templates/dashboard/post_form.html:30
+#: templates/dashboard/testimonial_confirm_delete.html:15
+#: templates/dashboard/testimonial_form.html:23
 msgid "Cancel"
 msgstr "پاشگەزبوونەوە"
 
-#: templates/dashboard/content_list.html:13
-#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
+#: templates/dashboard/content_list.html:17
+#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:13
+#: templates/dashboard/post_form.html:16
 msgid "New post"
 msgstr "بابەتی نوێ"
 
-#: templates/dashboard/content_list.html:30
-#: templates/dashboard/leadmagnet_list.html:28
-#: templates/dashboard/offering_list.html:28
-#: templates/dashboard/testimonial_list.html:39
+#: templates/dashboard/content_list.html:25
+msgid "Date"
+msgstr "بەروار"
+
+#: templates/dashboard/content_list.html:38
+#: templates/dashboard/leadmagnet_list.html:37
+#: templates/dashboard/offering_list.html:32
+#: templates/dashboard/testimonial_list.html:41
 msgid "Edit"
 msgstr "دەستکاری"
 
-#: templates/dashboard/content_list.html:31
-#: templates/dashboard/leadmagnet_confirm_delete.html:13
-#: templates/dashboard/leadmagnet_list.html:29
-#: templates/dashboard/offering_confirm_delete.html:13
-#: templates/dashboard/offering_list.html:29
-#: templates/dashboard/post_confirm_delete.html:13
-#: templates/dashboard/testimonial_confirm_delete.html:13
-#: templates/dashboard/testimonial_list.html:40
+#: templates/dashboard/content_list.html:40
+#: templates/dashboard/leadmagnet_confirm_delete.html:14
+#: templates/dashboard/leadmagnet_list.html:39
+#: templates/dashboard/offering_confirm_delete.html:14
+#: templates/dashboard/offering_list.html:34
+#: templates/dashboard/post_confirm_delete.html:14
+#: templates/dashboard/testimonial_confirm_delete.html:14
+#: templates/dashboard/testimonial_list.html:43
 msgid "Delete"
 msgstr "سڕینەوە"
 
-#: templates/dashboard/content_list.html:52
+#: templates/dashboard/content_list.html:62
 msgid "Categories"
 msgstr "پۆلەکان"
 
-#: templates/dashboard/content_list.html:60
+#: templates/dashboard/content_list.html:70
 msgid "No categories yet."
 msgstr "هێشتا پۆلێک نییە."
 
 #: templates/dashboard/leadmagnet_confirm_delete.html:4
-#: templates/dashboard/leadmagnet_confirm_delete.html:7
+#: templates/dashboard/leadmagnet_confirm_delete.html:8
 msgid "Delete resource"
 msgstr "سڕینەوەی سەرچاوە"
 
-#: templates/dashboard/leadmagnet_confirm_delete.html:9
-#: templates/dashboard/offering_confirm_delete.html:9
-#: templates/dashboard/post_confirm_delete.html:9
+#: templates/dashboard/leadmagnet_confirm_delete.html:10
+#: templates/dashboard/offering_confirm_delete.html:10
+#: templates/dashboard/post_confirm_delete.html:10
 #, python-format
 msgid "Are you sure you want to delete “%(title)s”? This cannot be undone."
 msgstr "دڵنیایت لە سڕینەوەی «%(title)s»؟ ئەم کردارە ناتوانرێت بگەڕێندرێتەوە."
 
 #: templates/dashboard/leadmagnet_form.html:4
-#: templates/dashboard/leadmagnet_form.html:8
+#: templates/dashboard/leadmagnet_form.html:9
 msgid "Edit resource"
 msgstr "دەستکاریکردنی سەرچاوە"
 
 #: templates/dashboard/leadmagnet_form.html:4
-#: templates/dashboard/leadmagnet_form.html:8
-#: templates/dashboard/leadmagnet_list.html:11
+#: templates/dashboard/leadmagnet_form.html:9
+#: templates/dashboard/leadmagnet_list.html:17
 msgid "New resource"
 msgstr "سەرچاوەی نوێ"
 
 #: templates/dashboard/leadmagnet_list.html:4
-#: templates/dashboard/leadmagnet_list.html:8 templates/leads/list.html:4
+#: templates/dashboard/leadmagnet_list.html:9 templates/leads/list.html:4
 #: templates/leads/list.html:8
 msgid "Free Resources"
 msgstr "سەرچاوە بەخۆڕاییەکان"
 
-#: templates/dashboard/leadmagnet_list.html:33
+#: templates/dashboard/leadmagnet_list.html:25
+#: templates/dashboard/submission_list.html:4
+#: templates/dashboard/submission_list.html:9
+msgid "Submissions"
+msgstr "داواکارییەکان"
+
+#: templates/dashboard/leadmagnet_list.html:43
 msgid "No resources yet."
 msgstr "هێشتا سەرچاوەیەک نییە."
 
-#: templates/dashboard/login.html:8 templates/dashboard/login.html:33
+#: templates/dashboard/login.html:4 templates/dashboard/login.html:27
 msgid "Log in"
 msgstr "چوونەژوورەوە"
 
-#: templates/dashboard/login.html:17
+#: templates/dashboard/login.html:5
+msgid "Log in to the dashboard"
+msgstr "چوونەژوورەوە بۆ داشبۆردی بەڕێوەبردن"
+
+#: templates/dashboard/login.html:11
 msgid "Incorrect username or password."
 msgstr "ناوی بەکارهێنەر یان وشەی نهێنی هەڵەیە."
 
-#: templates/dashboard/login.html:24
+#: templates/dashboard/login.html:18
 msgid "Username"
 msgstr "ناوی بەکارهێنەر"
 
-#: templates/dashboard/login.html:28
+#: templates/dashboard/login.html:22
 msgid "Password"
 msgstr "وشەی نهێنی"
 
+#: templates/dashboard/login.html:34
+msgid "Back to site"
+msgstr "گەڕانەوە بۆ ماڵپەڕ"
+
 #: templates/dashboard/offering_confirm_delete.html:4
-#: templates/dashboard/offering_confirm_delete.html:7
+#: templates/dashboard/offering_confirm_delete.html:8
 msgid "Delete offering"
 msgstr "سڕینەوەی کۆرس"
 
 #: templates/dashboard/offering_form.html:4
-#: templates/dashboard/offering_form.html:10
+#: templates/dashboard/offering_form.html:13
+#: templates/dashboard/offering_form.html:16
 msgid "Edit offering"
 msgstr "دەستکاریکردنی کۆرس"
 
 #: templates/dashboard/offering_form.html:4
-#: templates/dashboard/offering_form.html:10
-#: templates/dashboard/offering_list.html:11
+#: templates/dashboard/offering_form.html:13
+#: templates/dashboard/offering_form.html:16
+#: templates/dashboard/offering_list.html:12
 msgid "New offering"
 msgstr "کۆرسی نوێ"
 
-#: templates/dashboard/offering_form.html:28 templates/offerings/detail.html:28
+#: templates/dashboard/offering_form.html:27
+#: templates/dashboard/offering_list.html:19 templates/offerings/detail.html:28
 msgid "Sessions"
 msgstr "دانیشتنەکان"
 
-#: templates/dashboard/offering_form.html:43
+#: templates/dashboard/offering_form.html:41
 msgid "Delete this session"
 msgstr "سڕینەوەی ئەم دانیشتنە"
 
-#: templates/dashboard/offering_form.html:65
+#: templates/dashboard/offering_form.html:63
 msgid "Enrollments"
 msgstr "تۆمارکردنەکان"
 
 #: templates/dashboard/offering_list.html:4
-#: templates/dashboard/offering_list.html:8
+#: templates/dashboard/offering_list.html:9
 msgid "Offerings"
 msgstr "کۆرسەکان"
 
-#: templates/dashboard/offering_list.html:33
+#: templates/dashboard/offering_list.html:38
 msgid "No offerings yet."
 msgstr "هێشتا کۆرسێک نییە."
 
-#: templates/dashboard/otp_setup.html:8 templates/dashboard/otp_setup.html:13
+#: templates/dashboard/otp_setup.html:4 templates/dashboard/otp_setup.html:7
 msgid "Set up two-factor authentication"
 msgstr "ڕێکخستنی دووچینی پشتڕاستکردنەوە"
 
-#: templates/dashboard/otp_setup.html:15
-msgid ""
-"Scan this code with an authenticator app (e.g. Google Authenticator), then "
-"enter the 6-digit code it shows."
-msgstr ""
-"ئەم کۆدە بە ئەپێکی ڕاستکردنەوە (بۆ نموونە Google Authenticator) سکان بکە، "
-"پاشان کۆدی ٦ ژمارەیی پیشانراو بنووسە."
+#: templates/dashboard/otp_setup.html:9
+msgid "This step is required only once, for extra security."
+msgstr "ئەم هەنگاوە تەنها یەک جار پێویستە، بۆ ئاسایشی زیاتر."
 
-#: templates/dashboard/otp_setup.html:24
+#: templates/dashboard/otp_setup.html:13
 msgid "QR code"
 msgstr "کۆدی QR"
 
-#: templates/dashboard/otp_setup.html:33
-msgid "Confirm"
-msgstr "دڵنیاکردنەوە"
+#: templates/dashboard/otp_setup.html:15
+msgid "Scan this QR code with Google Authenticator or a similar app"
+msgstr "ئەم کۆدی QR بە Google Authenticator یان ئەپێکی هاوشێوە سکان بکە"
 
-#: templates/dashboard/otp_verify.html:8 templates/dashboard/otp_verify.html:13
+#: templates/dashboard/otp_setup.html:19
+msgid "Or enter the key manually"
+msgstr "یان کلیلەکە بە دەست بنووسە"
+
+#: templates/dashboard/otp_setup.html:28
+msgid "Enter the 6-digit code to confirm"
+msgstr "کۆدی ٦ ژمارەیی بنووسە بۆ پشتڕاستکردنەوە"
+
+#: templates/dashboard/otp_setup.html:32
+msgid "Confirm and activate"
+msgstr "پشتڕاستکردنەوە و چالاککردن"
+
+#: templates/dashboard/otp_verify.html:4
 msgid "Verify your identity"
 msgstr "ناسنامەکەت پشتڕاست بکەرەوە"
 
-#: templates/dashboard/otp_verify.html:28
-msgid "Verify"
-msgstr "پشتڕاستکردنەوە"
+#: templates/dashboard/otp_verify.html:5
+msgid "Enter your verification code"
+msgstr "کۆدی پشتڕاستکردنەوە بنووسە"
+
+#: templates/dashboard/otp_verify.html:7
+msgid "Enter the 6-digit code from your authenticator app"
+msgstr "کۆدی ٦ ژمارەیی ئەپی پشتڕاستکردنەوەت بنووسە"
+
+#: templates/dashboard/otp_verify.html:15
+msgid "Verify and log in"
+msgstr "پشتڕاستکردنەوە و چوونەژوورەوە"
 
 #: templates/dashboard/overview.html:11
+msgid "Your site's status at a glance"
+msgstr "کورتەیەک لە باری ماڵپەڕەکەت"
+
+#: templates/dashboard/overview.html:15
+msgid "View site"
+msgstr "بینینی ماڵپەڕ"
+
+#: templates/dashboard/overview.html:25
 msgid "Drafts"
 msgstr "ڕەشنووسەکان"
 
-#: templates/dashboard/overview.html:22
+#: templates/dashboard/overview.html:29 templates/offerings/list.html:4
+#: templates/offerings/list.html:8
+msgid "Courses & Workshops"
+msgstr "کۆرس و کارگەکان"
+
+#: templates/dashboard/overview.html:41
 msgid "Recent posts"
 msgstr "بابەتە دواییەکان"
 
-#: templates/dashboard/pages.html:4 templates/dashboard/pages.html:7
+#: templates/dashboard/overview.html:42 templates/dashboard/overview.html:61
+msgid "View all"
+msgstr "بینینی هەموو"
+
+#: templates/dashboard/overview.html:60
+msgid "Recent free-resource requests"
+msgstr "دوایین داواکارییەکانی سەرچاوە بەخۆڕاییەکان"
+
+#: templates/dashboard/overview.html:69 templates/leads/list.html:14
+#: templates/offerings/list.html:14 templates/testimonials/list.html:14
+msgid "Nothing here yet."
+msgstr "هێشتا هیچ شتێک نییە."
+
+#: templates/dashboard/pages.html:4
 msgid "Pages"
 msgstr "پەڕەکان"
 
-#: templates/dashboard/pages.html:9
+#: templates/dashboard/pages.html:11
 msgid ""
 "Publish a section to make it live immediately — no redeploy, no migration."
 msgstr ""
@@ -871,45 +946,45 @@ msgstr ""
 "بڵاوکردنەوە یان کۆچ."
 
 #: templates/dashboard/post_confirm_delete.html:4
-#: templates/dashboard/post_confirm_delete.html:7
+#: templates/dashboard/post_confirm_delete.html:8
 msgid "Delete post"
 msgstr "سڕینەوەی بابەت"
 
-#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:10
+#: templates/dashboard/post_form.html:4 templates/dashboard/post_form.html:13
+#: templates/dashboard/post_form.html:16
 msgid "Edit post"
 msgstr "دەستکاریکردنی بابەت"
 
-#: templates/dashboard/settings.html:12
+#: templates/dashboard/settings.html:11
 msgid "Site & contact"
 msgstr "ماڵپەڕ و پەیوەندی"
 
-#: templates/dashboard/settings.html:34
+#: templates/dashboard/settings.html:25
 msgid "Theme"
 msgstr "ڕووکار"
 
-#: templates/dashboard/submission_list.html:4
-#: templates/dashboard/submission_list.html:8
-msgid "Submissions"
-msgstr "داواکارییەکان"
-
-#: templates/dashboard/submission_list.html:10
+#: templates/dashboard/submission_list.html:12
 msgid "Export CSV"
 msgstr "دەرهێنانی CSV"
 
-#: templates/dashboard/submission_list.html:28
+#: templates/dashboard/submission_list.html:19
+msgid "Requested resource"
+msgstr "سەرچاوەی داواکراو"
+
+#: templates/dashboard/submission_list.html:31
 msgid "Mark as contacted"
 msgstr "نیشانکردن وەک پەیوەندیکراو"
 
-#: templates/dashboard/submission_list.html:33
+#: templates/dashboard/submission_list.html:36
 msgid "No submissions yet."
 msgstr "هێشتا داواکارییەک نییە."
 
 #: templates/dashboard/testimonial_confirm_delete.html:4
-#: templates/dashboard/testimonial_confirm_delete.html:7
+#: templates/dashboard/testimonial_confirm_delete.html:8
 msgid "Delete testimonial"
 msgstr "سڕینەوەی بۆچوون"
 
-#: templates/dashboard/testimonial_confirm_delete.html:9
+#: templates/dashboard/testimonial_confirm_delete.html:10
 #, python-format
 msgid ""
 "Are you sure you want to delete the testimonial from “%(name)s”? This cannot "
@@ -918,40 +993,35 @@ msgstr ""
 "دڵنیایت لە سڕینەوەی بۆچوونی «%(name)s»؟ ئەم کردارە ناتوانرێت بگەڕێندرێتەوە."
 
 #: templates/dashboard/testimonial_form.html:4
-#: templates/dashboard/testimonial_form.html:8
+#: templates/dashboard/testimonial_form.html:9
 msgid "Edit testimonial"
 msgstr "دەستکاریکردنی بۆچوون"
 
 #: templates/dashboard/testimonial_form.html:4
-#: templates/dashboard/testimonial_form.html:8
-#: templates/dashboard/testimonial_list.html:11
+#: templates/dashboard/testimonial_form.html:9
+#: templates/dashboard/testimonial_list.html:12
 msgid "New testimonial"
 msgstr "بۆچوونی نوێ"
 
-#: templates/dashboard/testimonial_list.html:25
-msgid "Move up"
-msgstr "بردن بۆ سەرەوە"
-
-#: templates/dashboard/testimonial_list.html:29
-msgid "Move down"
-msgstr "بردن بۆ خوارەوە"
-
-#: templates/dashboard/testimonial_list.html:36
+#: templates/dashboard/testimonial_list.html:28
 msgid "Pending"
 msgstr "چاوەڕوان"
 
-#: templates/dashboard/testimonial_list.html:44
+#: templates/dashboard/testimonial_list.html:34
+msgid "Move up"
+msgstr "بردن بۆ سەرەوە"
+
+#: templates/dashboard/testimonial_list.html:38
+msgid "Move down"
+msgstr "بردن بۆ خوارەوە"
+
+#: templates/dashboard/testimonial_list.html:47
 msgid "No testimonials yet."
 msgstr "هێشتا بۆچوونێک نییە."
 
 #: templates/leads/detail.html:14 templates/partials/_lead_card.html:9
 msgid "Resource cover image"
 msgstr "وێنەی سەرەکی سەرچاوە"
-
-#: templates/leads/list.html:14 templates/offerings/list.html:14
-#: templates/testimonials/list.html:14
-msgid "Nothing here yet."
-msgstr "هێشتا هیچ شتێک نییە."
 
 #: templates/offerings/detail.html:15 templates/partials/_offering_card.html:9
 msgid "Course cover image"
@@ -964,10 +1034,6 @@ msgstr "تۆمارکردن"
 #: templates/offerings/detail.html:56
 msgid "Submit"
 msgstr "ناردن"
-
-#: templates/offerings/list.html:4 templates/offerings/list.html:8
-msgid "Courses & Workshops"
-msgstr "کۆرس و کارگەکان"
 
 #: templates/pages/detail.html:26
 msgid "Send"

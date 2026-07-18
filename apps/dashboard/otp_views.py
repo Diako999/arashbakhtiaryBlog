@@ -88,6 +88,7 @@ class OTPSetupView(LoginRequiredMixin, TemplateView):
         context["qr_data_uri"] = "data:image/png;base64," + base64.b64encode(
             buf.getvalue()
         ).decode()
+        context["secret_key"] = base64.b32encode(device.bin_key).decode()
         context.setdefault("form", TOTPTokenForm())
         return context
 

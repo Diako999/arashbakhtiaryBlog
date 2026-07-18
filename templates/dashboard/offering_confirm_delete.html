@@ -4,13 +4,15 @@
 {% block title %}{% trans "Delete offering" %} · {{ site_settings.site_name }}{% endblock %}
 
 {% block dashboard_content %}
-<h1 class="mb-4 text-xl font-bold">{% trans "Delete offering" %}</h1>
-<p class="mb-6 text-sm text-gray-600 dark:text-gray-400">
-  {% blocktrans with title=object.title %}Are you sure you want to delete “{{ title }}”? This cannot be undone.{% endblocktrans %}
-</p>
-<form method="post" class="flex gap-3">
-  {% csrf_token %}
-  <button type="submit" class="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white">{% trans "Delete" %}</button>
-  <a href="{% url 'dashboard:offerings' %}" class="rounded-md border border-gray-200 px-4 py-2 text-sm dark:border-gray-700">{% trans "Cancel" %}</a>
-</form>
+<div class="flex max-w-md flex-col gap-5">
+  <h1 class="m-0 text-[22px] font-extrabold">{% trans "Delete offering" %}</h1>
+  <p class="m-0 text-sm leading-[1.9] text-ink-muted">
+    {% blocktrans with title=object.title %}Are you sure you want to delete “{{ title }}”? This cannot be undone.{% endblocktrans %}
+  </p>
+  <form method="post" class="flex gap-2.5">
+    {% csrf_token %}
+    <button type="submit" class="rounded-[10px] bg-danger px-5 py-2.5 text-[13.5px] font-bold text-white transition-transform hover:-translate-y-0.5">{% trans "Delete" %}</button>
+    <a href="{% url 'dashboard:offerings' %}" class="rounded-[10px] border border-line px-5 py-2.5 text-[13.5px] font-semibold text-ink no-underline transition-colors hover:border-brand hover:bg-surface-soft">{% trans "Cancel" %}</a>
+  </form>
+</div>
 {% endblock %}

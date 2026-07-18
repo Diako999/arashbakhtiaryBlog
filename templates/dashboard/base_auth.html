@@ -1,0 +1,39 @@
+{% load i18n %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% trans "Dashboard" %}{% endblock %} · {{ site_settings.site_name }}</title>
+  {% include "partials/_head_assets.html" %}
+</head>
+<body class="flex min-h-screen items-center justify-center bg-surface px-4 py-10 font-sans text-ink transition-colors">
+  <div class="flex w-full flex-col items-center gap-[22px] {% block width %}max-w-sm{% endblock %}">
+    {% block logo %}
+      {% include "partials/_logo.html" with size="52" %}
+    {% endblock %}
+
+    <div class="flex flex-col items-center gap-1 text-center">
+      <h1 class="m-0 text-xl font-extrabold">{% block heading %}{% endblock %}</h1>
+      {% block subheading %}{% endblock %}
+    </div>
+
+    {% if messages %}
+      <div class="flex w-full flex-col gap-2">
+        {% for message in messages %}
+          <p class="m-0 rounded-[10px] border border-line bg-card px-3.5 py-2.5 text-sm text-ink">{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="flex w-full flex-col gap-4 rounded-[18px] border border-line bg-card p-7">
+      {% block card_content %}{% endblock %}
+    </div>
+
+    {% block below_card %}{% endblock %}
+  </div>
+  {% include "partials/_theme_toggle_script.html" %}
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

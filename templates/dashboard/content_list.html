@@ -4,61 +4,72 @@
 {% block title %}{% trans "Content" %} · {{ site_settings.site_name }}{% endblock %}
 
 {% block dashboard_content %}
-<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-  <h1 class="text-xl font-bold">{% trans "Content" %}</h1>
-  <div class="flex gap-2">
-    <a href="{% url 'dashboard:category_create' %}"
-       class="rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700">{% trans "New category" %}</a>
-    <a href="{% url 'dashboard:post_create' %}"
-       class="rounded-md bg-gray-900 px-3 py-2 text-sm text-white dark:bg-gray-100 dark:text-gray-900">{% trans "New post" %}</a>
-  </div>
-</div>
-
-<div class="flex flex-col gap-2">
-  {% for post in posts %}
-    <div class="flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-900 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <p class="font-medium">{{ post.title }}</p>
-        <p class="text-xs text-gray-500 dark:text-gray-400">
-          {{ post.category.name|default:"—" }} · {{ post.created_at|date:"SHORT_DATE_FORMAT" }}
-        </p>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="rounded-full px-2 py-0.5 text-xs {% if post.status == 'published' %}bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300{% else %}bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300{% endif %}">
-          {{ post.get_status_display }}
-        </span>
-        <a href="{% url 'dashboard:post_edit' post.pk %}" class="text-sm hover:underline">{% trans "Edit" %}</a>
-        <a href="{% url 'dashboard:post_delete' post.pk %}" class="text-sm text-red-600 hover:underline dark:text-red-400">{% trans "Delete" %}</a>
-      </div>
-    </div>
-  {% empty %}
-    <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "No posts yet." %}</p>
-  {% endfor %}
-</div>
-
-{% if is_paginated %}
-  <nav class="mt-6 flex justify-center gap-2">
-    {% if page_obj.has_previous %}
-      <a href="?page={{ page_obj.previous_page_number }}" class="rounded-md border border-gray-200 px-3 py-1 text-sm dark:border-gray-700">{% trans "Previous" %}</a>
-    {% endif %}
-    <span class="px-3 py-1 text-sm text-gray-500 dark:text-gray-400">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
-    {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}" class="rounded-md border border-gray-200 px-3 py-1 text-sm dark:border-gray-700">{% trans "Next" %}</a>
-    {% endif %}
-  </nav>
-{% endif %}
-
-<div class="mt-8">
-  <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">{% trans "Categories" %}</h2>
-  <div class="flex flex-wrap gap-2">
-    {% for category in categories %}
-      <a href="{% url 'dashboard:category_edit' category.pk %}"
-         class="rounded-full border border-gray-200 px-3 py-1 text-xs hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800">
-        {{ category.name }}
+<div class="flex flex-col gap-[22px]">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <h1 class="m-0 text-[22px] font-extrabold">{% trans "Content" %}</h1>
+    <div class="flex gap-2.5">
+      <a href="{% url 'dashboard:category_create' %}"
+         class="rounded-[10px] border border-line px-4 py-2.5 text-[13px] font-semibold text-ink no-underline transition-colors hover:border-brand hover:bg-surface-soft">
+        {% trans "New category" %}
       </a>
-    {% empty %}
-      <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "No categories yet." %}</p>
-    {% endfor %}
+      <a href="{% url 'dashboard:post_create' %}"
+         class="rounded-[10px] bg-brand px-5 py-2.5 text-[13.5px] font-bold text-white no-underline transition-transform hover:-translate-y-0.5">
+        + {% trans "New post" %}
+      </a>
+    </div>
+  </div>
+
+  <div class="overflow-x-auto rounded-2xl border border-line bg-card">
+    <div class="min-w-[560px]">
+      <div class="grid grid-cols-[2fr_1fr_1fr_1fr_auto] gap-3 border-b border-line px-5 py-3.5 text-[12.5px] font-bold text-ink-faint">
+        <span>{% trans "Title" %}</span><span>{% trans "Category" %}</span><span>{% trans "Status" %}</span><span>{% trans "Date" %}</span><span></span>
+      </div>
+      {% for post in posts %}
+        <div class="grid grid-cols-[2fr_1fr_1fr_1fr_auto] items-center gap-3 border-b border-line px-5 py-3.5 text-[13.5px] transition-colors hover:bg-surface-soft">
+          <span class="font-semibold text-ink">{{ post.title }}</span>
+          <span class="text-ink-muted">{{ post.category.name|default:"—" }}</span>
+          <span class="w-fit rounded-full px-2.5 py-1 text-xs font-semibold
+                       {% if post.status == 'published' %}bg-brand-soft text-brand{% else %}bg-surface-soft text-ink-muted{% endif %}">
+            {{ post.get_status_display }}
+          </span>
+          <span class="text-[12.5px] text-ink-faint">{{ post.created_at|date:"SHORT_DATE_FORMAT" }}</span>
+          <div class="flex gap-1.5">
+            <a href="{% url 'dashboard:post_edit' post.pk %}"
+               class="rounded-lg border border-line px-2.5 py-1.5 text-xs text-ink-muted no-underline transition-colors hover:border-brand hover:bg-surface-soft">{% trans "Edit" %}</a>
+            <a href="{% url 'dashboard:post_delete' post.pk %}"
+               class="rounded-lg border border-line px-2.5 py-1.5 text-xs text-danger no-underline transition-colors hover:border-brand hover:bg-surface-soft">{% trans "Delete" %}</a>
+          </div>
+        </div>
+      {% empty %}
+        <p class="px-5 py-4 text-sm text-ink-muted">{% trans "No posts yet." %}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if is_paginated %}
+    <nav class="flex justify-center gap-2">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="rounded-[10px] border border-line px-4 py-2 text-sm font-semibold text-ink no-underline transition-colors hover:border-brand hover:text-brand">{% trans "Previous" %}</a>
+      {% endif %}
+      <span class="px-3 py-2 text-sm text-ink-muted">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="rounded-[10px] border border-line px-4 py-2 text-sm font-semibold text-ink no-underline transition-colors hover:border-brand hover:text-brand">{% trans "Next" %}</a>
+      {% endif %}
+    </nav>
+  {% endif %}
+
+  <div class="flex flex-col gap-3">
+    <span class="text-[15px] font-bold text-ink">{% trans "Categories" %}</span>
+    <div class="flex flex-wrap gap-2">
+      {% for category in categories %}
+        <a href="{% url 'dashboard:category_edit' category.pk %}"
+           class="rounded-full border border-line px-3.5 py-1.5 text-xs font-semibold text-ink-muted no-underline transition-colors hover:border-brand hover:text-brand">
+          {{ category.name }}
+        </a>
+      {% empty %}
+        <p class="text-sm text-ink-muted">{% trans "No categories yet." %}</p>
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}

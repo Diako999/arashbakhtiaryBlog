@@ -58,7 +58,12 @@ class OverviewView(OTPRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["draft_count"] = Post.objects.filter(status=Post.STATUS_DRAFT).count()
         context["published_count"] = Post.objects.filter(status=Post.STATUS_PUBLISHED).count()
+        context["offering_count"] = Offering.objects.count()
+        context["submission_count"] = Submission.objects.count()
         context["recent_posts"] = Post.objects.order_by("-created_at")[:5]
+        context["recent_submissions"] = Submission.objects.select_related(
+            "lead_magnet"
+        ).order_by("-created_at")[:5]
         return context
 
 

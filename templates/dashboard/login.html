@@ -1,39 +1,36 @@
+{% extends "dashboard/base_auth.html" %}
 {% load i18n widget_tweaks %}
-{% get_current_language_bidi as LANGUAGE_BIDI %}
-<!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% trans "Log in" %} · {{ site_settings.site_name }}</title>
-  {% include "partials/_head_assets.html" %}
-</head>
-<body class="flex min-h-screen items-center justify-center bg-gray-50 px-4 text-gray-900 dark:bg-gray-950 dark:text-gray-100">
-  <div class="w-full max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-    <h1 class="mb-6 text-lg font-bold">{{ site_settings.site_name }}</h1>
 
-    {% if form.errors %}
-      <p class="mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
-        {% trans "Incorrect username or password." %}
-      </p>
-    {% endif %}
+{% block title %}{% trans "Log in" %}{% endblock %}
+{% block heading %}{% trans "Log in to the dashboard" %}{% endblock %}
+{% block subheading %}<span class="text-[13.5px] text-ink-muted">{{ site_settings.site_name }}</span>{% endblock %}
 
-    <form method="post" class="flex flex-col gap-4">
-      {% csrf_token %}
-      <div>
-        <label for="{{ form.username.id_for_label }}" class="mb-1 block text-sm font-medium">{% trans "Username" %}</label>
-        {% render_field form.username class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800" %}
-      </div>
-      <div>
-        <label for="{{ form.password.id_for_label }}" class="mb-1 block text-sm font-medium">{% trans "Password" %}</label>
-        {% render_field form.password class="w-full rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800" %}
-      </div>
-      <input type="hidden" name="next" value="{{ next }}">
-      <button type="submit" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white dark:bg-gray-100 dark:text-gray-900">
-        {% trans "Log in" %}
-      </button>
-    </form>
-  </div>
-  {% include "partials/_theme_toggle_script.html" %}
-</body>
-</html>
+{% block card_content %}
+  {% if form.errors %}
+    <p class="m-0 rounded-[10px] border border-line bg-card px-3.5 py-2.5 text-sm text-danger">
+      {% trans "Incorrect username or password." %}
+    </p>
+  {% endif %}
+
+  <form method="post" class="flex flex-col gap-3.5">
+    {% csrf_token %}
+    <div class="flex flex-col gap-1.5">
+      <label for="{{ form.username.id_for_label }}" class="text-[13px] font-semibold text-ink-muted">{% trans "Username" %}</label>
+      {% render_field form.username class="w-full rounded-[10px] border border-line bg-surface-soft px-3.5 py-3 text-sm text-ink" %}
+    </div>
+    <div class="flex flex-col gap-1.5">
+      <label for="{{ form.password.id_for_label }}" class="text-[13px] font-semibold text-ink-muted">{% trans "Password" %}</label>
+      {% render_field form.password class="w-full rounded-[10px] border border-line bg-surface-soft px-3.5 py-3 text-sm text-ink" %}
+    </div>
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="mt-1.5 rounded-[10px] bg-brand px-4 py-3 text-[14.5px] font-bold text-white transition-transform hover:-translate-y-0.5">
+      {% trans "Log in" %}
+    </button>
+  </form>
+{% endblock %}
+
+{% block below_card %}
+  <a href="{% url 'home' %}" class="text-[13px] text-ink-faint no-underline transition-colors hover:text-brand">
+    {% trans "Back to site" %} ←
+  </a>
+{% endblock %}
