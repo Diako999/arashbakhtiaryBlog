@@ -45,10 +45,10 @@ class PostBodySanitizationTests(TestCase):
         self.assertNotIn("<script", post.body_ckb)
 
 
-class SearchVectorTests(TestCase):
-    """Search vectors are stored per language (title/excerpt/body are
-    separate fa/ckb columns under modeltranslation) — one language's search
-    must never match content that only exists in the other."""
+class SearchTests(TestCase):
+    """Search is a plain icontains match per language (title/excerpt/body
+    are separate fa/ckb columns under modeltranslation) — one language's
+    search must never match content that only exists in the other."""
 
     def setUp(self):
         self.author = User.objects.create_user(username="author2", password="pw")
@@ -60,11 +60,6 @@ class SearchVectorTests(TestCase):
             author=self.author,
             status=Post.STATUS_PUBLISHED,
         )
-
-    def test_vectors_populated_on_save(self):
-        self.post.refresh_from_db()
-        self.assertIsNotNone(self.post.search_vector_fa)
-        self.assertIsNotNone(self.post.search_vector_ckb)
 
     def test_fa_search_finds_fa_content_only(self):
         response = self.client.get(reverse("blog:list"), {"q": "آزمایش"})

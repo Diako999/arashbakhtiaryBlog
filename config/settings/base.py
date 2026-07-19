@@ -99,9 +99,20 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
-# Database
+# Database — MySQL/MariaDB via PyMySQL (see config/__init__.py for the
+# MySQLdb compatibility shim). utf8mb4 everywhere: MySQL's plain "utf8" is a
+# legacy alias capped at 3 bytes/char and can silently corrupt Persian/
+# Kurdish content, so charset is set explicitly here rather than left to
+# server/database defaults.
+# django.db.models.JSONField (used by ThemeConfig.colors, SiteSetting.social_links)
+# requires MySQL 5.7.8+ or MariaDB 10.2.7+ — both comfortably satisfied by any
+# current MariaDB/MySQL release, so no code changes needed there.
 DATABASES = {
     "default": env.db("DATABASE_URL"),
+}
+DATABASES["default"]["OPTIONS"] = {
+    "charset": "utf8mb4",
+    "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
 }
 
 

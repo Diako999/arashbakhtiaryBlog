@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.db.models import F
+from django.db.models import F, Q
 from django.utils.decorators import method_decorator
 from django.utils.translation import get_language, gettext as _
 from django.views.generic import DetailView, ListView
@@ -35,9 +35,15 @@ class PostListView(PublishedPostQuerysetMixin, SeoContextMixin, ListView):
             qs = qs.filter(tags__slug=tag_slug)
         query = self.request.GET.get("q")
         if query:
-            # Stored, GIN-indexed vector (populated on save) — one per
-            # language, since title/excerpt/body are separate fa/ckb columns.
-            qs = qs.filter(**{f"search_vector_{get_language()}": query})
+            # Plain icontains across the active language's columns — no
+            # ranking or stemming, since title/excerpt/body are separate
+            # fa/ckb columns under modeltranslation.
+            lang = get_language()
+            qs = qs.filter(
+                Q(**{f"title_{lang}__icontains": query})
+                | Q(**{f"excerpt_{lang}__icontains": query})
+                | Q(**{f"body_{lang}__icontains": query})
+            )
         return qs.distinct()
 
     def get_context_data(self, **kwargs):

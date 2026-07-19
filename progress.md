@@ -65,7 +65,7 @@ Deviations from those two docs, agreed with the user during this build:
 ## Environment (local dev)
 
 - Python 3.12 in `.venv/` (project venv — activate with `source .venv/bin/activate`)
-- PostgreSQL role `prodblog` / db `prodblog_dev`, credentials in `.env` (gitignored)
+- MariaDB user `prodblog` / db `prodblog_dev` (utf8mb4/utf8mb4_unicode_ci), credentials in `.env` (gitignored)
 - Tailwind standalone CLI at `bin/tailwindcss` (gitignored, large binary) —
   re-download any time with `bin/fetch-tailwind.sh`
 - Git remote: `origin` → https://github.com/Diako999/arashbakhtiaryBlog.git
@@ -214,6 +214,46 @@ That prints the current 6-digit code to submit at `/dashboard/otp/verify/`.
   `label = "<app>"` in its `AppConfig`.
 - `modeltranslation` is installed and listed first in `INSTALLED_APPS`
   (required load order), default language `fa`, fallback `ckb`.
+
+## PostgreSQL → MySQL/MariaDB migration (2026-07-19)
+
+Hosting moved to IranServer's shared Python plan, which only offers MySQL/
+MariaDB and blocks packages needing compilation at install time. Migrated
+the database layer:
+
+- `psycopg[binary]` → `PyMySQL` (pure Python, no compiler needed), wired via
+  the `pymysql.install_as_MySQLdb()` shim in `config/__init__.py` (Django's
+  documented pattern — must run before anything touches the DB layer).
+- `DATABASES` (`config/settings/base.py`) now sets `OPTIONS={"charset":
+  "utf8mb4", "init_command": "SET sql_mode='STRICT_TRANS_TABLES'"}`
+  explicitly, rather than relying on server defaults — MySQL's plain
+  `utf8` is a legacy 3-byte alias that can silently corrupt Persian/Kurdish
+  content. `DATABASE_URL` scheme is now `mysql://` (`.env`, `.env.example`).
+- Full-text search rewritten: removed `Post.search_vector_fa/_ckb`
+  (`django.contrib.postgres.search.SearchVectorField`) and the GIN indexes
+  entirely — `apps/blog/views.py`'s search is now a plain
+  `Q(...icontains=...)` across title/excerpt/body for the active language.
+  No ranking/stemming; a deliberate scope decision, not a placeholder.
+  Migration `0004_post_search_vector_...` (the one that added those Postgres
+  fields) was deleted outright and `0005` repointed at `0003` — safe because
+  this project had no production deployment yet, so migration history had
+  no external consumers to preserve.
+- `JSONField` usage (`ThemeConfig.colors`, `SiteSetting.social_links`) needed
+  no changes — native on MySQL 5.7.8+/MariaDB 10.2.7+.
+- Added `passenger_wsgi.py` at the project root for cPanel's "Setup Python
+  App" / Passenger WSGI integration (IranServer's actual deploy mechanism,
+  not a systemd-managed Gunicorn process).
+- Verified: fresh `migrate` on an empty MySQL DB succeeds unattended,
+  `makemigrations --check` shows no drift, full `manage.py test` suite
+  (27 tests) passes against a real MariaDB 11.8.6 instance (not SQLite),
+  and search was manually verified end-to-end (create post → search finds
+  it by a unique word → absent for non-matching query → correctly isolated
+  per language) against the real dev database.
+- Left as-is (out of scope, flagged for review): `apps/core/management/
+  commands/seed_demo_content.py` seeds one demo blog post whose *topic* is
+  Postgres full-text search (Persian/Kurdish tutorial-style prose, tagged
+  "PostgreSQL") — this is sample content, not infrastructure, so it wasn't
+  rewritten; worth a look if it'll confuse anyone browsing seeded demo data.
 
 ## How to resume
 

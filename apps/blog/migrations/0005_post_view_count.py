@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0004_post_search_vector_ckb_post_search_vector_fa_and_more'),
+        ('blog', '0003_alter_post_cover_image'),
     ]
 
     operations = [
