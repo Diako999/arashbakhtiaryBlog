@@ -5,6 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ArashBlog</title>
+    <script>
+      // Pre-paint light/dark mode, mirroring the Django project's inline
+      // script in _head_assets.html — avoids a flash of the wrong mode
+      // before React mounts and ThemeProvider fetches the DB default. Only
+      // covers dark/light; brand/accent hex colors still flash briefly
+      // since those aren't knowable before the API responds (see
+      // ThemeProvider.tsx).
+      (function () {
+        var saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.setAttribute("data-theme", saved);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

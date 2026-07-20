@@ -85,6 +85,7 @@
       "testimonials": "نظرات",
       "leads": "منابع رایگان",
       "pages": "صفحات",
+      "settings": "تنظیمات",
       "logout": "خروج"
     },
     "overview": {
@@ -188,7 +189,28 @@
       "title": "صفحات",
       "description": "بخش‌هایی که هنوز آماده انتشار نیستند را می‌توانید پنهان نگه دارید و هر زمان آماده بودند، منتشر کنید.",
       "published": "منتشرشده",
-      "hidden": "پنهان"
+      "hidden": "پنهان",
+      "content": "محتوای صفحات"
+    },
+    "settings": {
+      "siteTitle": "اطلاعات سایت",
+      "siteName": "نام سایت",
+      "logoUrl": "آدرس لوگو",
+      "contactEmail": "ایمیل تماس",
+      "contactPhone": "تلفن تماس",
+      "instagram": "اینستاگرام",
+      "telegram": "تلگرام",
+      "twitter": "توییتر / X",
+      "linkedin": "لینکدین",
+      "whatsapp": "واتساپ",
+      "metaDescription": "توضیح متا",
+      "saved": "ذخیره شد.",
+      "themeTitle": "قالب و رنگ‌ها",
+      "brandColor": "رنگ اصلی",
+      "accentColor": "رنگ تأکیدی",
+      "defaultMode": "حالت پیش‌فرض",
+      "light": "روشن",
+      "dark": "تیره"
     }
   }
 }

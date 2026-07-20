@@ -84,6 +84,7 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     await NavItemSeeder.EnsureAsync(db);
+    await FlatPageSeeder.EnsureAsync(db);
 }
 
 // Split from the block above on purpose: the test host runs under a

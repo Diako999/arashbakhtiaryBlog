@@ -1,0 +1,162 @@
+import { useEffect, useState, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { dashboardApi } from "../../api/dashboard";
+import type { SiteSettingDto, ThemeDto } from "../../api/types";
+
+const emptySite: SiteSettingDto = {
+  siteName: "",
+  logoUrl: "",
+  contactEmail: "",
+  contactPhone: "",
+  instagramUrl: "",
+  telegramUrl: "",
+  twitterUrl: "",
+  linkedinUrl: "",
+  whatsappUrl: "",
+  metaDescription: "",
+};
+
+const emptyTheme: ThemeDto = { brandColor: "#0f9d8e", accentColor: "#f0b429", defaultMode: "Dark" };
+
+export default function SettingsPage() {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+
+  const [siteForm, setSiteForm] = useState<SiteSettingDto>(emptySite);
+  const [siteSaved, setSiteSaved] = useState(false);
+  const [themeForm, setThemeForm] = useState<ThemeDto>(emptyTheme);
+  const [themeError, setThemeError] = useState(false);
+  const [themeSaved, setThemeSaved] = useState(false);
+
+  const { data: site } = useQuery({ queryKey: ["dashboard-site-setting"], queryFn: dashboardApi.siteSetting });
+  const { data: theme } = useQuery({ queryKey: ["dashboard-theme"], queryFn: dashboardApi.theme });
+
+  useEffect(() => {
+    if (site) setSiteForm(site);
+  }, [site]);
+
+  useEffect(() => {
+    if (theme) setThemeForm(theme);
+  }, [theme]);
+
+  async function handleSiteSubmit(e: FormEvent) {
+    e.preventDefault();
+    await dashboardApi.updateSiteSetting(siteForm);
+    setSiteSaved(true);
+    void queryClient.invalidateQueries({ queryKey: ["site-settings"] });
+  }
+
+  async function handleThemeSubmit(e: FormEvent) {
+    e.preventDefault();
+    setThemeError(false);
+    try {
+      await dashboardApi.updateTheme(themeForm);
+      setThemeSaved(true);
+      void queryClient.invalidateQueries({ queryKey: ["site-theme"] });
+    } catch {
+      setThemeError(true);
+    }
+  }
+
+  const inputClass = "w-full rounded-lg border border-line bg-card px-3 py-2";
+  const labelClass = "mb-1 block text-sm text-ink-muted";
+
+  return (
+    <div className="flex max-w-2xl flex-col gap-10">
+      <div>
+        <h1 className="mb-4 text-2xl font-bold">{t("dashboard.settings.siteTitle")}</h1>
+        <form onSubmit={(e) => void handleSiteSubmit(e)} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="sm:col-span-2">
+            <label className={labelClass}>{t("dashboard.settings.siteName")}</label>
+            <input required value={siteForm.siteName} onChange={(e) => setSiteForm({ ...siteForm, siteName: e.target.value })} className={inputClass} />
+          </div>
+          <div className="sm:col-span-2">
+            <label className={labelClass}>{t("dashboard.settings.logoUrl")}</label>
+            <input value={siteForm.logoUrl ?? ""} onChange={(e) => setSiteForm({ ...siteForm, logoUrl: e.target.value })} className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.contactEmail")}</label>
+            <input dir="ltr" value={siteForm.contactEmail} onChange={(e) => setSiteForm({ ...siteForm, contactEmail: e.target.value })} className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.contactPhone")}</label>
+            <input dir="ltr" value={siteForm.contactPhone} onChange={(e) => setSiteForm({ ...siteForm, contactPhone: e.target.value })} className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.instagram")}</label>
+            <input dir="ltr" value={siteForm.instagramUrl} onChange={(e) => setSiteForm({ ...siteForm, instagramUrl: e.target.value })} className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.telegram")}</label>
+            <input dir="ltr" value={siteForm.telegramUrl} onChange={(e) => setSiteForm({ ...siteForm, telegramUrl: e.target.value })} className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.twitter")}</label>
+            <input dir="ltr" value={siteForm.twitterUrl} onChange={(e) => setSiteForm({ ...siteForm, twitterUrl: e.target.value })} className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.linkedin")}</label>
+            <input dir="ltr" value={siteForm.linkedinUrl} onChange={(e) => setSiteForm({ ...siteForm, linkedinUrl: e.target.value })} className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.whatsapp")}</label>
+            <input dir="ltr" value={siteForm.whatsappUrl} onChange={(e) => setSiteForm({ ...siteForm, whatsappUrl: e.target.value })} className={inputClass} />
+          </div>
+          <div className="sm:col-span-2">
+            <label className={labelClass}>{t("dashboard.settings.metaDescription")}</label>
+            <textarea rows={2} value={siteForm.metaDescription} onChange={(e) => setSiteForm({ ...siteForm, metaDescription: e.target.value })} className={inputClass} />
+          </div>
+          <div className="sm:col-span-2 flex items-center gap-3">
+            <button type="submit" className="rounded-lg bg-brand px-5 py-2 font-bold text-white">
+              {t("dashboard.postForm.save")}
+            </button>
+            {siteSaved && <p className="text-brand">{t("dashboard.settings.saved")}</p>}
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <h1 className="mb-4 text-2xl font-bold">{t("dashboard.settings.themeTitle")}</h1>
+        <form onSubmit={(e) => void handleThemeSubmit(e)} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.brandColor")}</label>
+            <input
+              type="color"
+              value={themeForm.brandColor}
+              onChange={(e) => setThemeForm({ ...themeForm, brandColor: e.target.value })}
+              className="h-10 w-full rounded-lg border border-line bg-card"
+            />
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.accentColor")}</label>
+            <input
+              type="color"
+              value={themeForm.accentColor}
+              onChange={(e) => setThemeForm({ ...themeForm, accentColor: e.target.value })}
+              className="h-10 w-full rounded-lg border border-line bg-card"
+            />
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.defaultMode")}</label>
+            <select
+              value={themeForm.defaultMode}
+              onChange={(e) => setThemeForm({ ...themeForm, defaultMode: e.target.value as "Light" | "Dark" })}
+              className={inputClass}
+            >
+              <option value="Light">{t("dashboard.settings.light")}</option>
+              <option value="Dark">{t("dashboard.settings.dark")}</option>
+            </select>
+          </div>
+          <div className="sm:col-span-2 flex items-center gap-3">
+            <button type="submit" className="rounded-lg bg-brand px-5 py-2 font-bold text-white">
+              {t("dashboard.postForm.save")}
+            </button>
+            {themeSaved && <p className="text-brand">{t("dashboard.settings.saved")}</p>}
+            {themeError && <p className="text-danger">{t("dashboard.postForm.error")}</p>}
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}

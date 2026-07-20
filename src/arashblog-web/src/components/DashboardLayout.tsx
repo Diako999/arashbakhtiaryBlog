@@ -76,6 +76,9 @@ export default function DashboardLayout() {
           <NavLink to="/dashboard/pages" className={navItemClass}>
             {t("dashboard.nav.pages")}
           </NavLink>
+          <NavLink to="/dashboard/settings" className={navItemClass}>
+            {t("dashboard.nav.settings")}
+          </NavLink>
         </nav>
         <div className="mt-8 border-t border-line pt-4">
           {username && <p className="mb-2 px-2 text-sm text-ink-muted">{username}</p>}

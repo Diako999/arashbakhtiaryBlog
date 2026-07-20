@@ -3,6 +3,7 @@ import type {
   AnalyticsDto,
   DashboardCategoryDto,
   DashboardCommentDto,
+  DashboardFlatPageDto,
   DashboardLeadMagnetDetailDto,
   DashboardLeadMagnetListItemDto,
   DashboardNavItemDto,
@@ -13,11 +14,16 @@ import type {
   DashboardSubmissionDto,
   DashboardTestimonialDto,
   OverviewDto,
+  SiteSettingDto,
+  ThemeDto,
   UpsertCategoryRequest,
+  UpsertFlatPageRequest,
   UpsertLeadMagnetRequest,
   UpsertOfferingRequest,
   UpsertPostRequest,
+  UpsertSiteSettingRequest,
   UpsertTestimonialRequest,
+  UpsertThemeRequest,
 } from "./types";
 
 export const dashboardApi = {
@@ -67,4 +73,14 @@ export const dashboardApi = {
 
   navItems: () => api.get<DashboardNavItemDto[]>("/dashboard/nav-items"),
   toggleNavItem: (id: number) => api.post<void>(`/dashboard/nav-items/${id}/toggle`),
+
+  flatPages: () => api.get<DashboardFlatPageDto[]>("/dashboard/flat-pages"),
+  flatPage: (id: number) => api.get<DashboardFlatPageDto>(`/dashboard/flat-pages/${id}`),
+  updateFlatPage: (id: number, data: UpsertFlatPageRequest) =>
+    api.put<DashboardFlatPageDto>(`/dashboard/flat-pages/${id}`, data),
+
+  siteSetting: () => api.get<SiteSettingDto>("/dashboard/settings/site"),
+  updateSiteSetting: (data: UpsertSiteSettingRequest) => api.put<SiteSettingDto>("/dashboard/settings/site", data),
+  theme: () => api.get<ThemeDto>("/dashboard/settings/theme"),
+  updateTheme: (data: UpsertThemeRequest) => api.put<ThemeDto>("/dashboard/settings/theme", data),
 };

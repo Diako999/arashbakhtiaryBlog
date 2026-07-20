@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { blogApi } from "../api/blog";
+import { useSeo } from "../hooks/useSeo";
 import { defaultLanguage } from "../i18n";
 
 export default function PostDetail() {
@@ -33,6 +34,8 @@ export default function PostDetail() {
     e.preventDefault();
     commentMutation.mutate();
   }
+
+  useSeo({ title: post?.title ?? t("common.loading"), description: post?.excerpt, image: post?.coverImageUrl });
 
   if (isLoading) return <p>{t("common.loading")}</p>;
   if (!post) return <p>{t("blog.noPosts")}</p>;

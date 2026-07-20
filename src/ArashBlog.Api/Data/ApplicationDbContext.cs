@@ -21,6 +21,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Testimonial> Testimonials => Set<Testimonial>();
     public DbSet<LeadMagnet> LeadMagnets => Set<LeadMagnet>();
     public DbSet<Submission> Submissions => Set<Submission>();
+    public DbSet<FlatPage> FlatPages => Set<FlatPage>();
+    public DbSet<SiteSetting> SiteSettings => Set<SiteSetting>();
+    public DbSet<ThemeConfig> ThemeConfigs => Set<ThemeConfig>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -135,6 +138,32 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             e.Property(s => s.Name).HasMaxLength(120);
             e.Property(s => s.Email).HasMaxLength(256);
             e.HasOne(s => s.LeadMagnet).WithMany(l => l.Submissions).HasForeignKey(s => s.LeadMagnetId).OnDelete(DeleteBehavior.Cascade);
+        });
+
+        builder.Entity<FlatPage>(e =>
+        {
+            e.HasIndex(p => p.Slug).IsUnique();
+            e.Property(p => p.Slug).HasMaxLength(100);
+            e.Property(p => p.TitleFa).HasMaxLength(200);
+            e.Property(p => p.TitleCkb).HasMaxLength(200);
+            e.Property(p => p.MetaTitleFa).HasMaxLength(70);
+            e.Property(p => p.MetaTitleCkb).HasMaxLength(70);
+            e.Property(p => p.MetaDescriptionFa).HasMaxLength(160);
+            e.Property(p => p.MetaDescriptionCkb).HasMaxLength(160);
+        });
+
+        builder.Entity<SiteSetting>(e =>
+        {
+            e.Property(s => s.SiteName).HasMaxLength(120);
+            e.Property(s => s.ContactEmail).HasMaxLength(256);
+            e.Property(s => s.ContactPhone).HasMaxLength(40);
+            e.Property(s => s.MetaDescription).HasMaxLength(300);
+        });
+
+        builder.Entity<ThemeConfig>(e =>
+        {
+            e.Property(t => t.BrandColor).HasMaxLength(7);
+            e.Property(t => t.AccentColor).HasMaxLength(7);
         });
     }
 }

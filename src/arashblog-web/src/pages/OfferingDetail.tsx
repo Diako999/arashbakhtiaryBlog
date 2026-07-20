@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { offeringsApi } from "../api/offerings";
+import { useSeo } from "../hooks/useSeo";
 import { defaultLanguage } from "../i18n";
 
 export default function OfferingDetail() {
@@ -37,6 +38,8 @@ export default function OfferingDetail() {
     e.preventDefault();
     enrollMutation.mutate();
   }
+
+  useSeo({ title: offering?.title ?? t("common.loading"), description: offering?.summary, image: offering?.coverImageUrl });
 
   if (isLoading) return <p>{t("common.loading")}</p>;
   if (!offering) return <p>{t("offerings.none")}</p>;

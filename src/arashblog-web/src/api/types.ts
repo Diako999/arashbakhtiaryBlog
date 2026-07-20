@@ -326,3 +326,51 @@ export interface DashboardNavItemDto {
   title: string;
   isVisible: boolean;
 }
+
+// --- Flat pages (about/contact) ---
+
+export interface FlatPageDto {
+  slug: string;
+  title: string;
+  bodyHtml: string;
+}
+
+export interface DashboardFlatPageDto {
+  id: number;
+  slug: string;
+  titleFa: string;
+  titleCkb: string;
+  bodyFa: string;
+  bodyCkb: string;
+  metaTitleFa: string;
+  metaTitleCkb: string;
+  metaDescriptionFa: string;
+  metaDescriptionCkb: string;
+}
+
+export type UpsertFlatPageRequest = Omit<DashboardFlatPageDto, "id" | "slug">;
+
+// --- Site settings + theme ---
+
+export interface SiteSettingDto {
+  siteName: string;
+  logoUrl: string | null;
+  contactEmail: string;
+  contactPhone: string;
+  instagramUrl: string;
+  telegramUrl: string;
+  twitterUrl: string;
+  linkedinUrl: string;
+  whatsappUrl: string;
+  metaDescription: string;
+}
+
+export type UpsertSiteSettingRequest = SiteSettingDto;
+
+export interface ThemeDto {
+  brandColor: string;
+  accentColor: string;
+  defaultMode: "Light" | "Dark";
+}
+
+export type UpsertThemeRequest = ThemeDto;

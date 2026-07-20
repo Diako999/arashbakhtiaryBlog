@@ -8,6 +8,7 @@ import OfferingDetail from "./pages/OfferingDetail";
 import TestimonialList from "./pages/TestimonialList";
 import LeadList from "./pages/LeadList";
 import LeadDetail from "./pages/LeadDetail";
+import FlatPage from "./pages/FlatPage";
 import Login from "./pages/Login";
 import OtpSetup from "./pages/OtpSetup";
 import OtpVerify from "./pages/OtpVerify";
@@ -23,6 +24,7 @@ import LeadsList from "./pages/dashboard/LeadsList";
 import LeadForm from "./pages/dashboard/LeadForm";
 import SubmissionInbox from "./pages/dashboard/SubmissionInbox";
 import PagesVisibility from "./pages/dashboard/PagesVisibility";
+import SettingsPage from "./pages/dashboard/SettingsPage";
 import { defaultLanguage } from "./i18n";
 
 export default function App() {
@@ -38,6 +40,8 @@ export default function App() {
         <Route path="testimonials" element={<TestimonialList />} />
         <Route path="free-resource" element={<LeadList />} />
         <Route path="free-resource/:slug" element={<LeadDetail />} />
+        <Route path="about" element={<FlatPage slug="about" />} />
+        <Route path="contact" element={<FlatPage slug="contact" />} />
       </Route>
 
       <Route path="/dashboard/login" element={<Login />} />
@@ -60,6 +64,7 @@ export default function App() {
         <Route path="leads/:id/edit" element={<LeadForm />} />
         <Route path="leads/submissions" element={<SubmissionInbox />} />
         <Route path="pages" element={<PagesVisibility />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to={`/${defaultLanguage}/blog`} replace />} />

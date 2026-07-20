@@ -18,6 +18,7 @@ public static class NavItemSeeder
         ("offerings", "/offerings", "دوره‌ها", "کۆرسەکان", false, 2),
         ("testimonials", "/testimonials", "نظرات", "ڕاوبۆچوونەکان", false, 3),
         ("leads", "/free-resource", "منابع رایگان", "سەرچاوەی بەخۆڕایی", false, 4),
+        ("pages", "/about", "درباره ما", "دەربارەی ئێمە", false, 5),
     ];
 
     public static async Task EnsureAsync(ApplicationDbContext db)
