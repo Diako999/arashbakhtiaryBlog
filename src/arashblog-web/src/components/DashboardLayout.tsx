@@ -64,6 +64,18 @@ export default function DashboardLayout() {
           <NavLink to="/dashboard/comments" className={navItemClass}>
             {t("dashboard.nav.comments")}
           </NavLink>
+          <NavLink to="/dashboard/offerings" className={navItemClass}>
+            {t("dashboard.nav.offerings")}
+          </NavLink>
+          <NavLink to="/dashboard/testimonials" className={navItemClass}>
+            {t("dashboard.nav.testimonials")}
+          </NavLink>
+          <NavLink to="/dashboard/leads" className={navItemClass}>
+            {t("dashboard.nav.leads")}
+          </NavLink>
+          <NavLink to="/dashboard/pages" className={navItemClass}>
+            {t("dashboard.nav.pages")}
+          </NavLink>
         </nav>
         <div className="mt-8 border-t border-line pt-4">
           {username && <p className="mb-2 px-2 text-sm text-ink-muted">{username}</p>}

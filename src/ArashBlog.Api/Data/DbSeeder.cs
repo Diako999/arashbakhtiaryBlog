@@ -21,20 +21,6 @@ public static class DbSeeder
 
         await db.Database.MigrateAsync();
 
-        if (!await db.NavItems.AnyAsync(n => n.Key == "blog"))
-        {
-            db.NavItems.Add(new NavItem
-            {
-                Key = "blog",
-                Path = "/blog",
-                TitleFa = "وبلاگ",
-                TitleCkb = "بلۆگ",
-                IsVisible = true,
-                Order = 1,
-            });
-            await db.SaveChangesAsync();
-        }
-
         var admin = await userManager.FindByNameAsync(DevAdminUsername);
         if (admin is null)
         {

@@ -15,6 +15,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<Comment> Comments => Set<Comment>();
     public DbSet<NavItem> NavItems => Set<NavItem>();
+    public DbSet<Offering> Offerings => Set<Offering>();
+    public DbSet<Session> Sessions => Set<Session>();
+    public DbSet<Enrollment> Enrollments => Set<Enrollment>();
+    public DbSet<Testimonial> Testimonials => Set<Testimonial>();
+    public DbSet<LeadMagnet> LeadMagnets => Set<LeadMagnet>();
+    public DbSet<Submission> Submissions => Set<Submission>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -65,6 +71,70 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             e.Property(n => n.TitleCkb).HasMaxLength(60);
             e.Property(n => n.Key).HasMaxLength(50);
             e.Property(n => n.Path).HasMaxLength(200);
+        });
+
+        builder.Entity<Offering>(e =>
+        {
+            e.HasIndex(o => o.Slug).IsUnique();
+            e.Property(o => o.TitleFa).HasMaxLength(200);
+            e.Property(o => o.TitleCkb).HasMaxLength(200);
+            e.Property(o => o.Slug).HasMaxLength(220);
+            e.Property(o => o.SummaryFa).HasMaxLength(300);
+            e.Property(o => o.SummaryCkb).HasMaxLength(300);
+            e.Property(o => o.Price).HasPrecision(10, 2);
+            e.Property(o => o.MetaTitleFa).HasMaxLength(70);
+            e.Property(o => o.MetaTitleCkb).HasMaxLength(70);
+            e.Property(o => o.MetaDescriptionFa).HasMaxLength(160);
+            e.Property(o => o.MetaDescriptionCkb).HasMaxLength(160);
+        });
+
+        builder.Entity<Session>(e =>
+        {
+            e.Property(s => s.Location).HasMaxLength(200);
+            e.HasOne(s => s.Offering).WithMany(o => o.Sessions).HasForeignKey(s => s.OfferingId).OnDelete(DeleteBehavior.Cascade);
+        });
+
+        builder.Entity<Enrollment>(e =>
+        {
+            e.Property(en => en.Name).HasMaxLength(120);
+            e.Property(en => en.Email).HasMaxLength(256);
+            e.Property(en => en.Phone).HasMaxLength(40);
+            e.HasOne(en => en.Offering).WithMany(o => o.Enrollments).HasForeignKey(en => en.OfferingId).OnDelete(DeleteBehavior.Cascade);
+            // ClientSetNull, not SetNull: SQL Server refuses a DB-level ON
+            // DELETE SET NULL here because Offering already cascades to
+            // Enrollment directly AND indirectly via Session, and two
+            // cascade paths to the same table isn't allowed. EF still
+            // nulls the FK for tracked entities in the same context;
+            // deleting a Session out from under enrollments loaded in a
+            // different context is not a scenario this app has.
+            e.HasOne(en => en.Session).WithMany(s => s.Enrollments).HasForeignKey(en => en.SessionId).OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+        builder.Entity<Testimonial>(e =>
+        {
+            e.Property(t => t.AuthorName).HasMaxLength(120);
+            e.Property(t => t.AuthorRoleFa).HasMaxLength(150);
+            e.Property(t => t.AuthorRoleCkb).HasMaxLength(150);
+            e.HasOne(t => t.Offering).WithMany().HasForeignKey(t => t.OfferingId).OnDelete(DeleteBehavior.SetNull);
+        });
+
+        builder.Entity<LeadMagnet>(e =>
+        {
+            e.HasIndex(l => l.Slug).IsUnique();
+            e.Property(l => l.TitleFa).HasMaxLength(200);
+            e.Property(l => l.TitleCkb).HasMaxLength(200);
+            e.Property(l => l.Slug).HasMaxLength(220);
+            e.Property(l => l.MetaTitleFa).HasMaxLength(70);
+            e.Property(l => l.MetaTitleCkb).HasMaxLength(70);
+            e.Property(l => l.MetaDescriptionFa).HasMaxLength(160);
+            e.Property(l => l.MetaDescriptionCkb).HasMaxLength(160);
+        });
+
+        builder.Entity<Submission>(e =>
+        {
+            e.Property(s => s.Name).HasMaxLength(120);
+            e.Property(s => s.Email).HasMaxLength(256);
+            e.HasOne(s => s.LeadMagnet).WithMany(l => l.Submissions).HasForeignKey(s => s.LeadMagnetId).OnDelete(DeleteBehavior.Cascade);
         });
     }
 }

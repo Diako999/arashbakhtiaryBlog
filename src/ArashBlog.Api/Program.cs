@@ -75,6 +75,17 @@ if (app.Environment.IsDevelopment())
     await DbSeeder.SeedAsync(app.Services);
 }
 
+// Unconditional (dev, test, and prod alike) — these NavItem rows are real
+// application configuration the phased-rollout mechanism depends on, not
+// demo content. Prod is expected to have already run migrations as a
+// separate deploy step before the app starts, same assumption the Django
+// project's own navigation-seed migration made.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await NavItemSeeder.EnsureAsync(db);
+}
+
 // Split from the block above on purpose: the test host runs under a
 // "Testing" environment (see ArashBlog.Api.Tests/TestWebApplicationFactory)
 // so it gets neither the dev-only seed (which calls Database.MigrateAsync,

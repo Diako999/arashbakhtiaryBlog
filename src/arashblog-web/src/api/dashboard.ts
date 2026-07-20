@@ -3,11 +3,21 @@ import type {
   AnalyticsDto,
   DashboardCategoryDto,
   DashboardCommentDto,
+  DashboardLeadMagnetDetailDto,
+  DashboardLeadMagnetListItemDto,
+  DashboardNavItemDto,
+  DashboardOfferingDetailDto,
+  DashboardOfferingListResponse,
   DashboardPostDetailDto,
   DashboardPostListResponse,
+  DashboardSubmissionDto,
+  DashboardTestimonialDto,
   OverviewDto,
   UpsertCategoryRequest,
+  UpsertLeadMagnetRequest,
+  UpsertOfferingRequest,
   UpsertPostRequest,
+  UpsertTestimonialRequest,
 } from "./types";
 
 export const dashboardApi = {
@@ -28,4 +38,33 @@ export const dashboardApi = {
   comments: () => api.get<DashboardCommentDto[]>("/dashboard/comments"),
   toggleComment: (id: number) => api.post<void>(`/dashboard/comments/${id}/toggle`),
   deleteComment: (id: number) => api.del(`/dashboard/comments/${id}`),
+
+  offerings: () => api.get<DashboardOfferingListResponse>("/dashboard/offerings"),
+  offering: (id: number) => api.get<DashboardOfferingDetailDto>(`/dashboard/offerings/${id}`),
+  createOffering: (data: UpsertOfferingRequest) => api.post<DashboardOfferingDetailDto>("/dashboard/offerings", data),
+  updateOffering: (id: number, data: UpsertOfferingRequest) =>
+    api.put<DashboardOfferingDetailDto>(`/dashboard/offerings/${id}`, data),
+  deleteOffering: (id: number) => api.del(`/dashboard/offerings/${id}`),
+
+  testimonials: () => api.get<DashboardTestimonialDto[]>("/dashboard/testimonials"),
+  createTestimonial: (data: UpsertTestimonialRequest) =>
+    api.post<DashboardTestimonialDto>("/dashboard/testimonials", data),
+  updateTestimonial: (id: number, data: UpsertTestimonialRequest) =>
+    api.put<DashboardTestimonialDto>(`/dashboard/testimonials/${id}`, data),
+  deleteTestimonial: (id: number) => api.del(`/dashboard/testimonials/${id}`),
+  toggleTestimonialApproved: (id: number) => api.post<void>(`/dashboard/testimonials/${id}/toggle`),
+  moveTestimonial: (id: number, direction: "up" | "down") =>
+    api.post<void>(`/dashboard/testimonials/${id}/move/${direction}`),
+
+  leadMagnets: () => api.get<DashboardLeadMagnetListItemDto[]>("/dashboard/leads"),
+  leadMagnet: (id: number) => api.get<DashboardLeadMagnetDetailDto>(`/dashboard/leads/${id}`),
+  createLeadMagnet: (data: UpsertLeadMagnetRequest) => api.post<DashboardLeadMagnetDetailDto>("/dashboard/leads", data),
+  updateLeadMagnet: (id: number, data: UpsertLeadMagnetRequest) =>
+    api.put<DashboardLeadMagnetDetailDto>(`/dashboard/leads/${id}`, data),
+  deleteLeadMagnet: (id: number) => api.del(`/dashboard/leads/${id}`),
+  submissions: () => api.get<DashboardSubmissionDto[]>("/dashboard/leads/submissions"),
+  toggleSubmissionContacted: (id: number) => api.post<void>(`/dashboard/leads/submissions/${id}/toggle`),
+
+  navItems: () => api.get<DashboardNavItemDto[]>("/dashboard/nav-items"),
+  toggleNavItem: (id: number) => api.post<void>(`/dashboard/nav-items/${id}/toggle`),
 };

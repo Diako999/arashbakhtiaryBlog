@@ -51,12 +51,40 @@
     "loading": "در حال بارگذاری...",
     "back": "بازگشت"
   },
+  "offerings": {
+    "none": "دوره‌ای یافت نشد.",
+    "currency": "تومان",
+    "enrollTitle": "ثبت‌نام",
+    "enrollSuccess": "متشکریم — درخواست ثبت‌نام شما دریافت شد.",
+    "noSessionPreference": "بدون ترجیح جلسه",
+    "form": {
+      "name": "نام",
+      "email": "ایمیل",
+      "phone": "تلفن",
+      "notes": "توضیحات",
+      "submit": "ثبت‌نام",
+      "error": "ثبت‌نام با خطا مواجه شد."
+    }
+  },
+  "testimonials": {
+    "none": "نظری یافت نشد."
+  },
+  "leads": {
+    "none": "منبعی یافت نشد.",
+    "submitSuccess": "متشکریم — اکنون می‌توانید فایل را دانلود کنید.",
+    "download": "دانلود فایل",
+    "getIt": "دریافت رایگان"
+  },
   "dashboard": {
     "nav": {
       "overview": "نمای کلی",
       "analytics": "آمار",
       "content": "محتوا",
       "comments": "دیدگاه‌ها",
+      "offerings": "دوره‌ها",
+      "testimonials": "نظرات",
+      "leads": "منابع رایگان",
+      "pages": "صفحات",
       "logout": "خروج"
     },
     "overview": {
@@ -112,6 +140,55 @@
       "approve": "تأیید",
       "unapprove": "لغو تأیید",
       "none": "دیدگاهی وجود ندارد."
+    },
+    "offerings": {
+      "title": "دوره‌ها",
+      "newOffering": "دوره جدید"
+    },
+    "offeringForm": {
+      "newTitle": "دوره جدید",
+      "editTitle": "ویرایش دوره",
+      "summaryFa": "خلاصه (فارسی)",
+      "summaryCkb": "خلاصه (کوردی)",
+      "price": "قیمت",
+      "sessions": "جلسات",
+      "addSession": "افزودن جلسه",
+      "location": "مکان / لینک",
+      "capacity": "ظرفیت",
+      "noSessions": "جلسه‌ای ثبت نشده است.",
+      "enrollments": "ثبت‌نام‌ها"
+    },
+    "testimonials": {
+      "title": "مدیریت نظرات",
+      "newTestimonial": "نظر جدید",
+      "authorName": "نام",
+      "videoUrl": "آدرس ویدیو",
+      "roleFa": "سمت (فارسی)",
+      "roleCkb": "سمت (کوردی)",
+      "quoteFa": "متن نظر (فارسی)",
+      "quoteCkb": "متن نظر (کوردی)"
+    },
+    "leads": {
+      "title": "منابع رایگان",
+      "newLead": "منبع جدید",
+      "inbox": "صندوق درخواست‌ها",
+      "exportCsv": "خروجی CSV",
+      "contacted": "تماس گرفته شد",
+      "notContacted": "تماس گرفته نشد",
+      "noSubmissions": "درخواستی ثبت نشده است."
+    },
+    "leadForm": {
+      "newTitle": "منبع جدید",
+      "editTitle": "ویرایش منبع",
+      "descriptionFa": "توضیح (فارسی)",
+      "descriptionCkb": "توضیح (کوردی)",
+      "fileUrl": "آدرس فایل"
+    },
+    "pages": {
+      "title": "صفحات",
+      "description": "بخش‌هایی که هنوز آماده انتشار نیستند را می‌توانید پنهان نگه دارید و هر زمان آماده بودند، منتشر کنید.",
+      "published": "منتشرشده",
+      "hidden": "پنهان"
     }
   }
 }

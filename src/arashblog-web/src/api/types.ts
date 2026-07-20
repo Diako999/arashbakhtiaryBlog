@@ -155,3 +155,174 @@ export interface DashboardCommentDto {
   isApproved: boolean;
   createdAt: string;
 }
+
+// --- Offerings ---
+
+export interface SessionDto {
+  id: number;
+  startsAt: string;
+  endsAt: string | null;
+  location: string;
+  capacity: number | null;
+}
+
+export interface OfferingSummaryDto {
+  slug: string;
+  title: string;
+  summary: string;
+  coverImageUrl: string | null;
+  price: number | null;
+}
+
+export interface OfferingDetailDto extends OfferingSummaryDto {
+  bodyHtml: string;
+  sessions: SessionDto[];
+}
+
+export interface CreateEnrollmentRequest {
+  sessionId: number | null;
+  name: string;
+  email: string;
+  phone: string;
+  notes: string;
+}
+
+export interface DashboardSessionDto {
+  id: number | null;
+  startsAt: string;
+  endsAt: string | null;
+  location: string;
+  capacity: number | null;
+}
+
+export interface DashboardOfferingListItemDto {
+  id: number;
+  titleFa: string;
+  slug: string;
+  price: number | null;
+  status: "Draft" | "Published";
+  createdAt: string;
+}
+
+export interface DashboardOfferingListResponse {
+  items: DashboardOfferingListItemDto[];
+}
+
+export interface DashboardEnrollmentDto {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  sessionLabel: string | null;
+  createdAt: string;
+}
+
+export interface DashboardOfferingDetailDto {
+  id: number;
+  slug: string;
+  coverImageUrl: string | null;
+  price: number | null;
+  status: "Draft" | "Published";
+  titleFa: string;
+  titleCkb: string;
+  summaryFa: string;
+  summaryCkb: string;
+  bodyFa: string;
+  bodyCkb: string;
+  metaTitleFa: string;
+  metaTitleCkb: string;
+  metaDescriptionFa: string;
+  metaDescriptionCkb: string;
+  sessions: DashboardSessionDto[];
+  enrollments: DashboardEnrollmentDto[];
+}
+
+export type UpsertOfferingRequest = Omit<DashboardOfferingDetailDto, "id" | "enrollments">;
+
+// --- Testimonials ---
+
+export interface TestimonialDto {
+  authorName: string;
+  authorRole: string;
+  quote: string;
+  photoUrl: string | null;
+  videoUrl: string;
+}
+
+export interface DashboardTestimonialDto {
+  id: number;
+  authorName: string;
+  authorRoleFa: string;
+  authorRoleCkb: string;
+  quoteFa: string;
+  quoteCkb: string;
+  photoUrl: string | null;
+  videoUrl: string;
+  offeringId: number | null;
+  isApproved: boolean;
+  order: number;
+}
+
+export type UpsertTestimonialRequest = Omit<DashboardTestimonialDto, "id" | "isApproved" | "order">;
+
+// --- Leads ---
+
+export interface LeadMagnetSummaryDto {
+  slug: string;
+  title: string;
+  description: string;
+  coverImageUrl: string | null;
+}
+
+export interface LeadMagnetDetailDto extends LeadMagnetSummaryDto {
+  fileUrl: string;
+}
+
+export interface CreateSubmissionRequest {
+  name: string;
+  email: string;
+}
+
+export interface DashboardLeadMagnetListItemDto {
+  id: number;
+  titleFa: string;
+  slug: string;
+  status: "Draft" | "Published";
+  createdAt: string;
+}
+
+export interface DashboardLeadMagnetDetailDto {
+  id: number;
+  slug: string;
+  coverImageUrl: string | null;
+  fileUrl: string;
+  status: "Draft" | "Published";
+  titleFa: string;
+  titleCkb: string;
+  descriptionFa: string;
+  descriptionCkb: string;
+  metaTitleFa: string;
+  metaTitleCkb: string;
+  metaDescriptionFa: string;
+  metaDescriptionCkb: string;
+}
+
+export type UpsertLeadMagnetRequest = Omit<DashboardLeadMagnetDetailDto, "id">;
+
+export interface DashboardSubmissionDto {
+  id: number;
+  name: string;
+  email: string;
+  leadMagnetTitle: string;
+  isContacted: boolean;
+  createdAt: string;
+}
+
+// --- Pages visibility ---
+
+export interface DashboardNavItemDto {
+  id: number;
+  key: string;
+  title: string;
+  isVisible: boolean;
+}
