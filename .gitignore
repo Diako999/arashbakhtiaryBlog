@@ -6,9 +6,12 @@ obj/
 node_modules/
 src/arashblog-web/dist/
 src/ArashBlog.Api/wwwroot/
+src/ArashBlog.Api/media/
 
-# Real local secrets (connection string). Committed: appsettings.Development.json.example
+# Real local/production secrets (connection strings). Committed:
+# appsettings.Development.json.example, appsettings.Production.json.example
 src/ArashBlog.Api/appsettings.Development.json
+src/ArashBlog.Api/appsettings.Production.json
 
 *.log
 .DS_Store

@@ -43,7 +43,7 @@ public class AuthController(SignInManager<ApplicationUser> signInManager, UserMa
     }
 
     [HttpPost("login")]
-    [EnableRateLimiting("auth")]
+    [EnableRateLimiting("login")]
     public async Task<ActionResult<LoginResponse>> Login(LoginRequest request)
     {
         var result = await signInManager.PasswordSignInAsync(
@@ -105,7 +105,7 @@ public class AuthController(SignInManager<ApplicationUser> signInManager, UserMa
 
     [HttpPost("otp/setup/confirm")]
     [Authorize]
-    [EnableRateLimiting("auth")]
+    [EnableRateLimiting("otp")]
     public async Task<ActionResult<OtpConfirmResponse>> OtpSetupConfirm(OtpCodeRequest request)
     {
         var user = await userManager.GetUserAsync(User);
@@ -135,7 +135,7 @@ public class AuthController(SignInManager<ApplicationUser> signInManager, UserMa
     }
 
     [HttpPost("otp/verify")]
-    [EnableRateLimiting("auth")]
+    [EnableRateLimiting("otp")]
     public async Task<ActionResult<OtpVerifyResponse>> OtpVerify(OtpCodeRequest request)
     {
         var pending = await signInManager.GetTwoFactorAuthenticationUserAsync();

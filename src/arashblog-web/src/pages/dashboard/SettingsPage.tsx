@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
 import type { SiteSettingDto, ThemeDto } from "../../api/types";
+import FileUploadField from "../../components/FileUploadField";
 
 const emptySite: SiteSettingDto = {
   siteName: "",
@@ -72,8 +73,12 @@ export default function SettingsPage() {
             <input required value={siteForm.siteName} onChange={(e) => setSiteForm({ ...siteForm, siteName: e.target.value })} className={inputClass} />
           </div>
           <div className="sm:col-span-2">
-            <label className={labelClass}>{t("dashboard.settings.logoUrl")}</label>
-            <input value={siteForm.logoUrl ?? ""} onChange={(e) => setSiteForm({ ...siteForm, logoUrl: e.target.value })} className={inputClass} />
+            <FileUploadField
+              kind="image"
+              label={t("dashboard.settings.logoUrl")}
+              value={siteForm.logoUrl}
+              onChange={(url) => setSiteForm({ ...siteForm, logoUrl: url })}
+            />
           </div>
           <div>
             <label className={labelClass}>{t("dashboard.settings.contactEmail")}</label>

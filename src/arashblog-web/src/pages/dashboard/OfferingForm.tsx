@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
 import type { DashboardSessionDto, UpsertOfferingRequest } from "../../api/types";
+import FileUploadField from "../../components/FileUploadField";
 
 const emptyForm: UpsertOfferingRequest = {
   slug: "",
@@ -134,8 +135,12 @@ export default function OfferingForm() {
             </select>
           </div>
           <div className="sm:col-span-2">
-            <label className={labelClass}>{t("dashboard.postForm.coverImageUrl")}</label>
-            <input value={form.coverImageUrl ?? ""} onChange={(e) => setForm({ ...form, coverImageUrl: e.target.value })} className={inputClass} />
+            <FileUploadField
+              kind="image"
+              label={t("dashboard.postForm.coverImageUrl")}
+              value={form.coverImageUrl}
+              onChange={(url) => setForm({ ...form, coverImageUrl: url })}
+            />
           </div>
         </div>
 

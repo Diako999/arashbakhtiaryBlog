@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
 import type { UpsertLeadMagnetRequest } from "../../api/types";
+import FileUploadField from "../../components/FileUploadField";
 
 const emptyForm: UpsertLeadMagnetRequest = {
   slug: "",
@@ -76,12 +77,21 @@ export default function LeadForm() {
           <textarea rows={3} dir="rtl" value={form.descriptionCkb} onChange={(e) => setForm({ ...form, descriptionCkb: e.target.value })} className={inputClass} />
         </div>
         <div className="sm:col-span-2">
-          <label className={labelClass}>{t("dashboard.leadForm.fileUrl")}</label>
-          <input required value={form.fileUrl} onChange={(e) => setForm({ ...form, fileUrl: e.target.value })} className={inputClass} />
+          <FileUploadField
+            kind="document"
+            required
+            label={t("dashboard.leadForm.fileUrl")}
+            value={form.fileUrl}
+            onChange={(url) => setForm({ ...form, fileUrl: url })}
+          />
         </div>
         <div className="sm:col-span-2">
-          <label className={labelClass}>{t("dashboard.postForm.coverImageUrl")}</label>
-          <input value={form.coverImageUrl ?? ""} onChange={(e) => setForm({ ...form, coverImageUrl: e.target.value })} className={inputClass} />
+          <FileUploadField
+            kind="image"
+            label={t("dashboard.postForm.coverImageUrl")}
+            value={form.coverImageUrl}
+            onChange={(url) => setForm({ ...form, coverImageUrl: url })}
+          />
         </div>
         <div>
           <label className={labelClass}>{t("dashboard.postForm.status")}</label>

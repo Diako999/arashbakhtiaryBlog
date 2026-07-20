@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
 import type { DashboardTestimonialDto, UpsertTestimonialRequest } from "../../api/types";
+import FileUploadField from "../../components/FileUploadField";
 
 const emptyForm: UpsertTestimonialRequest = {
   authorName: "",
@@ -115,12 +116,14 @@ export default function TestimonialsList() {
             onChange={(e) => setForm({ ...form, quoteCkb: e.target.value })}
             className={`${inputClass} sm:col-span-2`}
           />
-          <input
-            placeholder={t("dashboard.postForm.coverImageUrl")}
-            value={form.photoUrl ?? ""}
-            onChange={(e) => setForm({ ...form, photoUrl: e.target.value })}
-            className={`${inputClass} sm:col-span-2`}
-          />
+          <div className="sm:col-span-2">
+            <FileUploadField
+              kind="image"
+              label={t("dashboard.testimonials.photo")}
+              value={form.photoUrl}
+              onChange={(url) => setForm({ ...form, photoUrl: url })}
+            />
+          </div>
           <div className="flex gap-2 sm:col-span-2">
             <button type="submit" className="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-white">
               {t("dashboard.postForm.save")}

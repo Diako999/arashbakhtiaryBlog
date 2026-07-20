@@ -1,0 +1,16 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=YOUR-SQL-SERVER-HOST,1433;Database=ArashBlogProd;User Id=arashblog_app;Password=CHANGE_ME;TrustServerCertificate=False;Encrypt=True;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "yourdomain.com",
+  "InitialAdmin": {
+    "Username": "admin",
+    "Password": "CHANGE_ME_ON_FIRST_BOOT"
+  }
+}
