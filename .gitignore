@@ -1,0 +1,14 @@
+bin/
+obj/
+*.user
+.vs/
+
+node_modules/
+src/arashblog-web/dist/
+src/ArashBlog.Api/wwwroot/
+
+# Real local secrets (connection string). Committed: appsettings.Development.json.example
+src/ArashBlog.Api/appsettings.Development.json
+
+*.log
+.DS_Store

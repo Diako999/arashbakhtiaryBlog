@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* Vazirmatn — self-hosted (not Google Fonts CDN): audience is Iran-based,
+   where Google's font CDN is often slow or blocked. Single variable-font
+   file covers weights 100-900, Arabic-script subset only (covers Persian +
+   Kurdish Sorani; incidental Latin text falls back to system sans-serif,
+   fine since the UI itself is never in Latin script). Ported from the
+   original Django project's tailwind/input.css. */
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/Vazirmatn-Variable.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1,
+    U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF,
+    U+FE70-FE74, U+FE76-FEFC;
+}
+
+@theme {
+  --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-accent: var(--accent);
+  --color-danger: var(--danger);
+  --color-surface: var(--bg);
+  --color-surface-soft: var(--bg-soft);
+  --color-surface-translucent: var(--bg-translucent);
+  --color-card: var(--card);
+  --color-line: var(--border);
+  --color-ink: var(--text);
+  --color-ink-muted: var(--text-muted);
+  --color-ink-faint: var(--text-faint);
+}
+
+/* Default brand/accent — hardcoded for M1. From M4 (Dashboard Settings)
+   these become DB-driven (ThemeConfig), same as the Django project's
+   theme_colors context processor injecting them into an inline <style>. */
+:root {
+  --brand: #0f9d8e;
+  --accent: #f0b429;
+  --bg: #F7F7F8;
+  --bg-soft: #EFEFF1;
+  --card: #FFFFFF;
+  --border: #DFE0E3;
+  --text: #1B1C1E;
+  --text-muted: #6B6E73;
+  --text-faint: #95989D;
+  --danger: #C8362E;
+  --bg-translucent: rgba(247, 247, 248, 0.82);
+  --brand-soft: color-mix(in srgb, var(--brand) 10%, transparent);
+}
+
+[data-theme="dark"] {
+  --bg: #141517;
+  --bg-soft: #1C1D20;
+  --card: #202124;
+  --border: #323438;
+  --text: #F2F2F1;
+  --text-muted: #A9ACB1;
+  --text-faint: #797D83;
+  --danger: #E5484D;
+  --bg-translucent: rgba(20, 21, 23, 0.82);
+  --brand-soft: color-mix(in srgb, var(--brand) 16%, transparent);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+}
+
+#root {
+  min-height: 100svh;
+}
