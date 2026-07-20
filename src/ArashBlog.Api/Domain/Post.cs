@@ -20,8 +20,10 @@ public class Post
     public PostStatus Status { get; set; } = PostStatus.Draft;
     public DateTimeOffset? PublishedAt { get; set; }
     public int ViewCount { get; set; }
-    public string MetaTitle { get; set; } = "";
-    public string MetaDescription { get; set; } = "";
+    public string MetaTitleFa { get; set; } = "";
+    public string MetaTitleCkb { get; set; } = "";
+    public string MetaDescriptionFa { get; set; } = "";
+    public string MetaDescriptionCkb { get; set; } = "";
 
     public string AuthorId { get; set; } = null!;
     public ApplicationUser Author { get; set; } = null!;

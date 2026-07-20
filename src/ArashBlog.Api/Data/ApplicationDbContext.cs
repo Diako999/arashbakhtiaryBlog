@@ -43,8 +43,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             e.Property(p => p.Slug).HasMaxLength(220);
             e.Property(p => p.ExcerptFa).HasMaxLength(300);
             e.Property(p => p.ExcerptCkb).HasMaxLength(300);
-            e.Property(p => p.MetaTitle).HasMaxLength(70);
-            e.Property(p => p.MetaDescription).HasMaxLength(160);
+            e.Property(p => p.MetaTitleFa).HasMaxLength(70);
+            e.Property(p => p.MetaTitleCkb).HasMaxLength(70);
+            e.Property(p => p.MetaDescriptionFa).HasMaxLength(160);
+            e.Property(p => p.MetaDescriptionCkb).HasMaxLength(160);
             e.HasOne(p => p.Author).WithMany().HasForeignKey(p => p.AuthorId).OnDelete(DeleteBehavior.Restrict);
             e.HasOne(p => p.Category).WithMany(c => c.Posts).HasForeignKey(p => p.CategoryId).OnDelete(DeleteBehavior.SetNull);
         });

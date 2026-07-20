@@ -50,5 +50,68 @@
   "common": {
     "loading": "در حال بارگذاری...",
     "back": "بازگشت"
+  },
+  "dashboard": {
+    "nav": {
+      "overview": "نمای کلی",
+      "analytics": "آمار",
+      "content": "محتوا",
+      "comments": "دیدگاه‌ها",
+      "logout": "خروج"
+    },
+    "overview": {
+      "title": "نمای کلی",
+      "draft": "پیش‌نویس",
+      "published": "منتشرشده",
+      "recentPosts": "نوشته‌های اخیر"
+    },
+    "analytics": {
+      "title": "آمار",
+      "totalViews": "مجموع بازدیدها",
+      "postCount": "تعداد نوشته‌ها",
+      "avgViews": "میانگین بازدید",
+      "topPosts": "پربازدیدترین نوشته‌ها",
+      "byCategory": "بازدید بر اساس دسته",
+      "uncategorized": "بدون دسته"
+    },
+    "content": {
+      "title": "محتوا",
+      "newPost": "نوشته جدید",
+      "categories": "دسته‌ها",
+      "categoryNameFa": "نام (فارسی)",
+      "categoryNameCkb": "نام (کوردی)",
+      "addCategory": "افزودن دسته",
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "confirmDelete": "آیا از حذف مطمئن هستید؟",
+      "draft": "پیش‌نویس",
+      "published": "منتشرشده"
+    },
+    "postForm": {
+      "newTitle": "نوشته جدید",
+      "editTitle": "ویرایش نوشته",
+      "titleFa": "عنوان (فارسی)",
+      "titleCkb": "عنوان (کوردی)",
+      "excerptFa": "خلاصه (فارسی)",
+      "excerptCkb": "خلاصه (کوردی)",
+      "bodyFa": "متن (فارسی)",
+      "bodyCkb": "متن (کوردی)",
+      "category": "دسته",
+      "tags": "برچسب‌ها (با کاما جدا کنید)",
+      "status": "وضعیت",
+      "publishedAt": "تاریخ انتشار",
+      "coverImageUrl": "آدرس تصویر کاور",
+      "save": "ذخیره",
+      "error": "ذخیره با خطا مواجه شد."
+    },
+    "comments": {
+      "title": "مدیریت دیدگاه‌ها",
+      "on": "روی",
+      "approved": "تأییدشده",
+      "pending": "در انتظار تأیید",
+      "approve": "تأیید",
+      "unapprove": "لغو تأیید",
+      "none": "دیدگاهی وجود ندارد."
+    }
   }
 }

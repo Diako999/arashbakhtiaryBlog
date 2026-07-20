@@ -50,5 +50,68 @@
   "common": {
     "loading": "بارکردن...",
     "back": "گەڕانەوە"
+  },
+  "dashboard": {
+    "nav": {
+      "overview": "گشتی",
+      "analytics": "ئامار",
+      "content": "ناوەڕۆک",
+      "comments": "بۆچوونەکان",
+      "logout": "دەرچوون"
+    },
+    "overview": {
+      "title": "گشتی",
+      "draft": "ڕەشنووس",
+      "published": "بڵاوکراوەتەوە",
+      "recentPosts": "بابەتە دوایینەکان"
+    },
+    "analytics": {
+      "title": "ئامار",
+      "totalViews": "کۆی بینینەکان",
+      "postCount": "ژمارەی بابەتەکان",
+      "avgViews": "ناوەندی بینین",
+      "topPosts": "بەناوبانگترین بابەتەکان",
+      "byCategory": "بینین بەپێی پۆل",
+      "uncategorized": "بێ پۆل"
+    },
+    "content": {
+      "title": "ناوەڕۆک",
+      "newPost": "بابەتی نوێ",
+      "categories": "پۆلەکان",
+      "categoryNameFa": "ناو (فارسی)",
+      "categoryNameCkb": "ناو (کوردی)",
+      "addCategory": "زیادکردنی پۆل",
+      "edit": "دەستکاری",
+      "delete": "سڕینەوە",
+      "confirmDelete": "دڵنیایت لە سڕینەوە؟",
+      "draft": "ڕەشنووس",
+      "published": "بڵاوکراوەتەوە"
+    },
+    "postForm": {
+      "newTitle": "بابەتی نوێ",
+      "editTitle": "دەستکاریکردنی بابەت",
+      "titleFa": "ناونیشان (فارسی)",
+      "titleCkb": "ناونیشان (کوردی)",
+      "excerptFa": "کورتە (فارسی)",
+      "excerptCkb": "کورتە (کوردی)",
+      "bodyFa": "ناوەڕۆک (فارسی)",
+      "bodyCkb": "ناوەڕۆک (کوردی)",
+      "category": "پۆل",
+      "tags": "تاگەکان (بە کۆما جیا بکەرەوە)",
+      "status": "دۆخ",
+      "publishedAt": "بەرواری بڵاوکردنەوە",
+      "coverImageUrl": "بەستەری وێنەی سەرەکی",
+      "save": "پاشەکەوتکردن",
+      "error": "پاشەکەوتکردن سەرکەوتوو نەبوو."
+    },
+    "comments": {
+      "title": "بەڕێوەبردنی بۆچوونەکان",
+      "on": "لەسەر",
+      "approved": "پەسەندکراو",
+      "pending": "چاوەڕوانی پەسەندکردن",
+      "approve": "پەسەندکردن",
+      "unapprove": "هەڵوەشاندنەوەی پەسەندکردن",
+      "none": "هیچ بۆچوونێک نییە."
+    }
   }
 }

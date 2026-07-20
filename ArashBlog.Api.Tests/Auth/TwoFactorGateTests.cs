@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Json;
-using System.Security.Cryptography;
 using ArashBlog.Api.Domain;
 using ArashBlog.Api.Features.Auth;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +30,7 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
     {
         var client = factory.CreateClient();
 
-        var response = await client.GetAsync("/api/dashboard/ping");
+        var response = await client.GetAsync("/api/dashboard/overview");
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
@@ -49,7 +47,7 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
         Assert.True(login!.Succeeded);
         Assert.True(login.RequiresOtpSetup);
 
-        var pingResponse = await client.GetAsync("/api/dashboard/ping");
+        var pingResponse = await client.GetAsync("/api/dashboard/overview");
         Assert.Equal(HttpStatusCode.Forbidden, pingResponse.StatusCode);
     }
 
@@ -74,7 +72,7 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
 
         var setupResponse = await client.GetAsync("/api/auth/otp/setup");
         var setup = await setupResponse.Content.ReadFromJsonAsync<OtpSetupResponse>();
-        var validCode = GenerateTotp(setup!.ManualKey);
+        var validCode = TotpHelper.Generate(setup!.ManualKey);
 
         var confirmResponse = await client.PostAsJsonAsync("/api/auth/otp/setup/confirm", new OtpCodeRequest(validCode));
         var confirm = await confirmResponse.Content.ReadFromJsonAsync<OtpConfirmResponse>();
@@ -82,7 +80,7 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
         Assert.Equal(HttpStatusCode.OK, confirmResponse.StatusCode);
         Assert.Equal(10, confirm!.RecoveryCodes.Count);
 
-        var pingResponse = await client.GetAsync("/api/dashboard/ping");
+        var pingResponse = await client.GetAsync("/api/dashboard/overview");
         Assert.Equal(HttpStatusCode.OK, pingResponse.StatusCode);
     }
 
@@ -94,7 +92,7 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
         await setupClient.PostAsJsonAsync("/api/auth/login", new LoginRequest("verify-user", "Sup3r-Secret!"));
         var setupResponse = await setupClient.GetAsync("/api/auth/otp/setup");
         var setup = await setupResponse.Content.ReadFromJsonAsync<OtpSetupResponse>();
-        await setupClient.PostAsJsonAsync("/api/auth/otp/setup/confirm", new OtpCodeRequest(GenerateTotp(setup!.ManualKey)));
+        await setupClient.PostAsJsonAsync("/api/auth/otp/setup/confirm", new OtpCodeRequest(TotpHelper.Generate(setup!.ManualKey)));
 
         // New session (new HttpClient == new cookie jar), same already-2FA-enabled user.
         var freshClient = factory.CreateClient();
@@ -103,16 +101,16 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
 
         Assert.True(login!.RequiresOtpVerify);
 
-        var pingBeforeVerify = await freshClient.GetAsync("/api/dashboard/ping");
+        var pingBeforeVerify = await freshClient.GetAsync("/api/dashboard/overview");
         Assert.Equal(HttpStatusCode.Unauthorized, pingBeforeVerify.StatusCode);
 
-        var verifyResponse = await freshClient.PostAsJsonAsync("/api/auth/otp/verify", new OtpCodeRequest(GenerateTotp(setup.ManualKey)));
+        var verifyResponse = await freshClient.PostAsJsonAsync("/api/auth/otp/verify", new OtpCodeRequest(TotpHelper.Generate(setup.ManualKey)));
         var verify = await verifyResponse.Content.ReadFromJsonAsync<OtpVerifyResponse>();
 
         Assert.Equal(HttpStatusCode.OK, verifyResponse.StatusCode);
         Assert.False(verify!.UsedRecoveryCode);
 
-        var pingAfterVerify = await freshClient.GetAsync("/api/dashboard/ping");
+        var pingAfterVerify = await freshClient.GetAsync("/api/dashboard/overview");
         Assert.Equal(HttpStatusCode.OK, pingAfterVerify.StatusCode);
     }
 
@@ -125,7 +123,7 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
         var setupResponse = await setupClient.GetAsync("/api/auth/otp/setup");
         var setup = await setupResponse.Content.ReadFromJsonAsync<OtpSetupResponse>();
         var confirmResponse = await setupClient.PostAsJsonAsync(
-            "/api/auth/otp/setup/confirm", new OtpCodeRequest(GenerateTotp(setup!.ManualKey)));
+            "/api/auth/otp/setup/confirm", new OtpCodeRequest(TotpHelper.Generate(setup!.ManualKey)));
         var confirm = await confirmResponse.Content.ReadFromJsonAsync<OtpConfirmResponse>();
         var recoveryCode = confirm!.RecoveryCodes[0];
 
@@ -146,50 +144,4 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
         Assert.Equal(HttpStatusCode.BadRequest, reuseResponse.StatusCode);
     }
 
-    // Generates a valid RFC 6238 TOTP (SHA1, 30s step, 6 digits — the same
-    // parameters ASP.NET Core Identity's default authenticator provider
-    // uses) for the base32 "manual key" returned by /api/auth/otp/setup.
-    // No external device needed, same purpose as the totp() helper in the
-    // Django project's "Local test login" doc.
-    private static string GenerateTotp(string formattedKey)
-    {
-        var key = Base32Decode(formattedKey.Replace(" ", ""));
-        var timestep = DateTimeOffset.UtcNow.ToUnixTimeSeconds() / 30;
-        var timestepBytes = BitConverter.GetBytes(timestep);
-        if (BitConverter.IsLittleEndian) Array.Reverse(timestepBytes);
-
-        using var hmac = new HMACSHA1(key);
-        var hash = hmac.ComputeHash(timestepBytes);
-        var offset = hash[^1] & 0x0F;
-        var binaryCode = ((hash[offset] & 0x7F) << 24)
-                          | ((hash[offset + 1] & 0xFF) << 16)
-                          | ((hash[offset + 2] & 0xFF) << 8)
-                          | (hash[offset + 3] & 0xFF);
-        var code = binaryCode % 1_000_000;
-        return code.ToString("D6");
-    }
-
-    private static byte[] Base32Decode(string input)
-    {
-        const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-        input = input.TrimEnd('=').ToUpperInvariant();
-
-        var bits = new List<bool>();
-        foreach (var c in input)
-        {
-            var value = alphabet.IndexOf(c);
-            if (value < 0) continue;
-            for (var i = 4; i >= 0; i--) bits.Add(((value >> i) & 1) == 1);
-        }
-
-        var bytes = new List<byte>();
-        for (var i = 0; i + 8 <= bits.Count; i += 8)
-        {
-            byte b = 0;
-            for (var j = 0; j < 8; j++) b = (byte)((b << 1) | (bits[i + j] ? 1 : 0));
-            bytes.Add(b);
-        }
-
-        return bytes.ToArray();
-    }
 }
