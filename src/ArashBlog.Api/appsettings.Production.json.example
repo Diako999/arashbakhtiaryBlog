@@ -8,7 +8,8 @@
       "Microsoft.AspNetCore": "Warning"
     }
   },
-  "AllowedHosts": "yourdomain.com",
+  "AllowedHosts": "yourdomain.com;admin.yourdomain.com",
+  "AdminHost": "admin.yourdomain.com",
   "InitialAdmin": {
     "Username": "admin",
     "Password": "CHANGE_ME_ON_FIRST_BOOT"

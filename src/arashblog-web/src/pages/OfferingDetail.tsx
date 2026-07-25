@@ -106,7 +106,7 @@ export default function OfferingDetail() {
               rows={3}
               className="rounded-lg border border-line bg-card px-3 py-2"
             />
-            <button type="submit" className="self-start rounded-lg bg-brand px-4 py-2 font-bold text-white">
+            <button type="submit" className="self-start btn-primary">
               {t("offerings.form.submit")}
             </button>
             {error && <p className="text-danger">{t("offerings.form.error")}</p>}

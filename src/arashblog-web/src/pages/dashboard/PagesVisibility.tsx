@@ -56,7 +56,7 @@ export default function PagesVisibility() {
 
       <div className="mb-10 flex flex-col gap-2">
         {navItems?.map((item) => (
-          <div key={item.id} className="flex items-center justify-between rounded-lg border border-line bg-card p-4">
+          <div key={item.id} className="flex items-center justify-between card-hover-soft border border-line bg-card p-4">
             <span className="font-bold">{item.title}</span>
             <button
               type="button"
@@ -76,7 +76,7 @@ export default function PagesVisibility() {
 
       <div className="flex flex-col gap-3">
         {flatPages?.map((page) => (
-          <div key={page.id} className="rounded-lg border border-line bg-card p-4">
+          <div key={page.id} className="card-hover-soft border border-line bg-card p-4">
             {editingId === page.id && form ? (
               <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <input
@@ -112,7 +112,7 @@ export default function PagesVisibility() {
                   className={`${inputClass} sm:col-span-2`}
                 />
                 <div className="flex gap-2 sm:col-span-2">
-                  <button type="submit" className="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-white">
+                  <button type="submit" className="btn-primary">
                     {t("dashboard.postForm.save")}
                   </button>
                   <button type="button" onClick={() => setEditingId(null)} className="rounded-lg px-4 py-2 text-sm text-ink-muted">

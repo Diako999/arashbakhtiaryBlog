@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import DashboardLayout from "./components/DashboardLayout";
+import LandingPage from "./pages/LandingPage";
 import PostList from "./pages/PostList";
 import PostDetail from "./pages/PostDetail";
 import OfferingList from "./pages/OfferingList";
@@ -25,14 +26,15 @@ import LeadForm from "./pages/dashboard/LeadForm";
 import SubmissionInbox from "./pages/dashboard/SubmissionInbox";
 import PagesVisibility from "./pages/dashboard/PagesVisibility";
 import SettingsPage from "./pages/dashboard/SettingsPage";
+import LandingSections from "./pages/dashboard/LandingSections";
 import { defaultLanguage } from "./i18n";
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to={`/${defaultLanguage}/blog`} replace />} />
+      <Route path="/" element={<Navigate to={`/${defaultLanguage}`} replace />} />
       <Route path="/:lang" element={<Layout />}>
-        <Route index element={<Navigate to="blog" replace />} />
+        <Route index element={<LandingPage />} />
         <Route path="blog" element={<PostList />} />
         <Route path="blog/:slug" element={<PostDetail />} />
         <Route path="offerings" element={<OfferingList />} />
@@ -64,10 +66,11 @@ export default function App() {
         <Route path="leads/:id/edit" element={<LeadForm />} />
         <Route path="leads/submissions" element={<SubmissionInbox />} />
         <Route path="pages" element={<PagesVisibility />} />
+        <Route path="landing" element={<LandingSections />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to={`/${defaultLanguage}/blog`} replace />} />
+      <Route path="*" element={<Navigate to={`/${defaultLanguage}`} replace />} />
     </Routes>
   );
 }

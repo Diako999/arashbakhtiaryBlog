@@ -21,7 +21,7 @@ export default function LeadsList() {
           <Link to="/dashboard/leads/submissions" className="rounded-lg border border-line px-4 py-2 font-bold no-underline">
             {t("dashboard.leads.inbox")}
           </Link>
-          <Link to="/dashboard/leads/new" className="rounded-lg bg-brand px-4 py-2 font-bold text-white no-underline">
+          <Link to="/dashboard/leads/new" className="btn-primary no-underline">
             {t("dashboard.leads.newLead")}
           </Link>
         </div>
@@ -31,7 +31,7 @@ export default function LeadsList() {
 
       <div className="flex flex-col gap-2">
         {data?.map((lead) => (
-          <div key={lead.id} className="flex items-center justify-between rounded-lg border border-line bg-card p-3">
+          <div key={lead.id} className="flex items-center justify-between card-hover-soft border border-line bg-card p-3">
             <div>
               <p className="font-bold">{lead.titleFa}</p>
               <p className="text-xs text-ink-faint">

@@ -24,7 +24,7 @@ export default function CommentModeration() {
       <h1 className="mb-6 text-2xl font-bold">{t("dashboard.comments.title")}</h1>
       <div className="flex flex-col gap-3">
         {comments?.map((c) => (
-          <div key={c.id} className="rounded-lg border border-line bg-card p-4">
+          <div key={c.id} className="card-hover-soft border border-line bg-card p-4">
             <div className="mb-2 flex items-center justify-between">
               <div>
                 <span className="font-bold">{c.name}</span>{" "}

@@ -18,7 +18,7 @@ const emptySite: SiteSettingDto = {
   metaDescription: "",
 };
 
-const emptyTheme: ThemeDto = { brandColor: "#0f9d8e", accentColor: "#f0b429", defaultMode: "Dark" };
+const emptyTheme: ThemeDto = { brandColor: "#E5484D", accentColor: "#8B9098", defaultMode: "Dark" };
 
 export default function SettingsPage() {
   const { t } = useTranslation();

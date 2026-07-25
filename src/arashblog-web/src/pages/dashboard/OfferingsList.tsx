@@ -17,7 +17,7 @@ export default function OfferingsList() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">{t("dashboard.offerings.title")}</h1>
-        <Link to="/dashboard/offerings/new" className="rounded-lg bg-brand px-4 py-2 font-bold text-white no-underline">
+        <Link to="/dashboard/offerings/new" className="btn-primary no-underline">
           {t("dashboard.offerings.newOffering")}
         </Link>
       </div>
@@ -26,7 +26,7 @@ export default function OfferingsList() {
 
       <div className="flex flex-col gap-2">
         {data?.items.map((offering) => (
-          <div key={offering.id} className="flex items-center justify-between rounded-lg border border-line bg-card p-3">
+          <div key={offering.id} className="flex items-center justify-between card-hover-soft border border-line bg-card p-3">
             <div>
               <p className="font-bold">{offering.titleFa}</p>
               <p className="text-xs text-ink-faint">

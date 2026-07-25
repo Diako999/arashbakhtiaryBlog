@@ -23,6 +23,10 @@ public class SitemapController(ApplicationDbContext db) : ControllerBase
         var baseUrl = $"{Request.Scheme}://{Request.Host}";
         var entries = new List<Entry>();
 
+        // The landing page — unconditional, same as posts, since it's never
+        // phased-rollout gated (see LandingController).
+        entries.Add(new Entry($"{baseUrl}/fa/", DateTimeOffset.UtcNow, "weekly", "1.0"));
+
         var posts = await db.Posts.Where(p => p.Status == PostStatus.Published).ToListAsync();
         entries.AddRange(posts.Select(p => new Entry($"{baseUrl}/fa/blog/{Uri.EscapeDataString(p.Slug)}", p.UpdatedAt, "weekly", "0.7")));
 

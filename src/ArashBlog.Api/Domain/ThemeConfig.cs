@@ -10,7 +10,7 @@ public enum ThemeMode
 public class ThemeConfig
 {
     public int Id { get; set; }
-    public string BrandColor { get; set; } = "#0f9d8e";
-    public string AccentColor { get; set; } = "#f0b429";
+    public string BrandColor { get; set; } = "#E5484D";
+    public string AccentColor { get; set; } = "#8B9098";
     public ThemeMode DefaultMode { get; set; } = ThemeMode.Dark;
 }

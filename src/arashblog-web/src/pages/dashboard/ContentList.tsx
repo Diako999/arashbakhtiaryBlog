@@ -34,12 +34,12 @@ export default function ContentList() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">{t("dashboard.content.title")}</h1>
-        <Link to="/dashboard/content/new" className="rounded-lg bg-brand px-4 py-2 font-bold text-white no-underline">
+        <Link to="/dashboard/content/new" className="btn-primary no-underline">
           {t("dashboard.content.newPost")}
         </Link>
       </div>
 
-      <details className="mb-6 rounded-xl border border-line bg-card p-4">
+      <details className="mb-6 card-hover-soft border border-line bg-card p-4">
         <summary className="cursor-pointer font-bold">{t("dashboard.content.categories")}</summary>
         <ul className="my-3 flex flex-wrap gap-2 text-sm">
           {categories?.map((c) => (
@@ -73,7 +73,7 @@ export default function ContentList() {
 
       <div className="flex flex-col gap-2">
         {postsData?.items.map((post) => (
-          <div key={post.id} className="flex items-center justify-between rounded-lg border border-line bg-card p-3">
+          <div key={post.id} className="flex items-center justify-between card-hover-soft border border-line bg-card p-3">
             <div>
               <p className="font-bold">{post.titleFa}</p>
               <p className="text-xs text-ink-faint">

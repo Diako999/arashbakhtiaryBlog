@@ -1,8 +1,9 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { offeringsApi } from "../api/offerings";
 import { defaultLanguage } from "../i18n";
+import OfferingCard from "../components/OfferingCard";
 
 export default function OfferingList() {
   const { lang = defaultLanguage } = useParams();
@@ -17,24 +18,9 @@ export default function OfferingList() {
   if (data?.length === 0) return <p>{t("offerings.none")}</p>;
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {data?.map((offering) => (
-        <article key={offering.slug} className="rounded-xl border border-line bg-card p-5">
-          <h2 className="mb-2 text-xl font-bold">
-            <Link
-              to={`/${lang}/offerings/${encodeURIComponent(offering.slug)}`}
-              className="text-ink no-underline hover:text-brand"
-            >
-              {offering.title}
-            </Link>
-          </h2>
-          {offering.summary && <p className="text-ink-muted">{offering.summary}</p>}
-          {offering.price !== null && (
-            <p className="mt-2 text-sm font-bold text-brand">
-              {offering.price.toLocaleString()} {t("offerings.currency")}
-            </p>
-          )}
-        </article>
+        <OfferingCard key={offering.slug} offering={offering} lang={lang} />
       ))}
     </div>
   );

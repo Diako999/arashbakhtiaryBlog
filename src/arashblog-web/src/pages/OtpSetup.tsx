@@ -31,7 +31,7 @@ export default function OtpSetup() {
 
   if (recoveryCodes) {
     return (
-      <div dir="rtl" className="mx-auto mt-16 max-w-sm rounded-xl border border-line bg-card p-6">
+      <div dir="rtl" className="mx-auto mt-16 max-w-sm card-hover border border-line bg-card p-6">
         <h1 className="mb-2 text-xl font-bold">{t("auth.otpSetup.recoveryCodesTitle")}</h1>
         <p className="mb-4 text-sm text-danger">{t("auth.otpSetup.recoveryCodesWarning")}</p>
         <ul className="mb-4 grid grid-cols-2 gap-2 font-mono text-sm">
@@ -53,7 +53,7 @@ export default function OtpSetup() {
   }
 
   return (
-    <div dir="rtl" className="mx-auto mt-16 max-w-sm rounded-xl border border-line bg-card p-6">
+    <div dir="rtl" className="mx-auto mt-16 max-w-sm card-hover border border-line bg-card p-6">
       <h1 className="mb-4 text-xl font-bold">{t("auth.otpSetup.title")}</h1>
       {isLoading && <p>{t("common.loading")}</p>}
       {setup && (

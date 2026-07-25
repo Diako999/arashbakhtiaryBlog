@@ -15,3 +15,9 @@ src/ArashBlog.Api/appsettings.Production.json
 
 *.log
 .DS_Store
+
+# Deployment build artifacts (produced by `dotnet publish` for the IranServer
+# deploy — see DEPLOYMENT.md), not source.
+/publish/
+/publish.zip
+/publish-migration.sql

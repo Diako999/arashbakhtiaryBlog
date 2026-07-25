@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { blogApi } from "../api/blog";
 import { defaultLanguage } from "../i18n";
+import PostCard from "../components/PostCard";
 
 export default function PostList() {
   const { lang = defaultLanguage } = useParams();
@@ -43,7 +44,7 @@ export default function PostList() {
           placeholder={t("blog.searchPlaceholder")}
           className="flex-1 rounded-lg border border-line bg-card px-3 py-2"
         />
-        <button type="submit" className="rounded-lg bg-brand px-4 py-2 font-bold text-white">
+        <button type="submit" className="btn-primary">
           {t("blog.searchPlaceholder")}
         </button>
       </form>
@@ -73,31 +74,9 @@ export default function PostList() {
       {isLoading && <p>{t("common.loading")}</p>}
       {!isLoading && data?.items.length === 0 && <p>{t("blog.noPosts")}</p>}
 
-      <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {data?.items.map((post) => (
-          <article key={post.slug} className="rounded-xl border border-line bg-card p-5">
-            <h2 className="mb-2 text-xl font-bold">
-              <Link
-                to={`/${lang}/blog/${encodeURIComponent(post.slug)}`}
-                className="text-ink no-underline hover:text-brand"
-              >
-                {post.title}
-              </Link>
-            </h2>
-            {post.excerpt && <p className="text-ink-muted">{post.excerpt}</p>}
-            <div className="mt-3 flex flex-wrap gap-2 text-xs text-ink-faint">
-              {post.categoryName && <span>{post.categoryName}</span>}
-              {post.tags.map((tagSlug) => (
-                <Link
-                  key={tagSlug}
-                  to={`/${lang}/blog?tag=${encodeURIComponent(tagSlug)}`}
-                  className="text-ink-faint no-underline hover:text-brand"
-                >
-                  #{tagSlug}
-                </Link>
-              ))}
-            </div>
-          </article>
+          <PostCard key={post.slug} post={post} lang={lang} />
         ))}
       </div>
     </div>

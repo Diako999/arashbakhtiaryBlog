@@ -96,6 +96,22 @@ if (app.Environment.IsDevelopment())
     await DbSeeder.SeedAsync(app.Services);
 }
 
+// TEMPORARY bootstrap step for the first-ever deploy to a host with no shell
+// access to run `dotnet ef database update` directly — apply pending
+// migrations over the same connection the app already uses, then remove
+// this block once the schema exists. Not the documented long-term design
+// (see DEPLOYMENT.md: migrations are meant to be a separate deploy step),
+// kept temporary on purpose so routine future deploys can't silently run
+// schema changes as a side effect of just starting the app. Skipped under
+// "Testing" since Database.MigrateAsync() throws against the InMemory
+// provider the test host uses.
+if (!app.Environment.IsEnvironment("Testing"))
+{
+    using var scope = app.Services.CreateScope();
+    var migrateDb = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await migrateDb.Database.MigrateAsync();
+}
+
 // Unconditional (dev, test, and prod alike) — these NavItem rows are real
 // application configuration the phased-rollout mechanism depends on, not
 // demo content. Prod is expected to have already run migrations as a
@@ -106,6 +122,7 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     await NavItemSeeder.EnsureAsync(db);
     await FlatPageSeeder.EnsureAsync(db);
+    await LandingSectionSeeder.EnsureAsync(db);
 }
 
 // Also unconditional, also a no-op once any user exists — see
@@ -173,6 +190,30 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/media",
 });
 
+// The admin dashboard (its UI and the auth/management API behind it) must
+// not be reachable from the public blog's own domain at all — not just
+// hidden from its nav. Checked by raw path prefix before routing/auth runs,
+// so a request never reaches the real controllers on the wrong host. The
+// admin host itself is unaffected: it still gets the public read-only APIs
+// too, since nothing has asked for those to be locked down there.
+var adminHost = app.Configuration["AdminHost"];
+if (!string.IsNullOrEmpty(adminHost))
+{
+    app.Use(async (context, next) =>
+    {
+        if (!string.Equals(context.Request.Host.Host, adminHost, StringComparison.OrdinalIgnoreCase)
+            && (context.Request.Path.StartsWithSegments("/dashboard")
+                || context.Request.Path.StartsWithSegments("/api/auth")
+                || context.Request.Path.StartsWithSegments("/api/dashboard")))
+        {
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            return;
+        }
+
+        await next();
+    });
+}
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -186,6 +227,19 @@ app.MapFallback(async context =>
     if (context.Request.Path.StartsWithSegments("/api"))
     {
         context.Response.StatusCode = StatusCodes.Status404NotFound;
+        return;
+    }
+
+    // The admin dashboard is meant to live at its own subdomain (configured
+    // via AdminHost) rather than under the public blog's domain — anything
+    // hit there that isn't already a /dashboard/* route bounces straight to
+    // the login screen, so "go to the admin subdomain" is the whole
+    // instruction an admin needs, with no bookmarked deep link required.
+    if (!string.IsNullOrEmpty(adminHost)
+        && string.Equals(context.Request.Host.Host, adminHost, StringComparison.OrdinalIgnoreCase)
+        && !context.Request.Path.StartsWithSegments("/dashboard"))
+    {
+        context.Response.Redirect("/dashboard/login");
         return;
     }
 

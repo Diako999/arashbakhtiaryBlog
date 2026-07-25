@@ -4,6 +4,7 @@ import type {
   DashboardCategoryDto,
   DashboardCommentDto,
   DashboardFlatPageDto,
+  DashboardLandingSectionDto,
   DashboardLeadMagnetDetailDto,
   DashboardLeadMagnetListItemDto,
   DashboardNavItemDto,
@@ -18,6 +19,7 @@ import type {
   ThemeDto,
   UpsertCategoryRequest,
   UpsertFlatPageRequest,
+  UpsertLandingSectionRequest,
   UpsertLeadMagnetRequest,
   UpsertOfferingRequest,
   UpsertPostRequest,
@@ -61,6 +63,13 @@ export const dashboardApi = {
   toggleTestimonialApproved: (id: number) => api.post<void>(`/dashboard/testimonials/${id}/toggle`),
   moveTestimonial: (id: number, direction: "up" | "down") =>
     api.post<void>(`/dashboard/testimonials/${id}/move/${direction}`),
+
+  landingSections: () => api.get<DashboardLandingSectionDto[]>("/dashboard/landing-sections"),
+  updateLandingSection: (id: number, data: UpsertLandingSectionRequest) =>
+    api.put<DashboardLandingSectionDto>(`/dashboard/landing-sections/${id}`, data),
+  toggleLandingSection: (id: number) => api.post<void>(`/dashboard/landing-sections/${id}/toggle`),
+  moveLandingSection: (id: number, direction: "up" | "down") =>
+    api.post<void>(`/dashboard/landing-sections/${id}/move/${direction}`),
 
   leadMagnets: () => api.get<DashboardLeadMagnetListItemDto[]>("/dashboard/leads"),
   leadMagnet: (id: number) => api.get<DashboardLeadMagnetDetailDto>(`/dashboard/leads/${id}`),

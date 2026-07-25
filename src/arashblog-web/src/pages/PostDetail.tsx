@@ -60,7 +60,7 @@ export default function PostDetail() {
         {post.comments.length === 0 && <p className="text-ink-muted">{t("blog.noComments")}</p>}
         <ul className="mb-6 flex flex-col gap-4">
           {post.comments.map((c) => (
-            <li key={c.id} className="rounded-lg border border-line bg-card p-4">
+            <li key={c.id} className="card-hover border border-line bg-card p-4">
               <p className="font-bold">{c.name}</p>
               <p className="text-ink-muted">{c.body}</p>
             </li>
@@ -91,7 +91,7 @@ export default function PostDetail() {
             rows={4}
             className="rounded-lg border border-line bg-card px-3 py-2"
           />
-          <button type="submit" className="self-start rounded-lg bg-brand px-4 py-2 font-bold text-white">
+          <button type="submit" className="self-start btn-primary">
             {t("blog.commentForm.submit")}
           </button>
           {submitted && <p className="text-brand">{t("blog.commentSuccess")}</p>}

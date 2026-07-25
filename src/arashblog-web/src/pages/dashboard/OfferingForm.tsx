@@ -188,7 +188,7 @@ export default function OfferingForm() {
             <h2 className="mb-3 text-lg font-bold">{t("dashboard.offeringForm.enrollments")}</h2>
             <div className="flex flex-col gap-2">
               {existing.enrollments.map((e) => (
-                <div key={e.id} className="rounded-lg border border-line bg-card p-3 text-sm">
+                <div key={e.id} className="card-hover-soft border border-line bg-card p-3 text-sm">
                   <span className="font-bold">{e.name}</span> — {e.email} {e.sessionLabel && `· ${e.sessionLabel}`}
                 </div>
               ))}

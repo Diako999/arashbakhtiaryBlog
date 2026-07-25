@@ -1,7 +1,11 @@
 {
   "nav": {
+    "home": "خانه",
     "blog": "وبلاگ",
     "language": "زبان"
+  },
+  "landing": {
+    "seeAll": "مشاهده همه ←"
   },
   "blog": {
     "searchPlaceholder": "جستجو...",
@@ -85,6 +89,7 @@
       "testimonials": "نظرات",
       "leads": "منابع رایگان",
       "pages": "صفحات",
+      "landing": "صفحه فرود",
       "settings": "تنظیمات",
       "logout": "خروج"
     },
@@ -217,6 +222,35 @@
       "choose": "انتخاب فایل",
       "urlPlaceholder": "آدرس فایل یا آپلود کنید",
       "error": "آپلود فایل با خطا مواجه شد."
+    },
+    "landing": {
+      "title": "صفحه فرود",
+      "description": "محتوای بخش‌های صفحه فرود را ویرایش کنید، پنهان/نمایان کنید یا ترتیبشان را تغییر دهید.",
+      "sections": {
+        "Hero": "بخش اصلی (هیرو)",
+        "OfferingsTeaser": "معرفی دوره‌ها",
+        "PostsTeaser": "معرفی نوشته‌ها",
+        "TestimonialsTeaser": "معرفی نظرات",
+        "CtaBanner": "بنر دعوت به اقدام"
+      },
+      "hidden": "پنهان",
+      "visible": "نمایان",
+      "heading": "عنوان",
+      "headingFa": "عنوان (فارسی)",
+      "headingCkb": "عنوان (کوردی)",
+      "subheadingFa": "زیرعنوان (فارسی)",
+      "subheadingCkb": "زیرعنوان (کوردی)",
+      "bodyFa": "متن (فارسی)",
+      "bodyCkb": "متن (کوردی)",
+      "imageUrl": "تصویر",
+      "primaryCtaTextFa": "متن دکمه اصلی (فارسی)",
+      "primaryCtaTextCkb": "متن دکمه اصلی (کوردی)",
+      "primaryCtaUrl": "آدرس دکمه اصلی",
+      "secondaryCtaTextFa": "متن دکمه دوم (فارسی)",
+      "secondaryCtaTextCkb": "متن دکمه دوم (کوردی)",
+      "secondaryCtaUrl": "آدرس دکمه دوم",
+      "save": "ذخیره",
+      "error": "ذخیره با خطا مواجه شد."
     }
   }
 }

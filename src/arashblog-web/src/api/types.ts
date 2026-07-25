@@ -374,3 +374,44 @@ export interface ThemeDto {
 }
 
 export type UpsertThemeRequest = ThemeDto;
+
+// --- Landing page ---
+
+export type LandingSectionTypeName = "Hero" | "OfferingsTeaser" | "PostsTeaser" | "TestimonialsTeaser" | "CtaBanner";
+
+export interface LandingSectionDto {
+  type: LandingSectionTypeName;
+  heading: string;
+  subheading: string;
+  body: string;
+  imageUrl: string | null;
+  primaryCtaText: string;
+  primaryCtaUrl: string;
+  secondaryCtaText: string;
+  secondaryCtaUrl: string;
+  offerings: OfferingSummaryDto[] | null;
+  posts: PostSummary[] | null;
+  testimonials: TestimonialDto[] | null;
+}
+
+export interface DashboardLandingSectionDto {
+  id: number;
+  type: LandingSectionTypeName;
+  order: number;
+  isVisible: boolean;
+  headingFa: string;
+  headingCkb: string;
+  subheadingFa: string;
+  subheadingCkb: string;
+  bodyFa: string;
+  bodyCkb: string;
+  imageUrl: string | null;
+  primaryCtaTextFa: string;
+  primaryCtaTextCkb: string;
+  primaryCtaUrl: string;
+  secondaryCtaTextFa: string;
+  secondaryCtaTextCkb: string;
+  secondaryCtaUrl: string;
+}
+
+export type UpsertLandingSectionRequest = Omit<DashboardLandingSectionDto, "id" | "type" | "order" | "isVisible">;

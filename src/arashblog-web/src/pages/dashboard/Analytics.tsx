@@ -12,15 +12,15 @@ export default function Analytics() {
     <div>
       <h1 className="mb-6 text-2xl font-bold">{t("dashboard.analytics.title")}</h1>
       <div className="mb-8 grid grid-cols-3 gap-4">
-        <div className="rounded-xl border border-line bg-card p-4">
+        <div className="card-hover-soft border border-line bg-card p-4">
           <p className="text-sm text-ink-muted">{t("dashboard.analytics.totalViews")}</p>
           <p className="text-2xl font-bold">{data?.totalViews}</p>
         </div>
-        <div className="rounded-xl border border-line bg-card p-4">
+        <div className="card-hover-soft border border-line bg-card p-4">
           <p className="text-sm text-ink-muted">{t("dashboard.analytics.postCount")}</p>
           <p className="text-2xl font-bold">{data?.postCount}</p>
         </div>
-        <div className="rounded-xl border border-line bg-card p-4">
+        <div className="card-hover-soft border border-line bg-card p-4">
           <p className="text-sm text-ink-muted">{t("dashboard.analytics.avgViews")}</p>
           <p className="text-2xl font-bold">{data?.avgViews}</p>
         </div>

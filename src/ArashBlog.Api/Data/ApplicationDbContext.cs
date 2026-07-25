@@ -24,6 +24,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<FlatPage> FlatPages => Set<FlatPage>();
     public DbSet<SiteSetting> SiteSettings => Set<SiteSetting>();
     public DbSet<ThemeConfig> ThemeConfigs => Set<ThemeConfig>();
+    public DbSet<LandingSection> LandingSections => Set<LandingSection>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -164,6 +165,19 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         {
             e.Property(t => t.BrandColor).HasMaxLength(7);
             e.Property(t => t.AccentColor).HasMaxLength(7);
+        });
+
+        builder.Entity<LandingSection>(e =>
+        {
+            e.HasIndex(s => s.Type).IsUnique();
+            e.Property(s => s.HeadingFa).HasMaxLength(200);
+            e.Property(s => s.HeadingCkb).HasMaxLength(200);
+            e.Property(s => s.SubheadingFa).HasMaxLength(300);
+            e.Property(s => s.SubheadingCkb).HasMaxLength(300);
+            e.Property(s => s.PrimaryCtaTextFa).HasMaxLength(60);
+            e.Property(s => s.PrimaryCtaTextCkb).HasMaxLength(60);
+            e.Property(s => s.SecondaryCtaTextFa).HasMaxLength(60);
+            e.Property(s => s.SecondaryCtaTextCkb).HasMaxLength(60);
         });
     }
 }

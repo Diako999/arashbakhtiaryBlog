@@ -26,7 +26,7 @@ export default function SubmissionInbox() {
 
       <div className="flex flex-col gap-2">
         {data?.map((submission) => (
-          <div key={submission.id} className="flex items-center justify-between rounded-lg border border-line bg-card p-3">
+          <div key={submission.id} className="flex items-center justify-between card-hover-soft border border-line bg-card p-3">
             <div>
               <p className="font-bold">
                 {submission.name} <span className="text-ink-faint">— {submission.email}</span>

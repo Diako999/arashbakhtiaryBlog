@@ -29,7 +29,7 @@ export default function OtpVerify() {
   }
 
   return (
-    <div dir="rtl" className="mx-auto mt-16 max-w-sm rounded-xl border border-line bg-card p-6">
+    <div dir="rtl" className="mx-auto mt-16 max-w-sm card-hover border border-line bg-card p-6">
       <h1 className="mb-4 text-xl font-bold">{t("auth.otpVerify.title")}</h1>
       <form onSubmit={(e) => void handleSubmit(e)} className="flex flex-col gap-3">
         <input

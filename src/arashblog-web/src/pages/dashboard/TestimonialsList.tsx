@@ -67,7 +67,7 @@ export default function TestimonialsList() {
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">{t("dashboard.testimonials.title")}</h1>
         {editingId === null && (
-          <button type="button" onClick={startNew} className="rounded-lg bg-brand px-4 py-2 font-bold text-white">
+          <button type="button" onClick={startNew} className="btn-primary">
             {t("dashboard.testimonials.newTestimonial")}
           </button>
         )}
@@ -125,7 +125,7 @@ export default function TestimonialsList() {
             />
           </div>
           <div className="flex gap-2 sm:col-span-2">
-            <button type="submit" className="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-white">
+            <button type="submit" className="btn-primary">
               {t("dashboard.postForm.save")}
             </button>
             <button type="button" onClick={() => setEditingId(null)} className="rounded-lg px-4 py-2 text-sm text-ink-muted">
@@ -139,7 +139,7 @@ export default function TestimonialsList() {
 
       <div className="flex flex-col gap-2">
         {data?.map((testimonial) => (
-          <div key={testimonial.id} className="rounded-lg border border-line bg-card p-3">
+          <div key={testimonial.id} className="card-hover-soft border border-line bg-card p-3">
             <div className="mb-1 flex items-center justify-between">
               <span className="font-bold">{testimonial.authorName}</span>
               <span
