@@ -27,6 +27,7 @@ import SubmissionInbox from "./pages/dashboard/SubmissionInbox";
 import PagesVisibility from "./pages/dashboard/PagesVisibility";
 import SettingsPage from "./pages/dashboard/SettingsPage";
 import LandingSections from "./pages/dashboard/LandingSections";
+import AdminUsers from "./pages/dashboard/AdminUsers";
 import { defaultLanguage } from "./i18n";
 
 export default function App() {
@@ -67,6 +68,7 @@ export default function App() {
         <Route path="leads/submissions" element={<SubmissionInbox />} />
         <Route path="pages" element={<PagesVisibility />} />
         <Route path="landing" element={<LandingSections />} />
+        <Route path="admins" element={<AdminUsers />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
 

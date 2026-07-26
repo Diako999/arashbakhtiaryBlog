@@ -17,6 +17,7 @@ const navEntries = [
   { to: "/dashboard/leads", end: false, labelKey: "dashboard.nav.leads" },
   { to: "/dashboard/pages", end: false, labelKey: "dashboard.nav.pages" },
   { to: "/dashboard/landing", end: false, labelKey: "dashboard.nav.landing" },
+  { to: "/dashboard/admins", end: false, labelKey: "dashboard.nav.admins" },
   { to: "/dashboard/settings", end: false, labelKey: "dashboard.nav.settings" },
 ] as const;
 

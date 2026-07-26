@@ -1,6 +1,8 @@
 import { api } from "./client";
 import type {
+  AdminUserDto,
   AnalyticsDto,
+  CreateAdminRequest,
   DashboardCategoryDto,
   DashboardCommentDto,
   DashboardFlatPageDto,
@@ -87,6 +89,10 @@ export const dashboardApi = {
   flatPage: (id: number) => api.get<DashboardFlatPageDto>(`/dashboard/flat-pages/${id}`),
   updateFlatPage: (id: number, data: UpsertFlatPageRequest) =>
     api.put<DashboardFlatPageDto>(`/dashboard/flat-pages/${id}`, data),
+
+  admins: () => api.get<AdminUserDto[]>("/dashboard/admins"),
+  createAdmin: (data: CreateAdminRequest) => api.post<AdminUserDto>("/dashboard/admins", data),
+  deleteAdmin: (id: string) => api.del(`/dashboard/admins/${id}`),
 
   siteSetting: () => api.get<SiteSettingDto>("/dashboard/settings/site"),
   updateSiteSetting: (data: UpsertSiteSettingRequest) => api.put<SiteSettingDto>("/dashboard/settings/site", data),

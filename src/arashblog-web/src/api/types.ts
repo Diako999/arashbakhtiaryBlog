@@ -16,6 +16,17 @@ export interface OtpSetupResponse {
   manualKey: string;
 }
 
+export interface AdminUserDto {
+  id: string;
+  userName: string;
+  twoFactorEnabled: boolean;
+}
+
+export interface CreateAdminRequest {
+  username: string;
+  password: string;
+}
+
 export interface OtpConfirmResponse {
   recoveryCodes: string[];
 }
