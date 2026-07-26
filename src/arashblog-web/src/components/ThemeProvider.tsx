@@ -21,6 +21,9 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 
     document.documentElement.style.setProperty("--brand", theme.brandColor);
     document.documentElement.style.setProperty("--accent", theme.accentColor);
+    document.documentElement.setAttribute("data-font", theme.fontChoice);
+    document.documentElement.setAttribute("data-card-style", theme.cardStyle);
+    document.documentElement.setAttribute("data-header-footer-style", theme.headerFooterStyle);
 
     if (!localStorage.getItem("theme")) {
       document.documentElement.setAttribute("data-theme", theme.defaultMode.toLowerCase());

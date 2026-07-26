@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { LandingSectionDto } from "../../api/types";
 import OfferingCard from "../../components/OfferingCard";
+import Reveal from "../../components/Reveal";
 
 export default function OfferingsTeaser({ section, lang }: { section: LandingSectionDto; lang: string }) {
   const { t } = useTranslation();
@@ -16,8 +17,10 @@ export default function OfferingsTeaser({ section, lang }: { section: LandingSec
         </Link>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {section.offerings.map((offering) => (
-          <OfferingCard key={offering.slug} offering={offering} lang={lang} />
+        {section.offerings.map((offering, index) => (
+          <Reveal key={offering.slug} delayMs={Math.min(index, 3) * 80}>
+            <OfferingCard offering={offering} lang={lang} />
+          </Reveal>
         ))}
       </div>
     </section>

@@ -4,6 +4,9 @@
     "blog": "وبلاگ",
     "language": "زبان"
   },
+  "footer": {
+    "rights": "تمامی حقوق محفوظ است."
+  },
   "landing": {
     "seeAll": "مشاهده همه ←"
   },
@@ -135,6 +138,10 @@
       "status": "وضعیت",
       "publishedAt": "تاریخ انتشار",
       "coverImageUrl": "آدرس تصویر کاور",
+      "customAppearance": "ظاهر سفارشی این نوشته",
+      "bgColor": "رنگ پس‌زمینه",
+      "textColor": "رنگ متن",
+      "accentColor": "رنگ تاکیدی/لینک",
       "save": "ذخیره",
       "error": "ذخیره با خطا مواجه شد."
     },
@@ -216,7 +223,18 @@
       "accentColor": "رنگ تأکیدی",
       "defaultMode": "حالت پیش‌فرض",
       "light": "روشن",
-      "dark": "تیره"
+      "dark": "تیره",
+      "fontChoice": "فونت سایت",
+      "fontVazirmatn": "وزیرمتن",
+      "fontSahel": "ساحل",
+      "fontSamim": "صمیم",
+      "cardStyle": "سبک کارت‌ها",
+      "cardRounded": "گرد",
+      "cardSharp": "تیز",
+      "cardSoft": "خیلی گرد",
+      "headerFooterStyle": "سبک هدر و فوتر",
+      "headerFooterGlass": "شیشه‌ای",
+      "headerFooterSolid": "ساده (بدون افکت شیشه‌ای)"
     },
     "upload": {
       "choose": "انتخاب فایل",

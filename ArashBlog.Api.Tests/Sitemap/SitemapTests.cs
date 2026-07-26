@@ -12,7 +12,7 @@ public class SitemapTests(TestWebApplicationFactory factory) : IClassFixture<Tes
     {
         var admin = await AuthTestHelper.CreateVerifiedClientAsync(factory, "sitemap-admin-1");
         var postResponse = await admin.PostAsJsonAsync("/api/dashboard/posts", new UpsertPostRequest(
-            "sitemap-post", null, "", null, "Published", DateTimeOffset.UtcNow,
+            "sitemap-post", null, "", null, null, null, null, "Published", DateTimeOffset.UtcNow,
             "پست سایت‌مپ", "بابەتی سایتمەپ", "", "", "<p>x</p>", "<p>x</p>", "", "", "", ""));
         await postResponse.Content.ReadFromJsonAsync<DashboardPostDetailDto>();
 

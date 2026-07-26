@@ -32,6 +32,7 @@ public class OverviewController(ApplicationDbContext db) : ControllerBase
 
         var recentDtos = recent.Select(p => new PostSummaryDto(
             p.Slug, p.TitleFa, p.ExcerptFa, p.CoverImageUrl,
+            p.BgColor, p.TextColor, p.AccentColor,
             p.Category?.NameFa, p.Category?.Slug,
             p.Tags.Select(t => t.Slug).ToList(),
             p.PublishedAt, p.Author.UserName ?? "")).ToList();

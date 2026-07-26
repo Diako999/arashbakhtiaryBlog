@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { PostSummary } from "../api/types";
@@ -5,8 +6,22 @@ import type { PostSummary } from "../api/types";
 export default function PostCard({ post, lang }: { post: PostSummary; lang: string }) {
   const { t } = useTranslation();
 
+  // Per-post overrides: background wins via inline style beating the
+  // bg-card class outright. Text/accent must override --color-ink/
+  // --color-brand directly (the vars .text-ink/.text-brand actually
+  // consume), not --text/--brand — those are only aliased into
+  // --color-ink/--color-brand at :root (`--color-ink: var(--text)`), and
+  // that alias resolves once at :root, so overriding --text on a
+  // descendant like this article never re-triggers it. --brand is kept
+  // too since the cover-image gradient fallback below references it directly.
+  const overrideStyle = {
+    ...(post.bgColor ? { backgroundColor: post.bgColor } : {}),
+    ...(post.textColor ? { "--color-ink": post.textColor } : {}),
+    ...(post.accentColor ? { "--brand": post.accentColor, "--color-brand": post.accentColor } : {}),
+  } as CSSProperties;
+
   return (
-    <article className="card-hover overflow-hidden border border-line bg-card">
+    <article className="card-hover overflow-hidden border border-line bg-card" style={overrideStyle}>
       <div
         className="aspect-[16/10] w-full"
         style={

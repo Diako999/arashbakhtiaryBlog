@@ -4,6 +4,9 @@
     "blog": "بلۆگ",
     "language": "زمان"
   },
+  "footer": {
+    "rights": "هەموو مافەکان پارێزراون."
+  },
   "landing": {
     "seeAll": "بینینی هەموو ←"
   },
@@ -135,6 +138,10 @@
       "status": "دۆخ",
       "publishedAt": "بەرواری بڵاوکردنەوە",
       "coverImageUrl": "بەستەری وێنەی سەرەکی",
+      "customAppearance": "ڕووکاری تایبەت بۆ ئەم بابەتە",
+      "bgColor": "ڕەنگی پاشبنەما",
+      "textColor": "ڕەنگی نووسین",
+      "accentColor": "ڕەنگی تیشکدان/بەستەر",
       "save": "پاشەکەوتکردن",
       "error": "پاشەکەوتکردن سەرکەوتوو نەبوو."
     },
@@ -216,7 +223,18 @@
       "accentColor": "ڕەنگی تیشکدەرەوە",
       "defaultMode": "دۆخی بنەڕەتی",
       "light": "ڕووناک",
-      "dark": "تاریک"
+      "dark": "تاریک",
+      "fontChoice": "فۆنتی ماڵپەڕ",
+      "fontVazirmatn": "ڤازیرمەتن",
+      "fontSahel": "ساحێل",
+      "fontSamim": "سەمیم",
+      "cardStyle": "شێوازی کارتەکان",
+      "cardRounded": "خڕ",
+      "cardSharp": "تیژ",
+      "cardSoft": "زۆر خڕ",
+      "headerFooterStyle": "شێوازی سەرپەڕ و ژێرپەڕ",
+      "headerFooterGlass": "شووشەیی",
+      "headerFooterSolid": "سادە (بێ کاریگەری شووشەیی)"
     },
     "upload": {
       "choose": "هەڵبژاردنی فایل",

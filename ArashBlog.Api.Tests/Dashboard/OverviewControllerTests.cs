@@ -11,9 +11,9 @@ public class OverviewControllerTests(TestWebApplicationFactory factory) : IClass
     {
         var client = await AuthTestHelper.CreateVerifiedClientAsync(factory, "overview-user");
         await client.PostAsJsonAsync("/api/dashboard/posts", new UpsertPostRequest(
-            "", null, "", null, "Draft", null, "پیش‌نویس", "ڕەشنووس", "", "", "<p>x</p>", "<p>x</p>", "", "", "", ""));
+            "", null, "", null, null, null, null, "Draft", null, "پیش‌نویس", "ڕەشنووس", "", "", "<p>x</p>", "<p>x</p>", "", "", "", ""));
         await client.PostAsJsonAsync("/api/dashboard/posts", new UpsertPostRequest(
-            "", null, "", null, "Published", DateTimeOffset.UtcNow,
+            "", null, "", null, null, null, null, "Published", DateTimeOffset.UtcNow,
             "منتشرشده", "بڵاوکراوەتەوە", "", "", "<p>x</p>", "<p>x</p>", "", "", "", ""));
 
         var overview = await client.GetFromJsonAsync<OverviewDto>("/api/dashboard/overview");
@@ -28,7 +28,7 @@ public class OverviewControllerTests(TestWebApplicationFactory factory) : IClass
     {
         var client = await AuthTestHelper.CreateVerifiedClientAsync(factory, "analytics-user");
         var createResponse = await client.PostAsJsonAsync("/api/dashboard/posts", new UpsertPostRequest(
-            "", null, "", null, "Published", DateTimeOffset.UtcNow,
+            "", null, "", null, null, null, null, "Published", DateTimeOffset.UtcNow,
             "محبوب", "بەناوبانگ", "", "", "<p>x</p>", "<p>x</p>", "", "", "", ""));
         var created = await createResponse.Content.ReadFromJsonAsync<DashboardPostDetailDto>();
 

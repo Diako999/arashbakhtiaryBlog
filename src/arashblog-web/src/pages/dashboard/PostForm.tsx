@@ -11,6 +11,9 @@ const emptyForm: UpsertPostRequest = {
   categoryId: null,
   tags: "",
   coverImageUrl: "",
+  bgColor: null,
+  textColor: null,
+  accentColor: null,
   status: "Draft",
   publishedAt: null,
   titleFa: "",
@@ -36,6 +39,7 @@ export default function PostForm() {
   const isEdit = id !== undefined;
   const [form, setForm] = useState<UpsertPostRequest>(emptyForm);
   const [error, setError] = useState(false);
+  const hasCustomColors = form.bgColor !== null || form.textColor !== null || form.accentColor !== null;
 
   const { data: categories } = useQuery({ queryKey: ["dashboard-categories"], queryFn: dashboardApi.categories });
   const { data: existing } = useQuery({
@@ -176,6 +180,54 @@ export default function PostForm() {
             value={form.coverImageUrl}
             onChange={(url) => setForm({ ...form, coverImageUrl: url })}
           />
+        </div>
+
+        <div className="sm:col-span-2 card-hover-soft border border-line bg-card p-4">
+          <label className="mb-3 flex items-center gap-2 text-sm font-bold">
+            <input
+              type="checkbox"
+              checked={hasCustomColors}
+              onChange={(e) =>
+                setForm(
+                  e.target.checked
+                    ? { ...form, bgColor: "#202124", textColor: "#f2f2f1", accentColor: "#e5484d" }
+                    : { ...form, bgColor: null, textColor: null, accentColor: null },
+                )
+              }
+            />
+            {t("dashboard.postForm.customAppearance")}
+          </label>
+          {hasCustomColors && (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div>
+                <label className={labelClass}>{t("dashboard.postForm.bgColor")}</label>
+                <input
+                  type="color"
+                  value={form.bgColor ?? "#202124"}
+                  onChange={(e) => setForm({ ...form, bgColor: e.target.value })}
+                  className="h-10 w-full rounded-lg border border-line bg-card"
+                />
+              </div>
+              <div>
+                <label className={labelClass}>{t("dashboard.postForm.textColor")}</label>
+                <input
+                  type="color"
+                  value={form.textColor ?? "#f2f2f1"}
+                  onChange={(e) => setForm({ ...form, textColor: e.target.value })}
+                  className="h-10 w-full rounded-lg border border-line bg-card"
+                />
+              </div>
+              <div>
+                <label className={labelClass}>{t("dashboard.postForm.accentColor")}</label>
+                <input
+                  type="color"
+                  value={form.accentColor ?? "#e5484d"}
+                  onChange={(e) => setForm({ ...form, accentColor: e.target.value })}
+                  className="h-10 w-full rounded-lg border border-line bg-card"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="sm:col-span-2 flex gap-3 pt-2">

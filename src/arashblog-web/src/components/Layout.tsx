@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { navApi } from "../api/nav";
 import { siteApi } from "../api/site";
 import { defaultLanguage, supportedLanguages, type SupportedLanguage } from "../i18n";
+import Footer from "./Footer";
 import LanguageSwitcher from "./LanguageSwitcher";
 import Logo from "./Logo";
 import ThemeToggleButton from "./ThemeToggleButton";
@@ -50,7 +51,7 @@ export default function Layout() {
   );
 
   return (
-    <div className="min-h-dvh bg-surface text-ink">
+    <div className="flex min-h-dvh flex-col bg-surface text-ink">
       <header className="glass-surface sticky top-0 z-30 border-b border-line">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
           <Link to={`/${activeLang}`} className="flex items-center gap-2 text-lg font-bold text-brand no-underline">
@@ -84,16 +85,20 @@ export default function Layout() {
           </div>
         </div>
 
-        {menuOpen && (
-          <div className="flex flex-col gap-4 border-t border-line px-4 py-5 transition-opacity duration-200 md:hidden">
-            {navLinks}
-            <LanguageSwitcher activeLang={activeLang} />
-          </div>
-        )}
+        <div
+          aria-hidden={!menuOpen}
+          className={`glass-surface absolute inset-x-0 top-full z-40 flex flex-col gap-4 overflow-hidden border-b border-line px-4 transition-all duration-300 ease-out md:hidden ${
+            menuOpen ? "max-h-[420px] translate-y-0 py-5 opacity-100" : "pointer-events-none max-h-0 -translate-y-2 py-0 opacity-0"
+          }`}
+        >
+          {navLinks}
+          <LanguageSwitcher activeLang={activeLang} />
+        </div>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-8">
+      <main className="mx-auto max-w-6xl flex-1 px-4 py-8">
         <Outlet />
       </main>
+      <Footer activeLang={activeLang} navItems={navItems} siteSettings={siteSettings} />
     </div>
   );
 }

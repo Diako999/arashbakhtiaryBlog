@@ -17,6 +17,9 @@ public class Post
     public required string BodyFa { get; set; }
     public required string BodyCkb { get; set; }
     public string? CoverImageUrl { get; set; }
+    public string? BgColor { get; set; }
+    public string? TextColor { get; set; }
+    public string? AccentColor { get; set; }
     public PostStatus Status { get; set; } = PostStatus.Draft;
     public DateTimeOffset? PublishedAt { get; set; }
     public int ViewCount { get; set; }

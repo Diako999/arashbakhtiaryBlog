@@ -25,7 +25,7 @@ public class SiteTests(TestWebApplicationFactory factory) : IClassFixture<TestWe
     {
         var admin = await AuthTestHelper.CreateVerifiedClientAsync(factory, "theme-admin-1");
 
-        var updateResponse = await admin.PutAsJsonAsync("/api/dashboard/settings/theme", new UpsertThemeRequest("#123456", "#abcdef", "Light"));
+        var updateResponse = await admin.PutAsJsonAsync("/api/dashboard/settings/theme", new UpsertThemeRequest("#123456", "#abcdef", "Light", "Vazirmatn", "Rounded", "Glass"));
         Assert.Equal(HttpStatusCode.OK, updateResponse.StatusCode);
 
         var publicClient = factory.CreateClient();
@@ -41,9 +41,37 @@ public class SiteTests(TestWebApplicationFactory factory) : IClassFixture<TestWe
     {
         var admin = await AuthTestHelper.CreateVerifiedClientAsync(factory, "theme-admin-2");
 
-        var response = await admin.PutAsJsonAsync("/api/dashboard/settings/theme", new UpsertThemeRequest("not-a-color", "#abcdef", "Dark"));
+        var response = await admin.PutAsJsonAsync("/api/dashboard/settings/theme", new UpsertThemeRequest("not-a-color", "#abcdef", "Dark", "Vazirmatn", "Rounded", "Glass"));
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Theme_update_rejects_an_invalid_extended_control()
+    {
+        var admin = await AuthTestHelper.CreateVerifiedClientAsync(factory, "theme-admin-3");
+
+        var response = await admin.PutAsJsonAsync(
+            "/api/dashboard/settings/theme", new UpsertThemeRequest("#123456", "#abcdef", "Dark", "NotAFont", "Rounded", "Glass"));
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Theme_update_persists_extended_controls()
+    {
+        var admin = await AuthTestHelper.CreateVerifiedClientAsync(factory, "theme-admin-4");
+
+        var updateResponse = await admin.PutAsJsonAsync(
+            "/api/dashboard/settings/theme", new UpsertThemeRequest("#123456", "#abcdef", "Dark", "Sahel", "Sharp", "Solid"));
+        Assert.Equal(HttpStatusCode.OK, updateResponse.StatusCode);
+
+        var publicClient = factory.CreateClient();
+        var theme = await publicClient.GetFromJsonAsync<ThemeDto>("/api/site/theme");
+
+        Assert.Equal("Sahel", theme!.FontChoice);
+        Assert.Equal("Sharp", theme.CardStyle);
+        Assert.Equal("Solid", theme.HeaderFooterStyle);
     }
 
     [Fact]

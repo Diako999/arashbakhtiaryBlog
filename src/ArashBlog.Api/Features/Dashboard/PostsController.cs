@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using ArashBlog.Api.Common;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
@@ -15,8 +16,15 @@ namespace ArashBlog.Api.Features.Dashboard;
 [ApiController]
 [Route("api/dashboard")]
 [RequireVerifiedTwoFactor]
-public class PostsController(ApplicationDbContext db, UserManager<ApplicationUser> userManager) : ControllerBase
+public partial class PostsController(ApplicationDbContext db, UserManager<ApplicationUser> userManager) : ControllerBase
 {
+    [GeneratedRegex(@"^#[0-9a-fA-F]{6}$")]
+    private static partial Regex HexColorRegex();
+
+    // Unlike SettingsController's colors (always present on a required
+    // ThemeConfig row), post colors are optional — only validate when the
+    // admin actually supplied a value.
+    private static bool IsValidOptionalColor(string? value) => value is null || HexColorRegex().IsMatch(value);
     [HttpGet("categories")]
     public async Task<ActionResult<IReadOnlyList<DashboardCategoryDto>>> Categories()
     {
@@ -101,11 +109,19 @@ public class PostsController(ApplicationDbContext db, UserManager<ApplicationUse
             return BadRequest(new { error = "invalid_status" });
         }
 
+        if (!IsValidOptionalColor(request.BgColor) || !IsValidOptionalColor(request.TextColor) || !IsValidOptionalColor(request.AccentColor))
+        {
+            return BadRequest(new { error = "invalid_color" });
+        }
+
         var post = new Post
         {
             Slug = slug,
             CategoryId = request.CategoryId,
             CoverImageUrl = request.CoverImageUrl,
+            BgColor = request.BgColor,
+            TextColor = request.TextColor,
+            AccentColor = request.AccentColor,
             Status = status,
             PublishedAt = request.PublishedAt,
             TitleFa = request.TitleFa,
@@ -144,9 +160,17 @@ public class PostsController(ApplicationDbContext db, UserManager<ApplicationUse
             return BadRequest(new { error = "invalid_status" });
         }
 
+        if (!IsValidOptionalColor(request.BgColor) || !IsValidOptionalColor(request.TextColor) || !IsValidOptionalColor(request.AccentColor))
+        {
+            return BadRequest(new { error = "invalid_color" });
+        }
+
         post.Slug = request.Slug;
         post.CategoryId = request.CategoryId;
         post.CoverImageUrl = request.CoverImageUrl;
+        post.BgColor = request.BgColor;
+        post.TextColor = request.TextColor;
+        post.AccentColor = request.AccentColor;
         post.Status = status;
         post.PublishedAt = request.PublishedAt;
         post.TitleFa = request.TitleFa;
@@ -217,6 +241,7 @@ public class PostsController(ApplicationDbContext db, UserManager<ApplicationUse
 
     private static DashboardPostDetailDto ToDetailDto(Post p) => new(
         p.Id, p.Slug, p.CategoryId, string.Join(", ", p.Tags.Select(t => t.Name)), p.CoverImageUrl,
+        p.BgColor, p.TextColor, p.AccentColor,
         p.Status.ToString(), p.PublishedAt, p.TitleFa, p.TitleCkb, p.ExcerptFa, p.ExcerptCkb, p.BodyFa, p.BodyCkb,
         p.MetaTitleFa, p.MetaTitleCkb, p.MetaDescriptionFa, p.MetaDescriptionCkb);
 }

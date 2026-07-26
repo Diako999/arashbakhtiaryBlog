@@ -12,4 +12,10 @@ public record SiteSettingDto(
     string WhatsappUrl,
     string MetaDescription);
 
-public record ThemeDto(string BrandColor, string AccentColor, string DefaultMode);
+public record ThemeDto(
+    string BrandColor,
+    string AccentColor,
+    string DefaultMode,
+    string FontChoice,
+    string CardStyle,
+    string HeaderFooterStyle);

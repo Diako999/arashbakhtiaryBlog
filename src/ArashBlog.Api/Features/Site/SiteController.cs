@@ -24,6 +24,8 @@ public class SiteController(ApplicationDbContext db) : ControllerBase
     public async Task<ActionResult<ThemeDto>> Theme()
     {
         var t = await SingletonLoader.LoadThemeConfigAsync(db);
-        return Ok(new ThemeDto(t.BrandColor, t.AccentColor, t.DefaultMode.ToString()));
+        return Ok(new ThemeDto(
+            t.BrandColor, t.AccentColor, t.DefaultMode.ToString(),
+            t.FontChoice.ToString(), t.CardStyle.ToString(), t.HeaderFooterStyle.ToString()));
     }
 }

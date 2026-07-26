@@ -34,6 +34,9 @@ export interface PostSummary {
   title: string;
   excerpt: string;
   coverImageUrl: string | null;
+  bgColor: string | null;
+  textColor: string | null;
+  accentColor: string | null;
   categoryName: string | null;
   categorySlug: string | null;
   tags: string[];
@@ -129,6 +132,9 @@ export interface DashboardPostDetailDto {
   categoryId: number | null;
   tags: string;
   coverImageUrl: string | null;
+  bgColor: string | null;
+  textColor: string | null;
+  accentColor: string | null;
   status: "Draft" | "Published";
   publishedAt: string | null;
   titleFa: string;
@@ -371,6 +377,9 @@ export interface ThemeDto {
   brandColor: string;
   accentColor: string;
   defaultMode: "Light" | "Dark";
+  fontChoice: "Vazirmatn" | "Sahel" | "Samim";
+  cardStyle: "Rounded" | "Sharp" | "Soft";
+  headerFooterStyle: "Glass" | "Solid";
 }
 
 export type UpsertThemeRequest = ThemeDto;

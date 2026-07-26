@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
+import { ApiError } from "../../api/client";
 import type { SiteSettingDto, ThemeDto } from "../../api/types";
 import FileUploadField from "../../components/FileUploadField";
 
@@ -18,7 +19,14 @@ const emptySite: SiteSettingDto = {
   metaDescription: "",
 };
 
-const emptyTheme: ThemeDto = { brandColor: "#E5484D", accentColor: "#8B9098", defaultMode: "Dark" };
+const emptyTheme: ThemeDto = {
+  brandColor: "#E5484D",
+  accentColor: "#8B9098",
+  defaultMode: "Dark",
+  fontChoice: "Vazirmatn",
+  cardStyle: "Rounded",
+  headerFooterStyle: "Glass",
+};
 
 export default function SettingsPage() {
   const { t } = useTranslation();
@@ -26,6 +34,7 @@ export default function SettingsPage() {
 
   const [siteForm, setSiteForm] = useState<SiteSettingDto>(emptySite);
   const [siteSaved, setSiteSaved] = useState(false);
+  const [siteError, setSiteError] = useState(false);
   const [themeForm, setThemeForm] = useState<ThemeDto>(emptyTheme);
   const [themeError, setThemeError] = useState(false);
   const [themeSaved, setThemeSaved] = useState(false);
@@ -43,9 +52,16 @@ export default function SettingsPage() {
 
   async function handleSiteSubmit(e: FormEvent) {
     e.preventDefault();
-    await dashboardApi.updateSiteSetting(siteForm);
-    setSiteSaved(true);
-    void queryClient.invalidateQueries({ queryKey: ["site-settings"] });
+    setSiteError(false);
+    try {
+      await dashboardApi.updateSiteSetting(siteForm);
+      setSiteSaved(true);
+      void queryClient.invalidateQueries({ queryKey: ["site-settings"] });
+    } catch (err) {
+      if (err instanceof ApiError) console.error("Site settings save failed:", err.status, err.body);
+      else console.error("Site settings save failed:", err);
+      setSiteError(true);
+    }
   }
 
   async function handleThemeSubmit(e: FormEvent) {
@@ -55,7 +71,9 @@ export default function SettingsPage() {
       await dashboardApi.updateTheme(themeForm);
       setThemeSaved(true);
       void queryClient.invalidateQueries({ queryKey: ["site-theme"] });
-    } catch {
+    } catch (err) {
+      if (err instanceof ApiError) console.error("Theme save failed:", err.status, err.body);
+      else console.error("Theme save failed:", err);
       setThemeError(true);
     }
   }
@@ -117,6 +135,7 @@ export default function SettingsPage() {
               {t("dashboard.postForm.save")}
             </button>
             {siteSaved && <p className="text-brand">{t("dashboard.settings.saved")}</p>}
+            {siteError && <p className="text-danger">{t("dashboard.postForm.error")}</p>}
           </div>
         </form>
       </div>
@@ -151,6 +170,41 @@ export default function SettingsPage() {
             >
               <option value="Light">{t("dashboard.settings.light")}</option>
               <option value="Dark">{t("dashboard.settings.dark")}</option>
+            </select>
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.fontChoice")}</label>
+            <select
+              value={themeForm.fontChoice}
+              onChange={(e) => setThemeForm({ ...themeForm, fontChoice: e.target.value as ThemeDto["fontChoice"] })}
+              className={inputClass}
+            >
+              <option value="Vazirmatn">{t("dashboard.settings.fontVazirmatn")}</option>
+              <option value="Sahel">{t("dashboard.settings.fontSahel")}</option>
+              <option value="Samim">{t("dashboard.settings.fontSamim")}</option>
+            </select>
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.cardStyle")}</label>
+            <select
+              value={themeForm.cardStyle}
+              onChange={(e) => setThemeForm({ ...themeForm, cardStyle: e.target.value as ThemeDto["cardStyle"] })}
+              className={inputClass}
+            >
+              <option value="Rounded">{t("dashboard.settings.cardRounded")}</option>
+              <option value="Sharp">{t("dashboard.settings.cardSharp")}</option>
+              <option value="Soft">{t("dashboard.settings.cardSoft")}</option>
+            </select>
+          </div>
+          <div>
+            <label className={labelClass}>{t("dashboard.settings.headerFooterStyle")}</label>
+            <select
+              value={themeForm.headerFooterStyle}
+              onChange={(e) => setThemeForm({ ...themeForm, headerFooterStyle: e.target.value as ThemeDto["headerFooterStyle"] })}
+              className={inputClass}
+            >
+              <option value="Glass">{t("dashboard.settings.headerFooterGlass")}</option>
+              <option value="Solid">{t("dashboard.settings.headerFooterSolid")}</option>
             </select>
           </div>
           <div className="sm:col-span-2 flex items-center gap-3">

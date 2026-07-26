@@ -53,7 +53,7 @@ public partial class SettingsController(ApplicationDbContext db) : ControllerBas
     public async Task<ActionResult<ThemeDto>> GetTheme()
     {
         var t = await SingletonLoader.LoadThemeConfigAsync(db);
-        return Ok(new ThemeDto(t.BrandColor, t.AccentColor, t.DefaultMode.ToString()));
+        return Ok(ToThemeDto(t));
     }
 
     [HttpPut("theme")]
@@ -69,12 +69,34 @@ public partial class SettingsController(ApplicationDbContext db) : ControllerBas
             return BadRequest(new { error = "invalid_mode" });
         }
 
+        if (!Enum.TryParse<ThemeFont>(request.FontChoice, ignoreCase: true, out var font))
+        {
+            return BadRequest(new { error = "invalid_font" });
+        }
+
+        if (!Enum.TryParse<ThemeCardStyle>(request.CardStyle, ignoreCase: true, out var cardStyle))
+        {
+            return BadRequest(new { error = "invalid_card_style" });
+        }
+
+        if (!Enum.TryParse<ThemeHeaderFooterStyle>(request.HeaderFooterStyle, ignoreCase: true, out var headerFooterStyle))
+        {
+            return BadRequest(new { error = "invalid_header_footer_style" });
+        }
+
         var t = await SingletonLoader.LoadThemeConfigAsync(db);
         t.BrandColor = request.BrandColor;
         t.AccentColor = request.AccentColor;
         t.DefaultMode = mode;
+        t.FontChoice = font;
+        t.CardStyle = cardStyle;
+        t.HeaderFooterStyle = headerFooterStyle;
         await db.SaveChangesAsync();
 
-        return Ok(new ThemeDto(t.BrandColor, t.AccentColor, t.DefaultMode.ToString()));
+        return Ok(ToThemeDto(t));
     }
+
+    private static ThemeDto ToThemeDto(ThemeConfig t) => new(
+        t.BrandColor, t.AccentColor, t.DefaultMode.ToString(),
+        t.FontChoice.ToString(), t.CardStyle.ToString(), t.HeaderFooterStyle.ToString());
 }

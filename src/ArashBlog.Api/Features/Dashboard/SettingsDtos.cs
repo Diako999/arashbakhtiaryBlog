@@ -12,4 +12,10 @@ public record UpsertSiteSettingRequest(
     string WhatsappUrl,
     string MetaDescription);
 
-public record UpsertThemeRequest(string BrandColor, string AccentColor, string DefaultMode);
+public record UpsertThemeRequest(
+    string BrandColor,
+    string AccentColor,
+    string DefaultMode,
+    string FontChoice,
+    string CardStyle,
+    string HeaderFooterStyle);

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { LandingSectionDto } from "../../api/types";
 import PostCard from "../../components/PostCard";
+import Reveal from "../../components/Reveal";
 
 export default function PostsTeaser({ section, lang }: { section: LandingSectionDto; lang: string }) {
   const { t } = useTranslation();
@@ -16,8 +17,10 @@ export default function PostsTeaser({ section, lang }: { section: LandingSection
         </Link>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {section.posts.map((post) => (
-          <PostCard key={post.slug} post={post} lang={lang} />
+        {section.posts.map((post, index) => (
+          <Reveal key={post.slug} delayMs={Math.min(index, 3) * 80}>
+            <PostCard post={post} lang={lang} />
+          </Reveal>
         ))}
       </div>
     </section>
