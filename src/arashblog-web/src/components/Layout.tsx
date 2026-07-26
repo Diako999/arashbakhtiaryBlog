@@ -95,7 +95,7 @@ export default function Layout() {
           <LanguageSwitcher activeLang={activeLang} />
         </div>
       </header>
-      <main className="mx-auto max-w-6xl flex-1 px-4 py-8">
+      <main className="mx-auto max-w-6xl flex-1 px-5 py-8 sm:px-8 lg:px-10">
         <Outlet />
       </main>
       <Footer activeLang={activeLang} navItems={navItems} siteSettings={siteSettings} />
