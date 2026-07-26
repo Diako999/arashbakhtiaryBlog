@@ -6,16 +6,16 @@ export default function OfferingCard({ offering, lang }: { offering: OfferingSum
   const { t } = useTranslation();
 
   return (
-    <article className="card-hover overflow-hidden border border-line bg-card">
+    <article className="card-hover flex h-full flex-col overflow-hidden border border-line bg-card">
       <div
-        className="aspect-[16/9] w-full"
+        className="aspect-[16/9] w-full shrink-0"
         style={
           offering.coverImageUrl
             ? { backgroundImage: `url(${offering.coverImageUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
             : { background: "linear-gradient(135deg, var(--accent) 0%, var(--brand) 100%)" }
         }
       />
-      <div className="flex h-full flex-col gap-2 px-5 py-5">
+      <div className="flex flex-1 flex-col gap-2 px-5 py-5">
         <h3 className="text-lg font-bold">
           <Link
             to={`/${lang}/offerings/${encodeURIComponent(offering.slug)}`}

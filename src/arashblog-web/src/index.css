@@ -246,15 +246,6 @@ body {
   -webkit-backdrop-filter: none;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-16px);
-  }
-}
-
 /* Scroll-reveal for the landing page (via components/Reveal.tsx + the
    useScrollReveal hook) — gated behind prefers-reduced-motion so users who
    asked for reduced motion get the content instantly, fully static. */
@@ -267,10 +258,6 @@ body {
   .reveal-visible {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  .hero-blob-float {
-    animation: float 7s ease-in-out infinite;
   }
 }
 

@@ -2,19 +2,8 @@ import type { LandingSectionDto } from "../../api/types";
 
 export default function Hero({ section }: { section: LandingSectionDto }) {
   return (
-    <section className="relative flex flex-col items-center gap-10 overflow-hidden py-6 md:flex-row md:gap-14 md:py-12">
-      <div
-        aria-hidden="true"
-        className="hero-blob-float pointer-events-none absolute -top-16 -start-24 h-72 w-72 rounded-full"
-        style={{ background: "radial-gradient(circle, var(--brand-soft), transparent 70%)" }}
-      />
-      <div
-        aria-hidden="true"
-        className="hero-blob-float pointer-events-none absolute -bottom-20 -end-16 h-64 w-64 rounded-full"
-        style={{ background: "radial-gradient(circle, var(--brand-soft), transparent 70%)", animationDelay: "2.5s" }}
-      />
-
-      <div className="flex min-w-0 flex-1 flex-col items-center gap-5 text-center md:min-w-[280px] md:items-start md:pe-4 md:text-start">
+    <section className="relative flex flex-col items-center gap-10 py-6 md:flex-row md:gap-14 md:py-12">
+      <div className="flex min-w-0 flex-1 flex-col items-center gap-5 text-center md:min-w-[280px] md:items-start md:pe-10 md:text-start lg:pe-16">
         <h1 className="gradient-text max-w-xl text-4xl font-extrabold leading-snug sm:text-5xl">{section.heading}</h1>
         {section.subheading && (
           <p className="max-w-lg text-base leading-8 text-ink-muted sm:text-lg">{section.subheading}</p>

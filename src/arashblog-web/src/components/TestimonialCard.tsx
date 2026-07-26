@@ -2,8 +2,8 @@ import type { TestimonialDto } from "../api/types";
 
 export default function TestimonialCard({ testimonial }: { testimonial: TestimonialDto }) {
   return (
-    <blockquote className="card-hover border border-line bg-card p-6">
-      <p className="mb-4 leading-8 text-ink-muted">&ldquo;{testimonial.quote}&rdquo;</p>
+    <blockquote className="card-hover flex h-full flex-col border border-line bg-card p-6">
+      <p className="mb-4 flex-1 leading-8 text-ink-muted">&ldquo;{testimonial.quote}&rdquo;</p>
       <footer className="flex items-center gap-3 border-t border-line pt-4">
         {testimonial.photoUrl ? (
           <img src={testimonial.photoUrl} alt="" className="h-11 w-11 rounded-full object-cover" />
