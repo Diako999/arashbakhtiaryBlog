@@ -53,6 +53,7 @@ public class OfferingsController(ApplicationDbContext db) : ControllerBase
         {
             Slug = slug,
             CoverImageUrl = request.CoverImageUrl,
+            VideoUrl = request.VideoUrl,
             Price = request.Price,
             Status = status,
             TitleFa = request.TitleFa,
@@ -92,6 +93,7 @@ public class OfferingsController(ApplicationDbContext db) : ControllerBase
 
         offering.Slug = request.Slug;
         offering.CoverImageUrl = request.CoverImageUrl;
+        offering.VideoUrl = request.VideoUrl;
         offering.Price = request.Price;
         offering.Status = status;
         offering.TitleFa = request.TitleFa;
@@ -173,7 +175,7 @@ public class OfferingsController(ApplicationDbContext db) : ControllerBase
     }
 
     private static DashboardOfferingDetailDto ToDetailDto(Offering o) => new(
-        o.Id, o.Slug, o.CoverImageUrl, o.Price, o.Status.ToString(),
+        o.Id, o.Slug, o.CoverImageUrl, o.VideoUrl, o.Price, o.Status.ToString(),
         o.TitleFa, o.TitleCkb, o.SummaryFa, o.SummaryCkb, o.BodyFa, o.BodyCkb,
         o.MetaTitleFa, o.MetaTitleCkb, o.MetaDescriptionFa, o.MetaDescriptionCkb,
         o.Sessions.OrderBy(s => s.StartsAt).Select(s => new DashboardSessionDto(s.Id, s.StartsAt, s.EndsAt, s.Location, s.Capacity)).ToList(),

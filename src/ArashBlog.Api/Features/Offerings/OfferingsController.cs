@@ -56,6 +56,7 @@ public class OfferingsController(ApplicationDbContext db) : ControllerBase
             l == "ckb" ? offering.BodyCkb : offering.BodyFa,
             l == "ckb" ? offering.SummaryCkb : offering.SummaryFa,
             offering.CoverImageUrl,
+            offering.VideoUrl,
             offering.Price,
             sessions));
     }

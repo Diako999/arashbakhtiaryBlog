@@ -182,6 +182,7 @@ export interface OfferingSummaryDto {
 
 export interface OfferingDetailDto extends OfferingSummaryDto {
   bodyHtml: string;
+  videoUrl: string | null;
   sessions: SessionDto[];
 }
 
@@ -227,6 +228,7 @@ export interface DashboardOfferingDetailDto {
   id: number;
   slug: string;
   coverImageUrl: string | null;
+  videoUrl: string | null;
   price: number | null;
   status: "Draft" | "Published";
   titleFa: string;

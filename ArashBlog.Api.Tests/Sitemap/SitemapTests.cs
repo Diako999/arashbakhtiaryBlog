@@ -17,7 +17,7 @@ public class SitemapTests(TestWebApplicationFactory factory) : IClassFixture<Tes
         await postResponse.Content.ReadFromJsonAsync<DashboardPostDetailDto>();
 
         await admin.PostAsJsonAsync("/api/dashboard/offerings", new UpsertOfferingRequest(
-            "sitemap-offering", null, null, "Published", "دوره سایت‌مپ", "کۆرسی سایتمەپ", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "", []));
+            "sitemap-offering", null, null, null, "Published", "دوره سایت‌مپ", "کۆرسی سایتمەپ", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "", []));
         await SectionVisibilityTestHelper.SetVisibleAsync(factory, "offerings", false);
 
         var client = factory.CreateClient();
@@ -32,7 +32,7 @@ public class SitemapTests(TestWebApplicationFactory factory) : IClassFixture<Tes
     {
         var admin = await AuthTestHelper.CreateVerifiedClientAsync(factory, "sitemap-admin-2");
         await admin.PostAsJsonAsync("/api/dashboard/offerings", new UpsertOfferingRequest(
-            "visible-sitemap-offering", null, null, "Published", "دوره دیدنی", "کۆرسی دیار", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "", []));
+            "visible-sitemap-offering", null, null, null, "Published", "دوره دیدنی", "کۆرسی دیار", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "", []));
         await SectionVisibilityTestHelper.SetVisibleAsync(factory, "offerings", true);
 
         var client = factory.CreateClient();

@@ -11,6 +11,7 @@ public class Offering
     public string BodyFa { get; set; } = "";
     public string BodyCkb { get; set; } = "";
     public string? CoverImageUrl { get; set; }
+    public string? VideoUrl { get; set; }
     public decimal? Price { get; set; }
     public PostStatus Status { get; set; } = PostStatus.Draft;
     public string MetaTitleFa { get; set; } = "";

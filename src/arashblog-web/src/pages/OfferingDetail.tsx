@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { offeringsApi } from "../api/offerings";
 import { useSeo } from "../hooks/useSeo";
 import { defaultLanguage } from "../i18n";
+import VideoEmbed from "../components/VideoEmbed";
 
 export default function OfferingDetail() {
   const { lang = defaultLanguage, slug = "" } = useParams();
@@ -54,6 +55,11 @@ export default function OfferingDetail() {
         <p className="mb-4 text-lg font-bold text-brand">
           {offering.price.toLocaleString()} {t("offerings.currency")}
         </p>
+      )}
+      {offering.videoUrl && (
+        <div className="mb-6">
+          <VideoEmbed url={offering.videoUrl} />
+        </div>
       )}
       <div dangerouslySetInnerHTML={{ __html: offering.bodyHtml }} />
 

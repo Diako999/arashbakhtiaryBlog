@@ -16,6 +16,7 @@ public record DashboardOfferingDetailDto(
     int Id,
     string Slug,
     string? CoverImageUrl,
+    string? VideoUrl,
     decimal? Price,
     string Status,
     string TitleFa,
@@ -34,6 +35,7 @@ public record DashboardOfferingDetailDto(
 public record UpsertOfferingRequest(
     string Slug,
     string? CoverImageUrl,
+    string? VideoUrl,
     decimal? Price,
     string Status,
     string TitleFa,

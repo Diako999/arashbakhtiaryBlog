@@ -9,6 +9,7 @@ import FileUploadField from "../../components/FileUploadField";
 const emptyForm: UpsertOfferingRequest = {
   slug: "",
   coverImageUrl: "",
+  videoUrl: "",
   price: null,
   status: "Draft",
   titleFa: "",
@@ -141,6 +142,17 @@ export default function OfferingForm() {
               value={form.coverImageUrl}
               onChange={(url) => setForm({ ...form, coverImageUrl: url })}
             />
+          </div>
+          <div className="sm:col-span-2">
+            <label className={labelClass}>{t("dashboard.offeringForm.videoUrl")}</label>
+            <input
+              dir="ltr"
+              placeholder="https://www.youtube.com/watch?v=..."
+              value={form.videoUrl ?? ""}
+              onChange={(e) => setForm({ ...form, videoUrl: e.target.value || null })}
+              className={inputClass}
+            />
+            <p className="mt-1 text-xs text-ink-faint">{t("dashboard.offeringForm.videoUrlHint")}</p>
           </div>
         </div>
 

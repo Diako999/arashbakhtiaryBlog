@@ -23,7 +23,7 @@ public class OfferingsDashboardTests(TestWebApplicationFactory factory) : IClass
         var client = await AuthTestHelper.CreateVerifiedClientAsync(factory, "offering-admin-3");
 
         var createResponse = await client.PostAsJsonAsync("/api/dashboard/offerings", new UpsertOfferingRequest(
-            "", null, null, "Draft", "دوره", "کۆرس", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "",
+            "", null, null, null, "Draft", "دوره", "کۆرس", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "",
             [
                 new DashboardSessionDto(null, DateTimeOffset.UtcNow.AddDays(1), null, "جلسه یک", 10),
                 new DashboardSessionDto(null, DateTimeOffset.UtcNow.AddDays(2), null, "جلسه دو", 10),
@@ -34,7 +34,7 @@ public class OfferingsDashboardTests(TestWebApplicationFactory factory) : IClass
         // Keep the first session but edit its location, drop the second, add a third.
         var keep = created.Sessions[0];
         var updateResponse = await client.PutAsJsonAsync($"/api/dashboard/offerings/{created.Id}", new UpsertOfferingRequest(
-            created.Slug, null, null, "Published", "دوره", "کۆرس", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "",
+            created.Slug, null, null, null, "Published", "دوره", "کۆرس", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "",
             [
                 keep with { Location = "جلسه یک (اصلاح‌شده)" },
                 new DashboardSessionDto(null, DateTimeOffset.UtcNow.AddDays(3), null, "جلسه سه", 5),
@@ -48,11 +48,28 @@ public class OfferingsDashboardTests(TestWebApplicationFactory factory) : IClass
     }
 
     [Fact]
+    public async Task Create_persists_video_url_and_it_reaches_the_public_detail()
+    {
+        var client = await AuthTestHelper.CreateVerifiedClientAsync(factory, "offering-admin-5");
+        var createResponse = await client.PostAsJsonAsync("/api/dashboard/offerings", new UpsertOfferingRequest(
+            "", null, "https://www.youtube.com/watch?v=dQw4w9WgXcQ", null, "Published", "دوره ویدیویی", "کۆرسی ڤیدیۆیی",
+            "", "", "<p>x</p>", "<p>x</p>", "", "", "", "", []));
+        var created = await createResponse.Content.ReadFromJsonAsync<DashboardOfferingDetailDto>();
+        Assert.Equal(HttpStatusCode.OK, createResponse.StatusCode);
+        Assert.Equal("https://www.youtube.com/watch?v=dQw4w9WgXcQ", created!.VideoUrl);
+
+        await SectionVisibilityTestHelper.SetVisibleAsync(factory, "offerings", true);
+        var publicClient = factory.CreateClient();
+        var detail = await publicClient.GetFromJsonAsync<Features.Offerings.OfferingDetailDto>($"/api/offerings/{created.Slug}?lang=fa");
+        Assert.Equal("https://www.youtube.com/watch?v=dQw4w9WgXcQ", detail!.VideoUrl);
+    }
+
+    [Fact]
     public async Task Delete_removes_the_offering()
     {
         var client = await AuthTestHelper.CreateVerifiedClientAsync(factory, "offering-admin-4");
         var createResponse = await client.PostAsJsonAsync("/api/dashboard/offerings", new UpsertOfferingRequest(
-            "", null, null, "Draft", "حذف‌شدنی", "سڕاوە", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "", []));
+            "", null, null, null, "Draft", "حذف‌شدنی", "سڕاوە", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "", []));
         var created = await createResponse.Content.ReadFromJsonAsync<DashboardOfferingDetailDto>();
 
         var deleteResponse = await client.DeleteAsync($"/api/dashboard/offerings/{created!.Id}");

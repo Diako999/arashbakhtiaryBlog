@@ -27,7 +27,7 @@ public class OfferingsPublicTests(TestWebApplicationFactory factory) : IClassFix
     {
         var admin = await AdminClientAsync("offering-admin-1");
         var createResponse = await admin.PostAsJsonAsync("/api/dashboard/offerings", new UpsertOfferingRequest(
-            "", null, 49.99m, "Published", "دوره برنامه‌نویسی", "کۆرسی بەرنامەسازی", "خلاصه", "کورتە",
+            "", null, null, 49.99m, "Published", "دوره برنامه‌نویسی", "کۆرسی بەرنامەسازی", "خلاصه", "کورتە",
             "<p>x</p>", "<p>x</p>", "", "", "", "",
             [new DashboardSessionDto(null, DateTimeOffset.UtcNow.AddDays(7), null, "آنلاین", 20)]));
         var created = await createResponse.Content.ReadFromJsonAsync<DashboardOfferingDetailDto>();
@@ -56,12 +56,12 @@ public class OfferingsPublicTests(TestWebApplicationFactory factory) : IClassFix
         var admin = await AdminClientAsync("offering-admin-2");
 
         var offeringAResponse = await admin.PostAsJsonAsync("/api/dashboard/offerings", new UpsertOfferingRequest(
-            "", null, null, "Published", "دوره الف", "کۆرسی ئەلف", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "", []));
+            "", null, null, null, "Published", "دوره الف", "کۆرسی ئەلف", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "", []));
         var offeringA = await offeringAResponse.Content.ReadFromJsonAsync<DashboardOfferingDetailDto>();
 
         // A session under a completely different offering.
         var offeringBResponse = await admin.PostAsJsonAsync("/api/dashboard/offerings", new UpsertOfferingRequest(
-            "", null, null, "Published", "دوره ب", "کۆرسی ب", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "",
+            "", null, null, null, "Published", "دوره ب", "کۆرسی ب", "", "", "<p>x</p>", "<p>x</p>", "", "", "", "",
             [new DashboardSessionDto(null, DateTimeOffset.UtcNow.AddDays(1), null, "", null)]));
         var offeringB = await offeringBResponse.Content.ReadFromJsonAsync<DashboardOfferingDetailDto>();
 
