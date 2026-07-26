@@ -61,7 +61,7 @@ export default function OfferingDetail() {
           <VideoEmbed url={offering.videoUrl} />
         </div>
       )}
-      <div dangerouslySetInnerHTML={{ __html: offering.bodyHtml }} />
+      <div className="rich-content" dangerouslySetInnerHTML={{ __html: offering.bodyHtml }} />
 
       <section className="mt-10 border-t border-line pt-6">
         <h2 className="mb-4 text-xl font-bold">{t("offerings.enrollTitle")}</h2>

@@ -26,7 +26,7 @@ export default function FlatPage({ slug }: { slug: "about" | "contact" }) {
   return (
     <article>
       <h1 className="mb-6 text-3xl font-bold">{page.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
+      <div className="rich-content" dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
     </article>
   );
 }

@@ -115,6 +115,7 @@ body {
   font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
+  overflow-x: hidden;
 }
 
 #root {
@@ -128,6 +129,31 @@ body {
    dashboard rows), so a component would just be a className wrapper —
    a class kills the value-duplication without forcing a structure change. */
 @layer components {
+  /* Wraps every dangerouslySetInnerHTML block (post/offering/flat-page
+     body) — that HTML is admin-authored free text with no structural
+     guarantees, so nothing here stops it from containing a wide pasted
+     image or table. Without this, such content overflows the viewport on
+     mobile instead of respecting it. */
+  .rich-content {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  .rich-content img,
+  .rich-content video,
+  .rich-content iframe {
+    max-width: 100%;
+    height: auto;
+  }
+  .rich-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .rich-content pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
   .card-hover {
     border-radius: var(--card-radius);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);

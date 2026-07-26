@@ -2,7 +2,7 @@ import type { LandingSectionDto } from "../../api/types";
 
 export default function Hero({ section }: { section: LandingSectionDto }) {
   return (
-    <section className="relative flex flex-wrap items-center gap-10 md:gap-14">
+    <section className="relative flex flex-wrap items-center gap-10 overflow-hidden md:gap-14">
       <div
         aria-hidden="true"
         className="hero-blob-float pointer-events-none absolute -top-16 -start-24 h-72 w-72 rounded-full"
@@ -14,7 +14,7 @@ export default function Hero({ section }: { section: LandingSectionDto }) {
         style={{ background: "radial-gradient(circle, var(--brand-soft), transparent 70%)", animationDelay: "2.5s" }}
       />
 
-      <div className="flex min-w-[280px] flex-1 flex-col gap-5">
+      <div className="flex min-w-0 flex-1 flex-col gap-5 sm:min-w-[280px]">
         <h1 className="gradient-text max-w-xl text-4xl font-extrabold leading-snug sm:text-5xl">{section.heading}</h1>
         {section.subheading && (
           <p className="max-w-lg text-base leading-8 text-ink-muted sm:text-lg">{section.subheading}</p>
@@ -33,7 +33,7 @@ export default function Hero({ section }: { section: LandingSectionDto }) {
         </div>
       </div>
 
-      <div className="min-w-[240px] flex-1 sm:max-w-[400px]">
+      <div className="min-w-0 flex-1 sm:min-w-[240px] sm:max-w-[400px]">
         <div
           className="aspect-[4/5] w-full rounded-[28px] border border-line"
           style={{

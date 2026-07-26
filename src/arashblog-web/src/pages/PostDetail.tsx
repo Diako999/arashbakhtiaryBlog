@@ -53,7 +53,7 @@ export default function PostDetail() {
         </span>
         {post.publishedAt && <span>{new Date(post.publishedAt).toLocaleDateString()}</span>}
       </div>
-      <div dangerouslySetInnerHTML={{ __html: post.bodyHtml }} />
+      <div className="rich-content" dangerouslySetInnerHTML={{ __html: post.bodyHtml }} />
 
       <section className="mt-10 border-t border-line pt-6">
         <h2 className="mb-4 text-xl font-bold">{t("blog.comments")}</h2>
