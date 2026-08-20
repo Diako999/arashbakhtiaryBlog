@@ -27,8 +27,8 @@ export default function HeroSlider() {
   if (!slides || slides.length === 0) return null;
 
   return (
-    <div className="relative mb-8 sm:mb-10 w-full overflow-hidden rounded-2xl border border-line">
-      <div className="relative aspect-video w-full bg-surface-soft">
+    <div className="relative mb-8 sm:mb-10 w-full overflow-hidden">
+      <div className="relative aspect-video w-full">
         {slides.map((slide, i) => {
           const image = (
             <img
