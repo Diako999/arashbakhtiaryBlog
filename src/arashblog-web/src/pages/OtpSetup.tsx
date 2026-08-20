@@ -4,9 +4,11 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { authApi } from "../api/auth";
 import { ApiError } from "../api/client";
+import { useSeo } from "../hooks/useSeo";
 
 export default function OtpSetup() {
   const { t } = useTranslation();
+  useSeo({ title: t("auth.otpSetup.title") });
   const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [error, setError] = useState(false);

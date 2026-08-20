@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { siteApi } from "../api/site";
 
 interface SeoOptions {
   title: string;
@@ -23,10 +25,16 @@ function upsertMeta(attr: "name" | "property", key: string, content: string) {
 }
 
 export function useSeo({ title, description, image }: SeoOptions) {
+  // Same query key Layout already fetches with — React Query dedupes, no
+  // extra request — just so every page's tab title gets the "Page | Site"
+  // suffix without each caller needing to know the site name.
+  const { data: siteSettings } = useQuery({ queryKey: ["site-settings"], queryFn: siteApi.settings });
+  const fullTitle = siteSettings?.siteName ? `${title} | ${siteSettings.siteName}` : title;
+
   useEffect(() => {
-    document.title = title;
-    upsertMeta("property", "og:title", title);
-    upsertMeta("name", "twitter:title", title);
+    document.title = fullTitle;
+    upsertMeta("property", "og:title", fullTitle);
+    upsertMeta("name", "twitter:title", fullTitle);
     upsertMeta("property", "og:url", window.location.href);
     upsertMeta("property", "og:type", "website");
 
@@ -48,5 +56,5 @@ export function useSeo({ title, description, image }: SeoOptions) {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute("href", window.location.href);
-  }, [title, description, image]);
+  }, [fullTitle, description, image]);
 }

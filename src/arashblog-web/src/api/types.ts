@@ -362,10 +362,27 @@ export interface SiteSettingDto {
   twitterUrl: string;
   linkedinUrl: string;
   whatsappUrl: string;
+  youtubeUrl: string;
   metaDescription: string;
 }
 
 export type UpsertSiteSettingRequest = SiteSettingDto;
+
+// --- Hero slider ---
+
+export interface HeroSlideDto {
+  imageUrl: string;
+  linkUrl: string;
+}
+
+export interface DashboardHeroSlideDto {
+  id: number;
+  imageUrl: string;
+  linkUrl: string;
+  order: number;
+}
+
+export type UpsertHeroSlideRequest = Omit<DashboardHeroSlideDto, "id" | "order">;
 
 export interface ThemeDto {
   brandColor: string;
@@ -374,3 +391,34 @@ export interface ThemeDto {
 }
 
 export type UpsertThemeRequest = ThemeDto;
+
+// --- Landing page settings ---
+
+export interface LandingPageSettingsDto {
+  heroBadge: string;
+  heroSubtitle: string;
+  heroDescription: string;
+  aboutRole: string;
+  aboutBio: string;
+  aboutPhotoUrl: string | null;
+  aboutGithubUrl: string;
+  aboutYoutubeUrl: string;
+}
+
+export interface DashboardLandingPageSettingsDto {
+  heroBadgeFa: string;
+  heroBadgeCkb: string;
+  heroSubtitleFa: string;
+  heroSubtitleCkb: string;
+  heroDescriptionFa: string;
+  heroDescriptionCkb: string;
+  aboutRoleFa: string;
+  aboutRoleCkb: string;
+  aboutBioFa: string;
+  aboutBioCkb: string;
+  aboutPhotoUrl: string | null;
+  aboutGithubUrl: string;
+  aboutYoutubeUrl: string;
+}
+
+export type UpsertLandingPageSettingsRequest = DashboardLandingPageSettingsDto;

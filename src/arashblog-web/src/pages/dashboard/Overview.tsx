@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
+import { useSeo } from "../../hooks/useSeo";
 
 export default function Overview() {
   const { t } = useTranslation();
+  useSeo({ title: t("dashboard.overview.title") });
   const { data, isLoading } = useQuery({ queryKey: ["dashboard-overview"], queryFn: dashboardApi.overview });
 
   if (isLoading) return <p>{t("common.loading")}</p>;

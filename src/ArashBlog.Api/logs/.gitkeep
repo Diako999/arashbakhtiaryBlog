@@ -1,0 +1,3 @@
+Keeps this directory present in the repo/publish output — ANCM writes
+stdout log files here (see web.config's stdoutLogFile) but won't create
+the folder itself if it's missing.

@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
+import { useSeo } from "../../hooks/useSeo";
 
 export default function ContentList() {
   const { t } = useTranslation();
+  useSeo({ title: t("dashboard.content.title") });
   const queryClient = useQueryClient();
   const [newCategory, setNewCategory] = useState({ nameFa: "", nameCkb: "" });
 

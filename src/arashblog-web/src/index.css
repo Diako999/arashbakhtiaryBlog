@@ -64,6 +64,19 @@
   --brand-soft: color-mix(in srgb, var(--brand) 16%, transparent);
 }
 
+@keyframes blob {
+  0% { transform: translate(-60%, -60%); }
+  25% { transform: translate(20%, -60%); }
+  50% { transform: translate(20%, 20%); }
+  75% { transform: translate(-60%, 20%); }
+  100% { transform: translate(-60%, -60%); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);

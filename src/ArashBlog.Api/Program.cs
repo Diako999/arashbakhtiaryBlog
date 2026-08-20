@@ -1,6 +1,7 @@
 using System.Threading.RateLimiting;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
@@ -37,10 +38,33 @@ builder.Services.ConfigureApplicationCookie(options =>
         context.Response.StatusCode = StatusCodes.Status403Forbidden;
         return Task.CompletedTask;
     };
+
+    // Dashboard admin session policy: sliding 12h window (any activity
+    // renews it), but capped at a 24h absolute lifetime from the moment
+    // they logged in — AuthController stamps that login time into a
+    // "session_started_utc" claim once (at sign-in only, untouched by
+    // sliding renewals since those don't re-run controller code), and this
+    // checks it on every request to force re-login once the cap is hit
+    // even if the sliding window would otherwise keep the cookie alive.
+    options.ExpireTimeSpan = TimeSpan.FromHours(12);
+    options.SlidingExpiration = true;
+    options.Events.OnValidatePrincipal = async context =>
+    {
+        var claim = context.Principal?.FindFirst("session_started_utc");
+        if (claim is null || !DateTimeOffset.TryParse(claim.Value, out var startedAt))
+        {
+            return;
+        }
+
+        if (DateTimeOffset.UtcNow - startedAt > TimeSpan.FromHours(24))
+        {
+            context.RejectPrincipal();
+            await context.HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+        }
+    };
+
     options.Cookie.SameSite = SameSiteMode.Strict;
     options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromDays(14);
-    options.SlidingExpiration = true;
 
     // Matches Django prod.py's SESSION_COOKIE_SECURE/CSRF_COOKIE_SECURE —
     // only in Production, so local HTTP dev keeps working unmodified.
@@ -89,6 +113,28 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Canonical-domain redirect: the old arashbakhtiary.ir host permanently
+// redirects to arashbakhtiary.com, preserving path/query — search engines
+// and any old links keep working instead of 404ing or serving duplicate
+// content under two hosts. Host-header driven rather than IsProduction-
+// gated, so it's harmless everywhere else and only ever fires when this
+// exact host is actually requested; requires both domains bound to the
+// same IIS site (see DEPLOYMENT.md) and included in AllowedHosts, since
+// ASP.NET Core rejects unrecognized Host headers before this ever runs.
+app.Use(async (context, next) =>
+{
+    var host = context.Request.Host.Host;
+    if (host.Equals("arashbakhtiary.ir", StringComparison.OrdinalIgnoreCase) ||
+        host.Equals("www.arashbakhtiary.ir", StringComparison.OrdinalIgnoreCase))
+    {
+        var target = $"https://arashbakhtiary.com{context.Request.Path}{context.Request.QueryString}";
+        context.Response.Redirect(target, permanent: true);
+        return;
+    }
+
+    await next();
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -96,11 +142,39 @@ if (app.Environment.IsDevelopment())
     await DbSeeder.SeedAsync(app.Services);
 }
 
+// Production applies pending migrations on every startup, same as
+// DbSeeder.SeedAsync already does for Development — the manual "run
+// dotnet ef database update as a separate deploy step" assumption doesn't
+// hold on hosts where a file upload + process restart is the only deploy
+// mechanism available (no shell, no direct DB access). EF migrations are
+// idempotent (checked against __EFMigrationsHistory), so this is safe to
+// run on every restart, not just ones that actually shipped a new
+// migration. Skipped in "Testing" (see below) since the in-memory
+// provider TestWebApplicationFactory uses has no schema to migrate.
+//
+// Deliberately best-effort, not fatal: a migration failure (bad
+// connection string, a DB user without schema-alter rights, whatever)
+// must never take the *entire site* down — that's strictly worse than
+// just the one new feature that needed the new schema failing on its
+// own. Logged so it's still visible in the stdout log if
+// stdoutLogEnabled is turned on.
+if (app.Environment.IsProduction())
+{
+    try
+    {
+        using var migrationScope = app.Services.CreateScope();
+        var migrationDb = migrationScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await migrationDb.Database.MigrateAsync();
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Startup migration failed — continuing without it.");
+    }
+}
+
 // Unconditional (dev, test, and prod alike) — these NavItem rows are real
 // application configuration the phased-rollout mechanism depends on, not
-// demo content. Prod is expected to have already run migrations as a
-// separate deploy step before the app starts, same assumption the Django
-// project's own navigation-seed migration made.
+// demo content.
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();

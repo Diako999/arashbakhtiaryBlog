@@ -76,11 +76,20 @@ needs — copy it to the server (e.g. `C:\inetpub\arashblog`).
    flag) — all of that logic in `Program.cs` is gated on
    `IsProduction()`.
 
-## 4. Apply database migrations
+## 4. Database migrations
 
-Run this once per deploy that adds new migrations (from a machine with the
-.NET SDK and network access to the SQL Server instance — does not have to
-be the IIS host itself):
+Nothing to do here — the app applies any pending migrations itself on every
+Production startup (see `Program.cs`), same as it already did for local
+Development. This is deliberate: on hosts where a file upload + IIS app
+pool recycle is the only deploy mechanism available (no shell, no direct
+SQL access), a "run `dotnet ef database update` separately" step isn't
+something you can actually do. EF checks `__EFMigrationsHistory` before
+applying anything, so this is safe to run on every restart whether or not
+that particular deploy shipped a new migration.
+
+If you *do* have a machine with the .NET SDK and network access to the SQL
+Server instance, you can still apply migrations manually ahead of a
+restart if you'd rather not rely on the startup path:
 
 ```powershell
 dotnet tool install --global dotnet-ef   # if not already installed
@@ -88,10 +97,6 @@ dotnet ef database update `
   --project src/ArashBlog.Api/ArashBlog.Api.csproj `
   --connection "Server=YOUR-SQL-SERVER-HOST,1433;Database=ArashBlogProd;User Id=arashblog_app;Password=CHANGE_ME;TrustServerCertificate=False;Encrypt=True;"
 ```
-
-The app itself never runs migrations automatically in Production — only
-the unconditional, idempotent seeders (`NavItemSeeder`, `FlatPageSeeder`)
-run on every startup, and those only insert rows, never alter schema.
 
 ## 5. First admin login
 
@@ -145,6 +150,16 @@ changes to a swap-the-whole-folder model.
 - `AllowedHosts` in `appsettings.Production.json` should be the real
   domain(s), not `*` — ASP.NET Core rejects requests with an unrecognized
   `Host` header otherwise.
+- **arashbakhtiary.ir → arashbakhtiary.com redirect**: `Program.cs` 301s
+  any request whose `Host` header is `arashbakhtiary.ir` or
+  `www.arashbakhtiary.ir` to the equivalent `arashbakhtiary.com` URL. For
+  this to actually fire, both domains must be bound to the *same* IIS site
+  (add bindings for all four host/www combinations) and all four must be
+  listed in `AllowedHosts` — otherwise IIS/ASP.NET Core rejects the `.ir`
+  request before the redirect middleware ever sees it. A certificate
+  covering `arashbakhtiary.ir` is only needed if you also want HTTPS on
+  the old domain before the redirect to HTTPS `.com` happens; plain HTTP
+  binding + redirect is fine otherwise.
 
 ## 8. Smoke test after deploy
 

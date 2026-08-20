@@ -36,4 +36,16 @@ public static class SingletonLoader
         }
         return theme;
     }
+
+    public static async Task<LandingPageSettings> LoadLandingPageSettingsAsync(ApplicationDbContext db)
+    {
+        var landing = await db.LandingPageSettings.FirstOrDefaultAsync();
+        if (landing is null)
+        {
+            landing = new LandingPageSettings();
+            db.LandingPageSettings.Add(landing);
+            await db.SaveChangesAsync();
+        }
+        return landing;
+    }
 }

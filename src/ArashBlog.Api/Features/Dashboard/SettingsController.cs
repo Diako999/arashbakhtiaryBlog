@@ -25,7 +25,7 @@ public partial class SettingsController(ApplicationDbContext db) : ControllerBas
         var s = await SingletonLoader.LoadSiteSettingAsync(db);
         return Ok(new SiteSettingDto(
             s.SiteName, s.LogoUrl, s.ContactEmail, s.ContactPhone,
-            s.InstagramUrl, s.TelegramUrl, s.TwitterUrl, s.LinkedinUrl, s.WhatsappUrl, s.MetaDescription));
+            s.InstagramUrl, s.TelegramUrl, s.TwitterUrl, s.LinkedinUrl, s.WhatsappUrl, s.YoutubeUrl, s.MetaDescription));
     }
 
     [HttpPut("site")]
@@ -41,12 +41,13 @@ public partial class SettingsController(ApplicationDbContext db) : ControllerBas
         s.TwitterUrl = request.TwitterUrl;
         s.LinkedinUrl = request.LinkedinUrl;
         s.WhatsappUrl = request.WhatsappUrl;
+        s.YoutubeUrl = request.YoutubeUrl;
         s.MetaDescription = request.MetaDescription;
         await db.SaveChangesAsync();
 
         return Ok(new SiteSettingDto(
             s.SiteName, s.LogoUrl, s.ContactEmail, s.ContactPhone,
-            s.InstagramUrl, s.TelegramUrl, s.TwitterUrl, s.LinkedinUrl, s.WhatsappUrl, s.MetaDescription));
+            s.InstagramUrl, s.TelegramUrl, s.TwitterUrl, s.LinkedinUrl, s.WhatsappUrl, s.YoutubeUrl, s.MetaDescription));
     }
 
     [HttpGet("theme")]
@@ -77,4 +78,38 @@ public partial class SettingsController(ApplicationDbContext db) : ControllerBas
 
         return Ok(new ThemeDto(t.BrandColor, t.AccentColor, t.DefaultMode.ToString()));
     }
+
+    [HttpGet("landing")]
+    public async Task<ActionResult<DashboardLandingPageSettingsDto>> GetLanding()
+    {
+        var l = await SingletonLoader.LoadLandingPageSettingsAsync(db);
+        return Ok(ToDto(l));
+    }
+
+    [HttpPut("landing")]
+    public async Task<ActionResult<DashboardLandingPageSettingsDto>> UpdateLanding(DashboardLandingPageSettingsDto request)
+    {
+        var l = await SingletonLoader.LoadLandingPageSettingsAsync(db);
+        l.HeroBadgeFa = request.HeroBadgeFa;
+        l.HeroBadgeCkb = request.HeroBadgeCkb;
+        l.HeroSubtitleFa = request.HeroSubtitleFa;
+        l.HeroSubtitleCkb = request.HeroSubtitleCkb;
+        l.HeroDescriptionFa = request.HeroDescriptionFa;
+        l.HeroDescriptionCkb = request.HeroDescriptionCkb;
+        l.AboutRoleFa = request.AboutRoleFa;
+        l.AboutRoleCkb = request.AboutRoleCkb;
+        l.AboutBioFa = request.AboutBioFa;
+        l.AboutBioCkb = request.AboutBioCkb;
+        l.AboutPhotoUrl = request.AboutPhotoUrl;
+        l.AboutGithubUrl = request.AboutGithubUrl;
+        l.AboutYoutubeUrl = request.AboutYoutubeUrl;
+        await db.SaveChangesAsync();
+
+        return Ok(ToDto(l));
+    }
+
+    private static DashboardLandingPageSettingsDto ToDto(Domain.LandingPageSettings l) => new(
+        l.HeroBadgeFa, l.HeroBadgeCkb, l.HeroSubtitleFa, l.HeroSubtitleCkb,
+        l.HeroDescriptionFa, l.HeroDescriptionCkb, l.AboutRoleFa, l.AboutRoleCkb,
+        l.AboutBioFa, l.AboutBioCkb, l.AboutPhotoUrl, l.AboutGithubUrl, l.AboutYoutubeUrl);
 }

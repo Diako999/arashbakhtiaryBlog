@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { authApi } from "../api/auth";
 import { ApiError } from "../api/client";
+import { useSeo } from "../hooks/useSeo";
 
 export default function OtpVerify() {
   const { t } = useTranslation();
+  useSeo({ title: t("auth.otpVerify.title") });
   const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [error, setError] = useState(false);

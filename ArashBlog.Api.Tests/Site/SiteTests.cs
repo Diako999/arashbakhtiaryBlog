@@ -53,7 +53,7 @@ public class SiteTests(TestWebApplicationFactory factory) : IClassFixture<TestWe
 
         var request = new UpsertSiteSettingRequest(
             "وبلاگ آرش", null, "contact@example.com", "+98 912 000 0000",
-            "https://instagram.com/arash", "", "", "", "", "توضیح سایت");
+            "https://instagram.com/arash", "", "", "", "", "", "توضیح سایت");
         var updateResponse = await admin.PutAsJsonAsync("/api/dashboard/settings/site", request);
         Assert.Equal(HttpStatusCode.OK, updateResponse.StatusCode);
 

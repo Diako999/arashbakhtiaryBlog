@@ -8,7 +8,7 @@
       "Microsoft.AspNetCore": "Warning"
     }
   },
-  "AllowedHosts": "yourdomain.com",
+  "AllowedHosts": "arashbakhtiary.com;www.arashbakhtiary.com;arashbakhtiary.ir;www.arashbakhtiary.ir",
   "InitialAdmin": {
     "Username": "admin",
     "Password": "CHANGE_ME_ON_FIRST_BOOT"

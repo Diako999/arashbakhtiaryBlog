@@ -17,5 +17,6 @@ public class SiteSetting
     public string TwitterUrl { get; set; } = "";
     public string LinkedinUrl { get; set; } = "";
     public string WhatsappUrl { get; set; } = "";
+    public string YoutubeUrl { get; set; } = "";
     public string MetaDescription { get; set; } = "";
 }

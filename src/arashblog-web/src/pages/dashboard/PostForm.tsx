@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
 import type { UpsertPostRequest } from "../../api/types";
 import FileUploadField from "../../components/FileUploadField";
+import RichTextEditor from "@/components/ui/rich-text-editor";
+import { useSeo } from "../../hooks/useSeo";
 
 const emptyForm: UpsertPostRequest = {
   slug: "",
@@ -25,17 +27,14 @@ const emptyForm: UpsertPostRequest = {
   metaDescriptionCkb: "",
 };
 
-// A plain textarea stands in for TinyMCE here — a rich-text editor
-// integration is a separate concern from CRUD wiring and is deliberately
-// out of scope for M2; the server-side sanitizer (PostBodySanitizer) is
-// what actually matters for security either way.
 export default function PostForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams();
   const isEdit = id !== undefined;
+  useSeo({ title: isEdit ? t("dashboard.postForm.editTitle") : t("dashboard.postForm.newTitle") });
   const [form, setForm] = useState<UpsertPostRequest>(emptyForm);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<"bodyFa" | "bodyCkb" | "network" | null>(null);
 
   const { data: categories } = useQuery({ queryKey: ["dashboard-categories"], queryFn: dashboardApi.categories });
   const { data: existing } = useQuery({
@@ -48,15 +47,28 @@ export default function PostForm() {
     if (existing) setForm(existing);
   }, [existing]);
 
+  function isBodyEmpty(html: string) {
+    return html.replace(/<[^>]*>/g, "").trim().length === 0;
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setError(false);
+    setError(null);
+    if (isBodyEmpty(form.bodyFa)) {
+      setError("bodyFa");
+      return;
+    }
+    if (isBodyEmpty(form.bodyCkb)) {
+      setError("bodyCkb");
+      return;
+    }
     try {
       if (isEdit) await dashboardApi.updatePost(Number(id), form);
       else await dashboardApi.createPost(form);
       navigate("/dashboard/content");
-    } catch {
-      setError(true);
+    } catch (err) {
+      console.error("Failed to save post:", err);
+      setError("network");
     }
   }
 
@@ -107,25 +119,13 @@ export default function PostForm() {
 
         <div className="sm:col-span-2">
           <label className={labelClass}>{t("dashboard.postForm.bodyFa")}</label>
-          <textarea
-            required
-            rows={6}
-            dir="rtl"
-            value={form.bodyFa}
-            onChange={(e) => setForm({ ...form, bodyFa: e.target.value })}
-            className={inputClass}
-          />
+          <RichTextEditor value={form.bodyFa} onChange={(html) => setForm({ ...form, bodyFa: html })} />
+          {error === "bodyFa" && <p className="mt-1 text-sm text-danger">{t("dashboard.postForm.bodyRequired")}</p>}
         </div>
         <div className="sm:col-span-2">
           <label className={labelClass}>{t("dashboard.postForm.bodyCkb")}</label>
-          <textarea
-            required
-            rows={6}
-            dir="rtl"
-            value={form.bodyCkb}
-            onChange={(e) => setForm({ ...form, bodyCkb: e.target.value })}
-            className={inputClass}
-          />
+          <RichTextEditor value={form.bodyCkb} onChange={(html) => setForm({ ...form, bodyCkb: html })} />
+          {error === "bodyCkb" && <p className="mt-1 text-sm text-danger">{t("dashboard.postForm.bodyRequired")}</p>}
         </div>
 
         <div>
@@ -182,7 +182,7 @@ export default function PostForm() {
           <button type="submit" className="rounded-lg bg-brand px-5 py-2 font-bold text-white">
             {t("dashboard.postForm.save")}
           </button>
-          {error && <p className="self-center text-danger">{t("dashboard.postForm.error")}</p>}
+          {error === "network" && <p className="self-center text-danger">{t("dashboard.postForm.error")}</p>}
         </div>
       </form>
     </div>

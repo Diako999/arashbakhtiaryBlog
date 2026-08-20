@@ -19,4 +19,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Unlike wwwroot, arbitrary top-level folders aren't auto-included in
+         publish output — this needs to exist on the server for ANCM's
+         stdout logging (see web.config) to have somewhere to write. -->
+    <Content Include="logs\.gitkeep">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

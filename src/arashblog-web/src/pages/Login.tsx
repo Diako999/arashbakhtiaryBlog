@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { authApi } from "../api/auth";
 import { ApiError } from "../api/client";
+import { useSeo } from "../hooks/useSeo";
 
 export default function Login() {
   const { t } = useTranslation();
+  useSeo({ title: t("auth.login.title") });
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

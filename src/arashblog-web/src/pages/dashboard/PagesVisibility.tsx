@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
 import type { DashboardFlatPageDto, UpsertFlatPageRequest } from "../../api/types";
+import { useSeo } from "../../hooks/useSeo";
 
 // Mirrors the Django dashboard's Pages screen — the admin-facing half of
 // the phased-rollout mechanism. "blog" never appears here since it's
@@ -14,6 +15,7 @@ import type { DashboardFlatPageDto, UpsertFlatPageRequest } from "../../api/type
 // the same "Pages" concern.
 export default function PagesVisibility() {
   const { t } = useTranslation();
+  useSeo({ title: t("dashboard.pages.title") });
   const queryClient = useQueryClient();
   const { data: navItems, isLoading: navLoading } = useQuery({ queryKey: ["dashboard-nav-items"], queryFn: dashboardApi.navItems });
   const { data: flatPages, isLoading: pagesLoading } = useQuery({ queryKey: ["dashboard-flat-pages"], queryFn: dashboardApi.flatPages });

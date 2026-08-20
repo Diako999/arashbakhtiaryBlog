@@ -24,6 +24,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<FlatPage> FlatPages => Set<FlatPage>();
     public DbSet<SiteSetting> SiteSettings => Set<SiteSetting>();
     public DbSet<ThemeConfig> ThemeConfigs => Set<ThemeConfig>();
+    public DbSet<LandingPageSettings> LandingPageSettings => Set<LandingPageSettings>();
+    public DbSet<HeroSlide> HeroSlides => Set<HeroSlide>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -164,6 +166,26 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         {
             e.Property(t => t.BrandColor).HasMaxLength(7);
             e.Property(t => t.AccentColor).HasMaxLength(7);
+        });
+
+        builder.Entity<HeroSlide>(e =>
+        {
+            e.Property(h => h.ImageUrl).HasMaxLength(500);
+            e.Property(h => h.LinkUrl).HasMaxLength(500);
+        });
+
+        builder.Entity<LandingPageSettings>(e =>
+        {
+            e.Property(l => l.HeroBadgeFa).HasMaxLength(60);
+            e.Property(l => l.HeroBadgeCkb).HasMaxLength(60);
+            e.Property(l => l.HeroSubtitleFa).HasMaxLength(150);
+            e.Property(l => l.HeroSubtitleCkb).HasMaxLength(150);
+            e.Property(l => l.HeroDescriptionFa).HasMaxLength(300);
+            e.Property(l => l.HeroDescriptionCkb).HasMaxLength(300);
+            e.Property(l => l.AboutRoleFa).HasMaxLength(150);
+            e.Property(l => l.AboutRoleCkb).HasMaxLength(150);
+            e.Property(l => l.AboutBioFa).HasMaxLength(600);
+            e.Property(l => l.AboutBioCkb).HasMaxLength(600);
         });
     }
 }

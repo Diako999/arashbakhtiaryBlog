@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { pagesApi } from "../api/pages";
 import { useSeo } from "../hooks/useSeo";
 import { defaultLanguage } from "../i18n";
+import AboutProfileSection from "../components/AboutProfileSection";
 
 // Renders both /about and /contact — static content pages, no form (the
 // dashboard-editable About/Contact rows carry whatever contact info the
@@ -25,7 +26,8 @@ export default function FlatPage({ slug }: { slug: "about" | "contact" }) {
 
   return (
     <article>
-      <h1 className="mb-6 text-3xl font-bold">{page.title}</h1>
+      {slug === "about" && <AboutProfileSection />}
+      <h1 className="mb-6 mt-8 text-3xl font-bold">{page.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
     </article>
   );

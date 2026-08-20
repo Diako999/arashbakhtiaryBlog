@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
 import type { DashboardTestimonialDto, UpsertTestimonialRequest } from "../../api/types";
 import FileUploadField from "../../components/FileUploadField";
+import { useSeo } from "../../hooks/useSeo";
 
 const emptyForm: UpsertTestimonialRequest = {
   authorName: "",
@@ -18,6 +19,7 @@ const emptyForm: UpsertTestimonialRequest = {
 
 export default function TestimonialsList() {
   const { t } = useTranslation();
+  useSeo({ title: t("dashboard.testimonials.title") });
   const queryClient = useQueryClient();
   const [editingId, setEditingId] = useState<number | "new" | null>(null);
   const [form, setForm] = useState<UpsertTestimonialRequest>(emptyForm);

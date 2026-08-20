@@ -3,10 +3,13 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { testimonialsApi } from "../api/testimonials";
 import { defaultLanguage } from "../i18n";
+import { GlassCard } from "@/components/ui/gradient-blob-card";
+import { useSeo } from "../hooks/useSeo";
 
 export default function TestimonialList() {
   const { lang = defaultLanguage } = useParams();
   const { t } = useTranslation();
+  useSeo({ title: t("dashboard.nav.testimonials") });
 
   const { data, isLoading } = useQuery({
     queryKey: ["testimonials", lang],
@@ -19,7 +22,7 @@ export default function TestimonialList() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       {data?.map((testimonial, index) => (
-        <blockquote key={index} className="rounded-xl border border-line bg-card p-5">
+        <GlassCard key={index} as="blockquote">
           <p className="mb-4 text-ink-muted">"{testimonial.quote}"</p>
           <footer className="flex items-center gap-3">
             {testimonial.photoUrl && (
@@ -30,7 +33,7 @@ export default function TestimonialList() {
               {testimonial.authorRole && <p className="text-xs text-ink-faint">{testimonial.authorRole}</p>}
             </div>
           </footer>
-        </blockquote>
+        </GlassCard>
       ))}
     </div>
   );

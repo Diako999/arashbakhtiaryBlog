@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { authApi } from "../api/auth";
+import ThemeToggle from "./ThemeToggle";
 
 type GateStatus = "loading" | "ok";
 
@@ -50,7 +51,10 @@ export default function DashboardLayout() {
   return (
     <div dir="rtl" className="flex min-h-screen bg-surface text-ink">
       <aside className="w-56 shrink-0 border-e border-line bg-card p-4">
-        <div className="mb-6 px-2 text-lg font-bold text-brand">ArashBlog</div>
+        <div className="mb-6 flex items-center justify-between px-2">
+          <span className="text-lg font-bold text-brand">ArashBlog</span>
+          <ThemeToggle />
+        </div>
         <nav className="flex flex-col gap-1">
           <NavLink to="/dashboard" end className={navItemClass}>
             {t("dashboard.nav.overview")}

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using ArashBlog.Api.Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -16,6 +17,16 @@ namespace ArashBlog.Api.Features.Auth;
 public class AuthController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
     : ControllerBase
 {
+    // Stamped onto the auth cookie at the moment full sign-in completes
+    // (password-only login, or after 2FA) and never touched again — sliding
+    // expiration renews ExpiresUtc on every request, but this claim stays
+    // fixed at the real login time so Program.cs's OnValidatePrincipal can
+    // enforce a hard 24h cap regardless of how much the sliding window
+    // (12h) keeps extending an active session.
+    private const string SessionStartedClaimType = "session_started_utc";
+
+    private static Claim SessionStartedClaim() => new(SessionStartedClaimType, DateTimeOffset.UtcNow.ToString("O"));
+
     private const string Issuer = "ArashBlog";
 
     [HttpGet("me")]
@@ -60,6 +71,15 @@ public class AuthController(SignInManager<ApplicationUser> signInManager, UserMa
         }
 
         var user = await userManager.FindByNameAsync(request.Username);
+        if (user is not null)
+        {
+            // PasswordSignInAsync above already completed the cookie
+            // sign-in for the no-2FA-required case; re-sign-in with the
+            // extra claim attached rather than trying to inject it into
+            // the ticket Identity already wrote.
+            await signInManager.SignInWithClaimsAsync(user, isPersistent: false, [SessionStartedClaim()]);
+        }
+
         var requiresSetup = user is not null && !user.TwoFactorEnabled;
         return Ok(new LoginResponse(true, requiresSetup, false));
     }
@@ -145,6 +165,7 @@ public class AuthController(SignInManager<ApplicationUser> signInManager, UserMa
         var totpResult = await signInManager.TwoFactorAuthenticatorSignInAsync(code, isPersistent: false, rememberClient: false);
         if (totpResult.Succeeded)
         {
+            await signInManager.SignInWithClaimsAsync(pending, isPersistent: false, [SessionStartedClaim()]);
             return Ok(new OtpVerifyResponse(false));
         }
 
@@ -153,6 +174,7 @@ public class AuthController(SignInManager<ApplicationUser> signInManager, UserMa
         var recoveryResult = await signInManager.TwoFactorRecoveryCodeSignInAsync(request.Code);
         if (recoveryResult.Succeeded)
         {
+            await signInManager.SignInWithClaimsAsync(pending, isPersistent: false, [SessionStartedClaim()]);
             return Ok(new OtpVerifyResponse(true));
         }
 

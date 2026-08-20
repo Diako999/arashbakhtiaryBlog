@@ -4,6 +4,8 @@ import type {
   DashboardCategoryDto,
   DashboardCommentDto,
   DashboardFlatPageDto,
+  DashboardHeroSlideDto,
+  DashboardLandingPageSettingsDto,
   DashboardLeadMagnetDetailDto,
   DashboardLeadMagnetListItemDto,
   DashboardNavItemDto,
@@ -18,6 +20,8 @@ import type {
   ThemeDto,
   UpsertCategoryRequest,
   UpsertFlatPageRequest,
+  UpsertHeroSlideRequest,
+  UpsertLandingPageSettingsRequest,
   UpsertLeadMagnetRequest,
   UpsertOfferingRequest,
   UpsertPostRequest,
@@ -83,4 +87,15 @@ export const dashboardApi = {
   updateSiteSetting: (data: UpsertSiteSettingRequest) => api.put<SiteSettingDto>("/dashboard/settings/site", data),
   theme: () => api.get<ThemeDto>("/dashboard/settings/theme"),
   updateTheme: (data: UpsertThemeRequest) => api.put<ThemeDto>("/dashboard/settings/theme", data),
+  landingSettings: () => api.get<DashboardLandingPageSettingsDto>("/dashboard/settings/landing"),
+  updateLandingSettings: (data: UpsertLandingPageSettingsRequest) =>
+    api.put<DashboardLandingPageSettingsDto>("/dashboard/settings/landing", data),
+
+  heroSlides: () => api.get<DashboardHeroSlideDto[]>("/dashboard/hero-slides"),
+  createHeroSlide: (data: UpsertHeroSlideRequest) => api.post<DashboardHeroSlideDto>("/dashboard/hero-slides", data),
+  updateHeroSlide: (id: number, data: UpsertHeroSlideRequest) =>
+    api.put<DashboardHeroSlideDto>(`/dashboard/hero-slides/${id}`, data),
+  deleteHeroSlide: (id: number) => api.del(`/dashboard/hero-slides/${id}`),
+  moveHeroSlide: (id: number, direction: "up" | "down") =>
+    api.post<void>(`/dashboard/hero-slides/${id}/move/${direction}`),
 };

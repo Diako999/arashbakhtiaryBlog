@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
+import { useSeo } from "../../hooks/useSeo";
 
 export default function OfferingsList() {
   const { t } = useTranslation();
+  useSeo({ title: t("dashboard.offerings.title") });
   const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({ queryKey: ["dashboard-offerings"], queryFn: dashboardApi.offerings });
 

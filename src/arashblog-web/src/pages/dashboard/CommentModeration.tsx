@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { dashboardApi } from "../../api/dashboard";
+import { useSeo } from "../../hooks/useSeo";
 
 export default function CommentModeration() {
   const { t } = useTranslation();
+  useSeo({ title: t("dashboard.comments.title") });
   const queryClient = useQueryClient();
   const { data: comments, isLoading } = useQuery({ queryKey: ["dashboard-comments"], queryFn: dashboardApi.comments });
 
