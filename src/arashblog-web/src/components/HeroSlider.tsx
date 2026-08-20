@@ -4,10 +4,12 @@ import { siteApi } from "@/api/site";
 
 const AUTOPLAY_MS = 5000;
 
-// The literal first thing on the homepage — an admin-managed image
-// carousel (Settings → Hero Slider) that sits above the scroll-driven
-// hero content below it. Renders nothing when no slides are configured
-// yet, so a fresh install isn't stuck with an empty gray box.
+// Rendered as the hero ScrollGlobeSection's `media` (see HomeHero.tsx) —
+// admin-managed image carousel (Settings → Hero Slider), inside the
+// section's own measured DOM node so ScrollGlobe's viewport-relative nav
+// dots/globe scroll math accounts for its height automatically. Renders
+// nothing when no slides are configured, so a fresh install isn't stuck
+// with an empty gray box or a dead margin gap above the title.
 export default function HeroSlider() {
   const { data: slides } = useQuery({ queryKey: ["hero-slides"], queryFn: siteApi.heroSlides });
   const [index, setIndex] = useState(0);
@@ -25,8 +27,8 @@ export default function HeroSlider() {
   if (!slides || slides.length === 0) return null;
 
   return (
-    <div className="relative mb-8 w-full overflow-hidden rounded-2xl border border-line">
-      <div className="relative h-56 w-full sm:h-80 lg:h-[28rem]">
+    <div className="relative mb-8 sm:mb-10 w-full overflow-hidden rounded-2xl border border-line">
+      <div className="relative h-40 w-full sm:h-56 lg:h-72">
         {slides.map((slide, i) => {
           const image = (
             <img

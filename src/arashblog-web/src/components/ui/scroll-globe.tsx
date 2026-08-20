@@ -14,6 +14,8 @@ export interface ScrollGlobeSection {
   actions?: { label: string; variant: "primary" | "secondary"; onClick?: () => void }[];
   /** Replaces the features/actions block with arbitrary content (e.g. a card slider) while keeping the badge/title/description heading. */
   customContent?: ReactNode;
+  /** Optional visual (e.g. an image or slider) rendered above the title, inside this section's own measured DOM node — so the fixed nav-dot/globe scroll math accounts for it automatically. Must own its own bottom margin since it may legitimately render nothing; don't wrap it in a margin div here or an empty state reintroduces a dead-gap. */
+  media?: ReactNode;
 }
 
 interface ScrollGlobeProps {
@@ -204,6 +206,7 @@ export function ScrollGlobe({ sections, globeConfig, className }: ScrollGlobePro
           )}
         >
           <div className="w-full max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
+            {section.media}
             <h1
               className={cn(
                 "font-bold mb-8 sm:mb-12 tracking-tight",

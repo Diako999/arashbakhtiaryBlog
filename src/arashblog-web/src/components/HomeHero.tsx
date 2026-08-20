@@ -26,6 +26,7 @@ export default function HomeHero() {
     const result: ScrollGlobeSection[] = [
       {
         id: "hero",
+        media: <HeroSlider />,
         badge: landing?.heroBadge || t("home.hero.badge"),
         title: siteSettings?.siteName ?? t("home.hero.title"),
         subtitle: landing?.heroSubtitle || t("home.hero.subtitle"),
@@ -86,10 +87,5 @@ export default function HomeHero() {
     return result;
   }, [t, navigate, lang, siteSettings, landing, posts]);
 
-  return (
-    <>
-      <HeroSlider />
-      <ScrollGlobe sections={sections} />
-    </>
-  );
+  return <ScrollGlobe sections={sections} />;
 }
