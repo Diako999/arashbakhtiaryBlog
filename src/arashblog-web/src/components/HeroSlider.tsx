@@ -28,14 +28,14 @@ export default function HeroSlider() {
 
   return (
     <div className="relative mb-8 sm:mb-10 w-full overflow-hidden rounded-2xl border border-line">
-      <div className="relative h-40 w-full sm:h-56 lg:h-72">
+      <div className="relative aspect-video w-full bg-surface-soft">
         {slides.map((slide, i) => {
           const image = (
             <img
               src={slide.imageUrl}
               alt=""
               className={
-                "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out " +
+                "absolute inset-0 h-full w-full object-contain transition-opacity duration-700 ease-out " +
                 (i === index ? "opacity-100" : "opacity-0")
               }
             />
