@@ -5,6 +5,44 @@ endpoints and the built React static files. There is no separate frontend
 host, no Docker, and no Linux-specific step in this document — everything
 below assumes a Windows Server host with IIS.
 
+## 0. Current hosting (Plesk on IranServer)
+
+The production host is a Windows/IIS **Plesk** account at IranServer. Details
+from the hosting panel's "server general info" page (no passwords here — keep
+those in your password manager):
+
+| Item | Value |
+|---|---|
+| Domain | `arashbakhtiary.ir` |
+| Plesk/system username | `znfuhqdb` |
+| Server | `wh033.irandns.com` |
+| Server IP | `193.141.65.244` |
+| Domain DNS 1 (required) | `win67.irandns.com` |
+| Domain DNS 2 (required) | `win68.irandns.com` |
+
+How this maps to the steps below:
+
+- **No RDP/shell** — you deploy by uploading the `publish/` output through
+  Plesk's File Manager/FTP into the domain's document root (typically
+  `httpdocs`). Overwrite files in place; never delete the `media/` folder.
+- **Hosting settings** (Plesk → Websites & Domains → *Hosting & DNS* →
+  *ASP.NET / .NET Core*): choose a .NET 8 / ASP.NET Core option if the plan
+  offers it. The checked-in `web.config` already uses ANCM in-process hosting
+  and has stdout logging on; make sure `httpdocs/logs/` exists.
+- **Environment**: set `ASPNETCORE_ENVIRONMENT=Production` and the secrets
+  (`ConnectionStrings__DefaultConnection`, `InitialAdmin__*`) via Plesk's
+  environment-variable setting if available, otherwise via
+  `appsettings.Production.json` uploaded next to the DLL.
+- **DNS**: the `.ir` domain's nameservers are `win67`/`win68.irandns.com`, so
+  its A records (`@` and `www`) are managed in Plesk's DNS settings for this
+  server and should point at `193.141.65.244`. The `.com` domain lives at its
+  own registrar; point its A records at the same IP and add it in Plesk as a
+  **domain alias** of `arashbakhtiary.ir` (not a separate site) so both hosts
+  reach the same app and the `.ir` → `.com` 301 in `Program.cs` can fire.
+- **Database**: use a SQL Server database created from Plesk (Databases →
+  *Add Database*, type Microsoft SQL Server) and put its host/user/password in
+  the connection string.
+
 ## 1. One-time server setup
 
 1. Install the **.NET 8 Hosting Bundle** (not just the runtime) from
