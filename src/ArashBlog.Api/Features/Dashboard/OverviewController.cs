@@ -1,4 +1,4 @@
-using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
 using ArashBlog.Api.Features.Blog;
@@ -13,7 +13,7 @@ namespace ArashBlog.Api.Features.Dashboard;
 // would be misleading, so the field is simply absent rather than faked.
 [ApiController]
 [Route("api/dashboard")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class OverviewController(ApplicationDbContext db) : ControllerBase
 {
     [HttpGet("overview")]

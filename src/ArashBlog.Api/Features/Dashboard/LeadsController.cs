@@ -1,5 +1,6 @@
 using System.Text;
 using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace ArashBlog.Api.Features.Dashboard;
 // Submission inbox (toggle-contacted, CSV export).
 [ApiController]
 [Route("api/dashboard/leads")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class LeadsController(ApplicationDbContext db) : ControllerBase
 {
     [HttpGet]

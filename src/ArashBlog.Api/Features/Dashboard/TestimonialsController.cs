@@ -1,4 +1,4 @@
-using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ namespace ArashBlog.Api.Features.Dashboard;
 // real position even when everything started out tied at the default (0).
 [ApiController]
 [Route("api/dashboard/testimonials")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class TestimonialsController(ApplicationDbContext db) : ControllerBase
 {
     [HttpGet]

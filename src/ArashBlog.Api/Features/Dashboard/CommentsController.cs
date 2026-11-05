@@ -1,4 +1,4 @@
-using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ namespace ArashBlog.Api.Features.Dashboard;
 // (is_approved ascending), newest first within each group.
 [ApiController]
 [Route("api/dashboard/comments")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class CommentsController(ApplicationDbContext db) : ControllerBase
 {
     [HttpGet]

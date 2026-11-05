@@ -1,4 +1,5 @@
 using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +15,7 @@ namespace ArashBlog.Api.Features.Dashboard;
 // wiring and is deferred rather than half-built here.
 [ApiController]
 [Route("api/dashboard")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class PostsController(ApplicationDbContext db, UserManager<ApplicationUser> userManager) : ControllerBase
 {
     [HttpGet("categories")]

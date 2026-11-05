@@ -1,4 +1,5 @@
 using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace ArashBlog.Api.Features.Dashboard;
 // inline Session formset and a read-only Enrollment list on the edit page.
 [ApiController]
 [Route("api/dashboard/offerings")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class OfferingsController(ApplicationDbContext db) : ControllerBase
 {
     [HttpGet]

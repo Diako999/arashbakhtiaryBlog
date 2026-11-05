@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
 using ArashBlog.Api.Features.Site;
@@ -13,7 +13,7 @@ namespace ArashBlog.Api.Features.Dashboard;
 // SiteController reads from.
 [ApiController]
 [Route("api/dashboard/settings")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public partial class SettingsController(ApplicationDbContext db) : ControllerBase
 {
     [GeneratedRegex(@"^#[0-9a-fA-F]{6}$")]

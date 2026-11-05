@@ -156,9 +156,11 @@ permanent no-op, so it's safe to leave these variables in place indefinitely
 — but rotating/removing the password value after the first successful boot
 is good practice regardless.
 
-After first login, complete TOTP 2FA setup (QR code shown once, recovery
-codes shown once) before the account can reach the dashboard — this is
-enforced the same way for every login, not skippable in Production.
+TOTP 2FA is available but optional — the dashboard no longer forces setup
+before granting access (the `RequireVerifiedTwoFactor` gate was removed at
+the owner's request). Visit `/dashboard/otp/setup` any time to turn it on
+voluntarily; until then, the username/password above is the only thing
+protecting the dashboard, so keep that password strong.
 
 ## 6. Media uploads
 
@@ -204,7 +206,7 @@ changes to a swap-the-whole-folder model.
 1. Visit the site over HTTPS, confirm the React app loads (not the
    fallback plain-text message from `Program.cs`, which means `wwwroot`
    is empty — the frontend build didn't happen or didn't get copied).
-2. Log in as the admin, complete 2FA setup, reach the dashboard.
+2. Log in as the admin and reach the dashboard (2FA setup is optional).
 3. Create a post, upload a cover image, confirm it renders at its
    `/media/...` URL.
 4. Hit `/api/blog/posts` a dozen times rapidly and confirm a 429 shows up

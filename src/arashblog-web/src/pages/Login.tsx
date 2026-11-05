@@ -19,10 +19,8 @@ export default function Login() {
     setLoading(true);
     setError(false);
     try {
-      const result = await authApi.login(username, password);
-      if (result.requiresOtpVerify) navigate("/dashboard/otp/verify");
-      else if (result.requiresOtpSetup) navigate("/dashboard/otp/setup");
-      else navigate("/dashboard");
+      await authApi.login(username, password);
+      navigate("/dashboard");
     } catch (err) {
       if (err instanceof ApiError) setError(true);
       else throw err;

@@ -1,4 +1,4 @@
-using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +14,7 @@ public record DashboardNavItemDto(int Id, string Key, string Title, bool IsVisib
 // whitelist leaving it out.
 [ApiController]
 [Route("api/dashboard/nav-items")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class PagesController(ApplicationDbContext db) : ControllerBase
 {
     [HttpGet]

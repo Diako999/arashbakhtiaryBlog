@@ -1,4 +1,5 @@
 using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace ArashBlog.Api.Features.Dashboard;
 // exists here instead rather than leaving the content unmanageable.
 [ApiController]
 [Route("api/dashboard/flat-pages")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class FlatPagesController(ApplicationDbContext db) : ControllerBase
 {
     [HttpGet]

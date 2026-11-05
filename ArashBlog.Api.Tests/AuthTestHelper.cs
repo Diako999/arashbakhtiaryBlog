@@ -9,8 +9,8 @@ using Xunit;
 namespace ArashBlog.Api.Tests;
 
 // Shared "give me a fully 2FA-verified dashboard client" helper for tests
-// that exercise [RequireVerifiedTwoFactor] endpoints but aren't themselves
-// testing the 2FA flow (that's TwoFactorGateTests' job).
+// that exercise dashboard endpoints but aren't themselves testing the
+// (optional) 2FA flow — that's TwoFactorGateTests' job.
 public static class AuthTestHelper
 {
     public const string Password = "Sup3r-Secret!";

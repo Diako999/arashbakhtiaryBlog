@@ -1,4 +1,5 @@
 using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArashBlog.Api.Features.Dashboard;
@@ -14,7 +15,7 @@ public record UploadResponse(string Url);
 // of "host it elsewhere yourself."
 [ApiController]
 [Route("api/dashboard/uploads")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class UploadsController(IWebHostEnvironment env) : ControllerBase
 {
     [HttpPost("image")]

@@ -1,4 +1,4 @@
-using ArashBlog.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 using ArashBlog.Api.Data;
 using ArashBlog.Api.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +10,7 @@ namespace ArashBlog.Api.Features.Dashboard;
 // hero slides are just images with an optional link, ordered the same way.
 [ApiController]
 [Route("api/dashboard/hero-slides")]
-[RequireVerifiedTwoFactor]
+[Authorize]
 public class HeroSlidesController(ApplicationDbContext db) : ControllerBase
 {
     [HttpGet]

@@ -19,13 +19,9 @@ export default function DashboardLayout() {
 
   useEffect(() => {
     authApi.me().then((me) => {
-      if (me.isAuthenticated && !me.requiresOtpSetup) {
+      if (me.isAuthenticated) {
         setUsername(me.username);
         setStatus("ok");
-      } else if (me.requiresOtpVerify) {
-        navigate("/dashboard/otp/verify", { replace: true });
-      } else if (me.isAuthenticated && me.requiresOtpSetup) {
-        navigate("/dashboard/otp/setup", { replace: true });
       } else {
         navigate("/dashboard/login", { replace: true });
       }

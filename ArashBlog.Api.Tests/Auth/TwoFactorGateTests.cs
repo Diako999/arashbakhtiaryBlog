@@ -9,11 +9,10 @@ using Xunit;
 
 namespace ArashBlog.Api.Tests.Auth;
 
-// Mirrors the Django project's dashboard.tests.TwoFactorGateTests — same
-// scenarios (anonymous denied, forced setup, wrong code rejected, valid
-// code grants access, recovery code works once), translated to ASP.NET
-// Core Identity's cookie + partial-2FA-cookie flow instead of django-otp's
-// per-session is_verified() flag.
+// 2FA is optional here (no RequireVerifiedTwoFactor gate) — these tests
+// cover the voluntary opt-in flow: setup, wrong/valid codes, and the
+// partial-2FA-cookie dance ASP.NET Core Identity forces on any session
+// where TwoFactorEnabled is already true, regardless of our own gating.
 public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixture<TestWebApplicationFactory>
 {
     private async Task CreateUserAsync(string username, string password)
@@ -36,8 +35,10 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
     }
 
     [Fact]
-    public async Task Login_without_confirmed_device_requires_otp_setup()
+    public async Task Login_without_confirmed_device_still_grants_dashboard_access()
     {
+        // 2FA is optional (voluntary opt-in via /api/auth/otp/setup), not a
+        // gate on dashboard access — a plain authenticated session is enough.
         await CreateUserAsync("no-device-user", "Sup3r-Secret!");
         var client = factory.CreateClient();
 
@@ -48,7 +49,7 @@ public class TwoFactorGateTests(TestWebApplicationFactory factory) : IClassFixtu
         Assert.True(login.RequiresOtpSetup);
 
         var pingResponse = await client.GetAsync("/api/dashboard/overview");
-        Assert.Equal(HttpStatusCode.Forbidden, pingResponse.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, pingResponse.StatusCode);
     }
 
     [Fact]
