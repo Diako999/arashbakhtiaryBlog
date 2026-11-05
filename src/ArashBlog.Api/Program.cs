@@ -135,6 +135,27 @@ app.Use(async (context, next) =>
     await next();
 });
 
+// Dedicated admin subdomain: landing on the bare root of
+// admin.ab.arashbakhtiary.ir sends you straight into the dashboard instead
+// of the public blog homepage, since this host's only reason to exist is
+// running the same app purely as an admin entry point. Everything else
+// (assets, /api/*, deep dashboard links) falls through unchanged — this is
+// just the landing redirect. Requires this host bound to the same app
+// (its own IIS site/app pool, pointed at the same published files) and its
+// own SSL certificate; see DEPLOYMENT.md.
+app.Use(async (context, next) =>
+{
+    var host = context.Request.Host.Host;
+    if (host.Equals("admin.ab.arashbakhtiary.ir", StringComparison.OrdinalIgnoreCase) &&
+        context.Request.Path == "/")
+    {
+        context.Response.Redirect("/dashboard", permanent: false);
+        return;
+    }
+
+    await next();
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
