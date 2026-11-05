@@ -113,8 +113,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Canonical-domain redirect: the old arashbakhtiary.ir host permanently
-// redirects to arashbakhtiary.com, preserving path/query — search engines
+// Canonical-domain redirect: the arashbakhtiary.com host permanently
+// redirects to arashbakhtiary.ir, preserving path/query — search engines
 // and any old links keep working instead of 404ing or serving duplicate
 // content under two hosts. Host-header driven rather than IsProduction-
 // gated, so it's harmless everywhere else and only ever fires when this
@@ -124,10 +124,10 @@ var app = builder.Build();
 app.Use(async (context, next) =>
 {
     var host = context.Request.Host.Host;
-    if (host.Equals("arashbakhtiary.ir", StringComparison.OrdinalIgnoreCase) ||
-        host.Equals("www.arashbakhtiary.ir", StringComparison.OrdinalIgnoreCase))
+    if (host.Equals("arashbakhtiary.com", StringComparison.OrdinalIgnoreCase) ||
+        host.Equals("www.arashbakhtiary.com", StringComparison.OrdinalIgnoreCase))
     {
-        var target = $"https://arashbakhtiary.com{context.Request.Path}{context.Request.QueryString}";
+        var target = $"https://arashbakhtiary.ir{context.Request.Path}{context.Request.QueryString}";
         context.Response.Redirect(target, permanent: true);
         return;
     }

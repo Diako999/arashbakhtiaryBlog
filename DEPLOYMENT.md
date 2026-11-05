@@ -38,7 +38,7 @@ How this maps to the steps below:
   server and should point at `193.141.65.244`. The `.com` domain lives at its
   own registrar; point its A records at the same IP and add it in Plesk as a
   **domain alias** of `arashbakhtiary.ir` (not a separate site) so both hosts
-  reach the same app and the `.ir` → `.com` 301 in `Program.cs` can fire.
+  reach the same app and the `.com` → `.ir` 301 in `Program.cs` can fire.
 - **Database**: use a SQL Server database created from Plesk (Databases →
   *Add Database*, type Microsoft SQL Server) and put its host/user/password in
   the connection string.
@@ -188,15 +188,15 @@ changes to a swap-the-whole-folder model.
 - `AllowedHosts` in `appsettings.Production.json` should be the real
   domain(s), not `*` — ASP.NET Core rejects requests with an unrecognized
   `Host` header otherwise.
-- **arashbakhtiary.ir → arashbakhtiary.com redirect**: `Program.cs` 301s
-  any request whose `Host` header is `arashbakhtiary.ir` or
-  `www.arashbakhtiary.ir` to the equivalent `arashbakhtiary.com` URL. For
+- **arashbakhtiary.com → arashbakhtiary.ir redirect**: `Program.cs` 301s
+  any request whose `Host` header is `arashbakhtiary.com` or
+  `www.arashbakhtiary.com` to the equivalent `arashbakhtiary.ir` URL. For
   this to actually fire, both domains must be bound to the *same* IIS site
   (add bindings for all four host/www combinations) and all four must be
-  listed in `AllowedHosts` — otherwise IIS/ASP.NET Core rejects the `.ir`
+  listed in `AllowedHosts` — otherwise IIS/ASP.NET Core rejects the `.com`
   request before the redirect middleware ever sees it. A certificate
-  covering `arashbakhtiary.ir` is only needed if you also want HTTPS on
-  the old domain before the redirect to HTTPS `.com` happens; plain HTTP
+  covering `arashbakhtiary.com` is only needed if you also want HTTPS on
+  the old domain before the redirect to HTTPS `.ir` happens; plain HTTP
   binding + redirect is fine otherwise.
 
 ## 8. Smoke test after deploy
